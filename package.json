@@ -1,0 +1,31 @@
+{
+  "name": "form1dable",
+  "author": "Mathieu Queval <mqueval@gmail.com>",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@types/react-redux": "^7.1.9",
+    "@types/react-select": "^3.0.26",
+    "@types/redux-form": "^8.3.0",
+    "classnames": "^2.2.6",
+    "object-hash": "^2.0.3",
+    "react-redux": "^7.2.1",
+    "react-select": "^3.1.0",
+    "redux": "^4.0.5",
+    "redux-form": "^8.3.6",
+    "redux-logger": "^3.0.6",
+    "redux-thunk": "^2.3.0",
+    "styled-components": "^5.2.1",
+    "utility-types": "^3.10.0"
+  },
+  "peerDependencies": {
+    "i18next": "^19.1.0",
+    "react": "^16.14.0"
+  }
+}
