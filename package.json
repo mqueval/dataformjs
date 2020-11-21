@@ -1,20 +1,21 @@
 {
   "name": "form1dable",
+  "description": "Gérer vos données avec simplicité",
   "author": "Mathieu Queval <mqueval@gmail.com>",
   "homepage": "https://github.com/mqueval/form1dable.git",
   "repository": {
     "url": "https://github.com/mqueval/form1dable.git",
     "type": "git"
   },
-  "version": "1.0.0-alpha",
+  "version": "0.0.0-alpha",
+  "private": false,
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "license": "CC-BY-NC-SA-4.0",
   "scripts": {
     "build": "tsc"
   },
-  "dependencies": {},
-  "devDependencies": {
+  "dependencies": {
     "@types/react-redux": "^7.1.9",
     "@types/react-select": "^3.0.26",
     "@types/redux-form": "^8.3.0",
@@ -29,6 +30,7 @@
     "styled-components": "^5.2.1",
     "utility-types": "^3.10.0"
   },
+  "devDependencies": {},
   "peerDependencies": {
     "i18next": "^19.1.0",
     "react": "^16.14.0"
