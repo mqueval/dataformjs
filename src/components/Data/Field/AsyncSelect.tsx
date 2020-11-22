@@ -7,7 +7,7 @@ import { FormidableContext } from '../../../index';
 import { DataFieldSelectProps } from './Select';
 
 export interface DataFieldAsyncSelectProps extends DataFieldSelectProps {
-  formName: string;
+  formName?: string;
   getOptionLabel?: (option: any) => string;
   isOptionSelected?: (option: any, optionsSelected: any) => boolean;
   searchOptions?: (inputValue: string) => Promise<any[]>;
