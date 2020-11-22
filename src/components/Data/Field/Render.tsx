@@ -26,23 +26,28 @@ const DataFieldRender: FC<WrappedFieldProps & DataFieldProps> = props => {
     return <input {...input} type="hidden" />;
   }
 
+  const componentList: {
+    [key: string]: FC<WrappedFieldProps & DataFieldProps & { id: string }>;
+  } = {
+    'async-select': FieldAsyncSelect,
+    input: FieldInput,
+    select: FieldSelect,
+    textarea: FieldTextarea,
+  };
+
+  const Component = componentList[componentType];
+
+  if (!Component) {
+    return (
+      <div>
+        {`data field render : erreur de paramètre : ${componentType} n'est pas pris en charge`}
+      </div>
+    );
+  }
+
   return (
     <FieldTemplate id={id} {...props}>
-      {'async-select' === componentType && (
-        <FieldAsyncSelect {...props} id={id} input={newInput} />
-      )}
-
-      {'input' === componentType && (
-        <FieldInput {...props} id={id} input={newInput} />
-      )}
-
-      {'select' === componentType && (
-        <FieldSelect {...props} id={id} input={newInput} />
-      )}
-
-      {'textarea' === componentType && (
-        <FieldTextarea {...props} id={id} input={newInput} />
-      )}
+      <Component {...props} id={id} input={newInput} />
     </FieldTemplate>
   );
 };
