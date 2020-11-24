@@ -16,8 +16,12 @@ const DataFieldRender: FC<WrappedFieldProps & DataFieldProps> = props => {
   const newInput = { ...input };
   const { onChange } = input;
   if (handleOnChange) {
-    newInput.onChange = (event: SyntheticEvent<HTMLInputElement>): void => {
-      handleOnChange(event, input.name);
+    newInput.onChange = (
+      event: SyntheticEvent<
+        HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+      >,
+    ): void => {
+      handleOnChange({ event, name: input.name });
       onChange(event);
     };
   }

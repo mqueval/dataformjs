@@ -13,7 +13,12 @@ export interface DataFieldProps extends DataProps {
   customTop?: ReactElement | ReactElement[];
   customTopClassName?: string;
   disabled?: boolean;
-  handleOnChange?: (e: SyntheticEvent<HTMLInputElement>, name: string) => any;
+  handleOnChange?: (props: {
+    change?: (formName: string, name: string, value: any) => void;
+    event?: SyntheticEvent<HTMLInputElement> | any;
+    name?: string;
+    value?: any;
+  }) => any;
   label?: string;
   name: string;
   params?: { [key: string]: any };
@@ -23,7 +28,7 @@ export interface DataFieldProps extends DataProps {
   validate?: Validator | Validator[];
 }
 
-const DataField: FC<DataFieldAsyncSelectProps | DataFieldProps> = ({
+const DataField: FC<DataFieldAsyncSelectProps<any> | DataFieldProps> = ({
   validate,
   ...props
 }) => {
