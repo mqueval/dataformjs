@@ -7,7 +7,7 @@ import { FormidableContext } from '../../../index';
 import { DataFieldSelectProps } from './Select';
 
 export interface DataFieldAsyncSelectProps extends DataFieldSelectProps {
-  formName?: string;
+  customOption?: any;
   getOptionLabel?: (option: any) => string;
   isOptionSelected?: (option: any, optionsSelected: any) => boolean;
   searchOptions?: (inputValue: string) => Promise<any[]>;
@@ -17,6 +17,7 @@ const FieldAsyncSelect: FC<WrappedFieldProps &
   DataFieldAsyncSelectProps & {
     id: string;
   }> = ({
+  customOption,
   formName,
   getOptionLabel,
   id,
@@ -41,20 +42,27 @@ const FieldAsyncSelect: FC<WrappedFieldProps &
   const { name } = input;
 
   const handleOnBlur = (event: any): void => {
-    console.info('FieldAsyncSelect handleOnBlur', event);
+    // console.info('FieldAsyncSelect handleOnBlur', event);
   };
 
   const handleOnChange = (value: any): void => {
-    console.info('FieldAsyncSelect handleOnChange', value);
+    // console.info('FieldAsyncSelect handleOnChange', value);
     dispatch(change(formName, input.name, value));
   };
 
   const handleOnFocus = (event: any): void => {
-    console.info('FieldAsyncSelect handleOnFocus', event);
+    // console.info('FieldAsyncSelect handleOnFocus', event);
   };
+
+  const components: { [key: string]: any } = {};
+
+  if (customOption) {
+    components.Option = customOption;
+  }
 
   return (
     <AsyncSelect
+      components={components}
       defaultOptions
       getOptionLabel={getOptionLabel}
       inputId={id}

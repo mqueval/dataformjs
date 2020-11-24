@@ -13,16 +13,17 @@ export interface DataArrayProps extends DataProps {
   defaultValue?: string;
   formName: string;
   group?: boolean;
+  groupTitle?: string;
   groupClassName?: string;
   params?: { [key: string]: any };
 }
 
 const DataArray: VoidFunctionComponent<DataArrayProps & {
   name: string;
-}> = ({ group, groupClassName, name, ...others }) => {
+}> = ({ group, groupTitle, groupClassName, name, ...others }) => {
   if (group) {
     return (
-      <Group className={groupClassName}>
+      <Group className={groupClassName} title={groupTitle}>
         <FieldArray component={DataArrayRender} name={name} props={others} />
       </Group>
     );

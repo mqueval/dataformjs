@@ -26,23 +26,34 @@ const DataFieldRender: FC<WrappedFieldProps & DataFieldProps> = props => {
     return <input {...input} type="hidden" />;
   }
 
-  const componentList: {
-    [key: string]: FC<WrappedFieldProps & DataFieldProps & { id: string }>;
-  } = {
-    'async-select': FieldAsyncSelect,
-    input: FieldInput,
-    select: FieldSelect,
-    textarea: FieldTextarea,
-  };
+  let Component;
+  switch (componentType) {
+    case 'async-select': {
+      Component = FieldAsyncSelect;
+      break;
+    }
 
-  const Component = componentList[componentType];
+    case 'input': {
+      Component = FieldInput;
+      break;
+    }
 
-  if (!Component) {
-    return (
-      <div>
-        {`data field render : erreur de paramètre : ${componentType} n'est pas pris en charge`}
-      </div>
-    );
+    case 'select': {
+      Component = FieldSelect;
+      break;
+    }
+
+    case 'textarea': {
+      Component = FieldTextarea;
+      break;
+    }
+
+    default:
+      return (
+        <div>
+          {`data field render : erreur de paramètre : ${componentType} n'est pas pris en charge`}
+        </div>
+      );
   }
 
   return (

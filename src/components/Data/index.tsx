@@ -10,13 +10,17 @@ import DataCondition from './Condition';
 import DataField from './Field';
 import DataSearchAndForm from './Search+Form';
 import DataSection from './Section';
+import DataValues from './Values';
 
 export interface DataProps {
   className?: string;
   componentType?: string;
   datas?: DataProps[];
+  formName?: string;
+  formValues?: { [key: string]: any };
   label?: string;
   name?: string;
+  params?: { [key: string]: any };
   required?: boolean;
   test?:
     | {
@@ -29,7 +33,6 @@ export interface DataProps {
 
 const Data: FC<DataProps & {
   formName: string;
-  params?: { [key: string]: any };
 }> = ({ datas, formName, ...props }) => {
   const { componentType, test, name, params } = props;
   const { extendData } = useContext(FormidableContext);
@@ -178,7 +181,7 @@ const Data: FC<DataProps & {
         );
       }
 
-      return <DataSearchAndForm {...props} name={name} />;
+      return <DataSearchAndForm {...props} formName={formName} name={name} />;
     }
 
     case 'select': {
@@ -188,7 +191,14 @@ const Data: FC<DataProps & {
         );
       }
 
-      return <DataField {...props} componentType="select" name={name} />;
+      return (
+        <DataField
+          {...props}
+          componentType="select"
+          formName={formName}
+          name={name}
+        />
+      );
     }
 
     case 'section': {
@@ -216,7 +226,26 @@ const Data: FC<DataProps & {
         );
       }
 
-      return <DataField {...props} componentType="textarea" name={name} />;
+      return (
+        <DataField
+          {...props}
+          componentType="textarea"
+          formName={formName}
+          name={name}
+        />
+      );
+
+    case 'values': {
+      return (
+        <DataValues
+          {...props}
+          datas={datas}
+          formName={formName}
+          name={name}
+          params={params}
+        />
+      );
+    }
 
     case 'hidden':
     case 'input':
@@ -226,7 +255,14 @@ const Data: FC<DataProps & {
         );
       }
 
-      return <DataField {...props} componentType="input" name={name} />;
+      return (
+        <DataField
+          {...props}
+          componentType="input"
+          formName={formName}
+          name={name}
+        />
+      );
 
     default: {
       return (

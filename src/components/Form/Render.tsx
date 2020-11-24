@@ -36,6 +36,7 @@ const Form: React.FC<FormProps & InjectedFormProps<any, FormProps>> = props => {
     error,
     // errorValues,
     footerClassName,
+    formValues,
     handleSubmit,
     invalid,
     name,

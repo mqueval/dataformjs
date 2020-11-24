@@ -34,8 +34,6 @@ const FieldTemplate: FC<WrappedFieldProps &
 }) => {
   const { t, theme } = useContext(FormidableContext);
 
-  console.info('error', error);
-
   return (
     <FieldSC as={theme && theme.field} className={className}>
       {customTop && (
