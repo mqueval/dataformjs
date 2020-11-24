@@ -29,8 +29,6 @@ const Form: FC<FormProps> = ({
   const newDatas: DataProps[] | undefined =
     datas && !Array.isArray(datas) ? [datas] : datas;
 
-  console.info('Form formName', name);
-
   return (
     <FormRender
       className={className}

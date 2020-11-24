@@ -3,6 +3,7 @@ import { Field as FieldForm, Validator } from 'redux-form';
 
 import { addValidator, isEmail, isRequired } from '../../../utils/validators';
 import { DataProps } from '../index';
+import { DataFieldAsyncSelectProps } from './AsyncSelect';
 import DataFieldRender from './Render';
 
 export interface DataFieldProps extends DataProps {
@@ -22,7 +23,10 @@ export interface DataFieldProps extends DataProps {
   validate?: Validator | Validator[];
 }
 
-const DataField: FC<DataFieldProps> = ({ validate, ...props }) => {
+const DataField: FC<DataFieldAsyncSelectProps | DataFieldProps> = ({
+  validate,
+  ...props
+}) => {
   const { required, type } = props;
   let newValidate =
     validate && !Array.isArray(validate) ? [validate] : validate;

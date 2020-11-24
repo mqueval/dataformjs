@@ -67,7 +67,14 @@ const DataArrayRender: FC<WrappedFieldArrayProps & DataArrayProps> = ({
             );
           }
 
-          return <Field key={field} componentType="input" name={field} />;
+          return (
+            <Field
+              key={field}
+              componentType="input"
+              formName={formName}
+              name={field}
+            />
+          );
         })}
 
       {'bottom' === addButtonPosition && (
