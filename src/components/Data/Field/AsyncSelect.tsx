@@ -1,7 +1,8 @@
 import React, { FC, ReactNode, useContext } from 'react';
 import { useDispatch } from 'react-redux';
+// import { components, ContainerProps } from 'react-select';
 import AsyncSelect from 'react-select/async';
-import { change, WrappedFieldProps } from 'redux-form';
+import { blur, change, focus, WrappedFieldProps } from 'redux-form';
 import styled from 'styled-components';
 
 import { FormidableContext } from '../../../index';
@@ -59,11 +60,14 @@ const FieldAsyncSelect: FC<WrappedFieldProps &
   isSearchable = true,
   loadOptions,
   loadingMessage,
+  meta,
+  meta: { error, touched },
   noOptionsMessage,
   placeholder,
+  ...others
 }) => {
   const dispatch = useDispatch();
-  const { t } = useContext(FormidableContext);
+  const { getControlStyle, t } = useContext(FormidableContext);
 
   if (!formName) {
     return <div>async-select : erreur de paramètre : formName obligatoire</div>;
@@ -77,8 +81,8 @@ const FieldAsyncSelect: FC<WrappedFieldProps &
 
   const { name, value } = input;
 
-  const handleOnBlur = (event: any): void => {
-    // console.info('FieldAsyncSelect handleOnBlur', event);
+  const handleOnBlur = (): void => {
+    dispatch(blur(formName, name, value, true));
   };
 
   const handleInnerOnChange = (changeValue: any): void => {
@@ -88,24 +92,43 @@ const FieldAsyncSelect: FC<WrappedFieldProps &
         value: changeValue,
       });
     }
-    // console.info('FieldAsyncSelect handleOnChange', value);
     dispatch(change(formName, name, changeValue));
   };
 
-  const handleOnFocus = (event: any): void => {
-    // console.info('FieldAsyncSelect handleOnFocus', event);
+  const handleOnFocus = (): void => {
+    dispatch(focus(formName, name));
   };
 
-  const components: { [key: string]: any } = {};
+  const newComponents: { [key: string]: any } = {};
 
   if (customOption) {
-    components.Option = customOption;
+    newComponents.Option = customOption;
   }
+
+  // const SelectContainer: FC<ContainerProps<any>> = ({ children, ...props }) => (
+  //   <div>
+  //     <components.SelectContainer {...props}>
+  //       {children}
+  //     </components.SelectContainer>
+  //   </div>
+  // );
+  //
+  // newComponents.SelectContainer = SelectContainer;
+
+  const styles = {
+    control: (base: any): any =>
+      getControlStyle
+        ? getControlStyle({
+            ...others,
+            status: touched && error ? 'error' : undefined,
+          })
+        : base,
+  };
 
   return (
     <SelectSC
       cacheOptions={cacheOptions}
-      components={components}
+      components={newComponents}
       defaultOptions={defaultOptions}
       defaultValue={defaultValue}
       formatOptionLabel={formatOptionLabel}
@@ -125,6 +148,7 @@ const FieldAsyncSelect: FC<WrappedFieldProps &
       onChange={handleInnerOnChange}
       onFocus={handleOnFocus}
       placeholder={t && placeholder ? t(placeholder) : placeholder}
+      styles={styles}
       value={value}
     />
   );
