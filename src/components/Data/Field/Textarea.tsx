@@ -20,7 +20,7 @@ const FieldTextarea: FC<WrappedFieldProps &
       disabled={disabled}
       id={id}
       placeholder={t && placeholder ? t(placeholder) : placeholder}
-      theme={touched && error ? 'error' : null}
+      status={touched && error ? 'error' : null}
     />
   );
 };

@@ -17,6 +17,7 @@ const DataArrayRender: FC<WrappedFieldArrayProps & DataArrayProps> = ({
   fields,
   formName,
   meta,
+  params,
 }) => {
   useEffect(() => {
     if (0 === fields.length) {
@@ -51,6 +52,7 @@ const DataArrayRender: FC<WrappedFieldArrayProps & DataArrayProps> = ({
                       key={`${field}_${hash(value)}`}
                       {...value}
                       formName={formName}
+                      params={params}
                     />
                   ))}
                 </FormSection>
@@ -63,6 +65,7 @@ const DataArrayRender: FC<WrappedFieldArrayProps & DataArrayProps> = ({
                 {...datas[0]}
                 formName={formName}
                 name={field}
+                params={params}
               />
             );
           }

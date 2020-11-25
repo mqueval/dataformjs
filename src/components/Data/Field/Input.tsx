@@ -8,6 +8,7 @@ import { DataFieldProps } from './index';
 const DataFieldInputSC = styled.div.attrs(props => ({
   className: props.className || 'flex items-center',
 }))``;
+
 const InputSC = styled.input``;
 
 export interface DataFieldInputProps extends DataFieldProps {
@@ -42,7 +43,7 @@ const FieldInput: FC<WrappedFieldProps &
         disabled={disabled}
         id={id}
         placeholder={t && placeholder ? t(placeholder) : placeholder}
-        theme={touched && error ? 'error' : null}
+        status={touched && error ? 'error' : undefined}
         type={type}
       />
       {description && (

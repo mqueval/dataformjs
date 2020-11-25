@@ -51,12 +51,12 @@ const FieldTemplate: FC<WrappedFieldProps &
 
         {touched &&
           ((error && (
-            <FieldMessageSC as={theme && theme.fieldMessage} theme="error">
+            <FieldMessageSC as={theme && theme.fieldMessage} status="error">
               {t ? t(error) : error}
             </FieldMessageSC>
           )) ||
             (warning && (
-              <FieldMessageSC as={theme && theme.fieldMessage} theme="warning">
+              <FieldMessageSC as={theme && theme.fieldMessage} status="warning">
                 {t ? t(warning) : warning}
               </FieldMessageSC>
             )))}
