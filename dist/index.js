@@ -14,12 +14,15 @@ var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (
 var __importStar = (this && this.__importStar) || function (mod) {
     if (mod && mod.__esModule) return mod;
     var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
     __setModuleDefault(result, mod);
     return result;
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.FormidableProvider = exports.FormidableContext = exports.print = void 0;
+exports.FormidableProvider = exports.FormidableContext = exports.isRequired = exports.isEmail = exports.addValidator = exports.initializeValues = exports.Form = exports.DataField = exports.Data = exports.print = exports.FormSection = exports.reduxForm = exports.SubmissionError = exports.formValueSelector = exports.FieldArray = exports.Field = exports.change = exports.useStore = exports.useSelector = exports.useDispatch = exports.connect = void 0;
 const FormidableContext_1 = __importStar(require("./FormidableContext"));
 exports.FormidableContext = FormidableContext_1.default;
 Object.defineProperty(exports, "FormidableProvider", { enumerable: true, get: function () { return FormidableContext_1.FormidableProvider; } });
@@ -36,17 +39,18 @@ Object.defineProperty(exports, "formValueSelector", { enumerable: true, get: fun
 Object.defineProperty(exports, "SubmissionError", { enumerable: true, get: function () { return redux_form_1.SubmissionError; } });
 Object.defineProperty(exports, "reduxForm", { enumerable: true, get: function () { return redux_form_1.reduxForm; } });
 Object.defineProperty(exports, "FormSection", { enumerable: true, get: function () { return redux_form_1.FormSection; } });
-exports.print = () => {
+const print = () => {
     console.info('Bonjour tout le monde !! La vie est formidable !!');
 };
+exports.print = print;
 var Data_1 = require("./components/Data");
-Object.defineProperty(exports, "Data", { enumerable: true, get: function () { return Data_1.default; } });
+Object.defineProperty(exports, "Data", { enumerable: true, get: function () { return __importDefault(Data_1).default; } });
 var Field_1 = require("./components/Data/Field");
-Object.defineProperty(exports, "DataField", { enumerable: true, get: function () { return Field_1.default; } });
+Object.defineProperty(exports, "DataField", { enumerable: true, get: function () { return __importDefault(Field_1).default; } });
 var Form_1 = require("./components/Form");
-Object.defineProperty(exports, "Form", { enumerable: true, get: function () { return Form_1.default; } });
+Object.defineProperty(exports, "Form", { enumerable: true, get: function () { return __importDefault(Form_1).default; } });
 var initializeValues_1 = require("./utils/initializeValues");
-Object.defineProperty(exports, "initializeValues", { enumerable: true, get: function () { return initializeValues_1.default; } });
+Object.defineProperty(exports, "initializeValues", { enumerable: true, get: function () { return __importDefault(initializeValues_1).default; } });
 var validators_1 = require("./utils/validators");
 Object.defineProperty(exports, "addValidator", { enumerable: true, get: function () { return validators_1.addValidator; } });
 Object.defineProperty(exports, "isEmail", { enumerable: true, get: function () { return validators_1.isEmail; } });
