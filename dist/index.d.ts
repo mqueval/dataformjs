@@ -1,6 +1,7 @@
 import FormidableContext, { FormidableProvider } from './FormidableContext';
-export { useDispatch, useSelector } from 'react-redux';
-export { change, Field, SubmissionError, WrappedFieldProps } from 'redux-form';
+export { Dispatch } from 'redux';
+export { connect, useDispatch, useSelector, DispatchProp, useStore, } from 'react-redux';
+export { change, Field, FieldArray, DecoratedFormProps, formValueSelector, SubmissionError, WrappedFieldProps, InjectedFormProps, reduxForm, FormSection, Validator, WrappedFieldArrayProps, } from 'redux-form';
 export declare const print: () => void;
 export { default as Data, DataProps } from './components/Data';
 export { default as DataField, DataFieldProps } from './components/Data/Field';
