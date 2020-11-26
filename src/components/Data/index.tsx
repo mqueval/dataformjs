@@ -31,9 +31,11 @@ export interface DataProps {
     | { field: string; operator: string; value: any }[];
 }
 
-const Data: FC<DataProps & {
-  formName: string;
-}> = ({ datas, formName, ...props }) => {
+const Data: FC<
+  DataProps & {
+    formName: string;
+  }
+> = ({ datas, formName, ...props }) => {
   const { componentType, test, name, params } = props;
   const { extendData } = useContext(FormidableContext);
 

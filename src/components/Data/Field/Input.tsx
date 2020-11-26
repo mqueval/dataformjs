@@ -16,10 +16,12 @@ export interface DataFieldInputProps extends DataFieldProps {
   type?: string;
 }
 
-const FieldInput: FC<WrappedFieldProps &
-  DataFieldInputProps & {
-    id: string;
-  }> = ({
+const FieldInput: FC<
+  WrappedFieldProps &
+    DataFieldInputProps & {
+      id: string;
+    }
+> = ({
   className,
   description,
   disabled,

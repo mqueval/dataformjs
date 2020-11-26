@@ -18,9 +18,11 @@ export interface DataArrayProps extends DataProps {
   params?: { [key: string]: any };
 }
 
-const DataArray: VoidFunctionComponent<DataArrayProps & {
-  name: string;
-}> = ({ group, groupTitle, groupClassName, name, ...others }) => {
+const DataArray: VoidFunctionComponent<
+  DataArrayProps & {
+    name: string;
+  }
+> = ({ group, groupTitle, groupClassName, name, ...others }) => {
   if (group) {
     return (
       <Group className={groupClassName} title={groupTitle}>
