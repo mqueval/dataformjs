@@ -24,12 +24,18 @@ const FormidableContext_1 = __importStar(require("./FormidableContext"));
 exports.FormidableContext = FormidableContext_1.default;
 Object.defineProperty(exports, "FormidableProvider", { enumerable: true, get: function () { return FormidableContext_1.FormidableProvider; } });
 var react_redux_1 = require("react-redux");
+Object.defineProperty(exports, "connect", { enumerable: true, get: function () { return react_redux_1.connect; } });
 Object.defineProperty(exports, "useDispatch", { enumerable: true, get: function () { return react_redux_1.useDispatch; } });
 Object.defineProperty(exports, "useSelector", { enumerable: true, get: function () { return react_redux_1.useSelector; } });
+Object.defineProperty(exports, "useStore", { enumerable: true, get: function () { return react_redux_1.useStore; } });
 var redux_form_1 = require("redux-form");
 Object.defineProperty(exports, "change", { enumerable: true, get: function () { return redux_form_1.change; } });
 Object.defineProperty(exports, "Field", { enumerable: true, get: function () { return redux_form_1.Field; } });
+Object.defineProperty(exports, "FieldArray", { enumerable: true, get: function () { return redux_form_1.FieldArray; } });
+Object.defineProperty(exports, "formValueSelector", { enumerable: true, get: function () { return redux_form_1.formValueSelector; } });
 Object.defineProperty(exports, "SubmissionError", { enumerable: true, get: function () { return redux_form_1.SubmissionError; } });
+Object.defineProperty(exports, "reduxForm", { enumerable: true, get: function () { return redux_form_1.reduxForm; } });
+Object.defineProperty(exports, "FormSection", { enumerable: true, get: function () { return redux_form_1.FormSection; } });
 exports.print = () => {
     console.info('Bonjour tout le monde !! La vie est formidable !!');
 };
