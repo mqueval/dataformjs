@@ -2,9 +2,29 @@ import React from 'react';
 
 import FormidableContext, { FormidableProvider } from './FormidableContext';
 
-export { useDispatch, useSelector } from 'react-redux';
+export { Dispatch } from 'redux';
+export {
+  connect,
+  useDispatch,
+  useSelector,
+  DispatchProp,
+  useStore,
+} from 'react-redux';
 
-export { change, Field, SubmissionError, WrappedFieldProps } from 'redux-form';
+export {
+  change,
+  Field,
+  FieldArray,
+  DecoratedFormProps,
+  formValueSelector,
+  SubmissionError,
+  WrappedFieldProps,
+  InjectedFormProps,
+  reduxForm,
+  FormSection,
+  Validator,
+  WrappedFieldArrayProps,
+} from 'redux-form';
 
 export const print = (): void => {
   console.info('Bonjour tout le monde !! La vie est formidable !!');
