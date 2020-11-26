@@ -7,11 +7,13 @@ import Data, { DataProps } from './index';
 
 const SectionSC = styled.div``;
 
-const DataSection: FC<DataProps & {
-  name: string;
-  formName: string;
-  params?: { [key: string]: any };
-}> = ({ datas, name, formName, params, ...props }) => (
+const DataSection: FC<
+  DataProps & {
+    name: string;
+    formName: string;
+    params?: { [key: string]: any };
+  }
+> = ({ datas, name, formName, params, ...props }) => (
   <SectionSC {...props}>
     <FormSection name={name}>
       {datas &&
