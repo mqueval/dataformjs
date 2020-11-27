@@ -8,9 +8,9 @@ const addValidator = (validator, validators) => {
 };
 exports.addValidator = addValidator;
 const isEmail = (value) => value && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value)
-    ? 'field/error/isEmail'
+    ? 'email.required'
     : undefined;
 exports.isEmail = isEmail;
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-const isRequired = (value) => value || 'number' === typeof value ? undefined : 'field/error/isRequired';
+const isRequired = (value) => value || 'number' === typeof value ? undefined : 'required';
 exports.isRequired = isRequired;

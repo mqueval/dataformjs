@@ -4,6 +4,7 @@ import React, { FC, useContext } from 'react';
 import { FormidableContext } from '../../index';
 import Column from '../Column';
 import Columns from '../Columns';
+import Grid from '../Grid';
 import Group from '../Group';
 import DataArray from './Array';
 import DataCondition from './Condition';
@@ -153,6 +154,29 @@ const Data: FC<
       );
     }
 
+    case 'grid': {
+      if (!datas) {
+        return (
+          <div>{`${componentType} : erreur de paramètre : datas obligatoire`}</div>
+        );
+      }
+
+      return (
+        <Grid {...props}>
+          {datas &&
+            datas.length > 0 &&
+            datas.map(data => (
+              <Data
+                key={hash(data)}
+                {...data}
+                formName={formName}
+                params={params}
+              />
+            ))}
+        </Grid>
+      );
+    }
+
     case 'group': {
       if (!datas) {
         return (
@@ -275,3 +299,5 @@ const Data: FC<
 };
 
 export default Data;
+
+export { DataArray };

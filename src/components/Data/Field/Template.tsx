@@ -7,6 +7,7 @@ import { FormidableContext } from '../../../index';
 import { DataFieldProps } from './index';
 
 const FieldMessageSC = styled.div``;
+const FieldLabelSC = styled.label``;
 const FieldSC = styled.div.attrs(props => ({
   className: classNames(props.className, 'pb-2'),
 }))``;
@@ -33,38 +34,37 @@ const FieldTemplate: FC<
   label,
   meta: { error, touched, warning },
 }) => {
-  const { t, theme } = useContext(FormidableContext);
+  const { t, sc } = useContext(FormidableContext);
 
   return (
-    <FieldSC as={theme && theme.field} className={className}>
+    <FieldSC as={sc && sc.field} className={className}>
       {customTop && (
-        <CustomTopSC
-          as={theme && theme.customTop}
-          className={customTopClassName}
-        >
+        <CustomTopSC as={sc && sc.customTop} className={customTopClassName}>
           {customTop}
         </CustomTopSC>
       )}
-      <label htmlFor={id}>{t ? t(label || name) : label || name}</label>
+      <FieldLabelSC as={sc && sc.label} htmlFor={id}>
+        {t ? t(label || name) : label || name}
+      </FieldLabelSC>
 
       <div>
         {children}
 
         {touched &&
           ((error && (
-            <FieldMessageSC as={theme && theme.fieldMessage} status="error">
+            <FieldMessageSC as={sc && sc.fieldMessage} status="error">
               {t ? t(error) : error}
             </FieldMessageSC>
           )) ||
             (warning && (
-              <FieldMessageSC as={theme && theme.fieldMessage} status="warning">
+              <FieldMessageSC as={sc && sc.fieldMessage} status="warning">
                 {t ? t(warning) : warning}
               </FieldMessageSC>
             )))}
       </div>
       {customBottom && (
         <CustomBottomSC
-          as={theme && theme.customBottom}
+          as={sc && sc.customBottom}
           className={customBottomClassName}
         >
           {customBottom}

@@ -1,4 +1,4 @@
-import React, { ReactNode, useContext } from 'react';
+import React, { ReactNode, SyntheticEvent, useContext } from 'react';
 import { connect, DefaultRootState } from 'react-redux';
 import { InjectedFormProps, reduxForm } from 'redux-form';
 import styled from 'styled-components';
@@ -13,8 +13,10 @@ const FormFooterSC = styled.div``;
 
 const MessageSC = styled.div``;
 
-interface FormProps {
+interface FormRenderProps {
   bodyClassName?: string;
+  cancelLabel?: string;
+  cancelOnClick?: (event: SyntheticEvent<HTMLButtonElement>) => void;
   children?: ReactNode;
   className?: string;
   datas?: DataProps[];
@@ -24,20 +26,26 @@ interface FormProps {
   forceUnregisterOnUnmount?: boolean;
   formValues?: any;
   footerClassName?: string;
+  id?: string;
   name: string;
   submitLabel?: string;
 }
 
-const Form: React.FC<FormProps & InjectedFormProps<any, FormProps>> = props => {
+const Form: React.FC<
+  FormRenderProps & InjectedFormProps<any, FormRenderProps>
+> = props => {
   const {
     bodyClassName,
+    cancelLabel = 'cancel',
+    cancelOnClick,
     children,
     className,
     error,
     // errorValues,
     footerClassName,
-    formValues,
+    // formValues,
     handleSubmit,
+    id,
     invalid,
     name,
     pristine,
@@ -49,12 +57,22 @@ const Form: React.FC<FormProps & InjectedFormProps<any, FormProps>> = props => {
   const { t } = useContext(FormidableContext);
 
   return (
-    <FormSC className={className} name={`${name}-form`} onSubmit={handleSubmit}>
+    <FormSC
+      className={className}
+      id={id}
+      name={`${name}-form`}
+      onSubmit={handleSubmit}
+    >
       <FormBodySC className={bodyClassName}>
         {children}
         {error && <MessageSC>{t ? t(error) : error}</MessageSC>}
       </FormBodySC>
       <FormFooterSC className={footerClassName}>
+        {cancelOnClick && (
+          <Button onClick={cancelOnClick}>
+            {t ? t(cancelLabel) : cancelLabel}
+          </Button>
+        )}
         <Button
           disabled={invalid || pristine || submitting || !valid}
           type="submit"
@@ -73,11 +91,11 @@ type StateProps = {
   form: string;
 };
 
-const ReduxForm = reduxForm<any, FormProps>({})(Form);
+const ReduxForm = reduxForm<any, FormRenderProps>({})(Form);
 
 const mapStateToProps = (
   state: DefaultRootState,
-  props: FormProps,
+  props: FormRenderProps,
 ): StateProps => ({
   destroyOnUnmount:
     undefined !== props.destroyOnUnmount ? props.destroyOnUnmount : true,

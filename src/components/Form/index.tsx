@@ -1,12 +1,18 @@
 import hash from 'object-hash';
-import React, { FC } from 'react';
+import React, { FC, SyntheticEvent } from 'react';
 
 import Data, { DataProps } from '../Data';
 import FormRender from './Render';
 
 interface FormProps {
+  cancelLabel?: string;
+  cancelOnClick?: (event: SyntheticEvent<HTMLButtonElement>) => void;
   className?: string;
   datas?: DataProps | DataProps[];
+  destroyOnUnmount?: boolean;
+  enableReinitialize?: boolean;
+  forceUnregisterOnUnmount?: boolean;
+  id?: string;
   initialValues?: { [key: string]: any };
   name: string;
   onSubmit: (values: any) => void;
@@ -16,9 +22,15 @@ interface FormProps {
 }
 
 const Form: FC<FormProps> = ({
+  cancelLabel,
+  cancelOnClick,
   children,
   className,
   datas,
+  destroyOnUnmount,
+  enableReinitialize,
+  forceUnregisterOnUnmount,
+  id,
   initialValues,
   name,
   onSubmit,
@@ -31,7 +43,13 @@ const Form: FC<FormProps> = ({
 
   return (
     <FormRender
+      cancelLabel={cancelLabel}
+      cancelOnClick={cancelOnClick}
       className={className}
+      destroyOnUnmount={destroyOnUnmount}
+      enableReinitialize={enableReinitialize}
+      forceUnregisterOnUnmount={forceUnregisterOnUnmount}
+      id={id}
       initialValues={initialValues}
       name={name}
       onSubmit={onSubmit}
