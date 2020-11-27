@@ -27,10 +27,10 @@ const styled_components_1 = __importDefault(require("styled-components"));
 const index_1 = require("../../index");
 const ButtonSC = styled_components_1.default.button ``;
 const Button = ({ children, disabled, onClick, type = 'button', }) => {
-    const { theme } = react_1.useContext(index_1.FormidableContext);
+    const { sc } = react_1.useContext(index_1.FormidableContext);
     if ('submit' !== type && !onClick) {
         return react_1.default.createElement("div", null, "la fonction onClick est obligatoire");
     }
-    return (react_1.default.createElement(ButtonSC, { as: theme && theme.button, disabled: disabled, onClick: onClick, type: type }, children));
+    return (react_1.default.createElement(ButtonSC, { as: sc && sc.button, disabled: disabled, onClick: onClick, type: type }, children));
 };
 exports.default = Button;

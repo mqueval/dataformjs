@@ -1,24 +1,40 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
 
-const ColumnsEl = styled.div`
+import { GridProps } from '../Grid';
+
+const ColumnsSC = styled.div<GridProps>`
   display: flex;
-  flex-direction: row;
   flex-wrap: wrap;
-
-  > div {
-    margin-right: 1.5rem;
-  }
-
-  > div:last-child {
-    margin-right: 0;
-  }
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: stretch;
+  align-content: flex-start;
+  margin: ${props =>
+    `-${props.spacingY || (props.theme.spacing && props.theme.spacing.xs)} -${
+      props.spacingX || (props.theme.spacing && props.theme.spacing.xs)
+    }`};
 `;
 
-const Columns: FC<{
-  className?: string;
-}> = ({ children, className }) => (
-  <ColumnsEl className={className}>{children}</ColumnsEl>
-);
+const Columns: FC<GridProps> = ({
+  children,
+  className,
+  spacingX,
+  spacingY,
+}) => {
+  const childrenWithProps = React.Children.map(children, child => {
+    if (React.isValidElement(child)) {
+      return React.cloneElement(child, { spacingX, spacingY });
+    }
+
+    return child;
+  });
+
+  return (
+    <ColumnsSC className={className} spacingX={spacingX} spacingY={spacingY}>
+      {childrenWithProps}
+    </ColumnsSC>
+  );
+};
 
 export default Columns;

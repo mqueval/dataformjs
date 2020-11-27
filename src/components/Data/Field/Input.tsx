@@ -31,7 +31,7 @@ const FieldInput: FC<
   type = 'text',
   meta: { error, touched },
 }) => {
-  const { t, theme } = useContext(FormidableContext);
+  const { t, sc } = useContext(FormidableContext);
 
   // if (!type) {
   //   return <div>input : erreur de paramètre : type obligatoire</div>;
@@ -41,7 +41,7 @@ const FieldInput: FC<
     <DataFieldInputSC className={className}>
       <InputSC
         {...input}
-        as={theme && theme.input}
+        as={sc && sc.input}
         disabled={disabled}
         id={id}
         placeholder={t && placeholder ? t(placeholder) : placeholder}

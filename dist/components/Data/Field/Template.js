@@ -27,6 +27,7 @@ const react_1 = __importStar(require("react"));
 const styled_components_1 = __importDefault(require("styled-components"));
 const index_1 = require("../../../index");
 const FieldMessageSC = styled_components_1.default.div ``;
+const FieldLabelSC = styled_components_1.default.label ``;
 const FieldSC = styled_components_1.default.div.attrs(props => ({
     className: classnames_1.default(props.className, 'pb-2'),
 })) ``;
@@ -37,15 +38,15 @@ const CustomTopSC = styled_components_1.default.div.attrs(props => ({
     className: classnames_1.default(props.className, 'float-right'),
 })) ``;
 const FieldTemplate = ({ children, className, customBottom, customBottomClassName, customTop, customTopClassName, id, input: { name }, label, meta: { error, touched, warning }, }) => {
-    const { t, theme } = react_1.useContext(index_1.FormidableContext);
-    return (react_1.default.createElement(FieldSC, { as: theme && theme.field, className: className },
-        customTop && (react_1.default.createElement(CustomTopSC, { as: theme && theme.customTop, className: customTopClassName }, customTop)),
-        react_1.default.createElement("label", { htmlFor: id }, t ? t(label || name) : label || name),
+    const { t, sc } = react_1.useContext(index_1.FormidableContext);
+    return (react_1.default.createElement(FieldSC, { as: sc && sc.field, className: className },
+        customTop && (react_1.default.createElement(CustomTopSC, { as: sc && sc.customTop, className: customTopClassName }, customTop)),
+        react_1.default.createElement(FieldLabelSC, { as: sc && sc.label, htmlFor: id }, t ? t(label || name) : label || name),
         react_1.default.createElement("div", null,
             children,
             touched &&
-                ((error && (react_1.default.createElement(FieldMessageSC, { as: theme && theme.fieldMessage, status: "error" }, t ? t(error) : error))) ||
-                    (warning && (react_1.default.createElement(FieldMessageSC, { as: theme && theme.fieldMessage, status: "warning" }, t ? t(warning) : warning))))),
-        customBottom && (react_1.default.createElement(CustomBottomSC, { as: theme && theme.customBottom, className: customBottomClassName }, customBottom))));
+                ((error && (react_1.default.createElement(FieldMessageSC, { as: sc && sc.fieldMessage, status: "error" }, t ? t(error) : error))) ||
+                    (warning && (react_1.default.createElement(FieldMessageSC, { as: sc && sc.fieldMessage, status: "warning" }, t ? t(warning) : warning))))),
+        customBottom && (react_1.default.createElement(CustomBottomSC, { as: sc && sc.customBottom, className: customBottomClassName }, customBottom))));
 };
 exports.default = FieldTemplate;

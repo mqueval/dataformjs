@@ -1,4 +1,5 @@
 import { FC } from 'react';
+import DataArray from './Array';
 export interface DataProps {
     className?: string;
     componentType?: string;
@@ -27,3 +28,4 @@ declare const Data: FC<DataProps & {
     formName: string;
 }>;
 export default Data;
+export { DataArray };

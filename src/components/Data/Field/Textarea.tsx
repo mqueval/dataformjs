@@ -13,12 +13,12 @@ const FieldTextarea: FC<
       id: string;
     }
 > = ({ disabled, id, input, meta: { error, touched }, placeholder }) => {
-  const { t, theme } = useContext(FormidableContext);
+  const { t, sc } = useContext(FormidableContext);
 
   return (
     <TextareaSC
       {...input}
-      as={theme && theme.textarea}
+      as={sc && sc.textarea}
       disabled={disabled}
       id={id}
       placeholder={t && placeholder ? t(placeholder) : placeholder}

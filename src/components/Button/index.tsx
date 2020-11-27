@@ -17,7 +17,7 @@ const Button: FC<ButtonProps> = ({
   onClick,
   type = 'button',
 }) => {
-  const { theme } = useContext(FormidableContext);
+  const { sc } = useContext(FormidableContext);
 
   if ('submit' !== type && !onClick) {
     return <div>la fonction onClick est obligatoire</div>;
@@ -25,7 +25,7 @@ const Button: FC<ButtonProps> = ({
 
   return (
     <ButtonSC
-      as={theme && theme.button}
+      as={sc && sc.button}
       disabled={disabled}
       onClick={onClick}
       type={type}

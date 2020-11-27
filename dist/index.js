@@ -22,7 +22,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.FormidableProvider = exports.FormidableContext = exports.isRequired = exports.isEmail = exports.addValidator = exports.initializeValues = exports.Form = exports.DataField = exports.Data = exports.print = exports.FormSection = exports.reduxForm = exports.SubmissionError = exports.formValueSelector = exports.FieldArray = exports.Field = exports.change = exports.useStore = exports.useSelector = exports.useDispatch = exports.connect = void 0;
+exports.FormidableProvider = exports.FormidableContext = exports.Grid = exports.Column = exports.isRequired = exports.isEmail = exports.addValidator = exports.initializeValues = exports.Form = exports.DataField = exports.DataArray = exports.Data = exports.print = exports.FormSection = exports.reduxForm = exports.SubmissionError = exports.formValueSelector = exports.FieldArray = exports.Field = exports.change = exports.useStore = exports.useSelector = exports.useDispatch = exports.connect = void 0;
 const FormidableContext_1 = __importStar(require("./FormidableContext"));
 exports.FormidableContext = FormidableContext_1.default;
 Object.defineProperty(exports, "FormidableProvider", { enumerable: true, get: function () { return FormidableContext_1.FormidableProvider; } });
@@ -45,6 +45,7 @@ const print = () => {
 exports.print = print;
 var Data_1 = require("./components/Data");
 Object.defineProperty(exports, "Data", { enumerable: true, get: function () { return __importDefault(Data_1).default; } });
+Object.defineProperty(exports, "DataArray", { enumerable: true, get: function () { return Data_1.DataArray; } });
 var Field_1 = require("./components/Data/Field");
 Object.defineProperty(exports, "DataField", { enumerable: true, get: function () { return __importDefault(Field_1).default; } });
 var Form_1 = require("./components/Form");
@@ -55,3 +56,7 @@ var validators_1 = require("./utils/validators");
 Object.defineProperty(exports, "addValidator", { enumerable: true, get: function () { return validators_1.addValidator; } });
 Object.defineProperty(exports, "isEmail", { enumerable: true, get: function () { return validators_1.isEmail; } });
 Object.defineProperty(exports, "isRequired", { enumerable: true, get: function () { return validators_1.isRequired; } });
+var Column_1 = require("./components/Column");
+Object.defineProperty(exports, "Column", { enumerable: true, get: function () { return __importDefault(Column_1).default; } });
+var Grid_1 = require("./components/Grid");
+Object.defineProperty(exports, "Grid", { enumerable: true, get: function () { return __importDefault(Grid_1).default; } });

@@ -10,6 +10,9 @@ interface FormidableStateProps {
         };
     }) => ReactElement<any, any> | null;
     getControlStyle?: (props: any) => any;
+    sc?: {
+        [key: string]: any;
+    };
     store?: Store;
     t?: TFunction;
     theme?: {

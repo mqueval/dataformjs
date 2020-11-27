@@ -29,11 +29,11 @@ const Columns_1 = __importDefault(require("../Columns"));
 const GroupSC = styled_components_1.default.div ``;
 const GroupDescriptionSC = styled_components_1.default.p ``;
 const Group = ({ children, className, columns, columnsClassName, customInfos, customInfosClassName, description, descriptionClassName, title, }) => {
-    const { t, theme } = react_1.useContext(index_1.FormidableContext);
-    return (react_1.default.createElement(GroupSC, { as: theme && theme.group, className: className },
+    const { t, sc } = react_1.useContext(index_1.FormidableContext);
+    return (react_1.default.createElement(GroupSC, { as: sc && sc.group, className: className },
         title && react_1.default.createElement("legend", null, t ? t(title) : title),
         customInfos && react_1.default.createElement("div", { className: customInfosClassName }, customInfos),
-        description && (react_1.default.createElement(GroupDescriptionSC, { as: theme && theme.groupDescription, className: descriptionClassName }, t ? t(description) : description)),
+        description && (react_1.default.createElement(GroupDescriptionSC, { as: sc && sc.groupDescription, className: descriptionClassName }, t ? t(description) : description)),
         columns ? (react_1.default.createElement(Columns_1.default, { className: columnsClassName }, children)) : (children)));
 };
 exports.default = Group;

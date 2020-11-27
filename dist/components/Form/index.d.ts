@@ -1,8 +1,14 @@
-import { FC } from 'react';
+import { FC, SyntheticEvent } from 'react';
 import { DataProps } from '../Data';
 interface FormProps {
+    cancelLabel?: string;
+    cancelOnClick?: (event: SyntheticEvent<HTMLButtonElement>) => void;
     className?: string;
     datas?: DataProps | DataProps[];
+    destroyOnUnmount?: boolean;
+    enableReinitialize?: boolean;
+    forceUnregisterOnUnmount?: boolean;
+    id?: string;
     initialValues?: {
         [key: string]: any;
     };

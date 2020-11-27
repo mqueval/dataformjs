@@ -22,13 +22,16 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.DataArray = void 0;
 const object_hash_1 = __importDefault(require("object-hash"));
 const react_1 = __importStar(require("react"));
 const index_1 = require("../../index");
 const Column_1 = __importDefault(require("../Column"));
 const Columns_1 = __importDefault(require("../Columns"));
+const Grid_1 = __importDefault(require("../Grid"));
 const Group_1 = __importDefault(require("../Group"));
 const Array_1 = __importDefault(require("./Array"));
+exports.DataArray = Array_1.default;
 const Condition_1 = __importDefault(require("./Condition"));
 const Field_1 = __importDefault(require("./Field"));
 const Search_Form_1 = __importDefault(require("./Search+Form"));
@@ -87,6 +90,14 @@ const Data = ({ datas, formName, ...props }) => {
                 return (react_1.default.createElement("div", null, `${componentType} : erreur de paramètre : formName obligatoire`));
             }
             return (react_1.default.createElement(Condition_1.default, Object.assign({}, props, { datas: datas, formName: formName, test: test })));
+        }
+        case 'grid': {
+            if (!datas) {
+                return (react_1.default.createElement("div", null, `${componentType} : erreur de paramètre : datas obligatoire`));
+            }
+            return (react_1.default.createElement(Grid_1.default, Object.assign({}, props), datas &&
+                datas.length > 0 &&
+                datas.map(data => (react_1.default.createElement(Data, Object.assign({ key: object_hash_1.default(data) }, data, { formName: formName, params: params }))))));
         }
         case 'group': {
             if (!datas) {

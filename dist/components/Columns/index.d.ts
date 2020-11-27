@@ -1,5 +1,4 @@
 import { FC } from 'react';
-declare const Columns: FC<{
-    className?: string;
-}>;
+import { GridProps } from '../Grid';
+declare const Columns: FC<GridProps>;
 export default Columns;

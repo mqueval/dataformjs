@@ -5,22 +5,28 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const react_1 = __importDefault(require("react"));
 const styled_components_1 = __importDefault(require("styled-components"));
-const ColumnsSC = styled_components_1.default.div `
+const GridSC = styled_components_1.default.div `
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
   justify-content: flex-start;
   align-items: stretch;
   align-content: flex-start;
-  margin: ${props => `-${props.spacingY || (props.theme.spacing && props.theme.spacing.xs)} -${props.spacingX || (props.theme.spacing && props.theme.spacing.xs)}`};
+  margin: ${props => `-${props.theme.spacing &&
+    (props.spacingY
+        ? props.theme.spacing[props.spacingY]
+        : props.theme.spacing.xs)} -${props.theme.spacing &&
+    (props.spacingX
+        ? props.theme.spacing[props.spacingX]
+        : props.theme.spacing.xs)}`};
 `;
-const Columns = ({ children, className, spacingX, spacingY, }) => {
+const Grid = ({ children, className, spacingX, spacingY }) => {
     const childrenWithProps = react_1.default.Children.map(children, child => {
         if (react_1.default.isValidElement(child)) {
             return react_1.default.cloneElement(child, { spacingX, spacingY });
         }
         return child;
     });
-    return (react_1.default.createElement(ColumnsSC, { className: className, spacingX: spacingX, spacingY: spacingY }, childrenWithProps));
+    return (react_1.default.createElement(GridSC, { className: className, spacingX: spacingX, spacingY: spacingY }, childrenWithProps));
 };
-exports.default = Columns;
+exports.default = Grid;
