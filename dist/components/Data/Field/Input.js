@@ -30,12 +30,12 @@ const DataFieldInputSC = styled_components_1.default.div.attrs(props => ({
 })) ``;
 const InputSC = styled_components_1.default.input ``;
 const FieldInput = ({ className, description, disabled, id, input, placeholder, type = 'text', meta: { error, touched }, }) => {
-    const { t, theme } = react_1.useContext(index_1.FormidableContext);
+    const { t, sc } = react_1.useContext(index_1.FormidableContext);
     // if (!type) {
     //   return <div>input : erreur de paramètre : type obligatoire</div>;
     // }
     return (react_1.default.createElement(DataFieldInputSC, { className: className },
-        react_1.default.createElement(InputSC, Object.assign({}, input, { as: theme && theme.input, disabled: disabled, id: id, placeholder: t && placeholder ? t(placeholder) : placeholder, status: touched && error ? 'error' : undefined, type: type })),
+        react_1.default.createElement(InputSC, Object.assign({}, input, { as: sc && sc.input, disabled: disabled, id: id, placeholder: t && placeholder ? t(placeholder) : placeholder, status: touched && error ? 'error' : undefined, type: type })),
         description && (react_1.default.createElement("label", { htmlFor: id }, t ? t(description) : description))));
 };
 exports.default = FieldInput;

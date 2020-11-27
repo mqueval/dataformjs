@@ -29,15 +29,15 @@ const Group: FC<GroupProps> = ({
   descriptionClassName,
   title,
 }) => {
-  const { t, theme } = useContext(FormidableContext);
+  const { t, sc } = useContext(FormidableContext);
 
   return (
-    <GroupSC as={theme && theme.group} className={className}>
+    <GroupSC as={sc && sc.group} className={className}>
       {title && <legend>{t ? t(title) : title}</legend>}
       {customInfos && <div className={customInfosClassName}>{customInfos}</div>}
       {description && (
         <GroupDescriptionSC
-          as={theme && theme.groupDescription}
+          as={sc && sc.groupDescription}
           className={descriptionClassName}
         >
           {t ? t(description) : description}

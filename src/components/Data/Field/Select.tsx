@@ -37,7 +37,7 @@ const FieldSelect: FC<
   multi = false,
   ...others
 }) => {
-  const { getControlStyle, t, theme } = useContext(FormidableContext);
+  const { getControlStyle, t, sc } = useContext(FormidableContext);
   const dispatch = useDispatch();
 
   if (!formName) {
@@ -119,7 +119,7 @@ const FieldSelect: FC<
   return (
     <SelectSC
       {...input}
-      as={theme && theme.select}
+      as={sc && sc.select}
       disabled={disabled}
       id={id}
       required

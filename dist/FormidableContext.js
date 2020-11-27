@@ -25,25 +25,29 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.FormidableProvider = void 0;
 const react_1 = __importStar(require("react"));
 const react_redux_1 = require("react-redux");
+const styled_components_1 = require("styled-components");
 const createStore_1 = __importDefault(require("./createStore"));
 const defaultState = {
     extendData: undefined,
     getControlStyle: undefined,
+    sc: undefined,
     store: undefined,
     t: undefined,
     theme: undefined,
 };
 const FormidableContext = react_1.default.createContext(defaultState);
-const FormidableProvider = ({ children, extendData, getControlStyle, t, theme, }) => {
+const FormidableProvider = ({ children, extendData, getControlStyle, sc, t, theme, }) => {
     const [store] = react_1.useState(createStore_1.default({}));
     return (react_1.default.createElement(FormidableContext.Provider, { value: {
             extendData,
             getControlStyle,
+            sc,
             store,
             t,
             theme,
         } },
-        react_1.default.createElement(react_redux_1.Provider, { store: store }, children)));
+        react_1.default.createElement(react_redux_1.Provider, { store: store },
+            react_1.default.createElement(styled_components_1.ThemeProvider, { theme: theme }, children))));
 };
 exports.FormidableProvider = FormidableProvider;
 exports.default = FormidableContext;
