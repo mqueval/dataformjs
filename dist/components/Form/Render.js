@@ -30,7 +30,11 @@ const index_1 = require("../../index");
 const Button_1 = __importDefault(require("../Button"));
 const FormSC = styled_components_1.default.form ``;
 const FormBodySC = styled_components_1.default.div ``;
-const FormFooterSC = styled_components_1.default.div ``;
+const FormFooterSC = styled_components_1.default.div `
+  display: flex;
+  justify-content: space-between;
+  padding-top: ${props => props.theme.spacing.l};
+`;
 const MessageSC = styled_components_1.default.div ``;
 const Form = props => {
     const { bodyClassName, cancelLabel = 'cancel', cancelOnClick, children, className, error, 
@@ -38,13 +42,13 @@ const Form = props => {
     footerClassName, 
     // formValues,
     handleSubmit, id, invalid, name, pristine, submitLabel = 'form/submit', submitting, valid, } = props;
-    const { t } = react_1.useContext(index_1.FormidableContext);
-    return (react_1.default.createElement(FormSC, { className: className, id: id, name: `${name}-form`, onSubmit: handleSubmit },
+    const { sc, t } = react_1.useContext(index_1.FormidableContext);
+    return (react_1.default.createElement(FormSC, { as: sc && sc.form, className: className, id: id, name: `${name}-form`, onSubmit: handleSubmit },
         react_1.default.createElement(FormBodySC, { className: bodyClassName },
             children,
             error && react_1.default.createElement(MessageSC, null, t ? t(error) : error)),
         react_1.default.createElement(FormFooterSC, { className: footerClassName },
-            cancelOnClick && (react_1.default.createElement(Button_1.default, { onClick: cancelOnClick }, t ? t(cancelLabel) : cancelLabel)),
+            react_1.default.createElement("div", null, cancelOnClick && (react_1.default.createElement(Button_1.default, { onClick: cancelOnClick }, t ? t(cancelLabel) : cancelLabel))),
             react_1.default.createElement(Button_1.default, { disabled: invalid || pristine || submitting || !valid, type: "submit" }, t ? t(submitLabel) : submitLabel))));
 };
 const ReduxForm = redux_form_1.reduxForm({})(Form);

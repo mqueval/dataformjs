@@ -9,7 +9,11 @@ import { DataProps } from '../Data';
 
 const FormSC = styled.form``;
 const FormBodySC = styled.div``;
-const FormFooterSC = styled.div``;
+const FormFooterSC = styled.div`
+  display: flex;
+  justify-content: space-between;
+  padding-top: ${props => props.theme.spacing.l};
+`;
 
 const MessageSC = styled.div``;
 
@@ -54,10 +58,11 @@ const Form: React.FC<
     valid,
   } = props;
 
-  const { t } = useContext(FormidableContext);
+  const { sc, t } = useContext(FormidableContext);
 
   return (
     <FormSC
+      as={sc && sc.form}
       className={className}
       id={id}
       name={`${name}-form`}
@@ -68,11 +73,14 @@ const Form: React.FC<
         {error && <MessageSC>{t ? t(error) : error}</MessageSC>}
       </FormBodySC>
       <FormFooterSC className={footerClassName}>
-        {cancelOnClick && (
-          <Button onClick={cancelOnClick}>
-            {t ? t(cancelLabel) : cancelLabel}
-          </Button>
-        )}
+        <div>
+          {cancelOnClick && (
+            <Button onClick={cancelOnClick}>
+              {t ? t(cancelLabel) : cancelLabel}
+            </Button>
+          )}
+        </div>
+
         <Button
           disabled={invalid || pristine || submitting || !valid}
           type="submit"

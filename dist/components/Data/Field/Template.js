@@ -28,9 +28,7 @@ const styled_components_1 = __importDefault(require("styled-components"));
 const index_1 = require("../../../index");
 const FieldMessageSC = styled_components_1.default.div ``;
 const FieldLabelSC = styled_components_1.default.label ``;
-const FieldSC = styled_components_1.default.div.attrs(props => ({
-    className: classnames_1.default(props.className, 'pb-2'),
-})) ``;
+const FieldSC = styled_components_1.default.div ``;
 const CustomBottomSC = styled_components_1.default.div.attrs(props => ({
     className: classnames_1.default(props.className, 'float-right'),
 })) ``;
