@@ -1,4 +1,4 @@
-import React, { FC, ReactElement, SyntheticEvent, useContext } from 'react';
+import React, { FC, ReactNode, SyntheticEvent, useContext } from 'react';
 import styled from 'styled-components';
 
 import { FormidableContext } from '../../index';
@@ -7,13 +7,16 @@ const ButtonSC = styled.button``;
 
 interface ButtonProps {
   disabled?: boolean;
-  iconLeft?: ReactElement;
+  iconLeft?: ReactNode;
+  iconRight?: ReactNode;
   onClick?: (event: SyntheticEvent<HTMLButtonElement>) => void;
   type?: 'button' | 'submit';
 }
 const Button: FC<ButtonProps> = ({
   children,
   disabled,
+  iconLeft,
+  iconRight,
   onClick,
   type = 'button',
 }) => {
@@ -30,7 +33,9 @@ const Button: FC<ButtonProps> = ({
       onClick={onClick}
       type={type}
     >
-      {children}
+      {iconLeft}
+      <span>{children}</span>
+      {iconRight}
     </ButtonSC>
   );
 };

@@ -37,19 +37,19 @@ const FormFooterSC = styled_components_1.default.div `
 `;
 const MessageSC = styled_components_1.default.div ``;
 const Form = props => {
-    const { bodyClassName, cancelLabel = 'cancel', cancelOnClick, children, className, error, 
+    const { bodyClassName, cancelIcon, cancelLabel = 'cancel', cancelOnClick, children, className, error, 
     // errorValues,
     footerClassName, 
     // formValues,
-    handleSubmit, id, invalid, name, pristine, submitLabel = 'form/submit', submitting, valid, } = props;
+    handleSubmit, id, isSubmissive = true, invalid, name, pristine, submitIcon, submitLabel = 'form/submit', submitting, valid, } = props;
     const { sc, t } = react_1.useContext(index_1.FormidableContext);
     return (react_1.default.createElement(FormSC, { as: sc && sc.form, className: className, id: id, name: `${name}-form`, onSubmit: handleSubmit },
         react_1.default.createElement(FormBodySC, { className: bodyClassName },
             children,
-            error && react_1.default.createElement(MessageSC, null, t ? t(error) : error)),
+            error && (react_1.default.createElement(MessageSC, { as: sc && sc.fieldMessage, status: "error" }, t ? t(error) : error))),
         react_1.default.createElement(FormFooterSC, { className: footerClassName },
-            react_1.default.createElement("div", null, cancelOnClick && (react_1.default.createElement(Button_1.default, { onClick: cancelOnClick }, t ? t(cancelLabel) : cancelLabel))),
-            react_1.default.createElement(Button_1.default, { disabled: invalid || pristine || submitting || !valid, type: "submit" }, t ? t(submitLabel) : submitLabel))));
+            react_1.default.createElement("div", null, cancelOnClick && (react_1.default.createElement(Button_1.default, { iconLeft: cancelIcon, onClick: cancelOnClick }, t ? t(cancelLabel) : cancelLabel))),
+            react_1.default.createElement(Button_1.default, { disabled: !isSubmissive || invalid || pristine || submitting || !valid, iconRight: submitIcon, type: "submit" }, t ? t(submitLabel) : submitLabel))));
 };
 const ReduxForm = redux_form_1.reduxForm({})(Form);
 const mapStateToProps = (state, props) => ({

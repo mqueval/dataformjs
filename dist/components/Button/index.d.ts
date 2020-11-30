@@ -1,7 +1,8 @@
-import { FC, ReactElement, SyntheticEvent } from 'react';
+import { FC, ReactNode, SyntheticEvent } from 'react';
 interface ButtonProps {
     disabled?: boolean;
-    iconLeft?: ReactElement;
+    iconLeft?: ReactNode;
+    iconRight?: ReactNode;
     onClick?: (event: SyntheticEvent<HTMLButtonElement>) => void;
     type?: 'button' | 'submit';
 }
