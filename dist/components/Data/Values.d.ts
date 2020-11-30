@@ -6,5 +6,5 @@ interface DataFieldValuesProps extends DataProps {
         [key: string]: any;
     };
 }
-declare const _default: import("react-redux").ConnectedComponent<React.FC<DataFieldValuesProps>, Pick<DataFieldValuesProps, "required" | "label" | "formName" | "componentType" | "name" | "params" | "className" | "datas" | "test"> & DataFieldValuesProps>;
+declare const _default: import("react-redux").ConnectedComponent<React.FC<DataFieldValuesProps>, Pick<DataFieldValuesProps, "label" | "className" | "datas" | "name" | "params" | "required" | "formName" | "componentType" | "test"> & DataFieldValuesProps>;
 export default _default;

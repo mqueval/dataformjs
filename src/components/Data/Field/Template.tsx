@@ -8,9 +8,7 @@ import { DataFieldProps } from './index';
 
 const FieldMessageSC = styled.div``;
 const FieldLabelSC = styled.label``;
-const FieldSC = styled.div.attrs(props => ({
-  className: classNames(props.className, 'pb-2'),
-}))``;
+const FieldSC = styled.div``;
 
 const CustomBottomSC = styled.div.attrs(props => ({
   className: classNames(props.className, 'float-right'),
