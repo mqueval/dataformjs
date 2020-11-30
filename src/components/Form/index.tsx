@@ -1,10 +1,13 @@
 import hash from 'object-hash';
-import React, { FC, SyntheticEvent } from 'react';
+import React, { FC, ReactNode, SyntheticEvent } from 'react';
+import { Dispatch } from 'redux';
+import { DecoratedFormProps } from 'redux-form';
 
 import Data, { DataProps } from '../Data';
 import FormRender from './Render';
 
-interface FormProps {
+export interface FormProps<P> {
+  cancelIcon?: ReactNode;
   cancelLabel?: string;
   cancelOnClick?: (event: SyntheticEvent<HTMLButtonElement>) => void;
   className?: string;
@@ -14,14 +17,23 @@ interface FormProps {
   forceUnregisterOnUnmount?: boolean;
   id?: string;
   initialValues?: { [key: string]: any };
+  isSubmissive?: boolean;
   name: string;
-  onSubmit: (values: any) => void;
+  onChange?(
+    values: Partial<FormData>,
+    dispatch: Dispatch<any>,
+    props: DecoratedFormProps<FormData, P>,
+    previousValues: Partial<FormData>,
+  ): void;
+  onSubmit: (values?: any) => void;
   params?: { [key: string]: any };
+  submitIcon?: ReactNode;
   submitLabel?: string;
   validate?: (values: any, props: any) => any;
 }
 
-const Form: FC<FormProps> = ({
+const Form: FC<FormProps<any>> = ({
+  cancelIcon,
   cancelLabel,
   cancelOnClick,
   children,
@@ -32,9 +44,12 @@ const Form: FC<FormProps> = ({
   forceUnregisterOnUnmount,
   id,
   initialValues,
+  isSubmissive,
   name,
+  onChange,
   onSubmit,
   params,
+  submitIcon,
   submitLabel,
   validate,
 }) => {
@@ -43,6 +58,7 @@ const Form: FC<FormProps> = ({
 
   return (
     <FormRender
+      cancelIcon={cancelIcon}
       cancelLabel={cancelLabel}
       cancelOnClick={cancelOnClick}
       className={className}
@@ -51,8 +67,11 @@ const Form: FC<FormProps> = ({
       forceUnregisterOnUnmount={forceUnregisterOnUnmount}
       id={id}
       initialValues={initialValues}
+      isSubmissive={isSubmissive}
       name={name}
+      onChange={onChange}
       onSubmit={onSubmit}
+      submitIcon={submitIcon}
       submitLabel={submitLabel}
       validate={validate}
     >

@@ -1,6 +1,9 @@
-import { FC, SyntheticEvent } from 'react';
+import { FC, ReactNode, SyntheticEvent } from 'react';
+import { Dispatch } from 'redux';
+import { DecoratedFormProps } from 'redux-form';
 import { DataProps } from '../Data';
-interface FormProps {
+export interface FormProps<P> {
+    cancelIcon?: ReactNode;
     cancelLabel?: string;
     cancelOnClick?: (event: SyntheticEvent<HTMLButtonElement>) => void;
     className?: string;
@@ -12,13 +15,16 @@ interface FormProps {
     initialValues?: {
         [key: string]: any;
     };
+    isSubmissive?: boolean;
     name: string;
-    onSubmit: (values: any) => void;
+    onChange?(values: Partial<FormData>, dispatch: Dispatch<any>, props: DecoratedFormProps<FormData, P>, previousValues: Partial<FormData>): void;
+    onSubmit: (values?: any) => void;
     params?: {
         [key: string]: any;
     };
+    submitIcon?: ReactNode;
     submitLabel?: string;
     validate?: (values: any, props: any) => any;
 }
-declare const Form: FC<FormProps>;
+declare const Form: FC<FormProps<any>>;
 export default Form;

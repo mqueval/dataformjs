@@ -19,6 +19,10 @@ const SelectSC = styled(AsyncSelect)`
     padding-right: 0 !important;
   }
 
+  .DataFieldAsyncSelect__value-container div {
+    margin-left: 0;
+  }
+
   .DataFieldAsyncSelect__value-container div:last-child {
     //.DataFieldAsyncSelect__value-container--has-value + div,
     //.DataFieldAsyncSelect__single-value + div,
