@@ -19,6 +19,7 @@ const MessageSC = styled.div``;
 
 interface FormRenderProps {
   bodyClassName?: string;
+  cancelIcon?: ReactNode;
   cancelLabel?: string;
   cancelOnClick?: (event: SyntheticEvent<HTMLButtonElement>) => void;
   children?: ReactNode;
@@ -31,7 +32,9 @@ interface FormRenderProps {
   formValues?: any;
   footerClassName?: string;
   id?: string;
+  isSubmissive?: boolean;
   name: string;
+  submitIcon?: ReactNode;
   submitLabel?: string;
 }
 
@@ -40,6 +43,7 @@ const Form: React.FC<
 > = props => {
   const {
     bodyClassName,
+    cancelIcon,
     cancelLabel = 'cancel',
     cancelOnClick,
     children,
@@ -50,9 +54,11 @@ const Form: React.FC<
     // formValues,
     handleSubmit,
     id,
+    isSubmissive = true,
     invalid,
     name,
     pristine,
+    submitIcon,
     submitLabel = 'form/submit',
     submitting,
     valid,
@@ -70,19 +76,26 @@ const Form: React.FC<
     >
       <FormBodySC className={bodyClassName}>
         {children}
-        {error && <MessageSC>{t ? t(error) : error}</MessageSC>}
+        {error && (
+          <MessageSC as={sc && sc.fieldMessage} status="error">
+            {t ? t(error) : error}
+          </MessageSC>
+        )}
       </FormBodySC>
       <FormFooterSC className={footerClassName}>
         <div>
           {cancelOnClick && (
-            <Button onClick={cancelOnClick}>
+            <Button iconLeft={cancelIcon} onClick={cancelOnClick}>
               {t ? t(cancelLabel) : cancelLabel}
             </Button>
           )}
         </div>
 
         <Button
-          disabled={invalid || pristine || submitting || !valid}
+          disabled={
+            !isSubmissive || invalid || pristine || submitting || !valid
+          }
+          iconRight={submitIcon}
           type="submit"
         >
           {t ? t(submitLabel) : submitLabel}
