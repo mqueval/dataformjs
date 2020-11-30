@@ -8,7 +8,27 @@ import styled from 'styled-components';
 import { FormidableContext } from '../../../index';
 import { DataFieldSelectProps } from './Select';
 
-const SelectSC = styled(AsyncSelect)``;
+const SelectSC = styled(AsyncSelect)`
+  .DataFieldAsyncSelect__value-container {
+    padding-bottom: 0;
+    padding-top: 0;
+    padding-left: 0;
+  }
+
+  .DataFieldAsyncSelect__control {
+    padding-right: 0 !important;
+  }
+
+  .DataFieldAsyncSelect__value-container div:last-child {
+    //.DataFieldAsyncSelect__value-container--has-value + div,
+    //.DataFieldAsyncSelect__single-value + div,
+    //.DataFieldAsyncSelect__placeholder + div {
+    margin-bottom: 0;
+    margin-top: 0;
+    padding-bottom: 0;
+    padding-top: 0;
+  }
+`;
 
 export interface DataFieldAsyncSelectProps<P> extends DataFieldSelectProps {
   cacheOptions?: boolean;
@@ -130,6 +150,7 @@ const FieldAsyncSelect: FC<
   return (
     <SelectSC
       cacheOptions={cacheOptions}
+      classNamePrefix="DataFieldAsyncSelect"
       components={newComponents}
       defaultOptions={defaultOptions}
       defaultValue={defaultValue}
