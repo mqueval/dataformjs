@@ -17,12 +17,7 @@ export interface DataFieldSelectProps extends DataFieldProps {
   getOptionValue?: (option: any) => any;
 }
 
-const FieldSelect: FC<
-  WrappedFieldProps &
-    DataFieldSelectProps & {
-      id: string;
-    }
-> = ({
+const FieldSelect: FC<WrappedFieldProps & DataFieldSelectProps> = ({
   disabled,
   formName,
   getOptionLabel,

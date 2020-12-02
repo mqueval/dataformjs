@@ -62,10 +62,7 @@ export interface DataFieldAsyncSelectProps<P> extends DataFieldSelectProps {
 }
 
 const FieldAsyncSelect: FC<
-  WrappedFieldProps &
-    DataFieldAsyncSelectProps<any> & {
-      id: string;
-    }
+  WrappedFieldProps & DataFieldAsyncSelectProps<any>
 > = ({
   cacheOptions = false,
   customOption,

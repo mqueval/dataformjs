@@ -26,7 +26,7 @@ const react_1 = __importStar(require("react"));
 const styled_components_1 = __importDefault(require("styled-components"));
 const index_1 = require("../../../index");
 const TextareaSC = styled_components_1.default.textarea ``;
-const FieldTextarea = ({ disabled, id, input, meta: { error, touched }, placeholder }) => {
+const FieldTextarea = ({ disabled, id, input, meta: { error, touched }, placeholder, }) => {
     const { t, sc } = react_1.useContext(index_1.FormidableContext);
     return (react_1.default.createElement(TextareaSC, Object.assign({}, input, { as: sc && sc.textarea, disabled: disabled, id: id, placeholder: t && placeholder ? t(placeholder) : placeholder, status: touched && error ? 'error' : null })));
 };

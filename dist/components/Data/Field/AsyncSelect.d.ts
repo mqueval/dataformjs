@@ -28,7 +28,5 @@ export interface DataFieldAsyncSelectProps<P> extends DataFieldSelectProps {
     }) => ReactNode;
     value?: P | P[];
 }
-declare const FieldAsyncSelect: FC<WrappedFieldProps & DataFieldAsyncSelectProps<any> & {
-    id: string;
-}>;
+declare const FieldAsyncSelect: FC<WrappedFieldProps & DataFieldAsyncSelectProps<any>>;
 export default FieldAsyncSelect;

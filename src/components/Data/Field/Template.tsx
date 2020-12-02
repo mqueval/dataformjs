@@ -18,9 +18,7 @@ const CustomTopSC = styled.div.attrs(props => ({
   className: classNames(props.className, 'float-right'),
 }))``;
 
-const FieldTemplate: FC<
-  WrappedFieldProps & DataFieldProps & { id: string }
-> = ({
+const FieldTemplate: FC<WrappedFieldProps & DataFieldProps> = ({
   children,
   className,
   customBottom,

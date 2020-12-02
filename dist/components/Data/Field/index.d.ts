@@ -15,6 +15,7 @@ export interface DataFieldProps extends DataProps {
         name?: string;
         value?: any;
     }) => any;
+    id?: string;
     label?: string;
     name: string;
     params?: {
