@@ -11,8 +11,8 @@ const Select_1 = __importDefault(require("./Select"));
 const Template_1 = __importDefault(require("./Template"));
 const Textarea_1 = __importDefault(require("./Textarea"));
 const DataFieldRender = props => {
-    const { componentType, handleOnChange, input } = props;
-    const id = object_hash_1.default({ componentType, name: input.name }); // TODO revoir ce code car il change a chaque fois
+    const { componentType, handleOnChange, id, input } = props;
+    const newId = id || object_hash_1.default({ componentType, name: input.name }); // TODO revoir ce code car il change a chaque fois
     const newInput = { ...input };
     const { onChange } = input;
     if (handleOnChange) {
@@ -46,6 +46,6 @@ const DataFieldRender = props => {
             return (react_1.default.createElement("div", null, `data field render : erreur de paramètre : ${componentType} n'est pas pris en charge`));
     }
     return (react_1.default.createElement(Template_1.default, Object.assign({ id: id }, props),
-        react_1.default.createElement(Component, Object.assign({}, props, { id: id, input: newInput }))));
+        react_1.default.createElement(Component, Object.assign({}, props, { id: newId, input: newInput }))));
 };
 exports.default = DataFieldRender;

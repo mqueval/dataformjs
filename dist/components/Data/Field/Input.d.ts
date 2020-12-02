@@ -5,7 +5,5 @@ export interface DataFieldInputProps extends DataFieldProps {
     description?: string;
     type?: string;
 }
-declare const FieldInput: FC<WrappedFieldProps & DataFieldInputProps & {
-    id: string;
-}>;
+declare const FieldInput: FC<WrappedFieldProps & DataFieldInputProps>;
 export default FieldInput;

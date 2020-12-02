@@ -10,8 +10,8 @@ import FieldTemplate from './Template';
 import FieldTextarea from './Textarea';
 
 const DataFieldRender: FC<WrappedFieldProps & DataFieldProps> = props => {
-  const { componentType, handleOnChange, input } = props;
-  const id = hash({ componentType, name: input.name }); // TODO revoir ce code car il change a chaque fois
+  const { componentType, handleOnChange, id, input } = props;
+  const newId = id || hash({ componentType, name: input.name }); // TODO revoir ce code car il change a chaque fois
 
   const newInput = { ...input };
   const { onChange } = input;
@@ -62,7 +62,7 @@ const DataFieldRender: FC<WrappedFieldProps & DataFieldProps> = props => {
 
   return (
     <FieldTemplate id={id} {...props}>
-      <Component {...props} id={id} input={newInput} />
+      <Component {...props} id={newId} input={newInput} />
     </FieldTemplate>
   );
 };
