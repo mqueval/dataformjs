@@ -6,6 +6,7 @@ export interface FormProps<P> {
     cancelIcon?: ReactNode;
     cancelLabel?: string;
     cancelOnClick?: (event: SyntheticEvent<HTMLButtonElement>) => void;
+    cancelStatus?: string;
     className?: string;
     datas?: DataProps | DataProps[];
     destroyOnUnmount?: boolean;
