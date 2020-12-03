@@ -10,6 +10,7 @@ export interface FormProps<P> {
   cancelIcon?: ReactNode;
   cancelLabel?: string;
   cancelOnClick?: (event: SyntheticEvent<HTMLButtonElement>) => void;
+  cancelStatus?: string;
   className?: string;
   datas?: DataProps | DataProps[];
   destroyOnUnmount?: boolean;
@@ -36,6 +37,7 @@ const Form: FC<FormProps<any>> = ({
   cancelIcon,
   cancelLabel,
   cancelOnClick,
+  cancelStatus,
   children,
   className,
   datas,
@@ -61,6 +63,7 @@ const Form: FC<FormProps<any>> = ({
       cancelIcon={cancelIcon}
       cancelLabel={cancelLabel}
       cancelOnClick={cancelOnClick}
+      cancelStatus={cancelStatus}
       className={className}
       destroyOnUnmount={destroyOnUnmount}
       enableReinitialize={enableReinitialize}

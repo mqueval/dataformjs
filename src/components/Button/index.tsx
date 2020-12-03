@@ -10,6 +10,7 @@ interface ButtonProps {
   iconLeft?: ReactNode;
   iconRight?: ReactNode;
   onClick?: (event: SyntheticEvent<HTMLButtonElement>) => void;
+  status?: string;
   type?: 'button' | 'submit';
 }
 const Button: FC<ButtonProps> = ({
@@ -18,6 +19,7 @@ const Button: FC<ButtonProps> = ({
   iconLeft,
   iconRight,
   onClick,
+  status,
   type = 'button',
 }) => {
   const { sc } = useContext(FormidableContext);
@@ -31,6 +33,7 @@ const Button: FC<ButtonProps> = ({
       as={sc && sc.button}
       disabled={disabled}
       onClick={onClick}
+      status={status}
       type={type}
     >
       {iconLeft}
