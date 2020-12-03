@@ -65,6 +65,7 @@ const FieldAsyncSelect: FC<
   WrappedFieldProps & DataFieldAsyncSelectProps<any>
 > = ({
   cacheOptions = false,
+  className,
   customOption,
   defaultOptions = false,
   defaultValue,
@@ -151,6 +152,7 @@ const FieldAsyncSelect: FC<
   return (
     <SelectSC
       cacheOptions={cacheOptions}
+      className={className}
       classNamePrefix="DataFieldAsyncSelect"
       components={newComponents}
       defaultOptions={defaultOptions}
@@ -159,7 +161,7 @@ const FieldAsyncSelect: FC<
       getOptionLabel={getOptionLabel}
       getOptionValue={getOptionValue}
       hideSelectedOptions={hideSelectedOptions}
-      inputId={id}
+      innerId={id}
       isClearable={isClearable}
       isMulti={isMulti}
       isOptionDisabled={isOptionDisabled}
