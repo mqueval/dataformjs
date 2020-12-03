@@ -22,6 +22,7 @@ interface FormRenderProps {
   cancelIcon?: ReactNode;
   cancelLabel?: string;
   cancelOnClick?: (event: SyntheticEvent<HTMLButtonElement>) => void;
+  cancelStatus?: string;
   children?: ReactNode;
   className?: string;
   datas?: DataProps[];
@@ -46,6 +47,7 @@ const Form: React.FC<
     cancelIcon,
     cancelLabel = 'cancel',
     cancelOnClick,
+    cancelStatus,
     children,
     className,
     error,
@@ -85,7 +87,11 @@ const Form: React.FC<
       <FormFooterSC className={footerClassName}>
         <div>
           {cancelOnClick && (
-            <Button iconLeft={cancelIcon} onClick={cancelOnClick}>
+            <Button
+              iconLeft={cancelIcon}
+              onClick={cancelOnClick}
+              status={cancelStatus}
+            >
               {t ? t(cancelLabel) : cancelLabel}
             </Button>
           )}
