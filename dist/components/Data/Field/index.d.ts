@@ -2,6 +2,7 @@ import { FC, ReactElement, SyntheticEvent } from 'react';
 import { Validator } from 'redux-form';
 import { DataProps } from '../index';
 import { DataFieldAsyncSelectProps } from './AsyncSelect';
+import { DataFieldInputProps } from './Input';
 export interface DataFieldProps extends DataProps {
     componentType: string;
     customBottom?: ReactElement | ReactElement[];
@@ -18,6 +19,10 @@ export interface DataFieldProps extends DataProps {
     id?: string;
     label?: string;
     name: string;
+    options?: {
+        label: string;
+        value: string | number;
+    }[];
     params?: {
         [key: string]: any;
     };
@@ -26,5 +31,5 @@ export interface DataFieldProps extends DataProps {
     type?: string;
     validate?: Validator | Validator[];
 }
-declare const DataField: FC<DataFieldAsyncSelectProps<any> | DataFieldProps>;
+declare const DataField: FC<DataFieldAsyncSelectProps<any> | DataFieldInputProps | DataFieldProps>;
 export default DataField;

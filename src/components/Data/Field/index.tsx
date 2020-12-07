@@ -1,10 +1,17 @@
-import React, { FC, ReactElement, SyntheticEvent } from 'react';
+import hash from 'object-hash';
+import React, { FC, ReactElement, SyntheticEvent, useContext } from 'react';
 import { Field as FieldForm, Validator } from 'redux-form';
+import styled from 'styled-components';
 
+import { FormidableContext } from '../../../index';
 import { addValidator, isEmail, isRequired } from '../../../utils/validators';
 import { DataProps } from '../index';
 import { DataFieldAsyncSelectProps } from './AsyncSelect';
+import DataFieldInput, { DataFieldInputProps } from './Input';
 import DataFieldRender from './Render';
+import DataFieldWrapper from './Wrapper';
+
+const InputGroupSC = styled.div``;
 
 export interface DataFieldProps extends DataProps {
   componentType: string;
@@ -22,6 +29,7 @@ export interface DataFieldProps extends DataProps {
   id?: string;
   label?: string;
   name: string;
+  options?: { label: string; value: string | number }[];
   params?: { [key: string]: any };
   placeholder?: string;
   required?: boolean;
@@ -29,11 +37,13 @@ export interface DataFieldProps extends DataProps {
   validate?: Validator | Validator[];
 }
 
-const DataField: FC<DataFieldAsyncSelectProps<any> | DataFieldProps> = ({
-  validate,
-  ...props
-}) => {
-  const { required, type } = props;
+const DataField: FC<
+  DataFieldAsyncSelectProps<any> | DataFieldInputProps | DataFieldProps
+> = ({ validate, ...props }) => {
+  const { sc } = useContext(FormidableContext);
+
+  const { componentType, id, name, options, required, type } = props;
+  const newId = id || hash({ componentType, name }); // TODO revoir ce code car il change a chaque fois
   let newValidate =
     validate && !Array.isArray(validate) ? [validate] : validate;
 
@@ -45,8 +55,44 @@ const DataField: FC<DataFieldAsyncSelectProps<any> | DataFieldProps> = ({
     newValidate = addValidator(isEmail, newValidate);
   }
 
+  if ('radio' === type && 'input' === componentType) {
+    if (!options || 0 === options.length) {
+      return <div>input : erreur de paramètre : options obligatoire</div>;
+    }
+
+    return (
+      <DataFieldWrapper {...props} id={newId}>
+        <InputGroupSC
+          as={sc && sc.inputGroup}
+          className="flex flex-row gap-2"
+          role="radiogroup"
+        >
+          {options.map(option => (
+            <FieldForm
+              key={option.value}
+              {...props}
+              className="grid grid-cols-2 items-center"
+              component={DataFieldInput}
+              description={option.label}
+              id={`${newId}_${option.value}`}
+              validate={newValidate}
+              value={option.value}
+            />
+          ))}
+        </InputGroupSC>
+      </DataFieldWrapper>
+    );
+  }
+
   return (
-    <FieldForm component={DataFieldRender} {...props} validate={newValidate} />
+    <DataFieldWrapper {...props} id={newId}>
+      <FieldForm
+        {...props}
+        component={DataFieldRender}
+        id={newId}
+        validate={newValidate}
+      />
+    </DataFieldWrapper>
   );
 };
 

@@ -8,7 +8,7 @@ import styled from 'styled-components';
 import { FormidableContext } from '../../../index';
 import { DataFieldSelectProps } from './Select';
 
-const SelectSC = styled(AsyncSelect)`
+export const SelectSC = styled(AsyncSelect)`
   .DataFieldAsyncSelect__value-container {
     padding-bottom: 0;
     padding-top: 0;
@@ -31,6 +31,10 @@ const SelectSC = styled(AsyncSelect)`
     margin-top: 0;
     padding-bottom: 0;
     padding-top: 0;
+  }
+
+  .DataFieldAsyncSelect__multi-value {
+    line-height: 2;
   }
 `;
 

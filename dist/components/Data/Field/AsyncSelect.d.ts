@@ -1,6 +1,8 @@
 import { FC, ReactNode } from 'react';
+import AsyncSelect from 'react-select/async';
 import { WrappedFieldProps } from 'redux-form';
 import { DataFieldSelectProps } from './Select';
+export declare const SelectSC: import("styled-components").StyledComponent<typeof AsyncSelect, any, {}, never>;
 export interface DataFieldAsyncSelectProps<P> extends DataFieldSelectProps {
     cacheOptions?: boolean;
     customOption?: any;
