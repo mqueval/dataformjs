@@ -28,6 +28,7 @@ const react_select_1 = __importDefault(require("react-select"));
 const redux_form_1 = require("redux-form");
 const styled_components_1 = __importDefault(require("styled-components"));
 const index_1 = require("../../../index");
+const AsyncSelect_1 = require("./AsyncSelect");
 const SelectSC = styled_components_1.default.select ``;
 const FieldSelect = ({ disabled, formName, getOptionLabel, getOptionValue, hasEmpty = true, handleOnChange, id, input, options, placeholder, meta: { error, touched }, multi = false, ...others }) => {
     const { getControlStyle, t, sc } = react_1.useContext(index_1.FormidableContext);
@@ -75,7 +76,8 @@ const FieldSelect = ({ disabled, formName, getOptionLabel, getOptionValue, hasEm
             }
             return option.value;
         };
-        return (react_1.default.createElement(react_select_1.default, { getOptionLabel: handleGetOptionLabel, getOptionValue: handleGetOptionValue, isMulti: true, onBlur: handleOnBlur, onChange: handleInnerOnChange, onFocus: handleOnFocus, options: options, styles: styles }));
+        return (react_1.default.createElement(AsyncSelect_1.SelectSC, { as: react_select_1.default, classNamePrefix: "DataFieldAsyncSelect", getOptionLabel: handleGetOptionLabel, getOptionValue: handleGetOptionValue, isMulti: true, onBlur: handleOnBlur, onChange: handleInnerOnChange, onFocus: handleOnFocus, options: options, placeholder: t && placeholder ? t(placeholder) : placeholder, styles: styles, value: input.value &&
+                input.value.map((v) => options.find(o => o.value === v)) }));
     }
     return (react_1.default.createElement(SelectSC, Object.assign({}, input, { as: sc && sc.select, disabled: disabled, id: id, required: true, status: touched && error ? 'error' : null }),
         react_1.default.createElement("option", { "aria-label": placeholder, disabled: true, hidden: !hasEmpty, value: "" }, t && placeholder ? t(placeholder) : placeholder),

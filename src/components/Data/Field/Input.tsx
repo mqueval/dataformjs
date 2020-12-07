@@ -5,9 +5,10 @@ import styled from 'styled-components';
 import { FormidableContext } from '../../../index';
 import { DataFieldProps } from './index';
 
-const DataFieldInputSC = styled.div.attrs(props => ({
-  className: props.className || 'flex items-center',
-}))``;
+const DataFieldInputSC = styled.div`
+  display: flex;
+  justify-items: center;
+`;
 
 const InputSC = styled.input``;
 
@@ -22,15 +23,12 @@ const FieldInput: FC<WrappedFieldProps & DataFieldInputProps> = ({
   disabled,
   id,
   input,
+  options,
   placeholder,
   type = 'text',
   meta: { error, touched },
 }) => {
   const { t, sc } = useContext(FormidableContext);
-
-  // if (!type) {
-  //   return <div>input : erreur de paramètre : type obligatoire</div>;
-  // }
 
   return (
     <DataFieldInputSC className={className}>

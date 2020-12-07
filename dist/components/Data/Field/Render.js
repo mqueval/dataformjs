@@ -3,7 +3,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const object_hash_1 = __importDefault(require("object-hash"));
 const react_1 = __importDefault(require("react"));
 const AsyncSelect_1 = __importDefault(require("./AsyncSelect"));
 const Input_1 = __importDefault(require("./Input"));
@@ -12,7 +11,6 @@ const Template_1 = __importDefault(require("./Template"));
 const Textarea_1 = __importDefault(require("./Textarea"));
 const DataFieldRender = props => {
     const { componentType, handleOnChange, id, input } = props;
-    const newId = id || object_hash_1.default({ componentType, name: input.name }); // TODO revoir ce code car il change a chaque fois
     const newInput = { ...input };
     const { onChange } = input;
     if (handleOnChange) {
@@ -46,6 +44,6 @@ const DataFieldRender = props => {
             return (react_1.default.createElement("div", null, `data field render : erreur de paramètre : ${componentType} n'est pas pris en charge`));
     }
     return (react_1.default.createElement(Template_1.default, Object.assign({ id: id }, props),
-        react_1.default.createElement(Component, Object.assign({}, props, { id: newId, input: newInput }))));
+        react_1.default.createElement(Component, Object.assign({}, props, { input: newInput }))));
 };
 exports.default = DataFieldRender;

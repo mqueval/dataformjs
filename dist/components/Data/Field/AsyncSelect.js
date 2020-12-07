@@ -22,6 +22,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.SelectSC = void 0;
 const react_1 = __importStar(require("react"));
 const react_redux_1 = require("react-redux");
 // import { components, ContainerProps } from 'react-select';
@@ -29,7 +30,7 @@ const async_1 = __importDefault(require("react-select/async"));
 const redux_form_1 = require("redux-form");
 const styled_components_1 = __importDefault(require("styled-components"));
 const index_1 = require("../../../index");
-const SelectSC = styled_components_1.default(async_1.default) `
+exports.SelectSC = styled_components_1.default(async_1.default) `
   .DataFieldAsyncSelect__value-container {
     padding-bottom: 0;
     padding-top: 0;
@@ -52,6 +53,10 @@ const SelectSC = styled_components_1.default(async_1.default) `
     margin-top: 0;
     padding-bottom: 0;
     padding-top: 0;
+  }
+
+  .DataFieldAsyncSelect__multi-value {
+    line-height: 2;
   }
 `;
 const FieldAsyncSelect = ({ cacheOptions = false, className, customOption, defaultOptions = false, defaultValue, formatOptionLabel, formName, getOptionLabel, getOptionValue, handleOnChange, hideSelectedOptions = false, id, input, isClearable = false, isMulti, isOptionDisabled, isOptionSelected, isSearchable = true, loadOptions, loadingMessage, meta, meta: { error, touched }, noOptionsMessage, placeholder, ...others }) => {
@@ -100,6 +105,6 @@ const FieldAsyncSelect = ({ cacheOptions = false, className, customOption, defau
             })
             : base,
     };
-    return (react_1.default.createElement(SelectSC, { cacheOptions: cacheOptions, className: className, classNamePrefix: "DataFieldAsyncSelect", components: newComponents, defaultOptions: defaultOptions, defaultValue: defaultValue, formatOptionLabel: formatOptionLabel, getOptionLabel: getOptionLabel, getOptionValue: getOptionValue, hideSelectedOptions: hideSelectedOptions, innerId: id, isClearable: isClearable, isMulti: isMulti, isOptionDisabled: isOptionDisabled, isOptionSelected: isOptionSelected, isSearchable: isSearchable, loadOptions: loadOptions, loadingMessage: loadingMessage, noOptionsMessage: noOptionsMessage, onBlur: handleOnBlur, onChange: handleInnerOnChange, onFocus: handleOnFocus, placeholder: t && placeholder ? t(placeholder) : placeholder, styles: styles, value: value }));
+    return (react_1.default.createElement(exports.SelectSC, { cacheOptions: cacheOptions, className: className, classNamePrefix: "DataFieldAsyncSelect", components: newComponents, defaultOptions: defaultOptions, defaultValue: defaultValue, formatOptionLabel: formatOptionLabel, getOptionLabel: getOptionLabel, getOptionValue: getOptionValue, hideSelectedOptions: hideSelectedOptions, innerId: id, isClearable: isClearable, isMulti: isMulti, isOptionDisabled: isOptionDisabled, isOptionSelected: isOptionSelected, isSearchable: isSearchable, loadOptions: loadOptions, loadingMessage: loadingMessage, noOptionsMessage: noOptionsMessage, onBlur: handleOnBlur, onChange: handleInnerOnChange, onFocus: handleOnFocus, placeholder: t && placeholder ? t(placeholder) : placeholder, styles: styles, value: value }));
 };
 exports.default = FieldAsyncSelect;
