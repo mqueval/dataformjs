@@ -5,13 +5,13 @@ import { blur, change, focus, WrappedFieldProps } from 'redux-form';
 import styled from 'styled-components';
 
 import { FormidableContext } from '../../../index';
+import { SelectSC as MultiSelectSC } from './AsyncSelect';
 import { DataFieldProps } from './index';
 
 const SelectSC = styled.select``;
 
 export interface DataFieldSelectProps extends DataFieldProps {
   hasEmpty?: boolean;
-  options?: { label: string; value: any }[];
   multi?: boolean;
   getOptionLabel?: (option: any) => any;
   getOptionValue?: (option: any) => any;
@@ -98,7 +98,9 @@ const FieldSelect: FC<WrappedFieldProps & DataFieldSelectProps> = ({
     };
 
     return (
-      <Select
+      <MultiSelectSC
+        as={Select}
+        classNamePrefix="DataFieldAsyncSelect"
         getOptionLabel={handleGetOptionLabel}
         getOptionValue={handleGetOptionValue}
         isMulti
@@ -106,7 +108,12 @@ const FieldSelect: FC<WrappedFieldProps & DataFieldSelectProps> = ({
         onChange={handleInnerOnChange}
         onFocus={handleOnFocus}
         options={options}
+        placeholder={t && placeholder ? t(placeholder) : placeholder}
         styles={styles}
+        value={
+          input.value &&
+          input.value.map((v: any) => options.find(o => o.value === v))
+        }
       />
     );
   }

@@ -25,15 +25,19 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const react_1 = __importStar(require("react"));
 const styled_components_1 = __importDefault(require("styled-components"));
 const index_1 = require("../../../index");
-const DataFieldInputSC = styled_components_1.default.div `
-  display: flex;
-  justify-items: center;
+const CustomBottomSC = styled_components_1.default.div `
+  float: right;
 `;
-const InputSC = styled_components_1.default.input ``;
-const FieldInput = ({ className, description, disabled, id, input, options, placeholder, type = 'text', meta: { error, touched }, }) => {
+const CustomTopSC = styled_components_1.default.div `
+  float: right;
+`;
+const FieldLabelSC = styled_components_1.default.label ``;
+const FieldWrapper = ({ children, customBottom, customBottomClassName, customTop, customTopClassName, id, label, name, }) => {
     const { t, sc } = react_1.useContext(index_1.FormidableContext);
-    return (react_1.default.createElement(DataFieldInputSC, { className: className },
-        react_1.default.createElement(InputSC, Object.assign({}, input, { as: sc && sc.input, disabled: disabled, id: id, placeholder: t && placeholder ? t(placeholder) : placeholder, status: touched && error ? 'error' : undefined, type: type })),
-        description && (react_1.default.createElement("label", { htmlFor: id }, t ? t(description) : description))));
+    return (react_1.default.createElement("div", null,
+        customTop && (react_1.default.createElement(CustomTopSC, { as: sc && sc.customTop, className: customTopClassName }, customTop)),
+        react_1.default.createElement(FieldLabelSC, { as: sc && sc.label, htmlFor: id }, t ? t(label || name) : label || name),
+        react_1.default.createElement("div", null, children),
+        customBottom && (react_1.default.createElement(CustomBottomSC, { as: sc && sc.customBottom, className: customBottomClassName }, customBottom))));
 };
-exports.default = FieldInput;
+exports.default = FieldWrapper;
