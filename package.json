@@ -10,7 +10,7 @@
   "bugs": {
     "url": "https://github.com/mqueval/dataformjs/issues"
   },
-  "version": "0.0.16-alpha",
+  "version": "0.0.17-alpha",
   "private": false,
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
