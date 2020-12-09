@@ -14,15 +14,16 @@ export {
 
 export {
   change,
+  DecoratedFormProps,
   Field,
   FieldArray,
-  DecoratedFormProps,
+  FormSection,
   formValueSelector,
   SubmissionError,
   WrappedFieldProps,
   InjectedFormProps,
   reduxForm,
-  FormSection,
+  reset,
   Validator,
   WrappedFieldArrayProps,
 } from 'redux-form';
