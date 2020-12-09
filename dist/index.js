@@ -22,7 +22,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.FormidableProvider = exports.FormidableContext = exports.Grid = exports.Column = exports.isRequired = exports.isEmail = exports.addValidator = exports.initializeValues = exports.Form = exports.DataField = exports.DataArray = exports.Data = exports.print = exports.FormSection = exports.reduxForm = exports.SubmissionError = exports.formValueSelector = exports.FieldArray = exports.Field = exports.change = exports.useStore = exports.useSelector = exports.useDispatch = exports.connect = void 0;
+exports.FormidableProvider = exports.FormidableContext = exports.Grid = exports.Column = exports.isRequired = exports.isEmail = exports.addValidator = exports.initializeValues = exports.Form = exports.DataField = exports.DataArray = exports.Data = exports.print = exports.reset = exports.reduxForm = exports.SubmissionError = exports.formValueSelector = exports.FormSection = exports.FieldArray = exports.Field = exports.change = exports.useStore = exports.useSelector = exports.useDispatch = exports.connect = void 0;
 const FormidableContext_1 = __importStar(require("./FormidableContext"));
 exports.FormidableContext = FormidableContext_1.default;
 Object.defineProperty(exports, "FormidableProvider", { enumerable: true, get: function () { return FormidableContext_1.FormidableProvider; } });
@@ -35,10 +35,11 @@ var redux_form_1 = require("redux-form");
 Object.defineProperty(exports, "change", { enumerable: true, get: function () { return redux_form_1.change; } });
 Object.defineProperty(exports, "Field", { enumerable: true, get: function () { return redux_form_1.Field; } });
 Object.defineProperty(exports, "FieldArray", { enumerable: true, get: function () { return redux_form_1.FieldArray; } });
+Object.defineProperty(exports, "FormSection", { enumerable: true, get: function () { return redux_form_1.FormSection; } });
 Object.defineProperty(exports, "formValueSelector", { enumerable: true, get: function () { return redux_form_1.formValueSelector; } });
 Object.defineProperty(exports, "SubmissionError", { enumerable: true, get: function () { return redux_form_1.SubmissionError; } });
 Object.defineProperty(exports, "reduxForm", { enumerable: true, get: function () { return redux_form_1.reduxForm; } });
-Object.defineProperty(exports, "FormSection", { enumerable: true, get: function () { return redux_form_1.FormSection; } });
+Object.defineProperty(exports, "reset", { enumerable: true, get: function () { return redux_form_1.reset; } });
 const print = () => {
     console.info('Bonjour tout le monde !! La vie est formidable !!');
 };
