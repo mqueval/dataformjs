@@ -23,6 +23,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const react_1 = __importStar(require("react"));
+const react_input_mask_1 = __importDefault(require("react-input-mask"));
 const styled_components_1 = __importDefault(require("styled-components"));
 const index_1 = require("../../../index");
 const DataFieldInputSC = styled_components_1.default.div `
@@ -30,10 +31,20 @@ const DataFieldInputSC = styled_components_1.default.div `
   justify-items: center;
 `;
 const InputSC = styled_components_1.default.input ``;
-const FieldInput = ({ className, description, disabled, id, input, options, placeholder, type = 'text', meta: { error, touched }, }) => {
+const FieldInput = ({ className, description, disabled, id, input, placeholder, type = 'text', mask, max, meta: { error, touched }, min, }) => {
     const { t, sc } = react_1.useContext(index_1.FormidableContext);
+    const fieldProps = {
+        disabled,
+        id,
+        max,
+        min,
+        as: sc && sc.input,
+        placeholder: t && placeholder ? t(placeholder) : placeholder,
+        status: touched && error ? 'error' : undefined,
+        type: mask ? 'text' : type,
+    };
     return (react_1.default.createElement(DataFieldInputSC, { className: className },
-        react_1.default.createElement(InputSC, Object.assign({}, input, { as: sc && sc.input, disabled: disabled, id: id, placeholder: t && placeholder ? t(placeholder) : placeholder, status: touched && error ? 'error' : undefined, type: type })),
+        mask ? (react_1.default.createElement(react_input_mask_1.default, Object.assign({ mask: mask }, input), (inputProps) => react_1.default.createElement(InputSC, Object.assign({}, inputProps, fieldProps)))) : (react_1.default.createElement(InputSC, Object.assign({}, input, fieldProps))),
         description && (react_1.default.createElement("label", { htmlFor: id }, t ? t(description) : description))));
 };
 exports.default = FieldInput;

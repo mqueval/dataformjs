@@ -40,9 +40,22 @@ const DataField = ({ validate, ...props }) => {
     if (required) {
         newValidate = validators_1.addValidator(validators_1.isRequired, newValidate);
     }
-    if ('email' === type) {
-        newValidate = validators_1.addValidator(validators_1.isEmail, newValidate);
+    switch (type) {
+        case 'date': {
+            newValidate = validators_1.addValidator(validators_1.isDate, newValidate);
+            break;
+        }
+        case 'email': {
+            newValidate = validators_1.addValidator(validators_1.isEmail, newValidate);
+            break;
+        }
+        case 'time': {
+            newValidate = validators_1.addValidator(validators_1.isTime, newValidate);
+            break;
+        }
+        default:
     }
+    console.info(`type : ${type} = newValidate`, newValidate);
     if ('radio' === type && 'input' === componentType) {
         if (!options || 0 === options.length) {
             return react_1.default.createElement("div", null, "input : erreur de param\u00E8tre : options obligatoire");

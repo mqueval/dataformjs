@@ -27,12 +27,13 @@ const styled_components_1 = __importDefault(require("styled-components"));
 const index_1 = require("../../../index");
 const FieldMessageSC = styled_components_1.default.div ``;
 const FieldSC = styled_components_1.default.div ``;
-const FieldTemplate = ({ children, className, input: { name }, meta: { error, touched, warning }, }) => {
+const FieldTemplate = ({ children, className, input: { name }, message, meta: { error, touched, warning }, }) => {
     const { t, sc } = react_1.useContext(index_1.FormidableContext);
     return (react_1.default.createElement(FieldSC, { as: sc && sc.field, className: className },
         children,
         touched &&
             ((error && (react_1.default.createElement(FieldMessageSC, { as: sc && sc.fieldMessage, status: "error" }, t ? t(error) : error))) ||
-                (warning && (react_1.default.createElement(FieldMessageSC, { as: sc && sc.fieldMessage, status: "warning" }, t ? t(warning) : warning))))));
+                (warning && (react_1.default.createElement(FieldMessageSC, { as: sc && sc.fieldMessage, status: "warning" }, t ? t(warning) : warning)))),
+        message && (react_1.default.createElement(FieldMessageSC, { as: sc && sc.fieldMessage }, t ? t(message) : message))));
 };
 exports.default = FieldTemplate;
