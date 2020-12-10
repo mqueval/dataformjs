@@ -4,7 +4,13 @@ import { Field as FieldForm, Validator } from 'redux-form';
 import styled from 'styled-components';
 
 import { FormidableContext } from '../../../index';
-import { addValidator, isEmail, isRequired } from '../../../utils/validators';
+import {
+  addValidator,
+  isDate,
+  isEmail,
+  isRequired,
+  isTime,
+} from '../../../utils/validators';
 import { DataProps } from '../index';
 import { DataFieldAsyncSelectProps } from './AsyncSelect';
 import DataFieldInput, { DataFieldInputProps } from './Input';
@@ -28,6 +34,7 @@ export interface DataFieldProps extends DataProps {
   }) => any;
   id?: string;
   label?: string;
+  message?: string;
   name: string;
   options?: { label: string; value: string | number }[];
   params?: { [key: string]: any };
@@ -51,9 +58,26 @@ const DataField: FC<
     newValidate = addValidator(isRequired, newValidate);
   }
 
-  if ('email' === type) {
-    newValidate = addValidator(isEmail, newValidate);
+  switch (type) {
+    case 'date': {
+      newValidate = addValidator(isDate, newValidate);
+      break;
+    }
+
+    case 'email': {
+      newValidate = addValidator(isEmail, newValidate);
+      break;
+    }
+
+    case 'time': {
+      newValidate = addValidator(isTime, newValidate);
+      break;
+    }
+
+    default:
   }
+
+  console.info(`type : ${type} = newValidate`, newValidate);
 
   if ('radio' === type && 'input' === componentType) {
     if (!options || 0 === options.length) {
