@@ -13,6 +13,7 @@ const FieldTemplate: FC<WrappedFieldProps & DataFieldProps> = ({
   children,
   className,
   input: { name },
+  message,
   meta: { error, touched, warning },
 }) => {
   const { t, sc } = useContext(FormidableContext);
@@ -32,6 +33,11 @@ const FieldTemplate: FC<WrappedFieldProps & DataFieldProps> = ({
               {t ? t(warning) : warning}
             </FieldMessageSC>
           )))}
+      {message && (
+        <FieldMessageSC as={sc && sc.fieldMessage}>
+          {t ? t(message) : message}
+        </FieldMessageSC>
+      )}
     </FieldSC>
   );
 };
