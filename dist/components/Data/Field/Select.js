@@ -40,7 +40,7 @@ const FieldSelect = ({ disabled, formName, getOptionLabel, getOptionValue, hasEm
         return react_1.default.createElement("div", null, "select : erreur de param\u00E8tre : options obligatoire");
     }
     if (multi) {
-        const { name, value } = input;
+        const { name } = input;
         const styles = {
             control: (base) => getControlStyle
                 ? getControlStyle({
@@ -50,7 +50,7 @@ const FieldSelect = ({ disabled, formName, getOptionLabel, getOptionValue, hasEm
                 : base,
         };
         const handleOnBlur = () => {
-            dispatch(redux_form_1.blur(formName, name, value, true));
+            // dispatch(blur(formName, name, newValue || value, true));
         };
         const handleInnerOnChange = (changeValue) => {
             if (handleOnChange) {

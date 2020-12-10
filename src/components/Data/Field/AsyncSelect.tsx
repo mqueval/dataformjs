@@ -2,7 +2,7 @@ import React, { FC, ReactNode, useContext } from 'react';
 import { useDispatch } from 'react-redux';
 // import { components, ContainerProps } from 'react-select';
 import AsyncSelect from 'react-select/async';
-import { blur, change, focus, WrappedFieldProps } from 'redux-form';
+import { change, focus, WrappedFieldProps } from 'redux-form';
 import styled from 'styled-components';
 
 import { FormidableContext } from '../../../index';
@@ -110,7 +110,12 @@ const FieldAsyncSelect: FC<
   const { name, value } = input;
 
   const handleOnBlur = (): void => {
-    dispatch(blur(formName, name, value, true));
+    // console.info('handleOnBlur');
+    // window.alert(newValue);
+    // window.alert(value);
+    // setTimeout(() => {
+    //   dispatch(blur(formName, name, newValue || value, true));
+    // }, 1000);
   };
 
   const handleInnerOnChange = (changeValue: any): void => {
