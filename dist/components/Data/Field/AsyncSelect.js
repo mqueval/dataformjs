@@ -70,7 +70,12 @@ const FieldAsyncSelect = ({ cacheOptions = false, className, customOption, defau
     }
     const { name, value } = input;
     const handleOnBlur = () => {
-        dispatch(redux_form_1.blur(formName, name, value, true));
+        // console.info('handleOnBlur');
+        // window.alert(newValue);
+        // window.alert(value);
+        // setTimeout(() => {
+        //   dispatch(blur(formName, name, newValue || value, true));
+        // }, 1000);
     };
     const handleInnerOnChange = (changeValue) => {
         if (handleOnChange) {

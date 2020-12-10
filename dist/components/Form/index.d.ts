@@ -25,6 +25,7 @@ export interface FormProps<P> {
     };
     submitIcon?: ReactNode;
     submitLabel?: string;
+    touchOnChange?: boolean;
     validate?: (values: any, props: any) => any;
 }
 declare const Form: FC<FormProps<any>>;

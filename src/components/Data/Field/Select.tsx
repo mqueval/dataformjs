@@ -1,7 +1,7 @@
 import React, { FC, useContext } from 'react';
 import { useDispatch } from 'react-redux';
 import Select from 'react-select';
-import { blur, change, focus, WrappedFieldProps } from 'redux-form';
+import { change, focus, WrappedFieldProps } from 'redux-form';
 import styled from 'styled-components';
 
 import { FormidableContext } from '../../../index';
@@ -44,7 +44,7 @@ const FieldSelect: FC<WrappedFieldProps & DataFieldSelectProps> = ({
   }
 
   if (multi) {
-    const { name, value } = input;
+    const { name } = input;
 
     const styles = {
       control: (base: any): any =>
@@ -57,7 +57,7 @@ const FieldSelect: FC<WrappedFieldProps & DataFieldSelectProps> = ({
     };
 
     const handleOnBlur = (): void => {
-      dispatch(blur(formName, name, value, true));
+      // dispatch(blur(formName, name, newValue || value, true));
     };
 
     const handleInnerOnChange = (changeValue: any): void => {

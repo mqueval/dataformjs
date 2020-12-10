@@ -37,6 +37,7 @@ interface FormRenderProps {
   name: string;
   submitIcon?: ReactNode;
   submitLabel?: string;
+  touchOnChange?: boolean;
 }
 
 const Form: React.FC<
@@ -57,13 +58,13 @@ const Form: React.FC<
     handleSubmit,
     id,
     isSubmissive = true,
-    invalid,
+    // invalid,
     name,
     pristine,
     submitIcon,
     submitLabel = 'form/submit',
     submitting,
-    valid,
+    // valid,
   } = props;
 
   const { sc, t } = useContext(FormidableContext);
@@ -99,7 +100,8 @@ const Form: React.FC<
 
         <Button
           disabled={
-            !isSubmissive || invalid || pristine || submitting || !valid
+            // !isSubmissive || invalid || pristine || submitting || !valid
+            !isSubmissive || pristine || submitting
           }
           iconRight={submitIcon}
           type="submit"
@@ -116,6 +118,7 @@ type StateProps = {
   enableReinitialize: boolean;
   forceUnregisterOnUnmount: boolean;
   form: string;
+  touchOnChange?: boolean;
 };
 
 const ReduxForm = reduxForm<any, FormRenderProps>({})(Form);
@@ -129,6 +132,8 @@ const mapStateToProps = (
   enableReinitialize: !!props.enableReinitialize,
   forceUnregisterOnUnmount: !!props.forceUnregisterOnUnmount,
   form: props.name,
+  touchOnChange:
+    undefined !== props.touchOnChange ? props.touchOnChange : false,
 });
 
 export default connect(mapStateToProps)(ReduxForm);
