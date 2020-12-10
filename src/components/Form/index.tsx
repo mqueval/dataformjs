@@ -30,6 +30,7 @@ export interface FormProps<P> {
   params?: { [key: string]: any };
   submitIcon?: ReactNode;
   submitLabel?: string;
+  touchOnChange?: boolean;
   validate?: (values: any, props: any) => any;
 }
 
@@ -53,6 +54,7 @@ const Form: FC<FormProps<any>> = ({
   params,
   submitIcon,
   submitLabel,
+  touchOnChange,
   validate,
 }) => {
   const newDatas: DataProps[] | undefined =
@@ -76,6 +78,7 @@ const Form: FC<FormProps<any>> = ({
       onSubmit={onSubmit}
       submitIcon={submitIcon}
       submitLabel={submitLabel}
+      touchOnChange={touchOnChange}
       validate={validate}
     >
       {newDatas &&

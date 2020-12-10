@@ -41,7 +41,9 @@ const Form = props => {
     // errorValues,
     footerClassName, 
     // formValues,
-    handleSubmit, id, isSubmissive = true, invalid, name, pristine, submitIcon, submitLabel = 'form/submit', submitting, valid, } = props;
+    handleSubmit, id, isSubmissive = true, 
+    // invalid,
+    name, pristine, submitIcon, submitLabel = 'form/submit', submitting, } = props;
     const { sc, t } = react_1.useContext(index_1.FormidableContext);
     return (react_1.default.createElement(FormSC, { as: sc && sc.form, className: className, id: id, name: `${name}-form`, onSubmit: handleSubmit },
         react_1.default.createElement(FormBodySC, { className: bodyClassName },
@@ -49,7 +51,9 @@ const Form = props => {
             error && (react_1.default.createElement(MessageSC, { as: sc && sc.fieldMessage, status: "error" }, t ? t(error) : error))),
         react_1.default.createElement(FormFooterSC, { className: footerClassName },
             react_1.default.createElement("div", null, cancelOnClick && (react_1.default.createElement(Button_1.default, { iconLeft: cancelIcon, onClick: cancelOnClick, status: cancelStatus }, t ? t(cancelLabel) : cancelLabel))),
-            react_1.default.createElement(Button_1.default, { disabled: !isSubmissive || invalid || pristine || submitting || !valid, iconRight: submitIcon, type: "submit" }, t ? t(submitLabel) : submitLabel))));
+            react_1.default.createElement(Button_1.default, { disabled: 
+                // !isSubmissive || invalid || pristine || submitting || !valid
+                !isSubmissive || pristine || submitting, iconRight: submitIcon, type: "submit" }, t ? t(submitLabel) : submitLabel))));
 };
 const ReduxForm = redux_form_1.reduxForm({})(Form);
 const mapStateToProps = (state, props) => ({
@@ -57,5 +61,6 @@ const mapStateToProps = (state, props) => ({
     enableReinitialize: !!props.enableReinitialize,
     forceUnregisterOnUnmount: !!props.forceUnregisterOnUnmount,
     form: props.name,
+    touchOnChange: undefined !== props.touchOnChange ? props.touchOnChange : false,
 });
 exports.default = react_redux_1.connect(mapStateToProps)(ReduxForm);
