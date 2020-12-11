@@ -55,7 +55,6 @@ const DataField = ({ validate, ...props }) => {
         }
         default:
     }
-    console.info(`type : ${type} = newValidate`, newValidate);
     if ('radio' === type && 'input' === componentType) {
         if (!options || 0 === options.length) {
             return react_1.default.createElement("div", null, "input : erreur de param\u00E8tre : options obligatoire");
