@@ -77,8 +77,6 @@ const DataField: FC<
     default:
   }
 
-  console.info(`type : ${type} = newValidate`, newValidate);
-
   if ('radio' === type && 'input' === componentType) {
     if (!options || 0 === options.length) {
       return <div>input : erreur de paramètre : options obligatoire</div>;
