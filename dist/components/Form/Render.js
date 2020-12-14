@@ -57,6 +57,8 @@ const Form = props => {
 };
 const ReduxForm = redux_form_1.reduxForm({})(Form);
 const mapStateToProps = (state, props) => ({
+    asyncChangeFields: props.asyncChangeFields,
+    asyncValidate: props.asyncValidate,
     destroyOnUnmount: undefined !== props.destroyOnUnmount ? props.destroyOnUnmount : true,
     enableReinitialize: !!props.enableReinitialize,
     forceUnregisterOnUnmount: !!props.forceUnregisterOnUnmount,

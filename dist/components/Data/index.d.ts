@@ -1,5 +1,6 @@
 import { FC } from 'react';
 import DataArray from './Array';
+import { DataConditionTestProps } from './Condition';
 export interface DataProps {
     className?: string;
     componentType?: string;
@@ -14,15 +15,7 @@ export interface DataProps {
         [key: string]: any;
     };
     required?: boolean;
-    test?: {
-        field: string;
-        operator: string;
-        value: any;
-    } | {
-        field: string;
-        operator: string;
-        value: any;
-    }[];
+    test?: DataConditionTestProps | DataConditionTestProps[];
 }
 declare const Data: FC<DataProps & {
     formName: string;

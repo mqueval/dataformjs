@@ -1,8 +1,8 @@
-import React, { FC, ReactNode, useContext } from 'react';
+import React, { FC, ReactNode, useContext, useRef } from 'react';
 import { useDispatch } from 'react-redux';
 // import { components, ContainerProps } from 'react-select';
 import AsyncSelect from 'react-select/async';
-import { change, focus, WrappedFieldProps } from 'redux-form';
+import { change, WrappedFieldProps } from 'redux-form';
 import styled from 'styled-components';
 
 import { FormidableContext } from '../../../index';
@@ -94,8 +94,12 @@ const FieldAsyncSelect: FC<
   placeholder,
   ...others
 }) => {
+  let newValue: any;
+  const inputRef = useRef<HTMLInputElement>(null);
   const dispatch = useDispatch();
   const { getControlStyle, t } = useContext(FormidableContext);
+
+  console.info('async select error', error);
 
   if (!formName) {
     return <div>async-select : erreur de paramètre : formName obligatoire</div>;
@@ -109,27 +113,23 @@ const FieldAsyncSelect: FC<
 
   const { name, value } = input;
 
-  const handleOnBlur = (): void => {
-    // console.info('handleOnBlur');
-    // window.alert(newValue);
-    // window.alert(value);
-    // setTimeout(() => {
-    //   dispatch(blur(formName, name, newValue || value, true));
-    // }, 1000);
+  const handleOnBlur = (event: any): void => {
+    input.onBlur(newValue || value);
   };
 
-  const handleInnerOnChange = (changeValue: any): void => {
+  const handleInnerOnChange = (changeValue: any, options: any): void => {
+    newValue = changeValue;
     if (handleOnChange) {
       handleOnChange({
         change: (...props) => dispatch(change(...props)),
         value: changeValue,
       });
     }
-    dispatch(change(formName, name, changeValue));
+    dispatch(change(formName, name, changeValue, true));
   };
 
-  const handleOnFocus = (): void => {
-    dispatch(focus(formName, name));
+  const handleOnFocus = (event: any): void => {
+    input.onFocus(event);
   };
 
   const newComponents: { [key: string]: any } = {};
@@ -159,33 +159,36 @@ const FieldAsyncSelect: FC<
   };
 
   return (
-    <SelectSC
-      cacheOptions={cacheOptions}
-      className={className}
-      classNamePrefix="DataFieldAsyncSelect"
-      components={newComponents}
-      defaultOptions={defaultOptions}
-      defaultValue={defaultValue}
-      formatOptionLabel={formatOptionLabel}
-      getOptionLabel={getOptionLabel}
-      getOptionValue={getOptionValue}
-      hideSelectedOptions={hideSelectedOptions}
-      innerId={id}
-      isClearable={isClearable}
-      isMulti={isMulti}
-      isOptionDisabled={isOptionDisabled}
-      isOptionSelected={isOptionSelected}
-      isSearchable={isSearchable}
-      loadOptions={loadOptions}
-      loadingMessage={loadingMessage}
-      noOptionsMessage={noOptionsMessage}
-      onBlur={handleOnBlur}
-      onChange={handleInnerOnChange}
-      onFocus={handleOnFocus}
-      placeholder={t && placeholder ? t(placeholder) : placeholder}
-      styles={styles}
-      value={value}
-    />
+    <>
+      <input ref={inputRef} name={name} type="hidden" />
+      <SelectSC
+        cacheOptions={cacheOptions}
+        className={className}
+        classNamePrefix="DataFieldAsyncSelect"
+        components={newComponents}
+        defaultOptions={defaultOptions}
+        defaultValue={defaultValue}
+        formatOptionLabel={formatOptionLabel}
+        getOptionLabel={getOptionLabel}
+        getOptionValue={getOptionValue}
+        hideSelectedOptions={hideSelectedOptions}
+        innerId={id}
+        isClearable={isClearable}
+        isMulti={isMulti}
+        isOptionDisabled={isOptionDisabled}
+        isOptionSelected={isOptionSelected}
+        isSearchable={isSearchable}
+        loadOptions={loadOptions}
+        loadingMessage={loadingMessage}
+        noOptionsMessage={noOptionsMessage}
+        onBlur={handleOnBlur}
+        onChange={handleInnerOnChange}
+        onFocus={handleOnFocus}
+        placeholder={t && placeholder ? t(placeholder) : placeholder}
+        styles={styles}
+        value={value}
+      />
+    </>
   );
 };
 

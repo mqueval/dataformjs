@@ -7,7 +7,7 @@ import Columns from '../Columns';
 import Grid from '../Grid';
 import Group from '../Group';
 import DataArray from './Array';
-import DataCondition from './Condition';
+import DataCondition, { DataConditionTestProps } from './Condition';
 import DataField from './Field';
 import DataSearchAndForm from './Search+Form';
 import DataSection from './Section';
@@ -23,13 +23,7 @@ export interface DataProps {
   name?: string;
   params?: { [key: string]: any };
   required?: boolean;
-  test?:
-    | {
-        field: string;
-        operator: string;
-        value: any;
-      }
-    | { field: string; operator: string; value: any }[];
+  test?: DataConditionTestProps | DataConditionTestProps[];
 }
 
 const Data: FC<

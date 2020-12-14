@@ -1,6 +1,7 @@
+import { DataContitionOperation } from '../components/Data/Condition';
 declare const _default: ({ fieldValue, operator, value, }: {
     fieldValue: any;
-    operator: string;
+    operator: DataContitionOperation;
     value: any;
 }) => boolean;
 export default _default;

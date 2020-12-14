@@ -7,6 +7,13 @@ import Data, { DataProps } from '../Data';
 import FormRender from './Render';
 
 export interface FormProps<P> {
+  asyncChangeFields?: string[];
+  asyncValidate?: (
+    values: FormData,
+    dispatch: Dispatch<any>,
+    props: DecoratedFormProps<FormData, P>,
+    blurredField: string,
+  ) => Promise<any>;
   cancelIcon?: ReactNode;
   cancelLabel?: string;
   cancelOnClick?: (event: SyntheticEvent<HTMLButtonElement>) => void;
@@ -35,6 +42,8 @@ export interface FormProps<P> {
 }
 
 const Form: FC<FormProps<any>> = ({
+  asyncChangeFields,
+  asyncValidate,
   cancelIcon,
   cancelLabel,
   cancelOnClick,
@@ -62,6 +71,8 @@ const Form: FC<FormProps<any>> = ({
 
   return (
     <FormRender
+      asyncChangeFields={asyncChangeFields}
+      asyncValidate={asyncValidate}
       cancelIcon={cancelIcon}
       cancelLabel={cancelLabel}
       cancelOnClick={cancelOnClick}

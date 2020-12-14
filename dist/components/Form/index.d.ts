@@ -3,6 +3,8 @@ import { Dispatch } from 'redux';
 import { DecoratedFormProps } from 'redux-form';
 import { DataProps } from '../Data';
 export interface FormProps<P> {
+    asyncChangeFields?: string[];
+    asyncValidate?: (values: FormData, dispatch: Dispatch<any>, props: DecoratedFormProps<FormData, P>, blurredField: string) => Promise<any>;
     cancelIcon?: ReactNode;
     cancelLabel?: string;
     cancelOnClick?: (event: SyntheticEvent<HTMLButtonElement>) => void;

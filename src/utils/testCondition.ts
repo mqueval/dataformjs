@@ -1,10 +1,12 @@
+import { DataContitionOperation } from '../components/Data/Condition';
+
 export default ({
   fieldValue,
   operator,
   value,
 }: {
   fieldValue: any;
-  operator: string;
+  operator: DataContitionOperation;
   value: any;
 }): boolean => {
   switch (operator) {
