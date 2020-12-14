@@ -11,13 +11,10 @@ export const addValidator = (
   return newValidators;
 };
 
-export const isDate = (value: string): string | undefined => {
-  console.info('isDate', moment(value));
-
-  return value && !moment(value, 'DD/MM/YYYY').isValid()
+export const isDate = (value: string): string | undefined =>
+  value && !moment(value, 'DD/MM/YYYY').isValid()
     ? 'validator.date.error'
     : undefined;
-};
 
 export const isEmail = (value: string): string | undefined =>
   value && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value)

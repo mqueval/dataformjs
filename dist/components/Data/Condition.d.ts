@@ -1,8 +1,9 @@
 import React from 'react';
 import { DataProps } from './index';
+export declare type DataContitionOperation = '==' | '!=' | 'in';
 export interface DataConditionTestProps {
     field: string;
-    operator: string;
+    operator: DataContitionOperation;
     value: any;
 }
 interface DataConditionProps extends DataProps {

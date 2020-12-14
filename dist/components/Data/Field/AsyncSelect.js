@@ -60,8 +60,11 @@ exports.SelectSC = styled_components_1.default(async_1.default) `
   }
 `;
 const FieldAsyncSelect = ({ cacheOptions = false, className, customOption, defaultOptions = false, defaultValue, formatOptionLabel, formName, getOptionLabel, getOptionValue, handleOnChange, hideSelectedOptions = false, id, input, isClearable = false, isMulti, isOptionDisabled, isOptionSelected, isSearchable = true, loadOptions, loadingMessage, meta, meta: { error, touched }, noOptionsMessage, placeholder, ...others }) => {
+    let newValue;
+    const inputRef = react_1.useRef(null);
     const dispatch = react_redux_1.useDispatch();
     const { getControlStyle, t } = react_1.useContext(index_1.FormidableContext);
+    console.info('async select error', error);
     if (!formName) {
         return react_1.default.createElement("div", null, "async-select : erreur de param\u00E8tre : formName obligatoire");
     }
@@ -69,25 +72,21 @@ const FieldAsyncSelect = ({ cacheOptions = false, className, customOption, defau
         return (react_1.default.createElement("div", null, "async-select : erreur de param\u00E8tre : loadOptions obligatoire"));
     }
     const { name, value } = input;
-    const handleOnBlur = () => {
-        // console.info('handleOnBlur');
-        // window.alert(newValue);
-        // window.alert(value);
-        // setTimeout(() => {
-        //   dispatch(blur(formName, name, newValue || value, true));
-        // }, 1000);
+    const handleOnBlur = (event) => {
+        input.onBlur(newValue || value);
     };
-    const handleInnerOnChange = (changeValue) => {
+    const handleInnerOnChange = (changeValue, options) => {
+        newValue = changeValue;
         if (handleOnChange) {
             handleOnChange({
                 change: (...props) => dispatch(redux_form_1.change(...props)),
                 value: changeValue,
             });
         }
-        dispatch(redux_form_1.change(formName, name, changeValue));
+        dispatch(redux_form_1.change(formName, name, changeValue, true));
     };
-    const handleOnFocus = () => {
-        dispatch(redux_form_1.focus(formName, name));
+    const handleOnFocus = (event) => {
+        input.onFocus(event);
     };
     const newComponents = {};
     if (customOption) {
@@ -110,6 +109,8 @@ const FieldAsyncSelect = ({ cacheOptions = false, className, customOption, defau
             })
             : base,
     };
-    return (react_1.default.createElement(exports.SelectSC, { cacheOptions: cacheOptions, className: className, classNamePrefix: "DataFieldAsyncSelect", components: newComponents, defaultOptions: defaultOptions, defaultValue: defaultValue, formatOptionLabel: formatOptionLabel, getOptionLabel: getOptionLabel, getOptionValue: getOptionValue, hideSelectedOptions: hideSelectedOptions, innerId: id, isClearable: isClearable, isMulti: isMulti, isOptionDisabled: isOptionDisabled, isOptionSelected: isOptionSelected, isSearchable: isSearchable, loadOptions: loadOptions, loadingMessage: loadingMessage, noOptionsMessage: noOptionsMessage, onBlur: handleOnBlur, onChange: handleInnerOnChange, onFocus: handleOnFocus, placeholder: t && placeholder ? t(placeholder) : placeholder, styles: styles, value: value }));
+    return (react_1.default.createElement(react_1.default.Fragment, null,
+        react_1.default.createElement("input", { ref: inputRef, name: name, type: "hidden" }),
+        react_1.default.createElement(exports.SelectSC, { cacheOptions: cacheOptions, className: className, classNamePrefix: "DataFieldAsyncSelect", components: newComponents, defaultOptions: defaultOptions, defaultValue: defaultValue, formatOptionLabel: formatOptionLabel, getOptionLabel: getOptionLabel, getOptionValue: getOptionValue, hideSelectedOptions: hideSelectedOptions, innerId: id, isClearable: isClearable, isMulti: isMulti, isOptionDisabled: isOptionDisabled, isOptionSelected: isOptionSelected, isSearchable: isSearchable, loadOptions: loadOptions, loadingMessage: loadingMessage, noOptionsMessage: noOptionsMessage, onBlur: handleOnBlur, onChange: handleInnerOnChange, onFocus: handleOnFocus, placeholder: t && placeholder ? t(placeholder) : placeholder, styles: styles, value: value })));
 };
 exports.default = FieldAsyncSelect;
