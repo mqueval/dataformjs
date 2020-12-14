@@ -6,9 +6,11 @@ import { getFormValues } from 'redux-form';
 import verifyCondition from '../../utils/verifyCondition';
 import Data, { DataProps } from './index';
 
+export type DataContitionOperation = '==' | '!=' | 'in';
+
 export interface DataConditionTestProps {
   field: string;
-  operator: string;
+  operator: DataContitionOperation;
   value: any;
 }
 

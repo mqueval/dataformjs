@@ -31,6 +31,7 @@ export interface DataFieldProps extends DataProps {
     required?: boolean;
     type?: string;
     validate?: Validator | Validator[];
+    validated?: string;
 }
 declare const DataField: FC<DataFieldAsyncSelectProps<any> | DataFieldInputProps | DataFieldProps>;
 export default DataField;

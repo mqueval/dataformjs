@@ -1,6 +1,7 @@
 import React, { ReactNode, SyntheticEvent, useContext } from 'react';
 import { connect, DefaultRootState } from 'react-redux';
-import { InjectedFormProps, reduxForm } from 'redux-form';
+import { Dispatch } from 'redux';
+import { DecoratedFormProps, InjectedFormProps, reduxForm } from 'redux-form';
 import styled from 'styled-components';
 
 import { FormidableContext } from '../../index';
@@ -18,6 +19,13 @@ const FormFooterSC = styled.div`
 const MessageSC = styled.div``;
 
 interface FormRenderProps {
+  asyncValidate?: (
+    values: FormData,
+    dispatch: Dispatch<any>,
+    props: DecoratedFormProps<FormData, any>,
+    blurredField: string,
+  ) => Promise<any>;
+  asyncChangeFields?: string[];
   bodyClassName?: string;
   cancelIcon?: ReactNode;
   cancelLabel?: string;
@@ -114,6 +122,13 @@ const Form: React.FC<
 };
 
 type StateProps = {
+  asyncChangeFields?: string[];
+  asyncValidate?: (
+    values: FormData,
+    dispatch: Dispatch<any>,
+    props: DecoratedFormProps<FormData, any>,
+    blurredField: string,
+  ) => Promise<any>;
   destroyOnUnmount: boolean;
   enableReinitialize: boolean;
   forceUnregisterOnUnmount: boolean;
@@ -127,6 +142,8 @@ const mapStateToProps = (
   state: DefaultRootState,
   props: FormRenderProps,
 ): StateProps => ({
+  asyncChangeFields: props.asyncChangeFields,
+  asyncValidate: props.asyncValidate,
   destroyOnUnmount:
     undefined !== props.destroyOnUnmount ? props.destroyOnUnmount : true,
   enableReinitialize: !!props.enableReinitialize,
