@@ -103,6 +103,7 @@ const FieldSelect: FC<WrappedFieldProps & DataFieldSelectProps> = ({
         classNamePrefix="DataFieldAsyncSelect"
         getOptionLabel={handleGetOptionLabel}
         getOptionValue={handleGetOptionValue}
+        inputId={id}
         isMulti
         onBlur={handleOnBlur}
         onChange={handleInnerOnChange}

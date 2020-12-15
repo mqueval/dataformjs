@@ -169,7 +169,7 @@ const FieldAsyncSelect: FC<
       getOptionLabel={getOptionLabel}
       getOptionValue={getOptionValue}
       hideSelectedOptions={hideSelectedOptions}
-      innerId={id}
+      inputId={id}
       isClearable={isClearable}
       isMulti={isMulti}
       isOptionDisabled={isOptionDisabled}

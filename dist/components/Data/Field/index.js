@@ -60,7 +60,7 @@ const DataField = ({ validate, ...props }) => {
             return react_1.default.createElement("div", null, "input : erreur de param\u00E8tre : options obligatoire");
         }
         return (react_1.default.createElement(Wrapper_1.default, Object.assign({}, props, { id: newId }),
-            react_1.default.createElement(InputGroupSC, { as: sc && sc.inputGroup, className: "flex flex-row gap-2", role: "radiogroup" }, options.map(option => (react_1.default.createElement(redux_form_1.Field, Object.assign({ key: option.value }, props, { className: "grid grid-cols-2 items-center", component: Input_1.default, description: option.label, id: `${newId}_${option.value}`, validate: newValidate, value: option.value })))))));
+            react_1.default.createElement(InputGroupSC, { as: sc && sc.inputGroup, className: "flex flex-row gap-2", role: "radiogroup" }, options.map(option => (react_1.default.createElement(redux_form_1.Field, Object.assign({ key: option.value }, props, { className: "grid grid-cols-2 items-center", component: Input_1.default, description: option.label, id: option.id || `${newId}_${option.value}`, validate: newValidate, value: option.value })))))));
     }
     return (react_1.default.createElement(Wrapper_1.default, Object.assign({}, props, { id: newId }),
         react_1.default.createElement(redux_form_1.Field, Object.assign({}, props, { component: Render_1.default, id: newId, validate: newValidate }))));
