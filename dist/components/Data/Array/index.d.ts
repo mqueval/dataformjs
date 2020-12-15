@@ -1,9 +1,12 @@
-import { ReactElement, VoidFunctionComponent } from 'react';
+import { ReactNode, VoidFunctionComponent } from 'react';
 import { DataProps } from '../index';
 export interface DataArrayProps extends DataProps {
-    addButtonIcon?: ReactElement;
+    addButtonClassName?: string;
+    addButtonIcon?: ReactNode | string;
     addButtonPosition?: string;
     addButtonLabel?: string;
+    addButtonSize?: string;
+    addButtonStatus?: string;
     datas: DataProps[];
     defaultValue?: string;
     formName: string;
@@ -13,6 +16,11 @@ export interface DataArrayProps extends DataProps {
     params?: {
         [key: string]: any;
     };
+    removeButtonClassName?: string;
+    removeButtonIcon?: ReactNode | string;
+    removeButtonLabel?: string;
+    removeButtonSize?: string;
+    removeButtonStatus?: string;
 }
 declare const DataArray: VoidFunctionComponent<DataArrayProps & {
     name: string;

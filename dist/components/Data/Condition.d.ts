@@ -1,16 +1,20 @@
 import React from 'react';
 import { DataProps } from './index';
-export declare type DataContitionOperation = '==' | '!=' | 'in';
 export interface DataConditionTestProps {
     field: string;
-    operator: DataContitionOperation;
+    operator: string;
     value: any;
 }
 interface DataConditionProps extends DataProps {
     datas: DataProps[];
+    className?: string;
     formName: string;
+    group?: boolean;
+    groupOptions?: {
+        [key: string]: any;
+    };
     test: DataConditionTestProps | DataConditionTestProps[];
     valid?: boolean;
 }
-declare const _default: import("react-redux").ConnectedComponent<React.FC<DataConditionProps>, Pick<DataConditionProps, "required" | "label" | "formName" | "componentType" | "name" | "params" | "className" | "datas" | "formValues" | "test"> & DataConditionProps>;
+declare const _default: import("react-redux").ConnectedComponent<React.FC<DataConditionProps>, Pick<DataConditionProps, "required" | "label" | "formName" | "componentType" | "name" | "params" | "className" | "customInfos" | "datas" | "formValues" | "test" | "group" | "groupOptions"> & DataConditionProps>;
 export default _default;
