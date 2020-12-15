@@ -76,7 +76,7 @@ const FieldSelect = ({ disabled, formName, getOptionLabel, getOptionValue, hasEm
             }
             return option.value;
         };
-        return (react_1.default.createElement(AsyncSelect_1.SelectSC, { as: react_select_1.default, classNamePrefix: "DataFieldAsyncSelect", getOptionLabel: handleGetOptionLabel, getOptionValue: handleGetOptionValue, isMulti: true, onBlur: handleOnBlur, onChange: handleInnerOnChange, onFocus: handleOnFocus, options: options, placeholder: t && placeholder ? t(placeholder) : placeholder, styles: styles, value: input.value &&
+        return (react_1.default.createElement(AsyncSelect_1.SelectSC, { as: react_select_1.default, classNamePrefix: "DataFieldAsyncSelect", getOptionLabel: handleGetOptionLabel, getOptionValue: handleGetOptionValue, inputId: id, isMulti: true, onBlur: handleOnBlur, onChange: handleInnerOnChange, onFocus: handleOnFocus, options: options, placeholder: t && placeholder ? t(placeholder) : placeholder, styles: styles, value: input.value &&
                 input.value.map((v) => options.find(o => o.value === v)) }));
     }
     return (react_1.default.createElement(SelectSC, Object.assign({}, input, { as: sc && sc.select, disabled: disabled, id: id, required: true, status: touched && error ? 'error' : null }),
