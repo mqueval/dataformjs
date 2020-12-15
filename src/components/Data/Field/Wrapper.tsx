@@ -15,6 +15,7 @@ const FieldLabelSC = styled.label``;
 
 const FieldWrapper: FC<DataFieldProps> = ({
   children,
+  componentType,
   customBottom,
   customBottomClassName,
   customTop,
@@ -24,6 +25,10 @@ const FieldWrapper: FC<DataFieldProps> = ({
   name,
 }) => {
   const { t, sc } = useContext(FormidableContext);
+
+  if ('hidden' === componentType) {
+    return <>{children}</>;
+  }
 
   return (
     <div>

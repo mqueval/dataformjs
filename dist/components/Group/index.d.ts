@@ -1,12 +1,14 @@
-import { FC, ReactElement } from 'react';
+import { FC, ReactNode } from 'react';
 declare type GroupProps = {
     className?: string;
     columns?: boolean;
     columnsClassName?: string;
-    customInfos?: ReactElement | ReactElement[];
+    customInfos?: ReactNode;
     customInfosClassName?: string;
     description?: string;
     descriptionClassName?: string;
+    grid?: boolean;
+    gridClassName?: string;
     title?: string;
 };
 declare const Group: FC<GroupProps>;

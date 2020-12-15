@@ -1,8 +1,9 @@
-import { FC } from 'react';
+import { FC, ReactNode } from 'react';
 import DataArray from './Array';
 import { DataConditionTestProps } from './Condition';
 export interface DataProps {
     className?: string;
+    customInfos?: ReactNode;
     componentType?: string;
     datas?: DataProps[];
     formName?: string;

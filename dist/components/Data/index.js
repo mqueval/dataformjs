@@ -138,7 +138,7 @@ const Data = ({ datas, formName, ...props }) => {
             if (!name) {
                 return (react_1.default.createElement("div", null, `${componentType} : erreur de paramètre : name obligatoire`));
             }
-            return (react_1.default.createElement(Field_1.default, Object.assign({}, props, { componentType: "input", formName: formName, name: name })));
+            return (react_1.default.createElement(Field_1.default, Object.assign({}, props, { componentType: componentType, formName: formName, name: name })));
         default: {
             return (react_1.default.createElement("div", null, `${componentType} : ce type de composant n'est pas pris en charge`));
         }

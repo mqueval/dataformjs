@@ -32,8 +32,11 @@ const CustomTopSC = styled_components_1.default.div `
   float: right;
 `;
 const FieldLabelSC = styled_components_1.default.label ``;
-const FieldWrapper = ({ children, customBottom, customBottomClassName, customTop, customTopClassName, id, label, name, }) => {
+const FieldWrapper = ({ children, componentType, customBottom, customBottomClassName, customTop, customTopClassName, id, label, name, }) => {
     const { t, sc } = react_1.useContext(index_1.FormidableContext);
+    if ('hidden' === componentType) {
+        return react_1.default.createElement(react_1.default.Fragment, null, children);
+    }
     return (react_1.default.createElement("div", null,
         customTop && (react_1.default.createElement(CustomTopSC, { as: sc && sc.customTop, className: customTopClassName }, customTop)),
         react_1.default.createElement(FieldLabelSC, { as: sc && sc.label, htmlFor: id }, t ? t(label || name) : label || name),

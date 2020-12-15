@@ -9,6 +9,7 @@ exports.default = ({ fieldValue, operator, value, }) => {
                 }
                 case 'number':
                 default: {
+                    console.info(fieldValue, value);
                     return Boolean(fieldValue === value);
                 }
             }

@@ -1,5 +1,5 @@
 import hash from 'object-hash';
-import React, { FC, useContext } from 'react';
+import React, { FC, ReactNode, useContext } from 'react';
 
 import { FormidableContext } from '../../index';
 import Column from '../Column';
@@ -15,6 +15,7 @@ import DataValues from './Values';
 
 export interface DataProps {
   className?: string;
+  customInfos?: ReactNode;
   componentType?: string;
   datas?: DataProps[];
   formName?: string;
@@ -278,7 +279,7 @@ const Data: FC<
       return (
         <DataField
           {...props}
-          componentType="input"
+          componentType={componentType}
           formName={formName}
           name={name}
         />
