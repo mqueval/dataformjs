@@ -36,7 +36,7 @@ export interface DataFieldProps extends DataProps {
   label?: string;
   message?: string;
   name: string;
-  options?: { label: string; value: string | number }[];
+  options?: { label: string; value: string | number; id?: string }[];
   params?: { [key: string]: any };
   placeholder?: string;
   required?: boolean;
@@ -96,7 +96,7 @@ const DataField: FC<
               className="grid grid-cols-2 items-center"
               component={DataFieldInput}
               description={option.label}
-              id={`${newId}_${option.value}`}
+              id={option.id || `${newId}_${option.value}`}
               validate={newValidate}
               value={option.value}
             />
