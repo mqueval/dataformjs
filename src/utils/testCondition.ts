@@ -1,12 +1,10 @@
-import { DataContitionOperation } from '../components/Data/Condition';
-
 export default ({
   fieldValue,
   operator,
   value,
 }: {
   fieldValue: any;
-  operator: DataContitionOperation;
+  operator: string;
   value: any;
 }): boolean => {
   switch (operator) {
@@ -18,6 +16,8 @@ export default ({
 
         case 'number':
         default: {
+          console.info(fieldValue, value);
+
           return Boolean(fieldValue === value);
         }
       }

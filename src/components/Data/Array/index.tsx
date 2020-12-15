@@ -1,4 +1,4 @@
-import React, { ReactElement, VoidFunctionComponent } from 'react';
+import React, { ReactNode, VoidFunctionComponent } from 'react';
 import { FieldArray } from 'redux-form';
 
 import Group from '../../Group';
@@ -6,9 +6,12 @@ import { DataProps } from '../index';
 import DataArrayRender from './Render';
 
 export interface DataArrayProps extends DataProps {
-  addButtonIcon?: ReactElement;
+  addButtonClassName?: string;
+  addButtonIcon?: ReactNode | string;
   addButtonPosition?: string;
   addButtonLabel?: string;
+  addButtonSize?: string;
+  addButtonStatus?: string;
   datas: DataProps[];
   defaultValue?: string;
   formName: string;
@@ -16,6 +19,11 @@ export interface DataArrayProps extends DataProps {
   groupTitle?: string;
   groupClassName?: string;
   params?: { [key: string]: any };
+  removeButtonClassName?: string;
+  removeButtonIcon?: ReactNode | string;
+  removeButtonLabel?: string;
+  removeButtonSize?: string;
+  removeButtonStatus?: string;
 }
 
 const DataArray: VoidFunctionComponent<

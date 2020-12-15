@@ -42,7 +42,6 @@ export interface DataFieldProps extends DataProps {
   required?: boolean;
   type?: string;
   validate?: Validator | Validator[]; // TODO @deprecated
-  validated?: string;
 }
 
 const DataField: FC<

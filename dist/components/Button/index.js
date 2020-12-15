@@ -25,15 +25,16 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const react_1 = __importStar(require("react"));
 const styled_components_1 = __importDefault(require("styled-components"));
 const index_1 = require("../../index");
+const Icon_1 = __importDefault(require("../Icon"));
 const ButtonSC = styled_components_1.default.button ``;
-const Button = ({ children, disabled, iconLeft, iconRight, onClick, status, type = 'button', }) => {
+const Button = ({ className, children, disabled, iconLeft, iconRight, onClick, size, status, type = 'button', ...props }) => {
     const { sc } = react_1.useContext(index_1.FormidableContext);
     if ('submit' !== type && !onClick) {
         return react_1.default.createElement("div", null, "la fonction onClick est obligatoire");
     }
-    return (react_1.default.createElement(ButtonSC, { as: sc && sc.button, disabled: disabled, onClick: onClick, status: status, type: type },
-        iconLeft,
-        react_1.default.createElement("span", null, children),
+    return (react_1.default.createElement(ButtonSC, Object.assign({ as: sc && sc.button, className: className, disabled: disabled, onClick: onClick, size: size, status: status, type: type }, props),
+        iconLeft && react_1.default.createElement(Icon_1.default, { value: iconLeft }),
+        children && react_1.default.createElement("span", null, children),
         iconRight));
 };
 exports.default = Button;

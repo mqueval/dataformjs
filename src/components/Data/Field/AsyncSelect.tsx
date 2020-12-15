@@ -95,7 +95,6 @@ const FieldAsyncSelect: FC<
   ...others
 }) => {
   let newValue: any;
-  const inputRef = useRef<HTMLInputElement>(null);
   const dispatch = useDispatch();
   const { getControlStyle, t } = useContext(FormidableContext);
 
@@ -159,36 +158,33 @@ const FieldAsyncSelect: FC<
   };
 
   return (
-    <>
-      <input ref={inputRef} name={name} type="hidden" />
-      <SelectSC
-        cacheOptions={cacheOptions}
-        className={className}
-        classNamePrefix="DataFieldAsyncSelect"
-        components={newComponents}
-        defaultOptions={defaultOptions}
-        defaultValue={defaultValue}
-        formatOptionLabel={formatOptionLabel}
-        getOptionLabel={getOptionLabel}
-        getOptionValue={getOptionValue}
-        hideSelectedOptions={hideSelectedOptions}
-        innerId={id}
-        isClearable={isClearable}
-        isMulti={isMulti}
-        isOptionDisabled={isOptionDisabled}
-        isOptionSelected={isOptionSelected}
-        isSearchable={isSearchable}
-        loadOptions={loadOptions}
-        loadingMessage={loadingMessage}
-        noOptionsMessage={noOptionsMessage}
-        onBlur={handleOnBlur}
-        onChange={handleInnerOnChange}
-        onFocus={handleOnFocus}
-        placeholder={t && placeholder ? t(placeholder) : placeholder}
-        styles={styles}
-        value={value}
-      />
-    </>
+    <SelectSC
+      cacheOptions={cacheOptions}
+      className={className}
+      classNamePrefix="DataFieldAsyncSelect"
+      components={newComponents}
+      defaultOptions={defaultOptions}
+      defaultValue={defaultValue}
+      formatOptionLabel={formatOptionLabel}
+      getOptionLabel={getOptionLabel}
+      getOptionValue={getOptionValue}
+      hideSelectedOptions={hideSelectedOptions}
+      innerId={id}
+      isClearable={isClearable}
+      isMulti={isMulti}
+      isOptionDisabled={isOptionDisabled}
+      isOptionSelected={isOptionSelected}
+      isSearchable={isSearchable}
+      loadOptions={loadOptions}
+      loadingMessage={loadingMessage}
+      noOptionsMessage={noOptionsMessage}
+      onBlur={handleOnBlur}
+      onChange={handleInnerOnChange}
+      onFocus={handleOnFocus}
+      placeholder={t && placeholder ? t(placeholder) : placeholder}
+      styles={styles}
+      value={value}
+    />
   );
 };
 

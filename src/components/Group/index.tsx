@@ -1,17 +1,20 @@
-import React, { FC, ReactElement, useContext } from 'react';
+import React, { FC, ReactNode, useContext } from 'react';
 import styled from 'styled-components';
 
 import { FormidableContext } from '../../index';
 import Columns from '../Columns';
+import Grid from '../Grid';
 
 type GroupProps = {
   className?: string;
   columns?: boolean;
   columnsClassName?: string;
-  customInfos?: ReactElement | ReactElement[];
+  customInfos?: ReactNode;
   customInfosClassName?: string;
   description?: string;
   descriptionClassName?: string;
+  grid?: boolean;
+  gridClassName?: string;
   title?: string;
 };
 
@@ -27,6 +30,8 @@ const Group: FC<GroupProps> = ({
   customInfosClassName,
   description,
   descriptionClassName,
+  grid,
+  gridClassName,
   title,
 }) => {
   const { t, sc } = useContext(FormidableContext);
@@ -43,11 +48,9 @@ const Group: FC<GroupProps> = ({
           {t ? t(description) : description}
         </GroupDescriptionSC>
       )}
-      {columns ? (
-        <Columns className={columnsClassName}>{children}</Columns>
-      ) : (
-        children
-      )}
+      {columns && <Columns className={columnsClassName}>{children}</Columns>}
+      {grid && <Grid className={gridClassName}>{children}</Grid>}
+      {!columns && !grid && children}
     </GroupSC>
   );
 };
