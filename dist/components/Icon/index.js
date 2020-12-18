@@ -34,7 +34,6 @@ const Icon = ({ value }) => {
                 break;
             }
             case 'remove': {
-                console.info('sc', sc);
                 if (sc && sc.iconRemove) {
                     return sc.iconRemove;
                 }

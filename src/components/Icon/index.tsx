@@ -17,7 +17,6 @@ const Icon: FC<{ value?: ReactNode | string }> = ({ value }) => {
       }
 
       case 'remove': {
-        console.info('sc', sc);
         if (sc && sc.iconRemove) {
           return sc.iconRemove;
         }

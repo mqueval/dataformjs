@@ -16,8 +16,6 @@ export default ({
 
         case 'number':
         default: {
-          console.info(fieldValue, value);
-
           return Boolean(fieldValue === value);
         }
       }
