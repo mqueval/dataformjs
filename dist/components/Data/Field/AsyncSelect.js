@@ -63,7 +63,6 @@ const FieldAsyncSelect = ({ cacheOptions = false, className, customOption, defau
     let newValue;
     const dispatch = react_redux_1.useDispatch();
     const { getControlStyle, t } = react_1.useContext(index_1.FormidableContext);
-    console.info('async select error', error);
     if (!formName) {
         return react_1.default.createElement("div", null, "async-select : erreur de param\u00E8tre : formName obligatoire");
     }

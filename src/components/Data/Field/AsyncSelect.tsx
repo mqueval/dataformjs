@@ -1,4 +1,4 @@
-import React, { FC, ReactNode, useContext, useRef } from 'react';
+import React, { FC, ReactNode, useContext } from 'react';
 import { useDispatch } from 'react-redux';
 // import { components, ContainerProps } from 'react-select';
 import AsyncSelect from 'react-select/async';
@@ -97,8 +97,6 @@ const FieldAsyncSelect: FC<
   let newValue: any;
   const dispatch = useDispatch();
   const { getControlStyle, t } = useContext(FormidableContext);
-
-  console.info('async select error', error);
 
   if (!formName) {
     return <div>async-select : erreur de paramètre : formName obligatoire</div>;
