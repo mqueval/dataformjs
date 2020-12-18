@@ -3,15 +3,16 @@ import React, { FC, ReactNode, SyntheticEvent } from 'react';
 import { Dispatch } from 'redux';
 import { DecoratedFormProps } from 'redux-form';
 
+import initializeValues from '../../utils/initializeValues';
 import Data, { DataProps } from '../Data';
 import FormRender from './Render';
 
-export interface FormProps<P> {
+export interface FormProps {
   asyncChangeFields?: string[];
   asyncValidate?: (
     values: FormData,
     dispatch: Dispatch<any>,
-    props: DecoratedFormProps<FormData, P>,
+    props: DecoratedFormProps<FormData, any>,
     blurredField: string,
   ) => Promise<any>;
   cancelIcon?: ReactNode;
@@ -30,7 +31,7 @@ export interface FormProps<P> {
   onChange?(
     values: Partial<FormData>,
     dispatch: Dispatch<any>,
-    props: DecoratedFormProps<FormData, P>,
+    props: DecoratedFormProps<FormData, any>,
     previousValues: Partial<FormData>,
   ): void;
   onSubmit: (values?: any) => void;
@@ -41,7 +42,7 @@ export interface FormProps<P> {
   validate?: (values: any, props: any) => any;
 }
 
-const Form: FC<FormProps<any>> = ({
+const Form: FC<FormProps> = ({
   asyncChangeFields,
   asyncValidate,
   cancelIcon,
@@ -82,7 +83,7 @@ const Form: FC<FormProps<any>> = ({
       enableReinitialize={enableReinitialize}
       forceUnregisterOnUnmount={forceUnregisterOnUnmount}
       id={id}
-      initialValues={initialValues}
+      initialValues={initialValues || (newDatas && initializeValues(newDatas))}
       isSubmissive={isSubmissive}
       name={name}
       onChange={onChange}

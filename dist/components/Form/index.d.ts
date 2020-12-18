@@ -2,9 +2,9 @@ import { FC, ReactNode, SyntheticEvent } from 'react';
 import { Dispatch } from 'redux';
 import { DecoratedFormProps } from 'redux-form';
 import { DataProps } from '../Data';
-export interface FormProps<P> {
+export interface FormProps {
     asyncChangeFields?: string[];
-    asyncValidate?: (values: FormData, dispatch: Dispatch<any>, props: DecoratedFormProps<FormData, P>, blurredField: string) => Promise<any>;
+    asyncValidate?: (values: FormData, dispatch: Dispatch<any>, props: DecoratedFormProps<FormData, any>, blurredField: string) => Promise<any>;
     cancelIcon?: ReactNode;
     cancelLabel?: string;
     cancelOnClick?: (event: SyntheticEvent<HTMLButtonElement>) => void;
@@ -20,7 +20,7 @@ export interface FormProps<P> {
     };
     isSubmissive?: boolean;
     name: string;
-    onChange?(values: Partial<FormData>, dispatch: Dispatch<any>, props: DecoratedFormProps<FormData, P>, previousValues: Partial<FormData>): void;
+    onChange?(values: Partial<FormData>, dispatch: Dispatch<any>, props: DecoratedFormProps<FormData, any>, previousValues: Partial<FormData>): void;
     onSubmit: (values?: any) => void;
     params?: {
         [key: string]: any;
@@ -30,5 +30,5 @@ export interface FormProps<P> {
     touchOnChange?: boolean;
     validate?: (values: any, props: any) => any;
 }
-declare const Form: FC<FormProps<any>>;
+declare const Form: FC<FormProps>;
 export default Form;
