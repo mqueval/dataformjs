@@ -9,7 +9,15 @@ declare type GroupProps = {
     descriptionClassName?: string;
     grid?: boolean;
     gridClassName?: string;
+    params?: {
+        [key: string]: any;
+    };
     title?: string;
+    titleAs?: 'div';
+    titleClassName?: string;
+    titleParams?: {
+        [key: string]: any;
+    };
 };
 declare const Group: FC<GroupProps>;
 export default Group;

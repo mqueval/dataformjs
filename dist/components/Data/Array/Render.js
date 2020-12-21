@@ -60,6 +60,8 @@ const DataArrayRender = ({ addButtonClassName, addButtonIcon, addButtonLabel, ad
                     if (datas.length > 1 || datas[0].datas) {
                         return (react_1.default.createElement(redux_form_1.FormSection, { key: `${field}_${object_hash_1.default(datas)}`, name: field }, datas.map(value => (react_1.default.createElement(index_2.default, Object.assign({ key: `${field}_${object_hash_1.default(value)}` }, value, { customInfos: removeCmp, formName: formName, params: {
                                 ...params,
+                                index,
+                                count: index + 1,
                                 name: field,
                             } }))))));
                     }
