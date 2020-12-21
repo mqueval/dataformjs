@@ -2,6 +2,7 @@ import React, { FC, ReactNode, useContext } from 'react';
 import styled from 'styled-components';
 
 import { FormidableContext } from '../../index';
+import convertParams from '../../utils/convertParams';
 import Columns from '../Columns';
 import Grid from '../Grid';
 
@@ -15,11 +16,16 @@ type GroupProps = {
   descriptionClassName?: string;
   grid?: boolean;
   gridClassName?: string;
+  params?: { [key: string]: any };
   title?: string;
+  titleAs?: 'div';
+  titleClassName?: string;
+  titleParams?: { [key: string]: any };
 };
 
-const GroupSC = styled.div``;
+const GroupSC = styled.fieldset``;
 const GroupDescriptionSC = styled.p``;
+const LegendSC = styled.legend``;
 
 const Group: FC<GroupProps> = ({
   children,
@@ -32,14 +38,23 @@ const Group: FC<GroupProps> = ({
   descriptionClassName,
   grid,
   gridClassName,
+  params,
   title,
+  titleAs,
+  titleClassName,
+  titleParams,
 }) => {
   const { t, sc } = useContext(FormidableContext);
 
   return (
     <GroupSC as={sc && sc.group} className={className}>
-      {title && <legend>{t ? t(title) : title}</legend>}
       {customInfos && <div className={customInfosClassName}>{customInfos}</div>}
+      {title && (
+        <LegendSC as={titleAs} className={titleClassName}>
+          {t ? t(title, convertParams(titleParams, params)) : title}
+        </LegendSC>
+      )}
+
       {description && (
         <GroupDescriptionSC
           as={sc && sc.groupDescription}

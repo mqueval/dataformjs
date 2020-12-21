@@ -157,6 +157,7 @@ const FieldAsyncSelect: FC<
 
   return (
     <SelectSC
+      autoComplete="new-password"
       cacheOptions={cacheOptions}
       className={className}
       classNamePrefix="DataFieldAsyncSelect"
