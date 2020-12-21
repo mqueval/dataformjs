@@ -15,6 +15,7 @@ export {
 export {
   change,
   DecoratedFormProps,
+  destroy,
   Field,
   FieldArray,
   FormSection,

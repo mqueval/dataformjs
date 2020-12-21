@@ -38,11 +38,11 @@ export default ({
         formValues,
       );
 
-      if (undefined !== fieldValue) {
-        valid.push(testCondition({ fieldValue, operator, value }));
-      } else {
-        valid.push(false);
-      }
+      // if (undefined !== fieldValue) {
+      valid.push(testCondition({ fieldValue, operator, value }));
+      // } else {
+      // valid.push(false);
+      // }
     }
   });
 

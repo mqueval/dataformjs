@@ -13,7 +13,7 @@ const verifyCondition_1 = __importDefault(require("../../utils/verifyCondition")
 const Group_1 = __importDefault(require("../Group"));
 const index_1 = __importDefault(require("./index"));
 const ConditionSC = styled_components_1.default.div ``;
-const DataCondition = ({ datas, formName, group, groupOptions, className, valid, }) => {
+const DataCondition = ({ datas, formName, group, groupOptions, className, params, valid, }) => {
     if (!valid) {
         return null;
     }
@@ -21,7 +21,7 @@ const DataCondition = ({ datas, formName, group, groupOptions, className, valid,
     const props = group ? groupOptions : {};
     return (react_1.default.createElement(ConditionCmp, Object.assign({ className: className }, props), datas &&
         datas.length > 0 &&
-        datas.map(data => (react_1.default.createElement(index_1.default, Object.assign({ key: object_hash_1.default(data) }, data, { formName: formName }))))));
+        datas.map(data => (react_1.default.createElement(index_1.default, Object.assign({ key: object_hash_1.default(data) }, data, { formName: formName, params: params }))))));
 };
 exports.default = react_redux_1.connect((state, props) => {
     if (!props.formName) {
