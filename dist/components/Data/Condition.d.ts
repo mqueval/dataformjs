@@ -3,7 +3,7 @@ import { DataProps } from './index';
 export interface DataConditionTestProps {
     field: string;
     operator: string;
-    value: any;
+    value?: any;
 }
 interface DataConditionProps extends DataProps {
     datas: DataProps[];

@@ -3,6 +3,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = ({ fieldValue, operator, value, }) => {
     switch (operator) {
         case '==': {
+            if (undefined === fieldValue) {
+                return false;
+            }
             switch (typeof fieldValue) {
                 case 'string': {
                     return Boolean(0 === String(fieldValue).localeCompare(value));
@@ -14,11 +17,28 @@ exports.default = ({ fieldValue, operator, value, }) => {
             }
         }
         case '!=': {
-            return Boolean(fieldValue !== value);
+            if (undefined === fieldValue) {
+                return false;
+            }
+            switch (typeof fieldValue) {
+                case 'string': {
+                    return Boolean(0 !== String(fieldValue).localeCompare(value));
+                }
+                case 'number':
+                default: {
+                    return Boolean(fieldValue !== value);
+                }
+            }
         }
         case 'in': {
             const newArray = !Array.isArray(value) ? [value] : value;
-            return Boolean(newArray.includes(fieldValue));
+            return undefined !== fieldValue && Boolean(newArray.includes(fieldValue));
+        }
+        case 'is': {
+            return Boolean(fieldValue);
+        }
+        case 'not': {
+            return !fieldValue;
         }
     }
     return false;
