@@ -95,6 +95,8 @@ const DataArrayRender: FC<WrappedFieldArrayProps & DataArrayProps> = ({
                       formName={formName}
                       params={{
                         ...params,
+                        index,
+                        count: index + 1,
                         name: field,
                       }}
                     />

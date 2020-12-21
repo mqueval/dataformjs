@@ -25,15 +25,17 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const react_1 = __importStar(require("react"));
 const styled_components_1 = __importDefault(require("styled-components"));
 const index_1 = require("../../index");
+const convertParams_1 = __importDefault(require("../../utils/convertParams"));
 const Columns_1 = __importDefault(require("../Columns"));
 const Grid_1 = __importDefault(require("../Grid"));
-const GroupSC = styled_components_1.default.div ``;
+const GroupSC = styled_components_1.default.fieldset ``;
 const GroupDescriptionSC = styled_components_1.default.p ``;
-const Group = ({ children, className, columns, columnsClassName, customInfos, customInfosClassName, description, descriptionClassName, grid, gridClassName, title, }) => {
+const LegendSC = styled_components_1.default.legend ``;
+const Group = ({ children, className, columns, columnsClassName, customInfos, customInfosClassName, description, descriptionClassName, grid, gridClassName, params, title, titleAs, titleClassName, titleParams, }) => {
     const { t, sc } = react_1.useContext(index_1.FormidableContext);
     return (react_1.default.createElement(GroupSC, { as: sc && sc.group, className: className },
-        title && react_1.default.createElement("legend", null, t ? t(title) : title),
         customInfos && react_1.default.createElement("div", { className: customInfosClassName }, customInfos),
+        title && (react_1.default.createElement(LegendSC, { as: titleAs, className: titleClassName }, t ? t(title, convertParams_1.default(titleParams, params)) : title)),
         description && (react_1.default.createElement(GroupDescriptionSC, { as: sc && sc.groupDescription, className: descriptionClassName }, t ? t(description) : description)),
         columns && react_1.default.createElement(Columns_1.default, { className: columnsClassName }, children),
         grid && react_1.default.createElement(Grid_1.default, { className: gridClassName }, children),
