@@ -16,7 +16,7 @@ const ConditionSC = styled.div``;
 export interface DataConditionTestProps {
   field: string;
   operator: string;
-  value: any;
+  value?: any;
 }
 
 interface DataConditionProps extends DataProps {
@@ -35,6 +35,7 @@ const DataCondition: FC<DataConditionProps> = ({
   group,
   groupOptions,
   className,
+  params,
   valid,
 }) => {
   if (!valid) {
@@ -49,7 +50,12 @@ const DataCondition: FC<DataConditionProps> = ({
       {datas &&
         datas.length > 0 &&
         datas.map(data => (
-          <Data key={hash(data)} {...data} formName={formName} />
+          <Data
+            key={hash(data)}
+            {...data}
+            formName={formName}
+            params={params}
+          />
         ))}
     </ConditionCmp>
   );
