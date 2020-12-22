@@ -22,6 +22,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+const classnames_1 = __importDefault(require("classnames"));
 const react_1 = __importStar(require("react"));
 const react_redux_1 = require("react-redux");
 const react_select_1 = __importDefault(require("react-select"));
@@ -30,7 +31,7 @@ const styled_components_1 = __importDefault(require("styled-components"));
 const index_1 = require("../../../index");
 const AsyncSelect_1 = require("./AsyncSelect");
 const SelectSC = styled_components_1.default.select ``;
-const FieldSelect = ({ disabled, formName, getOptionLabel, getOptionValue, hasEmpty = true, handleOnChange, id, input, options, placeholder, meta: { error, touched }, multi = false, ...others }) => {
+const FieldSelect = ({ disabled, formName, formatOptionLabel, getOptionLabel, getOptionValue, hasEmpty = true, handleOnChange, id, input, options, placeholder, meta: { error, touched }, multi = false, standard = true, ...others }) => {
     const { getControlStyle, t, sc } = react_1.useContext(index_1.FormidableContext);
     const dispatch = react_redux_1.useDispatch();
     if (!formName) {
@@ -39,7 +40,7 @@ const FieldSelect = ({ disabled, formName, getOptionLabel, getOptionValue, hasEm
     if (!options) {
         return react_1.default.createElement("div", null, "select : erreur de param\u00E8tre : options obligatoire");
     }
-    if (multi) {
+    if (multi || !standard) {
         const { name } = input;
         const styles = {
             control: (base) => getControlStyle
@@ -59,16 +60,39 @@ const FieldSelect = ({ disabled, formName, getOptionLabel, getOptionValue, hasEm
                     value: changeValue,
                 });
             }
-            dispatch(redux_form_1.change(formName, name, changeValue && changeValue.map(handleGetOptionValue)));
+            dispatch(redux_form_1.change(formName, name, multi
+                ? changeValue.map(handleGetOptionValue)
+                : handleGetOptionValue(changeValue)));
         };
         const handleOnFocus = () => {
             dispatch(redux_form_1.focus(formName, name));
+        };
+        const handleFormatOptionLabel = (option, { context, }) => {
+            if (formatOptionLabel) {
+                return formatOptionLabel(option, { context });
+            }
+            if ('value' === context) {
+                return t && option.label ? t(option.label) : option.label;
+            }
+            return (react_1.default.createElement(react_1.default.Fragment, null,
+                react_1.default.createElement("span", { className: classnames_1.default('label', {
+                        'font-bold': option.data && Object.keys(option.data).length > 0,
+                    }) }, t && option.label ? t(option.label) : option.label),
+                option.data && (react_1.default.createElement(react_1.default.Fragment, null, Object.keys(option.data).map(key => (react_1.default.createElement("span", { key: `${option.value}_${key}`, className: classnames_1.default('block', key) }, t && option.data[key]
+                    ? t(option.data[key])
+                    : option.data[key])))))));
         };
         const handleGetOptionLabel = (option) => {
             if (getOptionLabel) {
                 return getOptionLabel(option);
             }
-            return t && option.label ? t(option.label) : option.label;
+            return (react_1.default.createElement(react_1.default.Fragment, null,
+                react_1.default.createElement("span", { className: classnames_1.default('label', {
+                        'font-bold': option.data && Object.keys(option.data).length > 0,
+                    }) }, t && option.label ? t(option.label) : option.label),
+                option.data && (react_1.default.createElement(react_1.default.Fragment, null, Object.keys(option.data).map(key => (react_1.default.createElement("span", { key: `${option.value}_${key}`, className: classnames_1.default('block', key) }, t && option.data[key]
+                    ? t(option.data[key])
+                    : option.data[key])))))));
         };
         const handleGetOptionValue = (option) => {
             if (getOptionValue) {
@@ -76,8 +100,10 @@ const FieldSelect = ({ disabled, formName, getOptionLabel, getOptionValue, hasEm
             }
             return option.value;
         };
-        return (react_1.default.createElement(AsyncSelect_1.SelectSC, { as: react_select_1.default, classNamePrefix: "DataFieldAsyncSelect", getOptionLabel: handleGetOptionLabel, getOptionValue: handleGetOptionValue, inputId: id, isMulti: true, onBlur: handleOnBlur, onChange: handleInnerOnChange, onFocus: handleOnFocus, options: options, placeholder: t && placeholder ? t(placeholder) : placeholder, styles: styles, value: input.value &&
-                input.value.map((v) => options.find(o => o.value === v)) }));
+        return (react_1.default.createElement(AsyncSelect_1.SelectSC, { as: react_select_1.default, autoComplete: "new-password", classNamePrefix: "DataFieldSelect", formatOptionLabel: handleFormatOptionLabel, getOptionLabel: handleGetOptionLabel, getOptionValue: handleGetOptionValue, inputId: id, isMulti: multi, onBlur: handleOnBlur, onChange: handleInnerOnChange, onFocus: handleOnFocus, options: options, placeholder: t && placeholder ? t(placeholder) : placeholder, styles: styles, value: multi
+                ? input.value &&
+                    input.value.map((v) => options.find(o => o.value === v))
+                : options.find(o => o.value === input.value) }));
     }
     return (react_1.default.createElement(SelectSC, Object.assign({}, input, { as: sc && sc.select, disabled: disabled, id: id, required: true, status: touched && error ? 'error' : null }),
         react_1.default.createElement("option", { "aria-label": placeholder, disabled: true, hidden: !hasEmpty, value: "" }, t && placeholder ? t(placeholder) : placeholder),

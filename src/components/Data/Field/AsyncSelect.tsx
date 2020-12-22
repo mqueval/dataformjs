@@ -1,6 +1,5 @@
 import React, { FC, ReactNode, useContext } from 'react';
 import { useDispatch } from 'react-redux';
-// import { components, ContainerProps } from 'react-select';
 import AsyncSelect from 'react-select/async';
 import { change, WrappedFieldProps } from 'redux-form';
 import styled from 'styled-components';
@@ -9,21 +8,21 @@ import { FormidableContext } from '../../../index';
 import { DataFieldSelectProps } from './Select';
 
 export const SelectSC = styled(AsyncSelect)`
-  .DataFieldAsyncSelect__value-container {
+  .DataFieldSelect__value-container {
     padding-bottom: 0;
     padding-top: 0;
     padding-left: 0;
   }
 
-  .DataFieldAsyncSelect__control {
+  .DataFieldSelect__control {
     padding-right: 0 !important;
   }
 
-  .DataFieldAsyncSelect__value-container div {
+  .DataFieldSelect__value-container div {
     margin-left: 0;
   }
 
-  .DataFieldAsyncSelect__value-container div:last-child {
+  .DataFieldSelect__value-container div:last-child {
     //.DataFieldAsyncSelect__value-container--has-value + div,
     //.DataFieldAsyncSelect__single-value + div,
     //.DataFieldAsyncSelect__placeholder + div {
@@ -33,7 +32,7 @@ export const SelectSC = styled(AsyncSelect)`
     padding-top: 0;
   }
 
-  .DataFieldAsyncSelect__multi-value {
+  .DataFieldSelect__multi-value {
     line-height: 2;
   }
 `;
@@ -110,11 +109,11 @@ const FieldAsyncSelect: FC<
 
   const { name, value } = input;
 
-  const handleOnBlur = (event: any): void => {
+  const handleOnBlur = (): void => {
     input.onBlur(newValue || value);
   };
 
-  const handleInnerOnChange = (changeValue: any, options: any): void => {
+  const handleInnerOnChange = (changeValue: any): void => {
     newValue = changeValue;
     if (handleOnChange) {
       handleOnChange({
@@ -160,7 +159,7 @@ const FieldAsyncSelect: FC<
       autoComplete="new-password"
       cacheOptions={cacheOptions}
       className={className}
-      classNamePrefix="DataFieldAsyncSelect"
+      classNamePrefix="DataFieldSelect"
       components={newComponents}
       defaultOptions={defaultOptions}
       defaultValue={defaultValue}
