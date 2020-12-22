@@ -1,4 +1,5 @@
-import React, { FC, useContext } from 'react';
+import classnames from 'classnames';
+import React, { FC, ReactNode, useContext } from 'react';
 import { useDispatch } from 'react-redux';
 import Select from 'react-select';
 import { change, focus, WrappedFieldProps } from 'redux-form';
@@ -11,15 +12,25 @@ import { DataFieldProps } from './index';
 const SelectSC = styled.select``;
 
 export interface DataFieldSelectProps extends DataFieldProps {
+  formatOptionLabel?: (
+    option: any,
+    props: {
+      context: 'menu' | 'value';
+      inputValue?: string;
+      selectValue?: any | any[];
+    },
+  ) => ReactNode;
   hasEmpty?: boolean;
   multi?: boolean;
   getOptionLabel?: (option: any) => any;
   getOptionValue?: (option: any) => any;
+  standard?: boolean;
 }
 
 const FieldSelect: FC<WrappedFieldProps & DataFieldSelectProps> = ({
   disabled,
   formName,
+  formatOptionLabel,
   getOptionLabel,
   getOptionValue,
   hasEmpty = true,
@@ -30,6 +41,7 @@ const FieldSelect: FC<WrappedFieldProps & DataFieldSelectProps> = ({
   placeholder,
   meta: { error, touched },
   multi = false,
+  standard = true,
   ...others
 }) => {
   const { getControlStyle, t, sc } = useContext(FormidableContext);
@@ -43,7 +55,7 @@ const FieldSelect: FC<WrappedFieldProps & DataFieldSelectProps> = ({
     return <div>select : erreur de paramètre : options obligatoire</div>;
   }
 
-  if (multi) {
+  if (multi || !standard) {
     const { name } = input;
 
     const styles = {
@@ -72,7 +84,9 @@ const FieldSelect: FC<WrappedFieldProps & DataFieldSelectProps> = ({
         change(
           formName,
           name,
-          changeValue && changeValue.map(handleGetOptionValue),
+          multi
+            ? changeValue.map(handleGetOptionValue)
+            : handleGetOptionValue(changeValue),
         ),
       );
     };
@@ -81,12 +95,81 @@ const FieldSelect: FC<WrappedFieldProps & DataFieldSelectProps> = ({
       dispatch(focus(formName, name));
     };
 
+    const handleFormatOptionLabel = (
+      option: any,
+      {
+        context,
+      }: {
+        context: 'menu' | 'value';
+        inputValue?: string;
+        selectValue?: any | any[];
+      },
+    ) => {
+      if (formatOptionLabel) {
+        return formatOptionLabel(option, { context });
+      }
+
+      if ('value' === context) {
+        return t && option.label ? t(option.label) : option.label;
+      }
+
+      return (
+        <>
+          <span
+            className={classnames('label', {
+              'font-bold': option.data && Object.keys(option.data).length > 0,
+            })}
+          >
+            {t && option.label ? t(option.label) : option.label}
+          </span>
+          {option.data && (
+            <>
+              {Object.keys(option.data).map(key => (
+                <span
+                  key={`${option.value}_${key}`}
+                  className={classnames('block', key)}
+                >
+                  {t && option.data[key]
+                    ? t(option.data[key])
+                    : option.data[key]}
+                </span>
+              ))}
+            </>
+          )}
+        </>
+      );
+    };
+
     const handleGetOptionLabel = (option: any): any => {
       if (getOptionLabel) {
         return getOptionLabel(option);
       }
 
-      return t && option.label ? t(option.label) : option.label;
+      return (
+        <>
+          <span
+            className={classnames('label', {
+              'font-bold': option.data && Object.keys(option.data).length > 0,
+            })}
+          >
+            {t && option.label ? t(option.label) : option.label}
+          </span>
+          {option.data && (
+            <>
+              {Object.keys(option.data).map(key => (
+                <span
+                  key={`${option.value}_${key}`}
+                  className={classnames('block', key)}
+                >
+                  {t && option.data[key]
+                    ? t(option.data[key])
+                    : option.data[key]}
+                </span>
+              ))}
+            </>
+          )}
+        </>
+      );
     };
 
     const handleGetOptionValue = (option: any): any => {
@@ -100,11 +183,13 @@ const FieldSelect: FC<WrappedFieldProps & DataFieldSelectProps> = ({
     return (
       <MultiSelectSC
         as={Select}
-        classNamePrefix="DataFieldAsyncSelect"
+        autoComplete="new-password"
+        classNamePrefix="DataFieldSelect"
+        formatOptionLabel={handleFormatOptionLabel}
         getOptionLabel={handleGetOptionLabel}
         getOptionValue={handleGetOptionValue}
         inputId={id}
-        isMulti
+        isMulti={multi}
         onBlur={handleOnBlur}
         onChange={handleInnerOnChange}
         onFocus={handleOnFocus}
@@ -112,8 +197,10 @@ const FieldSelect: FC<WrappedFieldProps & DataFieldSelectProps> = ({
         placeholder={t && placeholder ? t(placeholder) : placeholder}
         styles={styles}
         value={
-          input.value &&
-          input.value.map((v: any) => options.find(o => o.value === v))
+          multi
+            ? input.value &&
+              input.value.map((v: any) => options.find(o => o.value === v))
+            : options.find(o => o.value === input.value)
         }
       />
     );
