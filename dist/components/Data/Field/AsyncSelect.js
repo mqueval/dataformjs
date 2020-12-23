@@ -59,6 +59,7 @@ exports.SelectSC = styled_components_1.default(async_1.default) `
   }
 `;
 const FieldAsyncSelect = ({ cacheOptions = false, className, customOption, defaultOptions = false, defaultValue, formatOptionLabel, formName, getOptionLabel, getOptionValue, handleOnChange, hideSelectedOptions = false, id, input, isClearable = false, isMulti, isOptionDisabled, isOptionSelected, isSearchable = true, loadOptions, loadingMessage, meta, meta: { error, touched }, noOptionsMessage, placeholder, ...others }) => {
+    const ref = react_1.useRef();
     let newValue;
     const dispatch = react_redux_1.useDispatch();
     const { getControlStyle, t } = react_1.useContext(index_1.FormidableContext);
@@ -83,7 +84,25 @@ const FieldAsyncSelect = ({ cacheOptions = false, className, customOption, defau
         dispatch(redux_form_1.change(formName, name, changeValue, true));
     };
     const handleOnFocus = (event) => {
+        if (undefined !== ref && value) {
+            if (formatOptionLabel) {
+                ref.current.select.state.inputValue = formatOptionLabel(value, {
+                    context: 'value',
+                });
+            }
+            else if (getOptionLabel) {
+                ref.current.select.state.inputValue = getOptionLabel(value);
+            }
+            else if (value.label) {
+                ref.current.select.state.inputValue = value.label;
+            }
+        }
         input.onFocus(event);
+    };
+    const handleOnMenuClose = () => {
+        if (undefined !== ref) {
+            ref.current.select.blur();
+        }
     };
     const newComponents = {};
     if (customOption) {
@@ -106,6 +125,6 @@ const FieldAsyncSelect = ({ cacheOptions = false, className, customOption, defau
             })
             : base,
     };
-    return (react_1.default.createElement(exports.SelectSC, { autoComplete: "new-password", cacheOptions: cacheOptions, className: className, classNamePrefix: "DataFieldSelect", components: newComponents, defaultOptions: defaultOptions, defaultValue: defaultValue, formatOptionLabel: formatOptionLabel, getOptionLabel: getOptionLabel, getOptionValue: getOptionValue, hideSelectedOptions: hideSelectedOptions, inputId: id, isClearable: isClearable, isMulti: isMulti, isOptionDisabled: isOptionDisabled, isOptionSelected: isOptionSelected, isSearchable: isSearchable, loadOptions: loadOptions, loadingMessage: loadingMessage, noOptionsMessage: noOptionsMessage, onBlur: handleOnBlur, onChange: handleInnerOnChange, onFocus: handleOnFocus, placeholder: t && placeholder ? t(placeholder) : placeholder, styles: styles, value: value }));
+    return (react_1.default.createElement(exports.SelectSC, { ref: ref, autoComplete: "new-password", cacheOptions: cacheOptions, className: className, classNamePrefix: "DataFieldSelect", components: newComponents, defaultOptions: defaultOptions, defaultValue: defaultValue, formatOptionLabel: formatOptionLabel, getOptionLabel: getOptionLabel, getOptionValue: getOptionValue, hideSelectedOptions: hideSelectedOptions, inputId: id, isClearable: isClearable, isMulti: isMulti, isOptionDisabled: isOptionDisabled, isOptionSelected: isOptionSelected, isSearchable: isSearchable, loadOptions: loadOptions, loadingMessage: loadingMessage, noOptionsMessage: noOptionsMessage, onBlur: handleOnBlur, onChange: handleInnerOnChange, onFocus: handleOnFocus, onMenuClose: handleOnMenuClose, placeholder: t && placeholder ? t(placeholder) : placeholder, styles: styles, value: value }));
 };
 exports.default = FieldAsyncSelect;

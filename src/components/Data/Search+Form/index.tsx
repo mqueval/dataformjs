@@ -5,11 +5,9 @@ import { DataProps } from '../index';
 
 const DataSearchAndForm: FC<DataProps> = ({ name }) => {
   const handleLoadOptions = (inputValue: string): Promise<any> =>
-    new Promise((resolve, reject) => {
-      console.info('inputValue', inputValue);
-
-      return resolve([{ label: 'Hello world', value: 'hello-world' }]);
-    });
+    new Promise((resolve, reject) =>
+      resolve([{ label: 'Hello world', value: 'hello-world' }]),
+    );
 
   return (
     <div>

@@ -21,6 +21,7 @@ export interface DataFieldSelectProps extends DataFieldProps {
     },
   ) => ReactNode;
   hasEmpty?: boolean;
+  isSearchable?: boolean;
   multi?: boolean;
   getOptionLabel?: (option: any) => any;
   getOptionValue?: (option: any) => any;
@@ -37,6 +38,7 @@ const FieldSelect: FC<WrappedFieldProps & DataFieldSelectProps> = ({
   handleOnChange,
   id,
   input,
+  isSearchable = false,
   options,
   placeholder,
   meta: { error, touched },
@@ -190,6 +192,7 @@ const FieldSelect: FC<WrappedFieldProps & DataFieldSelectProps> = ({
         getOptionValue={handleGetOptionValue}
         inputId={id}
         isMulti={multi}
+        isSearchable={isSearchable}
         onBlur={handleOnBlur}
         onChange={handleInnerOnChange}
         onFocus={handleOnFocus}
