@@ -1,6 +1,3 @@
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-import React from 'react';
-
 import FormidableContext, { FormidableProvider } from './FormidableContext';
 
 export { Dispatch } from 'redux';
