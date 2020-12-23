@@ -11,7 +11,8 @@ const composeEnhancers =
 
 const loggerMiddleware = createLogger();
 const middleware = [];
-if (process.env.GATSBY_ENVIRONMENT !== 'production') {
+
+if (process.env.NODE_ENV !== 'production') {
   middleware.push(loggerMiddleware);
 }
 

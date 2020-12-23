@@ -12,7 +12,7 @@ const composeEnhancers = (process.env.BROWSER && window.__REDUX_DEVTOOLS_EXTENSI
     redux_1.compose;
 const loggerMiddleware = redux_logger_1.createLogger();
 const middleware = [];
-if (process.env.GATSBY_ENVIRONMENT !== 'production') {
+if (process.env.NODE_ENV !== 'production') {
     middleware.push(loggerMiddleware);
 }
 exports.default = (initialState = {}, extraReducers = null, extraArguments = null) => {
