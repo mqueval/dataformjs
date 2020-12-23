@@ -1,4 +1,4 @@
-import React, { FC, ReactNode, useContext } from 'react';
+import React, { FC, ReactNode, useContext, useRef } from 'react';
 import { useDispatch } from 'react-redux';
 import AsyncSelect from 'react-select/async';
 import { change, WrappedFieldProps } from 'redux-form';
@@ -93,6 +93,7 @@ const FieldAsyncSelect: FC<
   placeholder,
   ...others
 }) => {
+  const ref = useRef<any>();
   let newValue: any;
   const dispatch = useDispatch();
   const { getControlStyle, t } = useContext(FormidableContext);
@@ -125,7 +126,25 @@ const FieldAsyncSelect: FC<
   };
 
   const handleOnFocus = (event: any): void => {
+    if (undefined !== ref && value) {
+      if (formatOptionLabel) {
+        ref.current.select.state.inputValue = formatOptionLabel(value, {
+          context: 'value',
+        });
+      } else if (getOptionLabel) {
+        ref.current.select.state.inputValue = getOptionLabel(value);
+      } else if (value.label) {
+        ref.current.select.state.inputValue = value.label;
+      }
+    }
+
     input.onFocus(event);
+  };
+
+  const handleOnMenuClose = () => {
+    if (undefined !== ref) {
+      ref.current.select.blur();
+    }
   };
 
   const newComponents: { [key: string]: any } = {};
@@ -156,6 +175,7 @@ const FieldAsyncSelect: FC<
 
   return (
     <SelectSC
+      ref={ref}
       autoComplete="new-password"
       cacheOptions={cacheOptions}
       className={className}
@@ -179,6 +199,7 @@ const FieldAsyncSelect: FC<
       onBlur={handleOnBlur}
       onChange={handleInnerOnChange}
       onFocus={handleOnFocus}
+      onMenuClose={handleOnMenuClose}
       placeholder={t && placeholder ? t(placeholder) : placeholder}
       styles={styles}
       value={value}
