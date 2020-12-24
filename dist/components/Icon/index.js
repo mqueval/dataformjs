@@ -33,6 +33,20 @@ const Icon = ({ value }) => {
                 IconCmp = t ? t('add') : 'add';
                 break;
             }
+            case 'back': {
+                if (sc && sc.iconBack) {
+                    return sc.iconBack;
+                }
+                IconCmp = t ? t('back') : 'back';
+                break;
+            }
+            case 'next': {
+                if (sc && sc.iconNext) {
+                    return sc.iconNext;
+                }
+                IconCmp = t ? t('next') : 'next';
+                break;
+            }
             case 'remove': {
                 if (sc && sc.iconRemove) {
                     return sc.iconRemove;

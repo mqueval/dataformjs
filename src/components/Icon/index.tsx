@@ -2,7 +2,7 @@ import React, { FC, ReactNode, useContext } from 'react';
 
 import { FormidableContext } from '../../index';
 
-const Icon: FC<{ value?: ReactNode | string }> = ({ value }) => {
+const Icon: FC<{ value?: ReactNode }> = ({ value }) => {
   const { t, sc } = useContext(FormidableContext);
 
   let IconCmp = value;
@@ -13,6 +13,22 @@ const Icon: FC<{ value?: ReactNode | string }> = ({ value }) => {
           return sc.iconAdd;
         }
         IconCmp = t ? t('add') : 'add';
+        break;
+      }
+
+      case 'back': {
+        if (sc && sc.iconBack) {
+          return sc.iconBack;
+        }
+        IconCmp = t ? t('back') : 'back';
+        break;
+      }
+
+      case 'next': {
+        if (sc && sc.iconNext) {
+          return sc.iconNext;
+        }
+        IconCmp = t ? t('next') : 'next';
         break;
       }
 
