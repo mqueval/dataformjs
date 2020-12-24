@@ -14,6 +14,7 @@ export interface FormProps {
     destroyOnUnmount?: boolean;
     enableReinitialize?: boolean;
     forceUnregisterOnUnmount?: boolean;
+    hideSubmitButton?: boolean;
     id?: string;
     initialValues?: {
         [key: string]: any;

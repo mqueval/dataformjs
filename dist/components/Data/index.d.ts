@@ -2,6 +2,8 @@ import { FC, ReactNode } from 'react';
 import DataArray from './Array';
 import { DataConditionTestProps } from './Condition';
 export interface DataProps {
+    actions?: any;
+    actionsClassName?: string;
     className?: string;
     customInfos?: ReactNode;
     componentType?: string;
@@ -16,6 +18,7 @@ export interface DataProps {
         [key: string]: any;
     };
     required?: boolean;
+    title?: string;
     test?: DataConditionTestProps | DataConditionTestProps[];
 }
 declare const Data: FC<DataProps & {

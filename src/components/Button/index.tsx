@@ -9,7 +9,7 @@ const ButtonSC = styled.button``;
 interface ButtonProps {
   className?: string;
   disabled?: boolean;
-  iconLeft?: ReactNode | 'string';
+  iconLeft?: ReactNode;
   iconRight?: ReactNode;
   onClick?: (event: SyntheticEvent<HTMLButtonElement>) => void;
   size?: string;
@@ -47,7 +47,7 @@ const Button: FC<ButtonProps> = ({
     >
       {iconLeft && <Icon value={iconLeft} />}
       {children && <span>{children}</span>}
-      {iconRight}
+      {iconRight && <Icon value={iconRight} />}
     </ButtonSC>
   );
 };

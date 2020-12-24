@@ -24,6 +24,7 @@ export interface FormProps {
   destroyOnUnmount?: boolean;
   enableReinitialize?: boolean;
   forceUnregisterOnUnmount?: boolean;
+  hideSubmitButton?: boolean;
   id?: string;
   initialValues?: { [key: string]: any };
   isSubmissive?: boolean;
@@ -55,6 +56,7 @@ const Form: FC<FormProps> = ({
   destroyOnUnmount,
   enableReinitialize,
   forceUnregisterOnUnmount,
+  hideSubmitButton,
   id,
   initialValues,
   isSubmissive,
@@ -82,6 +84,7 @@ const Form: FC<FormProps> = ({
       destroyOnUnmount={destroyOnUnmount}
       enableReinitialize={enableReinitialize}
       forceUnregisterOnUnmount={forceUnregisterOnUnmount}
+      hideSubmitButton={hideSubmitButton}
       id={id}
       initialValues={initialValues || (newDatas && initializeValues(newDatas))}
       isSubmissive={isSubmissive}

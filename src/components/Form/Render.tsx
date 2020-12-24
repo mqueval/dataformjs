@@ -40,6 +40,7 @@ interface FormRenderProps {
   forceUnregisterOnUnmount?: boolean;
   formValues?: any;
   footerClassName?: string;
+  hideSubmitButton?: boolean;
   id?: string;
   isSubmissive?: boolean;
   name: string;
@@ -64,6 +65,7 @@ const Form: React.FC<
     footerClassName,
     // formValues,
     handleSubmit,
+    hideSubmitButton = false,
     id,
     isSubmissive = true,
     // invalid,
@@ -106,16 +108,18 @@ const Form: React.FC<
           )}
         </div>
 
-        <Button
-          disabled={
-            // !isSubmissive || invalid || pristine || submitting || !valid
-            !isSubmissive || pristine || submitting
-          }
-          iconRight={submitIcon}
-          type="submit"
-        >
-          {t ? t(submitLabel) : submitLabel}
-        </Button>
+        {!hideSubmitButton && (
+          <Button
+            disabled={
+              // !isSubmissive || invalid || pristine || submitting || !valid
+              !isSubmissive || pristine || submitting
+            }
+            iconRight={submitIcon}
+            type="submit"
+          >
+            {t ? t(submitLabel) : submitLabel}
+          </Button>
+        )}
       </FormFooterSC>
     </FormSC>
   );
