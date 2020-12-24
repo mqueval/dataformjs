@@ -2,7 +2,7 @@ import { FC, ReactNode, SyntheticEvent } from 'react';
 interface ButtonProps {
     className?: string;
     disabled?: boolean;
-    iconLeft?: ReactNode | 'string';
+    iconLeft?: ReactNode;
     iconRight?: ReactNode;
     onClick?: (event: SyntheticEvent<HTMLButtonElement>) => void;
     size?: string;

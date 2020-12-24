@@ -41,7 +41,7 @@ const Form = props => {
     // errorValues,
     footerClassName, 
     // formValues,
-    handleSubmit, id, isSubmissive = true, 
+    handleSubmit, hideSubmitButton = false, id, isSubmissive = true, 
     // invalid,
     name, pristine, submitIcon, submitLabel = 'form/submit', submitting, } = props;
     const { sc, t } = react_1.useContext(index_1.FormidableContext);
@@ -51,9 +51,9 @@ const Form = props => {
             error && (react_1.default.createElement(MessageSC, { as: sc && sc.fieldMessage, status: "error" }, t ? t(error) : error))),
         react_1.default.createElement(FormFooterSC, { className: footerClassName },
             react_1.default.createElement("div", null, cancelOnClick && (react_1.default.createElement(Button_1.default, { iconLeft: cancelIcon, onClick: cancelOnClick, status: cancelStatus }, t ? t(cancelLabel) : cancelLabel))),
-            react_1.default.createElement(Button_1.default, { disabled: 
+            !hideSubmitButton && (react_1.default.createElement(Button_1.default, { disabled: 
                 // !isSubmissive || invalid || pristine || submitting || !valid
-                !isSubmissive || pristine || submitting, iconRight: submitIcon, type: "submit" }, t ? t(submitLabel) : submitLabel))));
+                !isSubmissive || pristine || submitting, iconRight: submitIcon, type: "submit" }, t ? t(submitLabel) : submitLabel)))));
 };
 const ReduxForm = redux_form_1.reduxForm({})(Form);
 const mapStateToProps = (state, props) => ({

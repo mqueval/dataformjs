@@ -6,6 +6,8 @@ import Column from '../Column';
 import Columns from '../Columns';
 import Grid from '../Grid';
 import Group from '../Group';
+import Step from '../Step';
+import Steps from '../Steps';
 import DataArray from './Array';
 import DataCondition, { DataConditionTestProps } from './Condition';
 import DataField from './Field';
@@ -14,6 +16,8 @@ import DataSection from './Section';
 import DataValues from './Values';
 
 export interface DataProps {
+  actions?: any;
+  actionsClassName?: string;
   className?: string;
   customInfos?: ReactNode;
   componentType?: string;
@@ -24,6 +28,7 @@ export interface DataProps {
   name?: string;
   params?: { [key: string]: any };
   required?: boolean;
+  title?: string;
   test?: DataConditionTestProps | DataConditionTestProps[];
 }
 
@@ -237,6 +242,41 @@ const Data: FC<
           name={name}
           params={params}
         />
+      );
+    }
+
+    case 'step': {
+      if (!datas) {
+        return (
+          <div>{`${componentType} : erreur de paramètre : datas obligatoire`}</div>
+        );
+      }
+
+      return (
+        <Step {...props} formName={formName} params={params}>
+          {datas &&
+            datas.length > 0 &&
+            datas.map(data => (
+              <Data
+                key={hash(data)}
+                {...data}
+                formName={formName}
+                params={params}
+              />
+            ))}
+        </Step>
+      );
+    }
+
+    case 'steps': {
+      if (!datas) {
+        return (
+          <div>{`${componentType} : erreur de paramètre : datas obligatoire`}</div>
+        );
+      }
+
+      return (
+        <Steps {...props} datas={datas} formName={formName} params={params} />
       );
     }
 
