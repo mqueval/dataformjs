@@ -28,28 +28,32 @@ const Icon = ({ value }) => {
         switch (value) {
             case 'add': {
                 if (sc && sc.iconAdd) {
-                    return sc.iconAdd;
+                    const IconAdd = sc.iconAdd;
+                    return react_1.default.createElement(IconAdd, null);
                 }
                 IconCmp = t ? t('add') : 'add';
                 break;
             }
             case 'back': {
                 if (sc && sc.iconBack) {
-                    return sc.iconBack;
+                    const IconBack = sc.iconBack;
+                    return react_1.default.createElement(IconBack, null);
                 }
                 IconCmp = t ? t('back') : 'back';
                 break;
             }
             case 'next': {
                 if (sc && sc.iconNext) {
-                    return sc.iconNext;
+                    const IconNext = sc.iconNext;
+                    return react_1.default.createElement(IconNext, null);
                 }
                 IconCmp = t ? t('next') : 'next';
                 break;
             }
             case 'remove': {
                 if (sc && sc.iconRemove) {
-                    return sc.iconRemove;
+                    const IconRemove = sc.iconRemove;
+                    return react_1.default.createElement(IconRemove, null);
                 }
                 IconCmp = t ? t('remove') : 'remove';
                 break;

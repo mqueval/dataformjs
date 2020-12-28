@@ -39,6 +39,7 @@ export interface FormProps {
   params?: { [key: string]: any };
   submitIcon?: ReactNode;
   submitLabel?: string;
+  title?: string;
   touchOnChange?: boolean;
   validate?: (values: any, props: any) => any;
 }

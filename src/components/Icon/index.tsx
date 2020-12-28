@@ -10,15 +10,20 @@ const Icon: FC<{ value?: ReactNode }> = ({ value }) => {
     switch (value) {
       case 'add': {
         if (sc && sc.iconAdd) {
-          return sc.iconAdd;
+          const IconAdd = sc.iconAdd;
+
+          return <IconAdd />;
         }
+
         IconCmp = t ? t('add') : 'add';
         break;
       }
 
       case 'back': {
         if (sc && sc.iconBack) {
-          return sc.iconBack;
+          const IconBack = sc.iconBack;
+
+          return <IconBack />;
         }
         IconCmp = t ? t('back') : 'back';
         break;
@@ -26,7 +31,9 @@ const Icon: FC<{ value?: ReactNode }> = ({ value }) => {
 
       case 'next': {
         if (sc && sc.iconNext) {
-          return sc.iconNext;
+          const IconNext = sc.iconNext;
+
+          return <IconNext />;
         }
         IconCmp = t ? t('next') : 'next';
         break;
@@ -34,7 +41,9 @@ const Icon: FC<{ value?: ReactNode }> = ({ value }) => {
 
       case 'remove': {
         if (sc && sc.iconRemove) {
-          return sc.iconRemove;
+          const IconRemove = sc.iconRemove;
+
+          return <IconRemove />;
         }
         IconCmp = t ? t('remove') : 'remove';
 
