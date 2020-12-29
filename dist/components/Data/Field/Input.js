@@ -31,13 +31,14 @@ const DataFieldInputSC = styled_components_1.default.div `
   justify-items: center;
 `;
 const InputSC = styled_components_1.default.input ``;
-const FieldInput = ({ className, description, disabled, id, input, placeholder, type = 'text', mask, max, meta: { error, touched }, min, }) => {
+const FieldInput = ({ className, description, disabled, id, input, placeholder, mask, max, meta: { error, touched }, min, step, type = 'text', }) => {
     const { t, sc } = react_1.useContext(index_1.FormidableContext);
     const fieldProps = {
         disabled,
         id,
         max,
         min,
+        step,
         as: sc && sc.input,
         placeholder: t && placeholder ? t(placeholder) : placeholder,
         status: touched && error ? 'error' : undefined,
