@@ -15,10 +15,11 @@ const InputSC = styled.input``;
 
 export interface DataFieldInputProps extends DataFieldProps {
   description?: string;
-  type?: string;
   mask?: string;
   min?: number | string;
   max?: number | string;
+  step?: number;
+  type?: string;
 }
 
 const FieldInput: FC<WrappedFieldProps & DataFieldInputProps> = ({
@@ -28,11 +29,13 @@ const FieldInput: FC<WrappedFieldProps & DataFieldInputProps> = ({
   id,
   input,
   placeholder,
-  type = 'text',
+
   mask,
   max,
   meta: { error, touched },
   min,
+  step,
+  type = 'text',
 }) => {
   const { t, sc } = useContext(FormidableContext);
 
@@ -41,6 +44,7 @@ const FieldInput: FC<WrappedFieldProps & DataFieldInputProps> = ({
     id,
     max,
     min,
+    step,
     as: sc && sc.input,
     placeholder: t && placeholder ? t(placeholder) : placeholder,
     status: touched && error ? 'error' : undefined,
