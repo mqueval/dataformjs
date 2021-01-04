@@ -115,7 +115,7 @@ const ProgressBarItemTitleSC = styled_components_1.default.span `
   color: inherit;
 `;
 const WizardSC = styled_components_1.default.div ``;
-const Wizard = ({ className, id, pages, name, params, progressClassName, progressItemClassName, progressItemIconClassName, progressShowStep = false, showProgress, }) => {
+const Wizard = ({ backClassName, backIcon, backIconColor, backLabel, backStatus, className, id, pages, name, params, progressClassName, progressItemClassName, progressItemIconClassName, progressShowStep = false, showProgress, }) => {
     const { sc } = react_1.useContext(index_1.FormidableContext);
     const dispatch = react_redux_1.useDispatch();
     const [page, setPage] = react_1.useState(0);
@@ -185,7 +185,7 @@ const Wizard = ({ className, id, pages, name, params, progressClassName, progres
                     i >= page && (!progressShowStep || !IconStep) && (react_1.default.createElement("span", null, i + 1))),
                 progressShowStep && (react_1.default.createElement(ProgressBarItemStepSC, null, `step ${i + 1}`)),
                 react_1.default.createElement(ProgressBarItemTitleSC, null, newPages[i].title))))))),
-        newPages && newPages.length > page && (react_1.default.createElement(Form_1.default, Object.assign({ cancelOnClick: page > 0 ? handleBackOnClick : undefined, id: `${id}--page_${page}`, onSubmit: handleNextOnClick }, newPages[page], { destroyOnUnmount: false, forceUnregisterOnUnmount // <------ unregister fields on unmount
+        newPages && newPages.length > page && (react_1.default.createElement(Form_1.default, Object.assign({ cancelClassName: backClassName, cancelIcon: backIcon, cancelIconColor: backIconColor, cancelLabel: backLabel, cancelOnClick: page > 0 ? handleBackOnClick : undefined, cancelStatus: backStatus, id: `${id}--page_${page}`, onSubmit: handleNextOnClick }, newPages[page], { destroyOnUnmount: false, forceUnregisterOnUnmount // <------ unregister fields on unmount
             : true, name: name, params: params })))));
 };
 exports.default = Wizard;

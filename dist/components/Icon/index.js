@@ -21,45 +21,47 @@ var __importStar = (this && this.__importStar) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const react_1 = __importStar(require("react"));
 const index_1 = require("../../index");
-const Icon = ({ value }) => {
+const Icon = ({ color, value }) => {
     const { t, sc } = react_1.useContext(index_1.FormidableContext);
-    let IconCmp = value;
-    if ('string' === typeof value) {
-        switch (value) {
-            case 'add': {
-                if (sc && sc.iconAdd) {
-                    const IconAdd = sc.iconAdd;
-                    return react_1.default.createElement(IconAdd, null);
-                }
-                IconCmp = t ? t('add') : 'add';
-                break;
+    if (typeof react_1.default.Component === typeof value) {
+        const IconCmp = value;
+        return react_1.default.createElement(IconCmp, { color: color });
+    }
+    let IconCmp;
+    switch (value) {
+        case 'add': {
+            if (sc && sc.iconAdd) {
+                const IconAdd = sc.iconAdd;
+                return react_1.default.createElement(IconAdd, { color: color });
             }
-            case 'back': {
-                if (sc && sc.iconBack) {
-                    const IconBack = sc.iconBack;
-                    return react_1.default.createElement(IconBack, null);
-                }
-                IconCmp = t ? t('back') : 'back';
-                break;
-            }
-            case 'next': {
-                if (sc && sc.iconNext) {
-                    const IconNext = sc.iconNext;
-                    return react_1.default.createElement(IconNext, null);
-                }
-                IconCmp = t ? t('next') : 'next';
-                break;
-            }
-            case 'remove': {
-                if (sc && sc.iconRemove) {
-                    const IconRemove = sc.iconRemove;
-                    return react_1.default.createElement(IconRemove, null);
-                }
-                IconCmp = t ? t('remove') : 'remove';
-                break;
-            }
-            default:
+            IconCmp = t ? t('add') : 'add';
+            break;
         }
+        case 'back': {
+            if (sc && sc.iconBack) {
+                const IconBack = sc.iconBack;
+                return react_1.default.createElement(IconBack, { color: color });
+            }
+            IconCmp = t ? t('back') : 'back';
+            break;
+        }
+        case 'next': {
+            if (sc && sc.iconNext) {
+                const IconNext = sc.iconNext;
+                return react_1.default.createElement(IconNext, null);
+            }
+            IconCmp = t ? t('next') : 'next';
+            break;
+        }
+        case 'remove': {
+            if (sc && sc.iconRemove) {
+                const IconRemove = sc.iconRemove;
+                return react_1.default.createElement(IconRemove, null);
+            }
+            IconCmp = t ? t('remove') : 'remove';
+            break;
+        }
+        default:
     }
     return react_1.default.createElement("div", null, IconCmp);
 };

@@ -1,5 +1,6 @@
 import { FC, ReactNode } from 'react';
 declare const Icon: FC<{
-    value?: ReactNode;
+    color?: string;
+    value: ReactNode;
 }>;
 export default Icon;
