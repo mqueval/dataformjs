@@ -15,7 +15,9 @@ export interface FormProps {
     props: DecoratedFormProps<FormData, any>,
     blurredField: string,
   ) => Promise<any>;
+  cancelClassName?: string;
   cancelIcon?: ReactNode;
+  cancelIconColor?: string;
   cancelLabel?: string;
   cancelOnClick?: (event: SyntheticEvent<HTMLButtonElement>) => void;
   cancelStatus?: string;
@@ -47,7 +49,9 @@ export interface FormProps {
 const Form: FC<FormProps> = ({
   asyncChangeFields,
   asyncValidate,
+  cancelClassName,
   cancelIcon,
+  cancelIconColor,
   cancelLabel,
   cancelOnClick,
   cancelStatus,
@@ -77,7 +81,9 @@ const Form: FC<FormProps> = ({
     <FormRender
       asyncChangeFields={asyncChangeFields}
       asyncValidate={asyncValidate}
+      cancelClassName={cancelClassName}
       cancelIcon={cancelIcon}
+      cancelIconColor={cancelIconColor}
       cancelLabel={cancelLabel}
       cancelOnClick={cancelOnClick}
       cancelStatus={cancelStatus}

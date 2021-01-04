@@ -5,7 +5,9 @@ import { DataProps } from '../Data';
 export interface FormProps {
     asyncChangeFields?: string[];
     asyncValidate?: (values: FormData, dispatch: Dispatch<any>, props: DecoratedFormProps<FormData, any>, blurredField: string) => Promise<any>;
+    cancelClassName?: string;
     cancelIcon?: ReactNode;
+    cancelIconColor?: string;
     cancelLabel?: string;
     cancelOnClick?: (event: SyntheticEvent<HTMLButtonElement>) => void;
     cancelStatus?: string;

@@ -1,6 +1,11 @@
-import { FC } from 'react';
+import { FC, ReactNode } from 'react';
 import { FormProps } from '../Form';
 export interface WizardProps {
+    backStatus?: string;
+    backIcon?: ReactNode;
+    backIconColor?: string;
+    backLabel?: string;
+    backClassName?: string;
     className?: string;
     pages?: Partial<FormProps> | Partial<FormProps>[];
     id?: string;

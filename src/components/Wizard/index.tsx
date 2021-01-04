@@ -1,6 +1,7 @@
 import hash from 'object-hash';
 import React, {
   FC,
+  ReactNode,
   SyntheticEvent,
   useContext,
   useEffect,
@@ -14,6 +15,11 @@ import { FormidableContext } from '../../index';
 import Form, { FormProps } from '../Form';
 
 export interface WizardProps {
+  backStatus?: string;
+  backIcon?: ReactNode;
+  backIconColor?: string;
+  backLabel?: string;
+  backClassName?: string;
   className?: string;
   pages?: Partial<FormProps> | Partial<FormProps>[];
   id?: string;
@@ -129,6 +135,11 @@ const ProgressBarItemTitleSC = styled.span`
 const WizardSC = styled.div``;
 
 const Wizard: FC<WizardProps> = ({
+  backClassName,
+  backIcon,
+  backIconColor,
+  backLabel,
+  backStatus,
   className,
   id,
   pages,
@@ -268,7 +279,12 @@ const Wizard: FC<WizardProps> = ({
       )}
       {newPages && newPages.length > page && (
         <Form
+          cancelClassName={backClassName}
+          cancelIcon={backIcon}
+          cancelIconColor={backIconColor}
+          cancelLabel={backLabel}
           cancelOnClick={page > 0 ? handleBackOnClick : undefined}
+          cancelStatus={backStatus}
           id={`${id}--page_${page}`}
           onSubmit={handleNextOnClick}
           {...newPages[page]}
