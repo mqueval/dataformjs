@@ -37,7 +37,7 @@ const FormFooterSC = styled_components_1.default.div `
 `;
 const MessageSC = styled_components_1.default.div ``;
 const Form = props => {
-    const { bodyClassName, cancelIcon, cancelLabel = 'cancel', cancelOnClick, cancelStatus, children, className, error, 
+    const { bodyClassName, cancelClassName, cancelIcon, cancelIconColor, cancelLabel = 'cancel', cancelOnClick, cancelStatus, children, className, error, 
     // errorValues,
     footerClassName, 
     // formValues,
@@ -50,7 +50,7 @@ const Form = props => {
             children,
             error && (react_1.default.createElement(MessageSC, { as: sc && sc.fieldMessage, status: "error" }, t ? t(error) : error))),
         react_1.default.createElement(FormFooterSC, { className: footerClassName },
-            react_1.default.createElement("div", null, cancelOnClick && (react_1.default.createElement(Button_1.default, { iconLeft: cancelIcon, onClick: cancelOnClick, status: cancelStatus }, t ? t(cancelLabel) : cancelLabel))),
+            react_1.default.createElement("div", null, cancelOnClick && (react_1.default.createElement(Button_1.default, { className: cancelClassName, iconColor: cancelIconColor, iconLeft: cancelIcon, onClick: cancelOnClick, status: cancelStatus }, t ? t(cancelLabel) : cancelLabel))),
             !hideSubmitButton && (react_1.default.createElement(Button_1.default, { disabled: 
                 // !isSubmissive || invalid || pristine || submitting || !valid
                 !isSubmissive || pristine || submitting, iconRight: submitIcon, type: "submit" }, t ? t(submitLabel) : submitLabel)))));

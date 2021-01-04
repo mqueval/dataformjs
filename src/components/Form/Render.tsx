@@ -27,7 +27,9 @@ interface FormRenderProps {
   ) => Promise<any>;
   asyncChangeFields?: string[];
   bodyClassName?: string;
+  cancelClassName?: string;
   cancelIcon?: ReactNode;
+  cancelIconColor?: string;
   cancelLabel?: string;
   cancelOnClick?: (event: SyntheticEvent<HTMLButtonElement>) => void;
   cancelStatus?: string;
@@ -54,7 +56,9 @@ const Form: React.FC<
 > = props => {
   const {
     bodyClassName,
+    cancelClassName,
     cancelIcon,
+    cancelIconColor,
     cancelLabel = 'cancel',
     cancelOnClick,
     cancelStatus,
@@ -99,6 +103,8 @@ const Form: React.FC<
         <div>
           {cancelOnClick && (
             <Button
+              className={cancelClassName}
+              iconColor={cancelIconColor}
               iconLeft={cancelIcon}
               onClick={cancelOnClick}
               status={cancelStatus}

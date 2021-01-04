@@ -9,6 +9,7 @@ const ButtonSC = styled.button``;
 interface ButtonProps {
   className?: string;
   disabled?: boolean;
+  iconColor?: string;
   iconLeft?: ReactNode;
   iconRight?: ReactNode;
   onClick?: (event: SyntheticEvent<HTMLButtonElement>) => void;
@@ -20,6 +21,7 @@ const Button: FC<ButtonProps> = ({
   className,
   children,
   disabled,
+  iconColor,
   iconLeft,
   iconRight,
   onClick,
@@ -45,9 +47,9 @@ const Button: FC<ButtonProps> = ({
       type={type}
       {...props}
     >
-      {iconLeft && <Icon value={iconLeft} />}
+      {iconLeft && <Icon color={iconColor} value={iconLeft} />}
       {children && <span>{children}</span>}
-      {iconRight && <Icon value={iconRight} />}
+      {iconRight && <Icon color={iconColor} value={iconRight} />}
     </ButtonSC>
   );
 };

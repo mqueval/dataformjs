@@ -2,6 +2,7 @@ import { FC, ReactNode, SyntheticEvent } from 'react';
 interface ButtonProps {
     className?: string;
     disabled?: boolean;
+    iconColor?: string;
     iconLeft?: ReactNode;
     iconRight?: ReactNode;
     onClick?: (event: SyntheticEvent<HTMLButtonElement>) => void;
