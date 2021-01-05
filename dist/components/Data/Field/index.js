@@ -22,7 +22,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const object_hash_1 = __importDefault(require("object-hash"));
 const react_1 = __importStar(require("react"));
 const redux_form_1 = require("redux-form");
 const styled_components_1 = __importDefault(require("styled-components"));
@@ -34,8 +33,9 @@ const Wrapper_1 = __importDefault(require("./Wrapper"));
 const InputGroupSC = styled_components_1.default.div ``;
 const DataField = ({ validate, ...props }) => {
     const { sc } = react_1.useContext(index_1.FormidableContext);
-    const { componentType, id, name, options, required, type } = props;
-    const newId = id || object_hash_1.default({ componentType, name }); // TODO revoir ce code car il change a chaque fois
+    const { componentType, id, name, options, required, params, type } = props;
+    console.info(`props ${name}`, params);
+    const newId = id || `${params && params.name ? `${params.name}.` : ''}${name}`;
     let newValidate = validate && !Array.isArray(validate) ? [validate] : validate;
     if (required) {
         newValidate = validators_1.addValidator(validators_1.isRequired, newValidate);

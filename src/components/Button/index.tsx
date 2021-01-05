@@ -12,6 +12,7 @@ interface ButtonProps {
   iconColor?: string;
   iconLeft?: ReactNode;
   iconRight?: ReactNode;
+  id?: string;
   onClick?: (event: SyntheticEvent<HTMLButtonElement>) => void;
   size?: string;
   status?: string;
@@ -24,6 +25,7 @@ const Button: FC<ButtonProps> = ({
   iconColor,
   iconLeft,
   iconRight,
+  id,
   onClick,
   size,
   status,
@@ -41,6 +43,7 @@ const Button: FC<ButtonProps> = ({
       as={sc && sc.button}
       className={className}
       disabled={disabled}
+      id={id}
       onClick={onClick}
       size={size}
       status={status}

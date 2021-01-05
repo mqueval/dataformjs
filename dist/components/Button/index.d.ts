@@ -5,6 +5,7 @@ interface ButtonProps {
     iconColor?: string;
     iconLeft?: ReactNode;
     iconRight?: ReactNode;
+    id?: string;
     onClick?: (event: SyntheticEvent<HTMLButtonElement>) => void;
     size?: string;
     status?: string;
