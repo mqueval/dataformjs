@@ -30,7 +30,7 @@ const initializeValues_1 = __importDefault(require("../../../utils/initializeVal
 const Button_1 = __importDefault(require("../../Button"));
 const Field_1 = __importDefault(require("../Field"));
 const index_2 = __importDefault(require("../index"));
-const DataArrayRender = ({ addButtonClassName, addButtonIcon, addButtonLabel, addButtonPosition, addButtonSize, addButtonStatus, datas, fields, formName, params, removeButtonClassName, removeButtonIcon, removeButtonLabel, removeButtonSize, removeButtonStatus, }) => {
+const DataArrayRender = ({ addButtonClassName, addButtonIcon, addButtonId, addButtonLabel, addButtonPosition, addButtonSize, addButtonStatus, datas, fields, formName, params, removeButtonClassName, removeButtonIcon, removeButtonLabel, removeButtonSize, removeButtonStatus, }) => {
     const { t } = react_1.useContext(index_1.FormidableContext);
     react_1.useEffect(() => {
         if (0 === fields.length) {
@@ -75,6 +75,6 @@ const DataArrayRender = ({ addButtonClassName, addButtonIcon, addButtonLabel, ad
                         name: field,
                     } }));
             }),
-        'bottom' === addButtonPosition && (react_1.default.createElement(Button_1.default, { iconLeft: addButtonIcon, onClick: handleAddButtonOnClick, size: addButtonSize, status: addButtonStatus }, t && addButtonLabel ? t(addButtonLabel) : addButtonLabel))));
+        'bottom' === addButtonPosition && (react_1.default.createElement(Button_1.default, { iconLeft: addButtonIcon, id: addButtonId, onClick: handleAddButtonOnClick, size: addButtonSize, status: addButtonStatus }, t && addButtonLabel ? t(addButtonLabel) : addButtonLabel))));
 };
 exports.default = DataArrayRender;

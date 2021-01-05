@@ -8,6 +8,7 @@ import DataArrayRender from './Render';
 export interface DataArrayProps extends DataProps {
   addButtonClassName?: string;
   addButtonIcon?: ReactNode | string;
+  addButtonId?: string;
   addButtonPosition?: string;
   addButtonLabel?: string;
   addButtonSize?: string;

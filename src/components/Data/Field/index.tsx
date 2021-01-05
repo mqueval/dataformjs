@@ -1,4 +1,3 @@
-import hash from 'object-hash';
 import React, { FC, ReactElement, SyntheticEvent, useContext } from 'react';
 import { Field as FieldForm, Validator } from 'redux-form';
 import styled from 'styled-components';
@@ -49,8 +48,11 @@ const DataField: FC<
 > = ({ validate, ...props }) => {
   const { sc } = useContext(FormidableContext);
 
-  const { componentType, id, name, options, required, type } = props;
-  const newId = id || hash({ componentType, name }); // TODO revoir ce code car il change a chaque fois
+  const { componentType, id, name, options, required, params, type } = props;
+
+  console.info(`props ${name}`, params);
+  const newId =
+    id || `${params && params.name ? `${params.name}.` : ''}${name}`;
   let newValidate =
     validate && !Array.isArray(validate) ? [validate] : validate;
 

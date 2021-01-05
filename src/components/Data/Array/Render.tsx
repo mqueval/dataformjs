@@ -12,6 +12,7 @@ import { DataArrayProps } from './index';
 const DataArrayRender: FC<WrappedFieldArrayProps & DataArrayProps> = ({
   addButtonClassName,
   addButtonIcon,
+  addButtonId,
   addButtonLabel,
   addButtonPosition,
   addButtonSize,
@@ -138,6 +139,7 @@ const DataArrayRender: FC<WrappedFieldArrayProps & DataArrayProps> = ({
       {'bottom' === addButtonPosition && (
         <Button
           iconLeft={addButtonIcon}
+          id={addButtonId}
           onClick={handleAddButtonOnClick}
           size={addButtonSize}
           status={addButtonStatus}
