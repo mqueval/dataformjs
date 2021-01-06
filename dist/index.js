@@ -22,7 +22,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.FormidableProvider = exports.FormidableContext = exports.convertParams = exports.Grid = exports.Column = exports.isRequired = exports.isEmail = exports.addValidator = exports.initializeValues = exports.Wizard = exports.Form = exports.DataField = exports.DataArray = exports.Data = exports.print = exports.reset = exports.reduxForm = exports.SubmissionError = exports.formValueSelector = exports.FormSection = exports.FieldArray = exports.Field = exports.destroy = exports.change = exports.useStore = exports.useSelector = exports.useDispatch = exports.connect = void 0;
+exports.FormidableProvider = exports.FormidableContext = exports.convertParams = exports.Grid = exports.Column = exports.isRequired = exports.isEmail = exports.addValidator = exports.initializeValues = exports.Wizard = exports.Icon = exports.Form = exports.DataField = exports.DataArray = exports.Data = exports.print = exports.reset = exports.reduxForm = exports.SubmissionError = exports.formValueSelector = exports.FormSection = exports.FieldArray = exports.Field = exports.destroy = exports.change = exports.useStore = exports.useSelector = exports.useDispatch = exports.connect = void 0;
 const FormidableContext_1 = __importStar(require("./FormidableContext"));
 exports.FormidableContext = FormidableContext_1.default;
 Object.defineProperty(exports, "FormidableProvider", { enumerable: true, get: function () { return FormidableContext_1.FormidableProvider; } });
@@ -52,6 +52,8 @@ var Field_1 = require("./components/Data/Field");
 Object.defineProperty(exports, "DataField", { enumerable: true, get: function () { return __importDefault(Field_1).default; } });
 var Form_1 = require("./components/Form");
 Object.defineProperty(exports, "Form", { enumerable: true, get: function () { return __importDefault(Form_1).default; } });
+var Icon_1 = require("./components/Icon");
+Object.defineProperty(exports, "Icon", { enumerable: true, get: function () { return __importDefault(Icon_1).default; } });
 var Wizard_1 = require("./components/Wizard");
 Object.defineProperty(exports, "Wizard", { enumerable: true, get: function () { return __importDefault(Wizard_1).default; } });
 var initializeValues_1 = require("./utils/initializeValues");
