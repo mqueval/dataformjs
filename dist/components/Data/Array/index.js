@@ -12,6 +12,7 @@ const DataArray = ({ group, groupTitle, groupClassName, name, ...others }) => {
         return (react_1.default.createElement(Group_1.default, { className: groupClassName, title: groupTitle },
             react_1.default.createElement(redux_form_1.FieldArray, { component: Render_1.default, name: name, props: others })));
     }
+    console.info('others array', others);
     return react_1.default.createElement(redux_form_1.FieldArray, { component: Render_1.default, name: name, props: others });
 };
 exports.default = DataArray;
