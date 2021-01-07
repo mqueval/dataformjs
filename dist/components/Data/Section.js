@@ -9,8 +9,8 @@ const redux_form_1 = require("redux-form");
 const styled_components_1 = __importDefault(require("styled-components"));
 const index_1 = __importDefault(require("./index"));
 const SectionSC = styled_components_1.default.div ``;
-const DataSection = ({ datas, name, formName, params, ...props }) => (react_1.default.createElement(SectionSC, Object.assign({}, props),
+const DataSection = ({ datas, name, formName, formValues, params, ...props }) => (react_1.default.createElement(SectionSC, Object.assign({}, props),
     react_1.default.createElement(redux_form_1.FormSection, { name: name }, datas &&
         datas.length > 0 &&
-        datas.map(data => (react_1.default.createElement(index_1.default, Object.assign({ key: object_hash_1.default(data) }, data, { formName: formName, params: params })))))));
+        datas.map(data => (react_1.default.createElement(index_1.default, Object.assign({ key: object_hash_1.default(data) }, data, { formName: formName, formValues: formValues, params: params })))))));
 exports.default = DataSection;

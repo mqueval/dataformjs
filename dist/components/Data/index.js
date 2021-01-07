@@ -39,7 +39,7 @@ const Field_1 = __importDefault(require("./Field"));
 const Search_Form_1 = __importDefault(require("./Search+Form"));
 const Section_1 = __importDefault(require("./Section"));
 const Values_1 = __importDefault(require("./Values"));
-const Data = ({ datas, formName, ...props }) => {
+const Data = ({ datas, formName, formValues, ...props }) => {
     const { componentType, test, name, params } = props;
     const { extendData } = react_1.useContext(index_1.FormidableContext);
     if (!componentType) {
@@ -49,6 +49,7 @@ const Data = ({ datas, formName, ...props }) => {
         const result = extendData({
             ...props,
             formName,
+            formValues,
             params,
         });
         if (result) {
@@ -63,7 +64,7 @@ const Data = ({ datas, formName, ...props }) => {
             if (!datas) {
                 return (react_1.default.createElement("div", null, `${componentType} : erreur de paramètre : datas obligatoire`));
             }
-            return (react_1.default.createElement(Array_1.default, Object.assign({}, props, { datas: datas, formName: formName, name: name, params: params })));
+            return (react_1.default.createElement(Array_1.default, Object.assign({}, props, { datas: datas, formName: formName, formValues: formValues, name: name, params: params })));
         }
         case 'column': {
             if (!datas) {
@@ -71,7 +72,7 @@ const Data = ({ datas, formName, ...props }) => {
             }
             return (react_1.default.createElement(Column_1.default, Object.assign({}, props), datas &&
                 datas.length > 0 &&
-                datas.map(data => (react_1.default.createElement(Data, Object.assign({ key: `${object_hash_1.default(data)}` }, data, { formName: formName, params: params }))))));
+                datas.map(data => (react_1.default.createElement(Data, Object.assign({ key: `${object_hash_1.default(data)}` }, data, { formName: formName, formValues: formValues, params: params }))))));
         }
         case 'columns': {
             if (!datas) {
@@ -79,7 +80,7 @@ const Data = ({ datas, formName, ...props }) => {
             }
             return (react_1.default.createElement(Columns_1.default, Object.assign({}, props), datas &&
                 datas.length > 0 &&
-                datas.map(data => (react_1.default.createElement(Data, Object.assign({ key: object_hash_1.default(data) }, data, { formName: formName, params: params }))))));
+                datas.map(data => (react_1.default.createElement(Data, Object.assign({ key: object_hash_1.default(data) }, data, { formName: formName, formValues: formValues, params: params }))))));
         }
         case 'condition': {
             if (!datas) {
@@ -91,7 +92,7 @@ const Data = ({ datas, formName, ...props }) => {
             if (!formName) {
                 return (react_1.default.createElement("div", null, `${componentType} : erreur de paramètre : formName obligatoire`));
             }
-            return (react_1.default.createElement(Condition_1.default, Object.assign({}, props, { datas: datas, formName: formName, test: test })));
+            return (react_1.default.createElement(Condition_1.default, Object.assign({}, props, { datas: datas, formName: formName, formValues: formValues, test: test })));
         }
         case 'grid': {
             if (!datas) {
@@ -99,7 +100,7 @@ const Data = ({ datas, formName, ...props }) => {
             }
             return (react_1.default.createElement(Grid_1.default, Object.assign({}, props), datas &&
                 datas.length > 0 &&
-                datas.map(data => (react_1.default.createElement(Data, Object.assign({ key: object_hash_1.default(data) }, data, { formName: formName, params: params }))))));
+                datas.map(data => (react_1.default.createElement(Data, Object.assign({ key: object_hash_1.default(data) }, data, { formName: formName, formValues: formValues, params: params }))))));
         }
         case 'group': {
             if (!datas) {
@@ -107,25 +108,25 @@ const Data = ({ datas, formName, ...props }) => {
             }
             return (react_1.default.createElement(Group_1.default, Object.assign({}, props), datas &&
                 datas.length > 0 &&
-                datas.map(data => (react_1.default.createElement(Data, Object.assign({ key: object_hash_1.default(data) }, data, { formName: formName, params: params }))))));
+                datas.map(data => (react_1.default.createElement(Data, Object.assign({ key: object_hash_1.default(data) }, data, { formName: formName, formValues: formValues, params: params }))))));
         }
         case 'search+form': {
             if (!name) {
                 return (react_1.default.createElement("div", null, `${componentType} : erreur de paramètre : name obligatoire`));
             }
-            return react_1.default.createElement(Search_Form_1.default, Object.assign({}, props, { formName: formName, name: name }));
+            return (react_1.default.createElement(Search_Form_1.default, Object.assign({}, props, { formName: formName, formValues: formValues, name: name })));
         }
         case 'select': {
             if (!name) {
                 return (react_1.default.createElement("div", null, `${componentType} : erreur de paramètre : name obligatoire`));
             }
-            return (react_1.default.createElement(Field_1.default, Object.assign({}, props, { componentType: "select", formName: formName, name: name })));
+            return (react_1.default.createElement(Field_1.default, Object.assign({}, props, { componentType: "select", formName: formName, formValues: formValues, name: name })));
         }
         case 'section': {
             if (!name) {
                 return (react_1.default.createElement("div", null, `${componentType} : erreur de paramètre : name obligatoire`));
             }
-            return (react_1.default.createElement(Section_1.default, Object.assign({}, props, { datas: datas, formName: formName, name: name, params: params })));
+            return (react_1.default.createElement(Section_1.default, Object.assign({}, props, { datas: datas, formName: formName, formValues: formValues, name: name, params: params })));
         }
         case 'step': {
             if (!datas) {
@@ -133,19 +134,19 @@ const Data = ({ datas, formName, ...props }) => {
             }
             return (react_1.default.createElement(Step_1.default, Object.assign({}, props, { formName: formName, params: params }), datas &&
                 datas.length > 0 &&
-                datas.map(data => (react_1.default.createElement(Data, Object.assign({ key: object_hash_1.default(data) }, data, { formName: formName, params: params }))))));
+                datas.map(data => (react_1.default.createElement(Data, Object.assign({ key: object_hash_1.default(data) }, data, { formName: formName, formValues: formValues, params: params }))))));
         }
         case 'steps': {
             if (!datas) {
                 return (react_1.default.createElement("div", null, `${componentType} : erreur de paramètre : datas obligatoire`));
             }
-            return (react_1.default.createElement(Steps_1.default, Object.assign({}, props, { datas: datas, formName: formName, params: params })));
+            return (react_1.default.createElement(Steps_1.default, Object.assign({}, props, { datas: datas, formName: formName, formValues: formValues, params: params })));
         }
         case 'textarea':
             if (!name) {
                 return (react_1.default.createElement("div", null, `${componentType} : erreur de paramètre : name obligatoire`));
             }
-            return (react_1.default.createElement(Field_1.default, Object.assign({}, props, { componentType: "textarea", formName: formName, name: name })));
+            return (react_1.default.createElement(Field_1.default, Object.assign({}, props, { componentType: "textarea", formName: formName, formValues: formValues, name: name })));
         case 'values': {
             return (react_1.default.createElement(Values_1.default, Object.assign({}, props, { datas: datas, formName: formName, name: name, params: params })));
         }
@@ -154,7 +155,7 @@ const Data = ({ datas, formName, ...props }) => {
             if (!name) {
                 return (react_1.default.createElement("div", null, `${componentType} : erreur de paramètre : name obligatoire`));
             }
-            return (react_1.default.createElement(Field_1.default, Object.assign({}, props, { componentType: componentType, formName: formName, name: name })));
+            return (react_1.default.createElement(Field_1.default, Object.assign({}, props, { componentType: componentType, formName: formName, formValues: formValues, name: name })));
         default: {
             return (react_1.default.createElement("div", null, `${componentType} : ce type de composant n'est pas pris en charge`));
         }

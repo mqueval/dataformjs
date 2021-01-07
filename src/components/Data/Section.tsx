@@ -13,7 +13,7 @@ const DataSection: FC<
     formName: string;
     params?: { [key: string]: any };
   }
-> = ({ datas, name, formName, params, ...props }) => (
+> = ({ datas, name, formName, formValues, params, ...props }) => (
   <SectionSC {...props}>
     <FormSection name={name}>
       {datas &&
@@ -23,6 +23,7 @@ const DataSection: FC<
             key={hash(data)}
             {...data}
             formName={formName}
+            formValues={formValues}
             params={params}
           />
         ))}

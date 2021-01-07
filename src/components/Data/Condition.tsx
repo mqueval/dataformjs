@@ -32,6 +32,7 @@ interface DataConditionProps extends DataProps {
 const DataCondition: FC<DataConditionProps> = ({
   datas,
   formName,
+  formValues,
   group,
   groupOptions,
   className,
@@ -54,6 +55,7 @@ const DataCondition: FC<DataConditionProps> = ({
             key={hash(data)}
             {...data}
             formName={formName}
+            formValues={formValues}
             params={params}
           />
         ))}

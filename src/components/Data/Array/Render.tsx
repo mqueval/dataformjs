@@ -20,6 +20,7 @@ const DataArrayRender: FC<WrappedFieldArrayProps & DataArrayProps> = ({
   datas,
   fields,
   formName,
+  formValues,
   params,
   removeButtonClassName,
   removeButtonIcon,
@@ -94,6 +95,7 @@ const DataArrayRender: FC<WrappedFieldArrayProps & DataArrayProps> = ({
                       {...value}
                       customInfos={removeCmp}
                       formName={formName}
+                      formValues={formValues}
                       params={{
                         ...params,
                         index,
@@ -112,6 +114,7 @@ const DataArrayRender: FC<WrappedFieldArrayProps & DataArrayProps> = ({
                 {...datas[0]}
                 customInfos={removeCmp}
                 formName={formName}
+                formValues={formValues}
                 name={field}
                 params={{
                   ...params,
@@ -127,6 +130,7 @@ const DataArrayRender: FC<WrappedFieldArrayProps & DataArrayProps> = ({
               componentType="input"
               customInfos={removeCmp}
               formName={formName}
+              formValues={formValues}
               name={field}
               params={{
                 ...params,
