@@ -36,7 +36,7 @@ const Data: FC<
   DataProps & {
     formName: string;
   }
-> = ({ datas, formName, ...props }) => {
+> = ({ datas, formName, formValues, ...props }) => {
   const { componentType, test, name, params } = props;
   const { extendData } = useContext(FormidableContext);
 
@@ -48,6 +48,7 @@ const Data: FC<
     const result = extendData({
       ...props,
       formName,
+      formValues,
       params,
     });
 
@@ -75,6 +76,7 @@ const Data: FC<
           {...props}
           datas={datas}
           formName={formName}
+          formValues={formValues}
           name={name}
           params={params}
         />
@@ -97,6 +99,7 @@ const Data: FC<
                 key={`${hash(data)}`}
                 {...data}
                 formName={formName}
+                formValues={formValues}
                 params={params}
               />
             ))}
@@ -120,6 +123,7 @@ const Data: FC<
                 key={hash(data)}
                 {...data}
                 formName={formName}
+                formValues={formValues}
                 params={params}
               />
             ))}
@@ -149,6 +153,7 @@ const Data: FC<
           {...props}
           datas={datas}
           formName={formName}
+          formValues={formValues}
           test={test}
         />
       );
@@ -170,6 +175,7 @@ const Data: FC<
                 key={hash(data)}
                 {...data}
                 formName={formName}
+                formValues={formValues}
                 params={params}
               />
             ))}
@@ -193,6 +199,7 @@ const Data: FC<
                 key={hash(data)}
                 {...data}
                 formName={formName}
+                formValues={formValues}
                 params={params}
               />
             ))}
@@ -207,7 +214,14 @@ const Data: FC<
         );
       }
 
-      return <DataSearchAndForm {...props} formName={formName} name={name} />;
+      return (
+        <DataSearchAndForm
+          {...props}
+          formName={formName}
+          formValues={formValues}
+          name={name}
+        />
+      );
     }
 
     case 'select': {
@@ -222,6 +236,7 @@ const Data: FC<
           {...props}
           componentType="select"
           formName={formName}
+          formValues={formValues}
           name={name}
         />
       );
@@ -239,6 +254,7 @@ const Data: FC<
           {...props}
           datas={datas}
           formName={formName}
+          formValues={formValues}
           name={name}
           params={params}
         />
@@ -261,6 +277,7 @@ const Data: FC<
                 key={hash(data)}
                 {...data}
                 formName={formName}
+                formValues={formValues}
                 params={params}
               />
             ))}
@@ -276,7 +293,13 @@ const Data: FC<
       }
 
       return (
-        <Steps {...props} datas={datas} formName={formName} params={params} />
+        <Steps
+          {...props}
+          datas={datas}
+          formName={formName}
+          formValues={formValues}
+          params={params}
+        />
       );
     }
 
@@ -292,6 +315,7 @@ const Data: FC<
           {...props}
           componentType="textarea"
           formName={formName}
+          formValues={formValues}
           name={name}
         />
       );
@@ -321,6 +345,7 @@ const Data: FC<
           {...props}
           componentType={componentType}
           formName={formName}
+          formValues={formValues}
           name={name}
         />
       );
