@@ -35,7 +35,6 @@ const Steps = ({ className, datas, formName, params }) => {
     const handleStepButtonOnClick = (event) => {
         const i = event.currentTarget.getAttribute('data-index');
         if (i) {
-            console.info('i', i);
             setIndex(parseInt(i, 10));
         }
     };
