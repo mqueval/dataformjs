@@ -50,7 +50,6 @@ const DataField: FC<
 
   const { componentType, id, name, options, required, params, type } = props;
 
-  console.info(`props ${name}`, params);
   const newId =
     id || `${params && params.name ? `${params.name}.` : ''}${name}`;
   let newValidate =
