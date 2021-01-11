@@ -34,7 +34,6 @@ const InputGroupSC = styled_components_1.default.div ``;
 const DataField = ({ validate, ...props }) => {
     const { sc } = react_1.useContext(index_1.FormidableContext);
     const { componentType, id, name, options, required, params, type } = props;
-    console.info(`props ${name}`, params);
     const newId = id || `${params && params.name ? `${params.name}.` : ''}${name}`;
     let newValidate = validate && !Array.isArray(validate) ? [validate] : validate;
     if (required) {
