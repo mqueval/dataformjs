@@ -11,7 +11,10 @@ interface FormidableStateProps {
   extendData?: (
     props: DataProps & { formName: string; params?: { [key: string]: any } },
   ) => ReactElement<any, any> | null;
+  extraArguments?: any;
+  extraReducers?: any;
   getControlStyle?: (props: any) => any;
+  initialState?: any;
   sc?: { [key: string]: any };
   store?: Store;
   t?: TFunction;
@@ -20,7 +23,10 @@ interface FormidableStateProps {
 
 const defaultState: FormidableStateProps = {
   extendData: undefined,
+  extraArguments: undefined,
+  extraReducers: undefined,
   getControlStyle: undefined,
+  initialState: {},
   sc: undefined,
   store: undefined,
   t: undefined,
@@ -32,12 +38,17 @@ const FormidableContext = React.createContext(defaultState);
 const FormidableProvider: FC<FormidableStateProps> = ({
   children,
   extendData,
+  extraArguments,
+  extraReducers,
   getControlStyle,
+  initialState = {},
   sc,
   t,
   theme,
 }) => {
-  const [store] = useState<Store>(createStore({}));
+  const [store] = useState<Store>(
+    createStore(initialState, extraReducers, extraArguments),
+  );
 
   return (
     <FormidableContext.Provider
