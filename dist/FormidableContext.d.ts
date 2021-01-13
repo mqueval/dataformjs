@@ -9,7 +9,10 @@ interface FormidableStateProps {
             [key: string]: any;
         };
     }) => ReactElement<any, any> | null;
+    extraArguments?: any;
+    extraReducers?: any;
     getControlStyle?: (props: any) => any;
+    initialState?: any;
     sc?: {
         [key: string]: any;
     };
