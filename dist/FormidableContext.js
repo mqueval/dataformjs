@@ -29,15 +29,18 @@ const styled_components_1 = require("styled-components");
 const createStore_1 = __importDefault(require("./createStore"));
 const defaultState = {
     extendData: undefined,
+    extraArguments: undefined,
+    extraReducers: undefined,
     getControlStyle: undefined,
+    initialState: {},
     sc: undefined,
     store: undefined,
     t: undefined,
     theme: undefined,
 };
 const FormidableContext = react_1.default.createContext(defaultState);
-const FormidableProvider = ({ children, extendData, getControlStyle, sc, t, theme, }) => {
-    const [store] = react_1.useState(createStore_1.default({}));
+const FormidableProvider = ({ children, extendData, extraArguments, extraReducers, getControlStyle, initialState = {}, sc, t, theme, }) => {
+    const [store] = react_1.useState(createStore_1.default(initialState, extraReducers, extraArguments));
     return (react_1.default.createElement(FormidableContext.Provider, { value: {
             extendData,
             getControlStyle,
