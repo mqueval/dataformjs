@@ -86,7 +86,7 @@ const FieldSelect: FC<WrappedFieldProps & DataFieldSelectProps> = ({
         change(
           formName,
           name,
-          multi
+          changeValue && multi
             ? changeValue.map(handleGetOptionValue)
             : handleGetOptionValue(changeValue),
         ),
@@ -179,7 +179,7 @@ const FieldSelect: FC<WrappedFieldProps & DataFieldSelectProps> = ({
         return getOptionValue(option);
       }
 
-      return option.value;
+      return option && option.value;
     };
 
     return (
