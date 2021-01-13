@@ -216,7 +216,7 @@ const Wizard: FC<WizardProps> = ({
 
   const handleNextOnClick = () => {
     if (newPages) {
-      const newPage = Math.max(page + 1, newPages.length - 1);
+      const newPage = Math.min(page + 1, newPages.length - 1);
       setPage(newPage);
 
       let location = window && window.location ? window.location.pathname : '/';
@@ -239,7 +239,7 @@ const Wizard: FC<WizardProps> = ({
         <ProgressBarSC className={progressClassName}>
           {infos.map((info, i) => (
             <ProgressBarItemSC
-              key={`${hash(newPages[i].datas)}`}
+              key={`${hash({ ...infos[i], i })}`}
               className={progressItemClassName}
               {...info}
               isCompleted={i < page}

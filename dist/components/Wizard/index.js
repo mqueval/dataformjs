@@ -167,7 +167,7 @@ const Wizard = ({ backClassName, backIcon, backIconColor, backLabel, backStatus,
     };
     const handleNextOnClick = () => {
         if (newPages) {
-            const newPage = Math.max(page + 1, newPages.length - 1);
+            const newPage = Math.min(page + 1, newPages.length - 1);
             setPage(newPage);
             let location = window && window.location ? window.location.pathname : '/';
             location += `?page=${newPage}`;
@@ -177,7 +177,7 @@ const Wizard = ({ backClassName, backIcon, backIconColor, backLabel, backStatus,
     const IconSuccess = sc && sc.iconSuccess;
     const IconStep = sc && sc.iconStep;
     return (react_1.default.createElement(WizardSC, { className: className },
-        showProgress && newPages && (react_1.default.createElement(ProgressBarSC, { className: progressClassName }, infos.map((info, i) => (react_1.default.createElement(ProgressBarItemSC, Object.assign({ key: `${object_hash_1.default(newPages[i].datas)}`, className: progressItemClassName }, info, { isCompleted: i < page }),
+        showProgress && newPages && (react_1.default.createElement(ProgressBarSC, { className: progressClassName }, infos.map((info, i) => (react_1.default.createElement(ProgressBarItemSC, Object.assign({ key: `${object_hash_1.default({ ...infos[i], i })}`, className: progressItemClassName }, info, { isCompleted: i < page }),
             react_1.default.createElement("button", { "data-page": i, onClick: handleStepButtonOnClick, type: "button" },
                 react_1.default.createElement(ProgressBarItemIconSC, Object.assign({ "aria-label": `step ${i + 1}`, className: progressItemIconClassName }, info, { isCompleted: i < page }),
                     i < page && IconSuccess && react_1.default.createElement(IconSuccess, { size: 16 }),

@@ -40,8 +40,6 @@ const DataArray: VoidFunctionComponent<
     );
   }
 
-  console.info('others array', others);
-
   return <FieldArray component={DataArrayRender} name={name} props={others} />;
 };
 
