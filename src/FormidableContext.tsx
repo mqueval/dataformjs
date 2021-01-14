@@ -14,6 +14,7 @@ interface FormidableStateProps {
   extraArguments?: any;
   extraReducers?: any;
   getControlStyle?: (props: any) => any;
+  initializeStore?: (store: Store) => void;
   initialState?: any;
   sc?: { [key: string]: any };
   store?: Store;
@@ -26,6 +27,7 @@ const defaultState: FormidableStateProps = {
   extraArguments: undefined,
   extraReducers: undefined,
   getControlStyle: undefined,
+  initializeStore: undefined,
   initialState: {},
   sc: undefined,
   store: undefined,
@@ -41,6 +43,7 @@ const FormidableProvider: FC<FormidableStateProps> = ({
   extraArguments,
   extraReducers,
   getControlStyle,
+  initializeStore,
   initialState = {},
   sc,
   t,
@@ -49,6 +52,10 @@ const FormidableProvider: FC<FormidableStateProps> = ({
   const [store] = useState<Store>(
     createStore(initialState, extraReducers, extraArguments),
   );
+
+  if (initializeStore) {
+    initializeStore(store);
+  }
 
   return (
     <FormidableContext.Provider
