@@ -12,6 +12,7 @@ interface FormidableStateProps {
     extraArguments?: any;
     extraReducers?: any;
     getControlStyle?: (props: any) => any;
+    initializeStore?: (store: Store) => void;
     initialState?: any;
     sc?: {
         [key: string]: any;

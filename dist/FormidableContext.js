@@ -32,6 +32,7 @@ const defaultState = {
     extraArguments: undefined,
     extraReducers: undefined,
     getControlStyle: undefined,
+    initializeStore: undefined,
     initialState: {},
     sc: undefined,
     store: undefined,
@@ -39,8 +40,11 @@ const defaultState = {
     theme: undefined,
 };
 const FormidableContext = react_1.default.createContext(defaultState);
-const FormidableProvider = ({ children, extendData, extraArguments, extraReducers, getControlStyle, initialState = {}, sc, t, theme, }) => {
+const FormidableProvider = ({ children, extendData, extraArguments, extraReducers, getControlStyle, initializeStore, initialState = {}, sc, t, theme, }) => {
     const [store] = react_1.useState(createStore_1.default(initialState, extraReducers, extraArguments));
+    if (initializeStore) {
+        initializeStore(store);
+    }
     return (react_1.default.createElement(FormidableContext.Provider, { value: {
             extendData,
             getControlStyle,
