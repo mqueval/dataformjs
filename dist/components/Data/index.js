@@ -48,6 +48,7 @@ const Data = ({ datas, formName, formValues, ...props }) => {
     if (extendData) {
         const result = extendData({
             ...props,
+            datas,
             formName,
             formValues,
             params,

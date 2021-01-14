@@ -22,98 +22,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const object_hash_1 = __importDefault(require("object-hash"));
 const react_1 = __importStar(require("react"));
 const react_redux_1 = require("react-redux");
 const redux_form_1 = require("redux-form");
-const styled_components_1 = __importStar(require("styled-components"));
+const styled_components_1 = __importDefault(require("styled-components"));
 const index_1 = require("../../index");
 const Form_1 = __importDefault(require("../Form"));
-const ProgressBarSC = styled_components_1.default.ul `
-  display: table;
-  width: 100%;
-  table-layout: fixed;
-  position: relative;
-  padding-bottom: 3rem;
-`;
-const ProgressBarItemSC = styled_components_1.default.li `
-  display: table-cell;
-  text-align: center;
-  vertical-align: top;
-  overflow: visible;
-  position: relative;
-  font-weight: bold;
-
-  &:not(:last-child):before {
-    content: '';
-    display: block;
-    position: absolute;
-    left: 60%;
-    background-color: ${props => props.inProgress || props.isCompleted ? '#112255' : '#e7e9ee'};
-    height: 4px;
-    width: 80%;
-    border-radius: 4px;
-  }
-
-  ${props => props.isCompleted &&
-    styled_components_1.css `
-      &:before {
-        background-color: #112255;
-      }
-    `};
-
-  ${props => props.inProgress &&
-    styled_components_1.css `
-      &:before {
-        background: #112255;
-        background: linear-gradient(
-          to right,
-          #112255 0%,
-          #112255 50%,
-          #e7e9ee 50%
-        );
-      }
-    `};
-
-  > button {
-    display: flex;
-    flex-direction: column;
-    position: absolute;
-    left: 50%;
-    top: -13px;
-    color: ${props => props.inProgress || props.isCompleted ? '#112255' : '#e7e9ee'};
-    margin-left: -15px;
-    outline: none;
-  }
-`;
-const ProgressBarItemIconSC = styled_components_1.default.span `
-  display: flex;
-  border: 2px solid ${props => (props.inProgress ? '#112255' : '#e7e9ee')};
-  border-radius: 30px;
-  height: 30px;
-  width: 30px;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 0.375rem;
-  color: ${props => props.inProgress || props.isCompleted ? '#112255' : '#e7e9ee'};
-  font-weight: 600;
-
-  ${props => props.isCompleted &&
-    styled_components_1.css `
-      border: none;
-      background: #112255;
-      color: #fff;
-    `};
-`;
-const ProgressBarItemStepSC = styled_components_1.default.span `
-  color: #e7e9ee;
-`;
-const ProgressBarItemTitleSC = styled_components_1.default.span `
-  font-weight: 600;
-  position: relative;
-  left: calc(-50% + 15px);
-  color: inherit;
-`;
+const ProgressBar_1 = __importDefault(require("./ProgressBar"));
 const WizardSC = styled_components_1.default.div ``;
 const Wizard = ({ backClassName, backIcon, backIconColor, backLabel, backStatus, className, id, pages, name, params, progressClassName, progressItemClassName, progressItemIconClassName, progressShowStep = false, showProgress, }) => {
     const { sc } = react_1.useContext(index_1.FormidableContext);
@@ -174,17 +89,8 @@ const Wizard = ({ backClassName, backIcon, backIconColor, backLabel, backStatus,
             window.history.replaceState({ location, page: newPage }, `page ${newPage}`, location);
         }
     };
-    const IconSuccess = sc && sc.iconSuccess;
-    const IconStep = sc && sc.iconStep;
     return (react_1.default.createElement(WizardSC, { className: className },
-        showProgress && newPages && (react_1.default.createElement(ProgressBarSC, { className: progressClassName }, infos.map((info, i) => (react_1.default.createElement(ProgressBarItemSC, Object.assign({ key: `${object_hash_1.default({ ...infos[i], i })}`, className: progressItemClassName }, info, { isCompleted: i < page }),
-            react_1.default.createElement("button", { "data-page": i, onClick: handleStepButtonOnClick, type: "button" },
-                react_1.default.createElement(ProgressBarItemIconSC, Object.assign({ "aria-label": `step ${i + 1}`, className: progressItemIconClassName }, info, { isCompleted: i < page }),
-                    i < page && IconSuccess && react_1.default.createElement(IconSuccess, { size: 16 }),
-                    i >= page && progressShowStep && IconStep && (react_1.default.createElement(IconStep, { size: 12 })),
-                    i >= page && (!progressShowStep || !IconStep) && (react_1.default.createElement("span", null, i + 1))),
-                progressShowStep && (react_1.default.createElement(ProgressBarItemStepSC, null, `step ${i + 1}`)),
-                react_1.default.createElement(ProgressBarItemTitleSC, null, newPages[i].title))))))),
+        showProgress && newPages && (react_1.default.createElement(ProgressBar_1.default, { className: progressClassName, handleStepButtonOnClick: handleStepButtonOnClick, iconStep: sc && sc.iconStep, iconSuccess: sc && sc.iconSuccess, infos: infos, itemClassName: progressItemClassName, itemIconClassName: progressItemIconClassName, page: page, pages: newPages, showStep: progressShowStep })),
         newPages && newPages.length > page && (react_1.default.createElement(Form_1.default, Object.assign({ cancelClassName: backClassName, cancelIcon: backIcon, cancelIconColor: backIconColor, cancelLabel: backLabel, cancelOnClick: page > 0 ? handleBackOnClick : undefined, cancelStatus: backStatus, id: `${id}--page_${page}`, onSubmit: handleNextOnClick }, newPages[page], { destroyOnUnmount: false, forceUnregisterOnUnmount // <------ unregister fields on unmount
             : true, name: name, params: params })))));
 };
