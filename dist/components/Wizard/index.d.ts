@@ -19,5 +19,9 @@ export interface WizardProps {
     progressShowStep?: boolean;
     showProgress?: boolean;
 }
+export interface WizardPageInfoProps {
+    isCompleted?: boolean;
+    inProgress?: boolean;
+}
 declare const Wizard: FC<WizardProps>;
 export default Wizard;

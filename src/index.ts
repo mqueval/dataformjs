@@ -1,6 +1,6 @@
 import FormidableContext, { FormidableProvider } from './FormidableContext';
 
-export { Dispatch } from 'redux';
+export { Dispatch, Store } from 'redux';
 export {
   connect,
   useDispatch,
