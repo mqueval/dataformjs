@@ -30,8 +30,7 @@ const Column_1 = __importDefault(require("../Column"));
 const Columns_1 = __importDefault(require("../Columns"));
 const Grid_1 = __importDefault(require("../Grid"));
 const Group_1 = __importDefault(require("../Group"));
-const Step_1 = __importDefault(require("../Step"));
-const Steps_1 = __importDefault(require("../Steps"));
+const Tabs_1 = __importDefault(require("../Tabs"));
 const Array_1 = __importDefault(require("./Array"));
 exports.DataArray = Array_1.default;
 const Condition_1 = __importDefault(require("./Condition"));
@@ -129,19 +128,11 @@ const Data = ({ datas, formName, formValues, ...props }) => {
             }
             return (react_1.default.createElement(Section_1.default, Object.assign({}, props, { datas: datas, formName: formName, formValues: formValues, name: name, params: params })));
         }
-        case 'step': {
+        case 'tabs': {
             if (!datas) {
                 return (react_1.default.createElement("div", null, `${componentType} : erreur de paramètre : datas obligatoire`));
             }
-            return (react_1.default.createElement(Step_1.default, Object.assign({}, props, { formName: formName, params: params }), datas &&
-                datas.length > 0 &&
-                datas.map(data => (react_1.default.createElement(Data, Object.assign({ key: object_hash_1.default(data) }, data, { formName: formName, formValues: formValues, params: params }))))));
-        }
-        case 'steps': {
-            if (!datas) {
-                return (react_1.default.createElement("div", null, `${componentType} : erreur de paramètre : datas obligatoire`));
-            }
-            return (react_1.default.createElement(Steps_1.default, Object.assign({}, props, { datas: datas, formName: formName, formValues: formValues, params: params })));
+            return (react_1.default.createElement(Tabs_1.default, Object.assign({}, props, { datas: datas, formName: formName, formValues: formValues })));
         }
         case 'textarea':
             if (!name) {
