@@ -6,7 +6,7 @@ import { change, focus, WrappedFieldProps } from 'redux-form';
 import styled from 'styled-components';
 
 import { FormidableContext } from '../../../index';
-import { SelectSC as MultiSelectSC } from './AsyncSelect';
+import { Input, SelectSC as MultiSelectSC } from './AsyncSelect';
 import { DataFieldProps } from './index';
 
 const SelectSC = styled.select``;
@@ -187,6 +187,7 @@ const FieldSelect: FC<WrappedFieldProps & DataFieldSelectProps> = ({
         as={Select}
         autoComplete="new-password"
         classNamePrefix="DataFieldSelect"
+        component={{ Input }}
         formatOptionLabel={handleFormatOptionLabel}
         getOptionLabel={handleGetOptionLabel}
         getOptionValue={handleGetOptionValue}

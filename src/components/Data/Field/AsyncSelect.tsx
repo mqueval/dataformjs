@@ -1,5 +1,6 @@
-import React, { FC, ReactNode, useContext, useRef } from 'react';
+import React, { FC, ReactNode, useContext, useRef, VFC } from 'react';
 import { useDispatch } from 'react-redux';
+import { components } from 'react-select';
 import AsyncSelect from 'react-select/async';
 import { change, WrappedFieldProps } from 'redux-form';
 import styled from 'styled-components';
@@ -36,6 +37,10 @@ export const SelectSC = styled(AsyncSelect)`
     line-height: 2;
   }
 `;
+
+export const Input: VFC<any> = props => (
+  <components.Input {...props} autoComplete="new-password" />
+);
 
 export interface DataFieldAsyncSelectProps<P> extends DataFieldSelectProps {
   cacheOptions?: boolean;
@@ -152,6 +157,8 @@ const FieldAsyncSelect: FC<
   if (customOption) {
     newComponents.Option = customOption;
   }
+
+  newComponents.Input = Input;
 
   // const SelectContainer: FC<ContainerProps<any>> = ({ children, ...props }) => (
   //   <div>
