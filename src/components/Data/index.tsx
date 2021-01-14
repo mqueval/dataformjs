@@ -47,6 +47,7 @@ const Data: FC<
   if (extendData) {
     const result = extendData({
       ...props,
+      datas,
       formName,
       formValues,
       params,
