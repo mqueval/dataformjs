@@ -6,8 +6,7 @@ import Column from '../Column';
 import Columns from '../Columns';
 import Grid from '../Grid';
 import Group from '../Group';
-import Step from '../Step';
-import Steps from '../Steps';
+import Tabs, { TabsProps } from '../Tabs';
 import DataArray from './Array';
 import DataCondition, { DataConditionTestProps } from './Condition';
 import DataField from './Field';
@@ -262,7 +261,7 @@ const Data: FC<
       );
     }
 
-    case 'step': {
+    case 'tabs': {
       if (!datas) {
         return (
           <div>{`${componentType} : erreur de paramètre : datas obligatoire`}</div>
@@ -270,36 +269,11 @@ const Data: FC<
       }
 
       return (
-        <Step {...props} formName={formName} params={params}>
-          {datas &&
-            datas.length > 0 &&
-            datas.map(data => (
-              <Data
-                key={hash(data)}
-                {...data}
-                formName={formName}
-                formValues={formValues}
-                params={params}
-              />
-            ))}
-        </Step>
-      );
-    }
-
-    case 'steps': {
-      if (!datas) {
-        return (
-          <div>{`${componentType} : erreur de paramètre : datas obligatoire`}</div>
-        );
-      }
-
-      return (
-        <Steps
-          {...props}
+        <Tabs
+          {...(props as TabsProps)}
           datas={datas}
           formName={formName}
           formValues={formValues}
-          params={params}
         />
       );
     }

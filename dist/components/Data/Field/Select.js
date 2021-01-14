@@ -100,7 +100,7 @@ const FieldSelect = ({ disabled, formName, formatOptionLabel, getOptionLabel, ge
             }
             return option && option.value;
         };
-        return (react_1.default.createElement(AsyncSelect_1.SelectSC, { as: react_select_1.default, autoComplete: "new-password", classNamePrefix: "DataFieldSelect", formatOptionLabel: handleFormatOptionLabel, getOptionLabel: handleGetOptionLabel, getOptionValue: handleGetOptionValue, inputId: id, isMulti: multi, isSearchable: isSearchable, onBlur: handleOnBlur, onChange: handleInnerOnChange, onFocus: handleOnFocus, options: options, placeholder: t && placeholder ? t(placeholder) : placeholder, styles: styles, value: multi
+        return (react_1.default.createElement(AsyncSelect_1.SelectSC, { as: react_select_1.default, autoComplete: "new-password", classNamePrefix: "DataFieldSelect", component: { Input: AsyncSelect_1.Input }, formatOptionLabel: handleFormatOptionLabel, getOptionLabel: handleGetOptionLabel, getOptionValue: handleGetOptionValue, inputId: id, isMulti: multi, isSearchable: isSearchable, onBlur: handleOnBlur, onChange: handleInnerOnChange, onFocus: handleOnFocus, options: options, placeholder: t && placeholder ? t(placeholder) : placeholder, styles: styles, value: multi
                 ? input.value &&
                     input.value.map((v) => options.find(o => o.value === v))
                 : options.find(o => o.value === input.value) }));

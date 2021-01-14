@@ -22,9 +22,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.SelectSC = void 0;
+exports.Input = exports.SelectSC = void 0;
 const react_1 = __importStar(require("react"));
 const react_redux_1 = require("react-redux");
+const react_select_1 = require("react-select");
 const async_1 = __importDefault(require("react-select/async"));
 const redux_form_1 = require("redux-form");
 const styled_components_1 = __importDefault(require("styled-components"));
@@ -58,6 +59,8 @@ exports.SelectSC = styled_components_1.default(async_1.default) `
     line-height: 2;
   }
 `;
+const Input = props => (react_1.default.createElement(react_select_1.components.Input, Object.assign({}, props, { autoComplete: "new-password" })));
+exports.Input = Input;
 const FieldAsyncSelect = ({ cacheOptions = false, className, customOption, defaultOptions = false, defaultValue, formatOptionLabel, formName, getOptionLabel, getOptionValue, handleOnChange, hideSelectedOptions = false, id, input, isClearable = false, isMulti, isOptionDisabled, isOptionSelected, isSearchable = true, loadOptions, loadingMessage, meta, meta: { error, touched }, noOptionsMessage, placeholder, ...others }) => {
     const ref = react_1.useRef();
     let newValue;
@@ -108,6 +111,7 @@ const FieldAsyncSelect = ({ cacheOptions = false, className, customOption, defau
     if (customOption) {
         newComponents.Option = customOption;
     }
+    newComponents.Input = exports.Input;
     // const SelectContainer: FC<ContainerProps<any>> = ({ children, ...props }) => (
     //   <div>
     //     <components.SelectContainer {...props}>
