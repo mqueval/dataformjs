@@ -2,6 +2,7 @@ import React, { FC, useContext } from 'react';
 import styled from 'styled-components';
 
 import { DataFieldProps, FormidableContext } from '../../../index';
+import Column from '../../Column';
 
 const CustomBottomSC = styled.div`
   float: right;
@@ -12,9 +13,12 @@ const CustomTopSC = styled.div`
 `;
 
 const FieldLabelSC = styled.label``;
+const WrapperSC = styled.div``;
 
 const FieldWrapper: FC<DataFieldProps> = ({
   children,
+  column,
+  columnOptions,
   componentType,
   customBottom,
   customBottomClassName,
@@ -30,8 +34,11 @@ const FieldWrapper: FC<DataFieldProps> = ({
     return <>{children}</>;
   }
 
+  const WrapperCmp = column ? Column : WrapperSC;
+  const props = column ? columnOptions : {};
+
   return (
-    <div>
+    <WrapperCmp className="wrapper" {...props}>
       {customTop && (
         <CustomTopSC as={sc && sc.customTop} className={customTopClassName}>
           {customTop}
@@ -49,7 +56,7 @@ const FieldWrapper: FC<DataFieldProps> = ({
           {customBottom}
         </CustomBottomSC>
       )}
-    </div>
+    </WrapperCmp>
   );
 };
 export default FieldWrapper;

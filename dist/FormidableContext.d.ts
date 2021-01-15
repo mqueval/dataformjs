@@ -5,9 +5,6 @@ import { DataProps } from './components/Data';
 interface FormidableStateProps {
     extendData?: (props: DataProps & {
         formName: string;
-        params?: {
-            [key: string]: any;
-        };
     }) => ReactElement<any, any> | null;
     extraArguments?: any;
     extraReducers?: any;

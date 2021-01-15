@@ -1,5 +1,5 @@
 import FormidableContext, { FormidableProvider } from './FormidableContext';
-export { Dispatch, Store } from 'redux';
+export { AnyAction, Dispatch, Store, compose } from 'redux';
 export { connect, useDispatch, useSelector, DispatchProp, useStore, } from 'react-redux';
 export { change, DecoratedFormProps, destroy, Field, FieldArray, FormSection, formValueSelector, SubmissionError, WrappedFieldProps, InjectedFormProps, reduxForm, reset, Validator, WrappedFieldArrayProps, } from 'redux-form';
 export declare const print: () => void;

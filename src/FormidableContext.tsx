@@ -9,7 +9,7 @@ import createStore from './createStore';
 
 interface FormidableStateProps {
   extendData?: (
-    props: DataProps & { formName: string; params?: { [key: string]: any } },
+    props: DataProps & { formName: string },
   ) => ReactElement<any, any> | null;
   extraArguments?: any;
   extraReducers?: any;
