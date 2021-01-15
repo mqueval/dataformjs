@@ -20,6 +20,8 @@ const InputGroupSC = styled.div``;
 
 export interface DataFieldProps extends DataProps {
   componentType: string;
+  column?: boolean;
+  columnOptions?: { [key: string]: any };
   customBottom?: ReactElement | ReactElement[];
   customBottomClassName?: string;
   customTop?: ReactElement | ReactElement[];
@@ -45,7 +47,7 @@ export interface DataFieldProps extends DataProps {
 
 const DataField: FC<
   DataFieldAsyncSelectProps<any> | DataFieldInputProps | DataFieldProps
-> = ({ validate, ...props }) => {
+> = ({ validate, column, columnOptions, ...props }) => {
   const { sc } = useContext(FormidableContext);
 
   const { componentType, id, name, options, required, params, type } = props;
@@ -84,7 +86,12 @@ const DataField: FC<
     }
 
     return (
-      <DataFieldWrapper {...props} id={newId}>
+      <DataFieldWrapper
+        {...props}
+        column={column}
+        columnOptions={columnOptions}
+        id={newId}
+      >
         <InputGroupSC
           as={sc && sc.inputGroup}
           className="flex flex-row gap-2"
@@ -108,7 +115,12 @@ const DataField: FC<
   }
 
   return (
-    <DataFieldWrapper {...props} id={newId}>
+    <DataFieldWrapper
+      {...props}
+      column={column}
+      columnOptions={columnOptions}
+      id={newId}
+    >
       <FieldForm
         {...props}
         component={DataFieldRender}

@@ -5,6 +5,10 @@ import { DataFieldAsyncSelectProps } from './AsyncSelect';
 import { DataFieldInputProps } from './Input';
 export interface DataFieldProps extends DataProps {
     componentType: string;
+    column?: boolean;
+    columnOptions?: {
+        [key: string]: any;
+    };
     customBottom?: ReactElement | ReactElement[];
     customBottomClassName?: string;
     customTop?: ReactElement | ReactElement[];
