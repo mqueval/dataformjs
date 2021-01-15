@@ -22,10 +22,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.FormidableProvider = exports.FormidableContext = exports.convertParams = exports.Grid = exports.Column = exports.isRequired = exports.isEmail = exports.addValidator = exports.initializeValues = exports.Wizard = exports.Icon = exports.Form = exports.DataField = exports.DataArray = exports.Data = exports.print = exports.reset = exports.reduxForm = exports.SubmissionError = exports.formValueSelector = exports.FormSection = exports.FieldArray = exports.Field = exports.destroy = exports.change = exports.useStore = exports.useSelector = exports.useDispatch = exports.connect = void 0;
+exports.FormidableProvider = exports.FormidableContext = exports.convertParams = exports.Grid = exports.Column = exports.isRequired = exports.isEmail = exports.addValidator = exports.initializeValues = exports.Wizard = exports.Icon = exports.Form = exports.DataField = exports.DataArray = exports.Data = exports.print = exports.reset = exports.reduxForm = exports.SubmissionError = exports.formValueSelector = exports.FormSection = exports.FieldArray = exports.Field = exports.destroy = exports.change = exports.useStore = exports.useSelector = exports.useDispatch = exports.connect = exports.compose = void 0;
 const FormidableContext_1 = __importStar(require("./FormidableContext"));
 exports.FormidableContext = FormidableContext_1.default;
 Object.defineProperty(exports, "FormidableProvider", { enumerable: true, get: function () { return FormidableContext_1.FormidableProvider; } });
+var redux_1 = require("redux");
+Object.defineProperty(exports, "compose", { enumerable: true, get: function () { return redux_1.compose; } });
 var react_redux_1 = require("react-redux");
 Object.defineProperty(exports, "connect", { enumerable: true, get: function () { return react_redux_1.connect; } });
 Object.defineProperty(exports, "useDispatch", { enumerable: true, get: function () { return react_redux_1.useDispatch; } });

@@ -25,6 +25,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const react_1 = __importStar(require("react"));
 const styled_components_1 = __importDefault(require("styled-components"));
 const index_1 = require("../../../index");
+const Column_1 = __importDefault(require("../../Column"));
 const CustomBottomSC = styled_components_1.default.div `
   float: right;
 `;
@@ -32,12 +33,15 @@ const CustomTopSC = styled_components_1.default.div `
   float: right;
 `;
 const FieldLabelSC = styled_components_1.default.label ``;
-const FieldWrapper = ({ children, componentType, customBottom, customBottomClassName, customTop, customTopClassName, id, label, name, }) => {
+const WrapperSC = styled_components_1.default.div ``;
+const FieldWrapper = ({ children, column, columnOptions, componentType, customBottom, customBottomClassName, customTop, customTopClassName, id, label, name, }) => {
     const { t, sc } = react_1.useContext(index_1.FormidableContext);
     if ('hidden' === componentType) {
         return react_1.default.createElement(react_1.default.Fragment, null, children);
     }
-    return (react_1.default.createElement("div", null,
+    const WrapperCmp = column ? Column_1.default : WrapperSC;
+    const props = column ? columnOptions : {};
+    return (react_1.default.createElement(WrapperCmp, Object.assign({ className: "wrapper" }, props),
         customTop && (react_1.default.createElement(CustomTopSC, { as: sc && sc.customTop, className: customTopClassName }, customTop)),
         react_1.default.createElement(FieldLabelSC, { as: sc && sc.label, htmlFor: id }, t ? t(label || name) : label || name),
         react_1.default.createElement("div", null, children),
