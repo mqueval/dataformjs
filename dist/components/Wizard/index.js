@@ -84,8 +84,13 @@ const Wizard = ({ backClassName, backIcon, backIconColor, backLabel, backStatus,
         if (newPages) {
             const newPage = Math.min(page + 1, newPages.length - 1);
             setPage(newPage);
+            console.info('window.location', window.location);
             let location = window && window.location ? window.location.pathname : '/';
-            location += `?page=${newPage}`;
+            const search = window && window.location
+                ? window.location.search.substr(1).split('&')
+                : [];
+            search.push(`page=${newPage}`);
+            location += `?${search.join('&')}`;
             window.history.replaceState({ location, page: newPage }, `page ${newPage}`, location);
         }
     };
