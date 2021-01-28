@@ -78,7 +78,6 @@ const FieldAsyncSelect = ({ cacheOptions = false, className, customOption, defau
         input.onBlur(newValue || value);
     };
     const handleInnerOnChange = (changeValue) => {
-        console.info('handleInnerOnChange');
         newValue = changeValue;
         if (handleOnChange) {
             handleOnChange({
