@@ -27,6 +27,7 @@ const react_redux_1 = require("react-redux");
 const redux_form_1 = require("redux-form");
 const styled_components_1 = __importDefault(require("styled-components"));
 const index_1 = require("../../index");
+const initializeValues_1 = __importDefault(require("../../utils/initializeValues"));
 const Form_1 = __importDefault(require("../Form"));
 const ProgressBar_1 = __importDefault(require("./ProgressBar"));
 const WizardSC = styled_components_1.default.div ``;
@@ -84,7 +85,6 @@ const Wizard = ({ backClassName, backIcon, backIconColor, backLabel, backStatus,
         if (newPages) {
             const newPage = Math.min(page + 1, newPages.length - 1);
             setPage(newPage);
-            console.info('window.location', window.location);
             let location = window && window.location ? window.location.pathname : '/';
             const search = window && window.location
                 ? window.location.search.substr(1).split('&')
@@ -94,9 +94,17 @@ const Wizard = ({ backClassName, backIcon, backIconColor, backLabel, backStatus,
             window.history.replaceState({ location, page: newPage }, `page ${newPage}`, location);
         }
     };
+    let newDatas = [];
+    newPages?.forEach(({ datas }) => {
+        const tmpDatas = datas && !Array.isArray(datas) ? [datas] : datas;
+        if (tmpDatas) {
+            newDatas = [...newDatas, ...tmpDatas];
+        }
+    });
+    const initialValues = initializeValues_1.default(newDatas);
     return (react_1.default.createElement(WizardSC, { className: className },
         showProgress && newPages && (react_1.default.createElement(ProgressBar_1.default, { className: progressClassName, handleStepButtonOnClick: handleStepButtonOnClick, iconStep: sc && sc.iconStep, iconSuccess: sc && sc.iconSuccess, infos: infos, itemClassName: progressItemClassName, itemIconClassName: progressItemIconClassName, page: page, pages: newPages, showStep: progressShowStep })),
-        newPages && newPages.length > page && (react_1.default.createElement(Form_1.default, Object.assign({ cancelClassName: backClassName, cancelIcon: backIcon, cancelIconColor: backIconColor, cancelLabel: backLabel, cancelOnClick: page > 0 ? handleBackOnClick : undefined, cancelStatus: backStatus, id: `${id}--page_${page}`, onSubmit: handleNextOnClick }, newPages[page], { destroyOnUnmount: false, forceUnregisterOnUnmount // <------ unregister fields on unmount
+        newPages && newPages.length > page && (react_1.default.createElement(Form_1.default, Object.assign({ cancelClassName: backClassName, cancelIcon: backIcon, cancelIconColor: backIconColor, cancelLabel: backLabel, cancelOnClick: page > 0 ? handleBackOnClick : undefined, cancelStatus: backStatus, id: `${id}--page_${page}`, initialValues: initialValues, onSubmit: handleNextOnClick }, newPages[page], { destroyOnUnmount: false, forceUnregisterOnUnmount // <------ unregister fields on unmount
             : true, name: name, params: params })))));
 };
 exports.default = Wizard;

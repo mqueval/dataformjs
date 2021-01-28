@@ -10,7 +10,8 @@ import { useDispatch } from 'react-redux';
 import { submit } from 'redux-form';
 import styled from 'styled-components';
 
-import { FormidableContext } from '../../index';
+import { DataProps, FormidableContext } from '../../index';
+import initializeValues from '../../utils/initializeValues';
 import Form, { FormProps } from '../Form';
 import ProgressBar from './ProgressBar';
 
@@ -124,7 +125,6 @@ const Wizard: FC<WizardProps> = ({
       const newPage = Math.min(page + 1, newPages.length - 1);
       setPage(newPage);
 
-      console.info('window.location', window.location);
       let location = window && window.location ? window.location.pathname : '/';
       const search =
         window && window.location
@@ -140,6 +140,18 @@ const Wizard: FC<WizardProps> = ({
       );
     }
   };
+
+  let newDatas: DataProps[] = [];
+
+  newPages?.forEach(({ datas }) => {
+    const tmpDatas = datas && !Array.isArray(datas) ? [datas] : datas;
+
+    if (tmpDatas) {
+      newDatas = [...newDatas, ...tmpDatas];
+    }
+  });
+
+  const initialValues = initializeValues(newDatas);
 
   return (
     <WizardSC className={className}>
@@ -166,6 +178,7 @@ const Wizard: FC<WizardProps> = ({
           cancelOnClick={page > 0 ? handleBackOnClick : undefined}
           cancelStatus={backStatus}
           id={`${id}--page_${page}`}
+          initialValues={initialValues}
           onSubmit={handleNextOnClick}
           {...newPages[page]}
           destroyOnUnmount={false} // <------ preserve form data

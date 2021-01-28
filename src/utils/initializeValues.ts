@@ -1,7 +1,15 @@
+import { merge } from 'lodash';
+
 type DataProps = { [key: string]: any };
 
 const introspection = (data: DataProps): DataProps => {
   const tmpData: DataProps = {};
+
+  if (data.notDefaultValue) {
+    console.info('notDefaultValue');
+
+    return tmpData;
+  }
 
   if (data.datas) {
     data.datas.forEach((tmp: DataProps) => {
@@ -54,18 +62,15 @@ export default (data: DataProps | DataProps[]): DataProps => {
   }
 
   newData.map(introspection).forEach((result: DataProps) => {
+    // result est un objet -> on doit iterer sur les key
     Object.keys(result).forEach(temp => {
-      // temp est un objet -> on doit iterer sur les key
-
-      value[temp] = undefined !== result[temp] ? result[temp] : '';
-
-      // if ('object' === typeof temp) {
-      //   Object.keys(temp).forEach(key => {
-      //     value[key] = '';
-      //   });
-      // } else {
-      //   value[temp] = '';
-      // }
+      if (value[temp]) {
+        if (undefined !== result[temp]) {
+          value[temp] = merge(result[temp], value[temp]);
+        }
+      } else {
+        value[temp] = undefined !== result[temp] ? result[temp] : '';
+      }
     });
   });
 
