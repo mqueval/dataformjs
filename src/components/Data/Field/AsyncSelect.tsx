@@ -121,7 +121,6 @@ const FieldAsyncSelect: FC<
   };
 
   const handleInnerOnChange = (changeValue: any): void => {
-    console.info('handleInnerOnChange');
     newValue = changeValue;
     if (handleOnChange) {
       handleOnChange({
