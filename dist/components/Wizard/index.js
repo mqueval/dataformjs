@@ -95,12 +95,14 @@ const Wizard = ({ backClassName, backIcon, backIconColor, backLabel, backStatus,
         }
     };
     let newDatas = [];
-    newPages?.forEach(({ datas }) => {
-        const tmpDatas = datas && !Array.isArray(datas) ? [datas] : datas;
-        if (tmpDatas) {
-            newDatas = [...newDatas, ...tmpDatas];
-        }
-    });
+    if (newPages) {
+        newPages.forEach(({ datas }) => {
+            const tmpDatas = datas && !Array.isArray(datas) ? [datas] : datas;
+            if (tmpDatas) {
+                newDatas = [...newDatas, ...tmpDatas];
+            }
+        });
+    }
     const initialValues = initializeValues_1.default(newDatas);
     return (react_1.default.createElement(WizardSC, { className: className },
         showProgress && newPages && (react_1.default.createElement(ProgressBar_1.default, { className: progressClassName, handleStepButtonOnClick: handleStepButtonOnClick, iconStep: sc && sc.iconStep, iconSuccess: sc && sc.iconSuccess, infos: infos, itemClassName: progressItemClassName, itemIconClassName: progressItemIconClassName, page: page, pages: newPages, showStep: progressShowStep })),

@@ -143,13 +143,15 @@ const Wizard: FC<WizardProps> = ({
 
   let newDatas: DataProps[] = [];
 
-  newPages?.forEach(({ datas }) => {
-    const tmpDatas = datas && !Array.isArray(datas) ? [datas] : datas;
+  if (newPages) {
+    newPages.forEach(({ datas }) => {
+      const tmpDatas = datas && !Array.isArray(datas) ? [datas] : datas;
 
-    if (tmpDatas) {
-      newDatas = [...newDatas, ...tmpDatas];
-    }
-  });
+      if (tmpDatas) {
+        newDatas = [...newDatas, ...tmpDatas];
+      }
+    });
+  }
 
   const initialValues = initializeValues(newDatas);
 
