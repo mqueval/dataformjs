@@ -20,8 +20,8 @@ export interface DataConditionTestProps {
 }
 
 interface DataConditionProps extends DataProps {
-  datas: DataProps[];
   className?: string;
+  datas: DataProps[];
   formName: string;
   group?: boolean;
   groupOptions?: { [key: string]: any };
