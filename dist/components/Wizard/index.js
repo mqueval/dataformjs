@@ -22,6 +22,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+const query_string_1 = __importDefault(require("query-string"));
 const react_1 = __importStar(require("react"));
 const react_redux_1 = require("react-redux");
 const redux_form_1 = require("redux-form");
@@ -86,11 +87,12 @@ const Wizard = ({ backClassName, backIcon, backIconColor, backLabel, backStatus,
             const newPage = Math.min(page + 1, newPages.length - 1);
             setPage(newPage);
             let location = window && window.location ? window.location.pathname : '/';
-            const search = window && window.location
-                ? window.location.search.substr(1).split('&')
-                : [];
-            search.push(`page=${newPage}`);
-            location += `?${search.join('&')}`;
+            const search = query_string_1.default.parse(window.location.search);
+            console.info('search', search);
+            if (search) {
+                search.page = String(newPage);
+            }
+            location += `?${query_string_1.default.stringify(search)}`;
             window.history.replaceState({ location, page: newPage }, `page ${newPage}`, location);
         }
     };

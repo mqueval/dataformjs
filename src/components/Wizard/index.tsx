@@ -1,3 +1,4 @@
+import queryString from 'query-string';
 import React, {
   FC,
   ReactNode,
@@ -126,12 +127,14 @@ const Wizard: FC<WizardProps> = ({
       setPage(newPage);
 
       let location = window && window.location ? window.location.pathname : '/';
-      const search =
-        window && window.location
-          ? window.location.search.substr(1).split('&')
-          : [];
-      search.push(`page=${newPage}`);
-      location += `?${search.join('&')}`;
+
+      const search = queryString.parse(window.location.search);
+      console.info('search', search);
+
+      if (search) {
+        search.page = String(newPage);
+      }
+      location += `?${queryString.stringify(search)}`;
 
       window.history.replaceState(
         { location, page: newPage },
