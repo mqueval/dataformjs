@@ -4,7 +4,6 @@ const lodash_1 = require("lodash");
 const introspection = (data) => {
     const tmpData = {};
     if (data.notDefaultValue) {
-        console.info('notDefaultValue');
         return tmpData;
     }
     if (data.datas) {
