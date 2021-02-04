@@ -6,8 +6,6 @@ const introspection = (data: DataProps): DataProps => {
   const tmpData: DataProps = {};
 
   if (data.notDefaultValue) {
-    console.info('notDefaultValue');
-
     return tmpData;
   }
 
