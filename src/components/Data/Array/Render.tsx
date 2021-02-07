@@ -32,16 +32,16 @@ const DataArrayRender: FC<WrappedFieldArrayProps & DataArrayProps> = ({
 
   useEffect(() => {
     if (0 === fields.length) {
-      fields.push(initializeValues(datas));
+      fields.push(datas ? initializeValues(datas) : '');
     }
   }, [datas, fields]);
 
-  if (!datas) {
-    return <div>datas obligatoire</div>;
-  }
+  // if (!datas) {
+  //   return <div>datas obligatoire</div>;
+  // }
 
   const handleAddButtonOnClick = (): void => {
-    fields.push(initializeValues(datas));
+    fields.push(datas ? initializeValues(datas) : '');
   };
 
   const handleRemoveButtonOnClick = (

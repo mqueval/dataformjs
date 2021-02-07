@@ -16,8 +16,9 @@
   "types": "dist/index.d.ts",
   "license": "CC-BY-NC-SA-4.0",
   "scripts": {
-    "build": "tsc",
-    "clean": "rimraf dist"
+    "build": "yarn clean && tsc",
+    "clean": "rimraf dist",
+    "watch": "yarn clean && tsc --watch"
   },
   "dependencies": {
     "@types/react-input-mask": "^3.0.0",

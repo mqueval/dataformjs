@@ -13,7 +13,7 @@ export interface DataArrayProps extends DataProps {
   addButtonLabel?: string;
   addButtonSize?: string;
   addButtonStatus?: string;
-  datas: DataProps[];
+  datas?: DataProps[];
   defaultValue?: string;
   formName: string;
   group?: boolean;

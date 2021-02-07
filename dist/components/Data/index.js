@@ -61,9 +61,11 @@ const Data = ({ datas, formName, formValues, ...props }) => {
             if (!name) {
                 return (react_1.default.createElement("div", null, `${componentType} : erreur de paramètre : name obligatoire`));
             }
-            if (!datas) {
-                return (react_1.default.createElement("div", null, `${componentType} : erreur de paramètre : datas obligatoire`));
-            }
+            // if (!datas) {
+            //   return (
+            //     <div>{`${componentType} : erreur de paramètre : datas obligatoire`}</div>
+            //   );
+            // }
             return (react_1.default.createElement(Array_1.default, Object.assign({}, props, { datas: datas, formName: formName, formValues: formValues, name: name, params: params })));
         }
         case 'column': {

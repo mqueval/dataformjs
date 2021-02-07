@@ -34,14 +34,14 @@ const DataArrayRender = ({ addButtonClassName, addButtonIcon, addButtonId, addBu
     const { t } = react_1.useContext(index_1.FormidableContext);
     react_1.useEffect(() => {
         if (0 === fields.length) {
-            fields.push(initializeValues_1.default(datas));
+            fields.push(datas ? initializeValues_1.default(datas) : '');
         }
     }, [datas, fields]);
-    if (!datas) {
-        return react_1.default.createElement("div", null, "datas obligatoire");
-    }
+    // if (!datas) {
+    //   return <div>datas obligatoire</div>;
+    // }
     const handleAddButtonOnClick = () => {
-        fields.push(initializeValues_1.default(datas));
+        fields.push(datas ? initializeValues_1.default(datas) : '');
     };
     const handleRemoveButtonOnClick = (event) => {
         const index = event.currentTarget.getAttribute('data-index');
