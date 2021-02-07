@@ -10,14 +10,15 @@
   "bugs": {
     "url": "https://github.com/mqueval/dataformjs/issues"
   },
-  "version": "1.0.10",
+  "version": "1.1.0",
   "private": false,
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "license": "CC-BY-NC-SA-4.0",
   "scripts": {
-    "build": "tsc",
-    "clean": "rimraf dist"
+    "build": "yarn clean && tsc",
+    "clean": "rimraf dist",
+    "watch": "yarn clean && tsc --watch"
   },
   "dependencies": {
     "@types/react-input-mask": "^3.0.0",

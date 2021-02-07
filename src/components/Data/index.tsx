@@ -65,11 +65,11 @@ const Data: FC<
         );
       }
 
-      if (!datas) {
-        return (
-          <div>{`${componentType} : erreur de paramètre : datas obligatoire`}</div>
-        );
-      }
+      // if (!datas) {
+      //   return (
+      //     <div>{`${componentType} : erreur de paramètre : datas obligatoire`}</div>
+      //   );
+      // }
 
       return (
         <DataArray
