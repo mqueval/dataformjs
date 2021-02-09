@@ -15,6 +15,7 @@ export {
   destroy,
   Field,
   FieldArray,
+  FieldArrayFieldsProps,
   FormSection,
   formValueSelector,
   SubmissionError,

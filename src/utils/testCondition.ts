@@ -55,6 +55,12 @@ export default ({
     case 'not': {
       return !fieldValue;
     }
+
+    case 'not-in': {
+      const newArray = !Array.isArray(value) ? [value] : value;
+
+      return undefined !== fieldValue && !newArray.includes(fieldValue);
+    }
   }
 
   return false;

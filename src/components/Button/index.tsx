@@ -18,6 +18,7 @@ interface ButtonProps {
   status?: string;
   type?: 'button' | 'submit';
 }
+
 const Button: FC<ButtonProps> = ({
   className,
   children,

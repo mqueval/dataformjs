@@ -30,6 +30,7 @@ const Tabs = ({ barClassName, barItemClassName, className, formName, datas, para
     const [tab, setTab] = react_1.useState(0);
     const [infos, setInfos] = react_1.useState([]);
     const newDatas = react_1.useMemo(() => (datas && !Array.isArray(datas) ? [datas] : datas), [datas]);
+    console.info('tabs', tabs);
     react_1.useEffect(() => {
         let newTab = 0;
         if (window && window.location && window.location.search) {
@@ -51,8 +52,11 @@ const Tabs = ({ barClassName, barItemClassName, className, formName, datas, para
         if (newDatas) {
             const newInfos = newDatas.map((newData, i) => ({
                 isActive: tab === i,
-                title: tabs[i],
+                title: 'string' === typeof tabs[i]
+                    ? tabs[i]
+                    : tabs[i].name,
             }));
+            console.info('newInfos', newInfos);
             setInfos(newInfos);
         }
     }, [newDatas, tab, tabs]);

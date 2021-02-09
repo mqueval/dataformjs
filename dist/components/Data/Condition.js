@@ -30,7 +30,9 @@ exports.default = react_redux_1.connect((state, props) => {
     const formValues = redux_form_1.getFormValues(props.formName)(state);
     const { params, test } = props;
     const newTest = params ? replaceTestParams_1.default(test, params) : test;
+    const valid = verifyCondition_1.default({ formValues, test: newTest });
+    console.info(`condition '${valid}'`, newTest);
     return {
-        valid: verifyCondition_1.default({ formValues, test: newTest }),
+        valid,
     };
 })(DataCondition);
