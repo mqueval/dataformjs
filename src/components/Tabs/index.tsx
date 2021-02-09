@@ -10,7 +10,16 @@ import React, {
 import Data, { DataProps } from '../Data';
 import TabsBar from './Bar';
 
-type TabProps = string;
+type TabType = {
+  name: string;
+  condition: {
+    field: string;
+    operator: '==' | '!=';
+    value: any;
+  };
+};
+
+type TabProps = string | TabType;
 
 export interface TabsProps extends DataProps {
   barClassName?: string;
@@ -40,6 +49,8 @@ const Tabs: VFC<TabsProps> = ({
     [datas],
   );
 
+  console.info('tabs', tabs);
+
   useEffect(() => {
     let newTab = 0;
     if (window && window.location && window.location.search) {
@@ -62,8 +73,12 @@ const Tabs: VFC<TabsProps> = ({
     if (newDatas) {
       const newInfos = newDatas.map((newData, i) => ({
         isActive: tab === i,
-        title: tabs[i],
+        title:
+          'string' === typeof tabs[i]
+            ? (tabs[i] as string)
+            : (tabs[i] as TabType).name,
       }));
+      console.info('newInfos', newInfos);
       setInfos(newInfos);
     }
   }, [newDatas, tab, tabs]);

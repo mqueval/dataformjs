@@ -1,6 +1,14 @@
 import { VFC } from 'react';
 import { DataProps } from '../Data';
-declare type TabProps = string;
+declare type TabType = {
+    name: string;
+    condition: {
+        field: string;
+        operator: '==' | '!=';
+        value: any;
+    };
+};
+declare type TabProps = string | TabType;
 export interface TabsProps extends DataProps {
     barClassName?: string;
     barItemClassName?: string;
