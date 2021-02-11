@@ -6,7 +6,10 @@ import React, {
   useState,
   VFC,
 } from 'react';
+import { connect } from 'react-redux';
 
+import replaceTestParams from '../../utils/replaceTestParams';
+import verifyCondition from '../../utils/verifyCondition';
 import Data, { DataProps } from '../Data';
 import TabsBar from './Bar';
 
@@ -29,15 +32,17 @@ export interface TabsProps extends DataProps {
 }
 
 export interface TabsPageInfoProps {
+  index: number;
   isActive?: boolean;
   title: string;
 }
 
-const Tabs: VFC<TabsProps> = ({
+const Tabs: VFC<TabsProps & { formValues: { [key: string]: any } }> = ({
   barClassName,
   barItemClassName,
   className,
   formName,
+  formValues,
   datas,
   params,
   tabs,
@@ -71,17 +76,39 @@ const Tabs: VFC<TabsProps> = ({
 
   useEffect(() => {
     if (newDatas) {
-      const newInfos = newDatas.map((newData, i) => ({
-        isActive: tab === i,
-        title:
-          'string' === typeof tabs[i]
-            ? (tabs[i] as string)
-            : (tabs[i] as TabType).name,
-      }));
+      const newInfos: TabsPageInfoProps[] = [];
+      newDatas.forEach((newData, i) => {
+        let addNewTab = true;
+        if ('string' !== typeof tabs[i]) {
+          const tmpTab = tabs[i] as TabType;
+          // On vérifie si il y a une condition
+          if (tmpTab.condition) {
+            console.info('condition', tmpTab.condition);
+            const newTest = params
+              ? replaceTestParams(tmpTab.condition, params)
+              : tmpTab.condition;
+
+            addNewTab = verifyCondition({ formValues, test: newTest });
+            console.info(`condition tab ${addNewTab}`, tmpTab.condition);
+          }
+        }
+
+        if (addNewTab) {
+          newInfos.push({
+            index: i,
+            isActive: tab === i,
+            title:
+              'string' === typeof tabs[i]
+                ? (tabs[i] as string)
+                : (tabs[i] as TabType).name,
+          });
+        }
+      });
+
       console.info('newInfos', newInfos);
       setInfos(newInfos);
     }
-  }, [newDatas, tab, tabs]);
+  }, [formValues, newDatas, params, tab, tabs]);
 
   const handleButtonOnClick = (
     event: SyntheticEvent<HTMLButtonElement>,
@@ -108,4 +135,12 @@ const Tabs: VFC<TabsProps> = ({
   );
 };
 
-export default Tabs;
+const mapStateToProps = (globalState: any, ownProps: TabsProps) => {
+  const { values } = globalState.form[ownProps.formName];
+
+  return {
+    formValues: values,
+  };
+};
+
+export default connect(mapStateToProps)(Tabs);
