@@ -22,6 +22,6 @@ const TabsBarItemSC = styled_components_1.default.li `
 `;
 const ItemTitleSC = styled_components_1.default.span ``;
 const TabsBar = ({ handleButtonOnClick, infos, className, itemClassName, }) => (react_1.default.createElement(TabsBarSC, { className: className }, infos.map((info, i) => (react_1.default.createElement(TabsBarItemSC, Object.assign({ key: `${object_hash_1.default({ ...infos[i], i })}`, className: itemClassName }, info),
-    react_1.default.createElement("button", { "data-tab": i, onClick: handleButtonOnClick, type: "button" },
+    react_1.default.createElement("button", { "data-tab": info.index, onClick: handleButtonOnClick, type: "button" },
         react_1.default.createElement(ItemTitleSC, null, infos[i].title)))))));
 exports.default = TabsBar;

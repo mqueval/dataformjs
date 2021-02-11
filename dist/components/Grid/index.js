@@ -6,27 +6,16 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const react_1 = __importDefault(require("react"));
 const styled_components_1 = __importDefault(require("styled-components"));
 const GridSC = styled_components_1.default.div `
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: stretch;
-  align-content: flex-start;
-  margin: ${props => `-${props.theme.spacing &&
-    (props.spacingY
-        ? props.theme.spacing[props.spacingY]
-        : props.theme.spacing.xs)} -${props.theme.spacing &&
-    (props.spacingX
-        ? props.theme.spacing[props.spacingX]
-        : props.theme.spacing.xs)}`};
+  display: grid;
+  column-gap: 1.5rem;
 `;
-const Grid = ({ children, className, spacingX, spacingY }) => {
-    const childrenWithProps = react_1.default.Children.map(children, child => {
-        if (react_1.default.isValidElement(child)) {
-            return react_1.default.cloneElement(child, { spacingX, spacingY });
-        }
-        return child;
-    });
-    return (react_1.default.createElement(GridSC, { className: className, spacingX: spacingX, spacingY: spacingY }, childrenWithProps));
-};
+const Grid = ({ children, className }) => (
+// const childrenWithProps = React.Children.map(children, child => {
+//   if (React.isValidElement(child)) {
+//     return React.cloneElement(child, { spacingX, spacingY });
+//   }
+//
+//   return child;
+// });
+react_1.default.createElement(GridSC, { className: className }, children));
 exports.default = Grid;
