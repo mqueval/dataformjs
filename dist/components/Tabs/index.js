@@ -24,9 +24,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const classnames_1 = __importDefault(require("classnames"));
 const react_1 = __importStar(require("react"));
+const react_redux_1 = require("react-redux");
+const replaceTestParams_1 = __importDefault(require("../../utils/replaceTestParams"));
+const verifyCondition_1 = __importDefault(require("../../utils/verifyCondition"));
 const Data_1 = __importDefault(require("../Data"));
 const Bar_1 = __importDefault(require("./Bar"));
-const Tabs = ({ barClassName, barItemClassName, className, formName, datas, params, tabs, }) => {
+const Tabs = ({ barClassName, barItemClassName, className, formName, formValues, datas, params, tabs, }) => {
     const [tab, setTab] = react_1.useState(0);
     const [infos, setInfos] = react_1.useState([]);
     const newDatas = react_1.useMemo(() => (datas && !Array.isArray(datas) ? [datas] : datas), [datas]);
@@ -50,16 +53,35 @@ const Tabs = ({ barClassName, barItemClassName, className, formName, datas, para
     }, []);
     react_1.useEffect(() => {
         if (newDatas) {
-            const newInfos = newDatas.map((newData, i) => ({
-                isActive: tab === i,
-                title: 'string' === typeof tabs[i]
-                    ? tabs[i]
-                    : tabs[i].name,
-            }));
+            const newInfos = [];
+            newDatas.forEach((newData, i) => {
+                let addNewTab = true;
+                if ('string' !== typeof tabs[i]) {
+                    const tmpTab = tabs[i];
+                    // On vérifie si il y a une condition
+                    if (tmpTab.condition) {
+                        console.info('condition', tmpTab.condition);
+                        const newTest = params
+                            ? replaceTestParams_1.default(tmpTab.condition, params)
+                            : tmpTab.condition;
+                        addNewTab = verifyCondition_1.default({ formValues, test: newTest });
+                        console.info(`condition tab ${addNewTab}`, tmpTab.condition);
+                    }
+                }
+                if (addNewTab) {
+                    newInfos.push({
+                        index: i,
+                        isActive: tab === i,
+                        title: 'string' === typeof tabs[i]
+                            ? tabs[i]
+                            : tabs[i].name,
+                    });
+                }
+            });
             console.info('newInfos', newInfos);
             setInfos(newInfos);
         }
-    }, [newDatas, tab, tabs]);
+    }, [formValues, newDatas, params, tab, tabs]);
     const handleButtonOnClick = (event) => {
         const newTab = event.currentTarget.getAttribute('data-tab');
         if (newTab) {
@@ -70,4 +92,10 @@ const Tabs = ({ barClassName, barItemClassName, className, formName, datas, para
         react_1.default.createElement(Bar_1.default, { className: barClassName, handleButtonOnClick: handleButtonOnClick, infos: infos, itemClassName: barItemClassName }),
         newDatas && newDatas.length > tab && (react_1.default.createElement(Data_1.default, Object.assign({}, newDatas[tab], { formName: formName, params: params })))));
 };
-exports.default = Tabs;
+const mapStateToProps = (globalState, ownProps) => {
+    const { values } = globalState.form[ownProps.formName];
+    return {
+        formValues: values,
+    };
+};
+exports.default = react_redux_1.connect(mapStateToProps)(Tabs);

@@ -1,4 +1,4 @@
-import { VFC } from 'react';
+import React from 'react';
 import { DataProps } from '../Data';
 declare type TabType = {
     name: string;
@@ -16,8 +16,17 @@ export interface TabsProps extends DataProps {
     tabs: TabProps[];
 }
 export interface TabsPageInfoProps {
+    index: number;
     isActive?: boolean;
     title: string;
 }
-declare const Tabs: VFC<TabsProps>;
-export default Tabs;
+declare const _default: import("react-redux").ConnectedComponent<React.VFC<TabsProps & {
+    formValues: {
+        [key: string]: any;
+    };
+}>, Pick<TabsProps & {
+    formValues: {
+        [key: string]: any;
+    };
+}, "required" | "label" | "title" | "formName" | "componentType" | "name" | "params" | "actions" | "actionsClassName" | "className" | "customInfos" | "datas" | "test" | "barClassName" | "barItemClassName" | "tabs"> & TabsProps>;
+export default _default;

@@ -42,7 +42,11 @@ const TabsBar: FC<TabsBarProps> = ({
         className={itemClassName}
         {...info}
       >
-        <button data-tab={i} onClick={handleButtonOnClick} type="button">
+        <button
+          data-tab={info.index}
+          onClick={handleButtonOnClick}
+          type="button"
+        >
           <ItemTitleSC>{infos[i].title}</ItemTitleSC>
         </button>
       </TabsBarItemSC>
