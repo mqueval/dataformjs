@@ -1,10 +1,16 @@
 import { FC, ReactNode, SyntheticEvent } from 'react';
 import { Dispatch } from 'redux';
 import { DecoratedFormProps } from 'redux-form';
+import { ButtonProps } from '../Button';
 import { DataProps } from '../Data';
+export interface FormActionProps extends ButtonProps {
+    label?: string;
+}
 export interface FormProps {
+    actions?: FormActionProps | FormActionProps[];
     asyncChangeFields?: string[];
     asyncValidate?: (values: FormData, dispatch: Dispatch<any>, props: DecoratedFormProps<FormData, any>, blurredField: string) => Promise<any>;
+    bodyClassName?: string;
     cancelClassName?: string;
     cancelIcon?: ReactNode;
     cancelIconColor?: string;
@@ -15,6 +21,7 @@ export interface FormProps {
     datas?: DataProps | DataProps[];
     destroyOnUnmount?: boolean;
     enableReinitialize?: boolean;
+    footerClassName?: string;
     forceUnregisterOnUnmount?: boolean;
     hideSubmitButton?: boolean;
     id?: string;
@@ -28,7 +35,10 @@ export interface FormProps {
     params?: {
         [key: string]: any;
     };
+    submitClassName?: string;
     submitIcon?: ReactNode;
+    submitIconLeft?: ReactNode;
+    submitIconRight?: ReactNode;
     submitLabel?: string;
     title?: string;
     touchOnChange?: boolean;
