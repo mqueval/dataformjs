@@ -6,7 +6,7 @@ import Icon from '../Icon';
 
 const ButtonSC = styled.button``;
 
-interface ButtonProps {
+export interface ButtonProps {
   className?: string;
   disabled?: boolean;
   iconColor?: string;
@@ -16,6 +16,7 @@ interface ButtonProps {
   onClick?: (event: SyntheticEvent<HTMLButtonElement>) => void;
   size?: string;
   status?: string;
+  tooltip?: string;
   type?: 'button' | 'submit';
 }
 

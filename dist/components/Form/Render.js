@@ -22,6 +22,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+const object_hash_1 = __importDefault(require("object-hash"));
 const react_1 = __importStar(require("react"));
 const react_redux_1 = require("react-redux");
 const redux_form_1 = require("redux-form");
@@ -36,23 +37,26 @@ const FormFooterSC = styled_components_1.default.div `
 `;
 const MessageSC = styled_components_1.default.div ``;
 const Form = props => {
-    const { bodyClassName, cancelClassName, cancelIcon, cancelIconColor, cancelLabel = 'cancel', cancelOnClick, cancelStatus, children, className, error, 
+    const { actions, bodyClassName, cancelClassName, cancelIcon, cancelIconColor, cancelLabel = 'cancel', cancelOnClick, cancelStatus, children, className, error, 
     // errorValues,
     footerClassName, 
     // formValues,
     handleSubmit, hideSubmitButton = false, id, isSubmissive = true, 
     // invalid,
-    name, pristine, submitIcon, submitLabel = 'form/submit', submitting, } = props;
+    name, pristine, submitClassName, submitIcon, submitIconLeft, submitIconRight, submitLabel = 'form/submit', submitting, } = props;
     const { sc, t } = react_1.useContext(index_1.FormidableContext);
     return (react_1.default.createElement(FormSC, { as: sc && sc.form, className: className, id: id, name: `${name}-form`, onSubmit: handleSubmit },
         react_1.default.createElement(FormBodySC, { className: bodyClassName },
             children,
             error && (react_1.default.createElement(MessageSC, { as: sc && sc.fieldMessage, status: "error" }, t ? t(error) : error))),
         react_1.default.createElement(FormFooterSC, { className: footerClassName },
-            react_1.default.createElement("div", null, cancelOnClick && (react_1.default.createElement(Button_1.default, { className: cancelClassName, iconColor: cancelIconColor, iconLeft: cancelIcon, onClick: cancelOnClick, status: cancelStatus }, t ? t(cancelLabel) : cancelLabel))),
-            !hideSubmitButton && (react_1.default.createElement(Button_1.default, { disabled: 
+            react_1.default.createElement("div", null,
+                actions &&
+                    (!Array.isArray(actions) ? [actions] : actions).map(({ className: actionClassName, label, onClick: actionOnClick, ...actionProps }, i) => (react_1.default.createElement(Button_1.default, Object.assign({ key: object_hash_1.default({ actionClassName, id, label, index: i }) }, actionProps, { onClick: actionOnClick }), label))),
+                cancelOnClick && (react_1.default.createElement(Button_1.default, { className: cancelClassName, iconColor: cancelIconColor, iconLeft: cancelIcon, onClick: cancelOnClick, status: cancelStatus }, t ? t(cancelLabel) : cancelLabel))),
+            !hideSubmitButton && (react_1.default.createElement(Button_1.default, { className: submitClassName, disabled: 
                 // !isSubmissive || invalid || pristine || submitting || !valid
-                !isSubmissive || pristine || submitting, iconRight: submitIcon, type: "submit" }, t ? t(submitLabel) : submitLabel)))));
+                !isSubmissive || pristine || submitting, iconLeft: submitIconLeft || submitIcon, iconRight: submitIconRight, type: "submit" }, !submitIcon && (t ? t(submitLabel) : submitLabel))))));
 };
 const ReduxForm = redux_form_1.reduxForm({})(Form);
 const mapStateToProps = (state, props) => ({
