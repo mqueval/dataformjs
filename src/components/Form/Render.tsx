@@ -1,4 +1,5 @@
-import React, { ReactNode, SyntheticEvent, useContext } from 'react';
+import objectHash from 'object-hash';
+import React, { ReactNode, useContext } from 'react';
 import { connect, DefaultRootState } from 'react-redux';
 import { Dispatch } from 'redux';
 import { DecoratedFormProps, InjectedFormProps, reduxForm } from 'redux-form';
@@ -6,7 +7,7 @@ import styled from 'styled-components';
 
 import { FormidableContext } from '../../index';
 import Button from '../Button';
-import { DataProps } from '../Data';
+import { FormProps } from './index';
 
 const FormSC = styled.form``;
 const FormBodySC = styled.div``;
@@ -17,43 +18,17 @@ const FormFooterSC = styled.div`
 
 const MessageSC = styled.div``;
 
-interface FormRenderProps {
-  asyncValidate?: (
-    values: FormData,
-    dispatch: Dispatch<any>,
-    props: DecoratedFormProps<FormData, any>,
-    blurredField: string,
-  ) => Promise<any>;
-  asyncChangeFields?: string[];
-  bodyClassName?: string;
-  cancelClassName?: string;
-  cancelIcon?: ReactNode;
-  cancelIconColor?: string;
-  cancelLabel?: string;
-  cancelOnClick?: (event: SyntheticEvent<HTMLButtonElement>) => void;
-  cancelStatus?: string;
+interface FormRenderProps extends FormProps {
   children?: ReactNode;
-  className?: string;
-  datas?: DataProps[];
-  destroyOnUnmount?: boolean;
-  enableReinitialize?: boolean;
   errorValues?: any;
-  forceUnregisterOnUnmount?: boolean;
   formValues?: any;
-  footerClassName?: string;
-  hideSubmitButton?: boolean;
-  id?: string;
-  isSubmissive?: boolean;
-  name: string;
-  submitIcon?: ReactNode;
-  submitLabel?: string;
-  touchOnChange?: boolean;
 }
 
 const Form: React.FC<
   FormRenderProps & InjectedFormProps<any, FormRenderProps>
 > = props => {
   const {
+    actions,
     bodyClassName,
     cancelClassName,
     cancelIcon,
@@ -74,7 +49,10 @@ const Form: React.FC<
     // invalid,
     name,
     pristine,
+    submitClassName,
     submitIcon,
+    submitIconLeft,
+    submitIconRight,
     submitLabel = 'form/submit',
     submitting,
     // valid,
@@ -100,6 +78,26 @@ const Form: React.FC<
       </FormBodySC>
       <FormFooterSC className={footerClassName}>
         <div>
+          {actions &&
+            (!Array.isArray(actions) ? [actions] : actions).map(
+              (
+                {
+                  className: actionClassName,
+                  label,
+                  onClick: actionOnClick,
+                  ...actionProps
+                },
+                i,
+              ) => (
+                <Button
+                  key={objectHash({ actionClassName, id, label, index: i })}
+                  {...actionProps}
+                  onClick={actionOnClick}
+                >
+                  {label}
+                </Button>
+              ),
+            )}
           {cancelOnClick && (
             <Button
               className={cancelClassName}
@@ -115,14 +113,16 @@ const Form: React.FC<
 
         {!hideSubmitButton && (
           <Button
+            className={submitClassName}
             disabled={
               // !isSubmissive || invalid || pristine || submitting || !valid
               !isSubmissive || pristine || submitting
             }
-            iconRight={submitIcon}
+            iconLeft={submitIconLeft || submitIcon}
+            iconRight={submitIconRight}
             type="submit"
           >
-            {t ? t(submitLabel) : submitLabel}
+            {!submitIcon && (t ? t(submitLabel) : submitLabel)}
           </Button>
         )}
       </FormFooterSC>
