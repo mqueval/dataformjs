@@ -54,8 +54,6 @@ const Tabs: VFC<TabsProps & { formValues: { [key: string]: any } }> = ({
     [datas],
   );
 
-  console.info('tabs', tabs);
-
   useEffect(() => {
     let newTab = 0;
     if (window && window.location && window.location.search) {
@@ -83,13 +81,11 @@ const Tabs: VFC<TabsProps & { formValues: { [key: string]: any } }> = ({
           const tmpTab = tabs[i] as TabType;
           // On vérifie si il y a une condition
           if (tmpTab.condition) {
-            console.info('condition', tmpTab.condition);
             const newTest = params
               ? replaceTestParams(tmpTab.condition, params)
               : tmpTab.condition;
 
             addNewTab = verifyCondition({ formValues, test: newTest });
-            console.info(`condition tab ${addNewTab}`, tmpTab.condition);
           }
         }
 
@@ -104,8 +100,6 @@ const Tabs: VFC<TabsProps & { formValues: { [key: string]: any } }> = ({
           });
         }
       });
-
-      console.info('newInfos', newInfos);
       setInfos(newInfos);
     }
   }, [formValues, newDatas, params, tab, tabs]);
