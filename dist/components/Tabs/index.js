@@ -33,7 +33,6 @@ const Tabs = ({ barClassName, barItemClassName, className, formName, formValues,
     const [tab, setTab] = react_1.useState(0);
     const [infos, setInfos] = react_1.useState([]);
     const newDatas = react_1.useMemo(() => (datas && !Array.isArray(datas) ? [datas] : datas), [datas]);
-    console.info('tabs', tabs);
     react_1.useEffect(() => {
         let newTab = 0;
         if (window && window.location && window.location.search) {
@@ -60,12 +59,10 @@ const Tabs = ({ barClassName, barItemClassName, className, formName, formValues,
                     const tmpTab = tabs[i];
                     // On vérifie si il y a une condition
                     if (tmpTab.condition) {
-                        console.info('condition', tmpTab.condition);
                         const newTest = params
                             ? replaceTestParams_1.default(tmpTab.condition, params)
                             : tmpTab.condition;
                         addNewTab = verifyCondition_1.default({ formValues, test: newTest });
-                        console.info(`condition tab ${addNewTab}`, tmpTab.condition);
                     }
                 }
                 if (addNewTab) {
@@ -78,7 +75,6 @@ const Tabs = ({ barClassName, barItemClassName, className, formName, formValues,
                     });
                 }
             });
-            console.info('newInfos', newInfos);
             setInfos(newInfos);
         }
     }, [formValues, newDatas, params, tab, tabs]);

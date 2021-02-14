@@ -79,7 +79,6 @@ export default connect((state: DefaultRootState, props: DataConditionProps): {
   const newTest = params ? replaceTestParams(test, params) : test;
 
   const valid = verifyCondition({ formValues, test: newTest });
-  console.info(`condition '${valid}'`, newTest);
 
   return {
     valid,
