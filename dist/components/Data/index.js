@@ -30,6 +30,7 @@ const Column_1 = __importDefault(require("../Column"));
 const Columns_1 = __importDefault(require("../Columns"));
 const Grid_1 = __importDefault(require("../Grid"));
 const Group_1 = __importDefault(require("../Group"));
+const Rows_1 = __importDefault(require("../Rows"));
 const Tabs_1 = __importDefault(require("../Tabs"));
 const Array_1 = __importDefault(require("./Array"));
 exports.DataArray = Array_1.default;
@@ -109,6 +110,14 @@ const Data = ({ datas, formName, formValues, ...props }) => {
                 return (react_1.default.createElement("div", null, `${componentType} : erreur de paramètre : datas obligatoire`));
             }
             return (react_1.default.createElement(Group_1.default, Object.assign({}, props), datas &&
+                datas.length > 0 &&
+                datas.map(data => (react_1.default.createElement(Data, Object.assign({ key: object_hash_1.default(data) }, data, { formName: formName, formValues: formValues, params: params }))))));
+        }
+        case 'rows': {
+            if (!datas) {
+                return (react_1.default.createElement("div", null, `${componentType} : erreur de paramètre : datas obligatoire`));
+            }
+            return (react_1.default.createElement(Rows_1.default, Object.assign({}, props), datas &&
                 datas.length > 0 &&
                 datas.map(data => (react_1.default.createElement(Data, Object.assign({ key: object_hash_1.default(data) }, data, { formName: formName, formValues: formValues, params: params }))))));
         }

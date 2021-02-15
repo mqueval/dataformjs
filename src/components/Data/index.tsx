@@ -6,6 +6,7 @@ import Column from '../Column';
 import Columns from '../Columns';
 import Grid from '../Grid';
 import Group from '../Group';
+import Rows from '../Rows';
 import Tabs, { TabsProps } from '../Tabs';
 import DataArray from './Array';
 import DataCondition, { DataConditionTestProps } from './Condition';
@@ -23,6 +24,8 @@ export interface DataProps {
   datas?: DataProps[];
   formName?: string;
   formValues?: { [key: string]: any };
+  grid?: boolean;
+  gridClassName?: string;
   label?: string;
   name?: string;
   params?: { [key: string]: any };
@@ -204,6 +207,30 @@ const Data: FC<
               />
             ))}
         </Group>
+      );
+    }
+
+    case 'rows': {
+      if (!datas) {
+        return (
+          <div>{`${componentType} : erreur de paramètre : datas obligatoire`}</div>
+        );
+      }
+
+      return (
+        <Rows {...props}>
+          {datas &&
+            datas.length > 0 &&
+            datas.map(data => (
+              <Data
+                key={hash(data)}
+                {...data}
+                formName={formName}
+                formValues={formValues}
+                params={params}
+              />
+            ))}
+        </Rows>
       );
     }
 
