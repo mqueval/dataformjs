@@ -16,5 +16,5 @@ interface DataConditionProps extends DataProps {
     test: DataConditionTestProps | DataConditionTestProps[];
     valid?: boolean;
 }
-declare const _default: import("react-redux").ConnectedComponent<React.FC<DataConditionProps>, Pick<DataConditionProps, "label" | "title" | "name" | "className" | "required" | "formName" | "componentType" | "params" | "actions" | "actionsClassName" | "customInfos" | "datas" | "formValues" | "test" | "group" | "groupOptions"> & DataConditionProps>;
+declare const _default: import("react-redux").ConnectedComponent<React.FC<DataConditionProps>, Pick<DataConditionProps, "label" | "title" | "name" | "className" | "required" | "formName" | "componentType" | "params" | "actions" | "actionsClassName" | "customInfos" | "datas" | "formValues" | "grid" | "gridClassName" | "test" | "group" | "groupOptions"> & DataConditionProps>;
 export default _default;
