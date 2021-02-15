@@ -12,6 +12,8 @@ export interface DataProps {
     formValues?: {
         [key: string]: any;
     };
+    grid?: boolean;
+    gridClassName?: string;
     label?: string;
     name?: string;
     params?: {
