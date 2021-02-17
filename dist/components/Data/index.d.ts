@@ -6,6 +6,7 @@ export interface DataProps {
     actionsClassName?: string;
     className?: string;
     customInfos?: ReactNode;
+    customInfosClassName?: string;
     componentType?: string;
     datas?: DataProps[];
     formName?: string;

@@ -22,6 +22,8 @@ const FieldWrapper: FC<DataFieldProps> = ({
   componentType,
   customBottom,
   customBottomClassName,
+  customInfos,
+  customInfosClassName,
   customTop,
   customTopClassName,
   id,
@@ -39,6 +41,11 @@ const FieldWrapper: FC<DataFieldProps> = ({
 
   return (
     <WrapperCmp className="wrapper" {...props}>
+      {customInfos && (
+        <CustomTopSC as={sc && sc.customTop} className={customInfosClassName}>
+          {customInfos}
+        </CustomTopSC>
+      )}
       {customTop && (
         <CustomTopSC as={sc && sc.customTop} className={customTopClassName}>
           {customTop}

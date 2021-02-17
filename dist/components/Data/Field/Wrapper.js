@@ -34,7 +34,7 @@ const CustomTopSC = styled_components_1.default.div `
 `;
 const FieldLabelSC = styled_components_1.default.label ``;
 const WrapperSC = styled_components_1.default.div ``;
-const FieldWrapper = ({ children, column, columnOptions, componentType, customBottom, customBottomClassName, customTop, customTopClassName, id, label, name, }) => {
+const FieldWrapper = ({ children, column, columnOptions, componentType, customBottom, customBottomClassName, customInfos, customInfosClassName, customTop, customTopClassName, id, label, name, }) => {
     const { t, sc } = react_1.useContext(index_1.FormidableContext);
     if ('hidden' === componentType) {
         return react_1.default.createElement(react_1.default.Fragment, null, children);
@@ -42,6 +42,7 @@ const FieldWrapper = ({ children, column, columnOptions, componentType, customBo
     const WrapperCmp = column ? Column_1.default : WrapperSC;
     const props = column ? columnOptions : {};
     return (react_1.default.createElement(WrapperCmp, Object.assign({ className: "wrapper" }, props),
+        customInfos && (react_1.default.createElement(CustomTopSC, { as: sc && sc.customTop, className: customInfosClassName }, customInfos)),
         customTop && (react_1.default.createElement(CustomTopSC, { as: sc && sc.customTop, className: customTopClassName }, customTop)),
         react_1.default.createElement(FieldLabelSC, { as: sc && sc.label, htmlFor: id }, t ? t(label || name) : label || name),
         react_1.default.createElement("div", null, children),

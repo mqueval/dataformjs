@@ -28,5 +28,5 @@ declare const _default: import("react-redux").ConnectedComponent<React.VFC<TabsP
     formValues: {
         [key: string]: any;
     };
-}, "label" | "title" | "name" | "className" | "required" | "formName" | "componentType" | "params" | "actions" | "actionsClassName" | "customInfos" | "datas" | "grid" | "gridClassName" | "test" | "barClassName" | "barItemClassName" | "tabs"> & TabsProps>;
+}, "label" | "title" | "name" | "className" | "required" | "formName" | "componentType" | "params" | "actions" | "actionsClassName" | "customInfos" | "customInfosClassName" | "datas" | "grid" | "gridClassName" | "test" | "barClassName" | "barItemClassName" | "tabs"> & TabsProps>;
 export default _default;
