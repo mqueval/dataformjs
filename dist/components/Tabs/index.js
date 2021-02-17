@@ -58,7 +58,7 @@ const Tabs = ({ barClassName, barItemClassName, className, formName, formValues,
                 if ('string' !== typeof tabs[i]) {
                     const tmpTab = tabs[i];
                     // On vérifie si il y a une condition
-                    if (tmpTab.condition) {
+                    if (tmpTab?.condition) {
                         const newTest = params
                             ? replaceTestParams_1.default(tmpTab.condition, params)
                             : tmpTab.condition;
@@ -71,7 +71,7 @@ const Tabs = ({ barClassName, barItemClassName, className, formName, formValues,
                         isActive: tab === i,
                         title: 'string' === typeof tabs[i]
                             ? tabs[i]
-                            : tabs[i].name,
+                            : tabs[i]?.name,
                     });
                 }
             });
