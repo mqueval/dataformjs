@@ -31,7 +31,7 @@ const Input_1 = __importDefault(require("./Input"));
 const Render_1 = __importDefault(require("./Render"));
 const Wrapper_1 = __importDefault(require("./Wrapper"));
 const InputGroupSC = styled_components_1.default.div ``;
-const DataField = ({ validate, column, columnOptions, ...props }) => {
+const DataField = ({ column, columnOptions, validate, ...props }) => {
     const { sc } = react_1.useContext(index_1.FormidableContext);
     const { componentType, id, name, options, required, params, type } = props;
     const newId = id || `${params && params.name ? `${params.name}.` : ''}${name}`;

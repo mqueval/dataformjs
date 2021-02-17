@@ -80,7 +80,7 @@ const Tabs: VFC<TabsProps & { formValues: { [key: string]: any } }> = ({
         if ('string' !== typeof tabs[i]) {
           const tmpTab = tabs[i] as TabType;
           // On vérifie si il y a une condition
-          if (tmpTab.condition) {
+          if (tmpTab?.condition) {
             const newTest = params
               ? replaceTestParams(tmpTab.condition, params)
               : tmpTab.condition;
@@ -96,7 +96,7 @@ const Tabs: VFC<TabsProps & { formValues: { [key: string]: any } }> = ({
             title:
               'string' === typeof tabs[i]
                 ? (tabs[i] as string)
-                : (tabs[i] as TabType).name,
+                : (tabs[i] as TabType)?.name,
           });
         }
       });

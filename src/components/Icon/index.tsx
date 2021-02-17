@@ -46,6 +46,7 @@ const Icon: FC<{ color?: string; value: ReactNode }> = ({ color, value }) => {
     }
 
     case 'remove': {
+      console.info('button remove');
       if (sc && sc.iconRemove) {
         const IconRemove = sc.iconRemove;
 

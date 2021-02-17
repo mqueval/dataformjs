@@ -47,7 +47,7 @@ export interface DataFieldProps extends DataProps {
 
 const DataField: FC<
   DataFieldAsyncSelectProps<any> | DataFieldInputProps | DataFieldProps
-> = ({ validate, column, columnOptions, ...props }) => {
+> = ({ column, columnOptions, validate, ...props }) => {
   const { sc } = useContext(FormidableContext);
 
   const { componentType, id, name, options, required, params, type } = props;
