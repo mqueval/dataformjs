@@ -32,7 +32,6 @@ const Button = ({ className, children, disabled, iconColor, iconLeft, iconRight,
     if ('submit' !== type && !onClick) {
         return react_1.default.createElement("div", null, "la fonction onClick est obligatoire");
     }
-    console.info('iconLeft', iconLeft);
     return (react_1.default.createElement(ButtonSC, Object.assign({ as: sc && sc.button, className: className, disabled: disabled, id: id, onClick: onClick, size: size, status: status, type: type }, props),
         iconLeft && react_1.default.createElement(Icon_1.default, { color: iconColor, value: iconLeft }),
         children && react_1.default.createElement("span", null, children),
