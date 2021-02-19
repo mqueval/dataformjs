@@ -40,8 +40,6 @@ const Button: FC<ButtonProps> = ({
     return <div>la fonction onClick est obligatoire</div>;
   }
 
-  console.info('iconLeft', iconLeft);
-
   return (
     <ButtonSC
       as={sc && sc.button}
