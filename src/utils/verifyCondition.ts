@@ -21,7 +21,7 @@ export default ({
       const fieldValue = fieldArray.reduce(
         (acc, tmp) => {
           if (acc) {
-            if (tmp.split('[').length > 1) {
+            if (tmp && tmp.split('[').length > 1) {
               // c'est un tableau
               const [newTmp, index] = tmp.slice(0, tmp.length - 1).split('[');
               if (Object.keys(acc).includes(newTmp) && acc[newTmp][index]) {

@@ -67,7 +67,11 @@ const Wizard: FC<WizardProps> = ({
 
   useEffect(() => {
     let newPage = 0;
-    if (window && window.location && window.location.search) {
+    if (
+      typeof window !== 'undefined' &&
+      window.location &&
+      window.location.search
+    ) {
       const search: { [key: string]: any } = {};
       window.location.search
         .slice(1)

@@ -35,7 +35,9 @@ const Tabs = ({ barClassName, barItemClassName, className, formName, formValues,
     const newDatas = react_1.useMemo(() => (datas && !Array.isArray(datas) ? [datas] : datas), [datas]);
     react_1.useEffect(() => {
         let newTab = 0;
-        if (window && window.location && window.location.search) {
+        if (typeof window !== 'undefined' &&
+            window.location &&
+            window.location.search) {
             const search = {};
             window.location.search
                 .slice(1)
