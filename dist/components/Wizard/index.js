@@ -40,7 +40,9 @@ const Wizard = ({ backClassName, backIcon, backIconColor, backLabel, backStatus,
     const newPages = pages && !Array.isArray(pages) ? [pages] : pages;
     react_1.useEffect(() => {
         let newPage = 0;
-        if (window && window.location && window.location.search) {
+        if (typeof window !== 'undefined' &&
+            window.location &&
+            window.location.search) {
             const search = {};
             window.location.search
                 .slice(1)
