@@ -31,7 +31,7 @@ exports.default = ({ fieldValue, operator, value, }) => {
             }
         }
         case 'in': {
-            const newArray = !Array.isArray(value) ? value.split(',') : value;
+            const newArray = value && !Array.isArray(value) ? value.split(',') : value;
             return undefined !== fieldValue && Boolean(newArray.includes(fieldValue));
         }
         case 'is': {
@@ -41,7 +41,7 @@ exports.default = ({ fieldValue, operator, value, }) => {
             return !fieldValue;
         }
         case 'not-in': {
-            const newArray = !Array.isArray(value) ? value.split(',') : value;
+            const newArray = value && !Array.isArray(value) ? value.split(',') : value;
             console.info('value', value);
             console.info('fieldValue', fieldValue);
             console.info('newArray', newArray);
