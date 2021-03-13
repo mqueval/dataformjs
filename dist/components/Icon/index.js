@@ -21,18 +21,18 @@ var __importStar = (this && this.__importStar) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const react_1 = __importStar(require("react"));
 const index_1 = require("../../index");
-const Icon = ({ color, value }) => {
+const Icon = ({ color, size, value, }) => {
     const { t, sc } = react_1.useContext(index_1.FormidableContext);
     if (typeof react_1.default.Component === typeof value) {
         const IconCmp = value;
-        return react_1.default.createElement(IconCmp, { color: color });
+        return react_1.default.createElement(IconCmp, { color: color, size: size });
     }
     let IconCmp;
     switch (value) {
         case 'add': {
             if (sc && sc.iconAdd) {
                 const IconAdd = sc.iconAdd;
-                return react_1.default.createElement(IconAdd, { color: color });
+                return react_1.default.createElement(IconAdd, { color: color, size: size });
             }
             IconCmp = t ? t('add') : 'add';
             break;
@@ -40,7 +40,7 @@ const Icon = ({ color, value }) => {
         case 'back': {
             if (sc && sc.iconBack) {
                 const IconBack = sc.iconBack;
-                return react_1.default.createElement(IconBack, { color: color });
+                return react_1.default.createElement(IconBack, { color: color, size: size });
             }
             IconCmp = t ? t('back') : 'back';
             break;
@@ -48,7 +48,7 @@ const Icon = ({ color, value }) => {
         case 'next': {
             if (sc && sc.iconNext) {
                 const IconNext = sc.iconNext;
-                return react_1.default.createElement(IconNext, null);
+                return react_1.default.createElement(IconNext, { color: color, size: size });
             }
             IconCmp = t ? t('next') : 'next';
             break;
@@ -57,7 +57,7 @@ const Icon = ({ color, value }) => {
             console.info('button remove');
             if (sc && sc.iconRemove) {
                 const IconRemove = sc.iconRemove;
-                return react_1.default.createElement(IconRemove, null);
+                return react_1.default.createElement(IconRemove, { color: color, size: size });
             }
             IconCmp = t ? t('remove') : 'remove';
             break;

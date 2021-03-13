@@ -12,6 +12,7 @@ export interface ButtonProps {
   iconColor?: string;
   iconLeft?: ReactNode;
   iconRight?: ReactNode;
+  iconSize?: number;
   id?: string;
   onClick?: (event: SyntheticEvent<HTMLButtonElement>) => void;
   size?: string;
@@ -27,6 +28,7 @@ const Button: FC<ButtonProps> = ({
   iconColor,
   iconLeft,
   iconRight,
+  iconSize,
   id,
   onClick,
   size,
@@ -52,7 +54,7 @@ const Button: FC<ButtonProps> = ({
       type={type}
       {...props}
     >
-      {iconLeft && <Icon color={iconColor} value={iconLeft} />}
+      {iconLeft && <Icon color={iconColor} size={iconSize} value={iconLeft} />}
       {children && <span>{children}</span>}
       {iconRight && <Icon color={iconColor} value={iconRight} />}
     </ButtonSC>

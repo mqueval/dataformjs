@@ -49,8 +49,10 @@ export interface FormProps {
   params?: { [key: string]: any };
   submitClassName?: string;
   submitIcon?: ReactNode;
+  submitIconColor?: string;
   submitIconLeft?: ReactNode;
   submitIconRight?: ReactNode;
+  submitIconSize?: number;
   submitLabel?: string;
   title?: string;
   touchOnChange?: boolean;
@@ -85,8 +87,10 @@ const Form: FC<FormProps> = ({
   params,
   submitClassName,
   submitIcon,
+  submitIconColor,
   submitIconLeft,
   submitIconRight,
+  submitIconSize,
   submitLabel,
   touchOnChange,
   validate,
@@ -120,8 +124,10 @@ const Form: FC<FormProps> = ({
       onSubmit={onSubmit}
       submitClassName={submitClassName}
       submitIcon={submitIcon}
+      submitIconColor={submitIconColor}
       submitIconLeft={submitIconLeft}
       submitIconRight={submitIconRight}
+      submitIconSize={submitIconSize}
       submitLabel={submitLabel}
       touchOnChange={touchOnChange}
       validate={validate}

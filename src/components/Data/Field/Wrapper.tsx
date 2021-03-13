@@ -28,6 +28,7 @@ const FieldWrapper: FC<DataFieldProps> = ({
   customTopClassName,
   id,
   label,
+  labelShow = true,
   name,
 }) => {
   const { t, sc } = useContext(FormidableContext);
@@ -51,9 +52,11 @@ const FieldWrapper: FC<DataFieldProps> = ({
           {customTop}
         </CustomTopSC>
       )}
-      <FieldLabelSC as={sc && sc.label} htmlFor={id}>
-        {t ? t(label || name) : label || name}
-      </FieldLabelSC>
+      {labelShow && (
+        <FieldLabelSC as={sc && sc.label} htmlFor={id}>
+          {t ? t(label || name) : label || name}
+        </FieldLabelSC>
+      )}
       <div>{children}</div>
       {customBottom && (
         <CustomBottomSC

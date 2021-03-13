@@ -37,8 +37,10 @@ export interface FormProps {
     };
     submitClassName?: string;
     submitIcon?: ReactNode;
+    submitIconColor?: string;
     submitIconLeft?: ReactNode;
     submitIconRight?: ReactNode;
+    submitIconSize?: number;
     submitLabel?: string;
     title?: string;
     touchOnChange?: boolean;

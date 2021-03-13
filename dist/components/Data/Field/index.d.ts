@@ -14,6 +14,7 @@ export interface DataFieldProps extends DataProps {
     customTop?: ReactElement | ReactElement[];
     customTopClassName?: string;
     disabled?: boolean;
+    fieldClassName?: string;
     handleOnChange?: (props: {
         change?: (formName: string, name: string, value: any) => void;
         event?: SyntheticEvent<HTMLInputElement> | any;
@@ -22,6 +23,7 @@ export interface DataFieldProps extends DataProps {
     }) => any;
     id?: string;
     label?: string;
+    labelShow?: boolean;
     message?: string;
     name: string;
     options?: {
