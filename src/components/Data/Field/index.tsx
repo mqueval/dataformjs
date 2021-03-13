@@ -50,7 +50,7 @@ export interface DataFieldProps extends DataProps {
 
 const DataField: FC<
   DataFieldAsyncSelectProps<any> | DataFieldInputProps | DataFieldProps
-> = ({ column, columnOptions, fieldClassName, validate, ...props }) => {
+> = ({ className, column, columnOptions, validate, ...props }) => {
   const { sc } = useContext(FormidableContext);
 
   const { componentType, id, name, options, required, params, type } = props;
@@ -106,7 +106,7 @@ const DataField: FC<
               {...props}
               className={classnames(
                 '"grid grid-cols-2 items-center"',
-                fieldClassName,
+                className,
               )}
               component={DataFieldInput}
               description={option.label}
@@ -129,7 +129,6 @@ const DataField: FC<
     >
       <FieldForm
         {...props}
-        className={fieldClassName}
         component={DataFieldRender}
         id={newId}
         validate={newValidate}

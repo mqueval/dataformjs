@@ -32,7 +32,7 @@ const Input_1 = __importDefault(require("./Input"));
 const Render_1 = __importDefault(require("./Render"));
 const Wrapper_1 = __importDefault(require("./Wrapper"));
 const InputGroupSC = styled_components_1.default.div ``;
-const DataField = ({ column, columnOptions, fieldClassName, validate, ...props }) => {
+const DataField = ({ className, column, columnOptions, validate, ...props }) => {
     const { sc } = react_1.useContext(index_1.FormidableContext);
     const { componentType, id, name, options, required, params, type } = props;
     const newId = id || `${params && params.name ? `${params.name}.` : ''}${name}`;
@@ -60,9 +60,9 @@ const DataField = ({ column, columnOptions, fieldClassName, validate, ...props }
             return react_1.default.createElement("div", null, "input : erreur de param\u00E8tre : options obligatoire");
         }
         return (react_1.default.createElement(Wrapper_1.default, Object.assign({}, props, { column: column, columnOptions: columnOptions, id: newId }),
-            react_1.default.createElement(InputGroupSC, { as: sc && sc.inputGroup, className: "flex flex-row gap-2", role: "radiogroup" }, options.map(option => (react_1.default.createElement(redux_form_1.Field, Object.assign({ key: option.value }, props, { className: classnames_1.default('"grid grid-cols-2 items-center"', fieldClassName), component: Input_1.default, description: option.label, id: option.id || `${newId}_${option.value}`, validate: newValidate, value: option.value })))))));
+            react_1.default.createElement(InputGroupSC, { as: sc && sc.inputGroup, className: "flex flex-row gap-2", role: "radiogroup" }, options.map(option => (react_1.default.createElement(redux_form_1.Field, Object.assign({ key: option.value }, props, { className: classnames_1.default('"grid grid-cols-2 items-center"', className), component: Input_1.default, description: option.label, id: option.id || `${newId}_${option.value}`, validate: newValidate, value: option.value })))))));
     }
     return (react_1.default.createElement(Wrapper_1.default, Object.assign({}, props, { column: column, columnOptions: columnOptions, id: newId }),
-        react_1.default.createElement(redux_form_1.Field, Object.assign({}, props, { className: fieldClassName, component: Render_1.default, id: newId, validate: newValidate }))));
+        react_1.default.createElement(redux_form_1.Field, Object.assign({}, props, { component: Render_1.default, id: newId, validate: newValidate }))));
 };
 exports.default = DataField;
