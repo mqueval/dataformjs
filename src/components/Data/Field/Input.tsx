@@ -26,10 +26,10 @@ const FieldInput: FC<WrappedFieldProps & DataFieldInputProps> = ({
   className,
   description,
   disabled,
+  fieldClassName,
   id,
   input,
   placeholder,
-
   mask,
   max,
   meta: { error, touched },
@@ -55,10 +55,16 @@ const FieldInput: FC<WrappedFieldProps & DataFieldInputProps> = ({
     <DataFieldInputSC className={className}>
       {mask ? (
         <InputMask mask={mask} {...input}>
-          {(inputProps: any) => <InputSC {...inputProps} {...fieldProps} />}
+          {(inputProps: any) => (
+            <InputSC
+              {...inputProps}
+              {...fieldProps}
+              className={fieldClassName}
+            />
+          )}
         </InputMask>
       ) : (
-        <InputSC {...input} {...fieldProps} />
+        <InputSC {...input} {...fieldProps} className={fieldClassName} />
       )}
       {description && (
         <label htmlFor={id}>{t ? t(description) : description}</label>
