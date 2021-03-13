@@ -44,13 +44,24 @@ export interface DataFieldProps extends DataProps {
   params?: { [key: string]: any };
   placeholder?: string;
   required?: boolean;
+  templateClassName?: string;
   type?: string;
   validate?: Validator | Validator[]; // TODO @deprecated
+  wrapperClassName?: string;
 }
 
 const DataField: FC<
   DataFieldAsyncSelectProps<any> | DataFieldInputProps | DataFieldProps
-> = ({ className, column, columnOptions, validate, ...props }) => {
+> = ({
+  className,
+  column,
+  columnOptions,
+  fieldClassName,
+  templateClassName,
+  validate,
+  wrapperClassName,
+  ...props
+}) => {
   const { sc } = useContext(FormidableContext);
 
   const { componentType, id, name, options, required, params, type } = props;
@@ -94,6 +105,7 @@ const DataField: FC<
         column={column}
         columnOptions={columnOptions}
         id={newId}
+        wrapperClassName={wrapperClassName}
       >
         <InputGroupSC
           as={sc && sc.inputGroup}
@@ -103,6 +115,8 @@ const DataField: FC<
           {options.map(option => (
             <FieldForm
               key={option.value}
+              fieldClassName={fieldClassName}
+              templateClassName={templateClassName}
               {...props}
               className={classnames(
                 '"grid grid-cols-2 items-center"',
@@ -126,11 +140,15 @@ const DataField: FC<
       column={column}
       columnOptions={columnOptions}
       id={newId}
+      wrapperClassName={wrapperClassName}
     >
       <FieldForm
         {...props}
+        className={className}
         component={DataFieldRender}
+        fieldClassName={fieldClassName}
         id={newId}
+        templateClassName={templateClassName}
         validate={newValidate}
       />
     </DataFieldWrapper>
