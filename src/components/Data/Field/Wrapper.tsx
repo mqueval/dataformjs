@@ -30,6 +30,7 @@ const FieldWrapper: FC<DataFieldProps> = ({
   label,
   labelShow = true,
   name,
+  wrapperClassName,
 }) => {
   const { t, sc } = useContext(FormidableContext);
 
@@ -41,7 +42,7 @@ const FieldWrapper: FC<DataFieldProps> = ({
   const props = column ? columnOptions : {};
 
   return (
-    <WrapperCmp className="wrapper" {...props}>
+    <WrapperCmp className={wrapperClassName} {...props}>
       {customInfos && (
         <CustomTopSC as={sc && sc.customTop} className={customInfosClassName}>
           {customInfos}

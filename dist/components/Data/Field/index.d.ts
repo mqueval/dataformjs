@@ -36,8 +36,10 @@ export interface DataFieldProps extends DataProps {
     };
     placeholder?: string;
     required?: boolean;
+    templateClassName?: string;
     type?: string;
     validate?: Validator | Validator[];
+    wrapperClassName?: string;
 }
 declare const DataField: FC<DataFieldAsyncSelectProps<any> | DataFieldInputProps | DataFieldProps>;
 export default DataField;
