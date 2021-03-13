@@ -43,7 +43,7 @@ const Form = props => {
     // formValues,
     handleSubmit, hideSubmitButton = false, id, isSubmissive = true, 
     // invalid,
-    name, pristine, submitClassName, submitIcon, submitIconLeft, submitIconRight, submitLabel = 'form/submit', submitting, } = props;
+    name, pristine, submitClassName, submitIcon, submitIconColor, submitIconLeft, submitIconRight, submitIconSize, submitLabel = 'form/submit', submitting, } = props;
     const { sc, t } = react_1.useContext(index_1.FormidableContext);
     return (react_1.default.createElement(FormSC, { as: sc && sc.form, className: className, id: id, name: `${name}-form`, onSubmit: handleSubmit },
         react_1.default.createElement(FormBodySC, { className: bodyClassName },
@@ -56,7 +56,7 @@ const Form = props => {
                 cancelOnClick && (react_1.default.createElement(Button_1.default, { className: cancelClassName, iconColor: cancelIconColor, iconLeft: cancelIcon, onClick: cancelOnClick, status: cancelStatus }, t ? t(cancelLabel) : cancelLabel))),
             !hideSubmitButton && (react_1.default.createElement(Button_1.default, { className: submitClassName, disabled: 
                 // !isSubmissive || invalid || pristine || submitting || !valid
-                !isSubmissive || pristine || submitting, iconLeft: submitIconLeft || submitIcon, iconRight: submitIconRight, type: "submit" }, !submitIcon && (t ? t(submitLabel) : submitLabel))))));
+                !isSubmissive || pristine || submitting, iconColor: submitIconColor, iconLeft: submitIconLeft || submitIcon, iconRight: submitIconRight, iconSize: submitIconSize, type: "submit" }, !submitIcon && (t ? t(submitLabel) : submitLabel))))));
 };
 const ReduxForm = redux_form_1.reduxForm({})(Form);
 const mapStateToProps = (state, props) => ({

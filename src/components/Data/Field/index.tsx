@@ -1,3 +1,4 @@
+import classnames from 'classnames';
 import React, { FC, ReactElement, SyntheticEvent, useContext } from 'react';
 import { Field as FieldForm, Validator } from 'redux-form';
 import styled from 'styled-components';
@@ -27,6 +28,7 @@ export interface DataFieldProps extends DataProps {
   customTop?: ReactElement | ReactElement[];
   customTopClassName?: string;
   disabled?: boolean;
+  fieldClassName?: string;
   handleOnChange?: (props: {
     change?: (formName: string, name: string, value: any) => void;
     event?: SyntheticEvent<HTMLInputElement> | any;
@@ -35,6 +37,7 @@ export interface DataFieldProps extends DataProps {
   }) => any;
   id?: string;
   label?: string;
+  labelShow?: boolean;
   message?: string;
   name: string;
   options?: { label: string; value: string | number; id?: string }[];
@@ -47,7 +50,7 @@ export interface DataFieldProps extends DataProps {
 
 const DataField: FC<
   DataFieldAsyncSelectProps<any> | DataFieldInputProps | DataFieldProps
-> = ({ column, columnOptions, validate, ...props }) => {
+> = ({ column, columnOptions, fieldClassName, validate, ...props }) => {
   const { sc } = useContext(FormidableContext);
 
   const { componentType, id, name, options, required, params, type } = props;
@@ -101,7 +104,10 @@ const DataField: FC<
             <FieldForm
               key={option.value}
               {...props}
-              className="grid grid-cols-2 items-center"
+              className={classnames(
+                '"grid grid-cols-2 items-center"',
+                fieldClassName,
+              )}
               component={DataFieldInput}
               description={option.label}
               id={option.id || `${newId}_${option.value}`}
@@ -123,6 +129,7 @@ const DataField: FC<
     >
       <FieldForm
         {...props}
+        className={fieldClassName}
         component={DataFieldRender}
         id={newId}
         validate={newValidate}

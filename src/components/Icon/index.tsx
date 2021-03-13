@@ -2,13 +2,17 @@ import React, { FC, ReactNode, useContext } from 'react';
 
 import { FormidableContext } from '../../index';
 
-const Icon: FC<{ color?: string; value: ReactNode }> = ({ color, value }) => {
+const Icon: FC<{ color?: string; size?: number; value: ReactNode }> = ({
+  color,
+  size,
+  value,
+}) => {
   const { t, sc } = useContext(FormidableContext);
 
   if (typeof React.Component === typeof value) {
     const IconCmp: any = value as React.ReactElement;
 
-    return <IconCmp color={color} />;
+    return <IconCmp color={color} size={size} />;
   }
 
   let IconCmp;
@@ -18,7 +22,7 @@ const Icon: FC<{ color?: string; value: ReactNode }> = ({ color, value }) => {
       if (sc && sc.iconAdd) {
         const IconAdd = sc.iconAdd;
 
-        return <IconAdd color={color} />;
+        return <IconAdd color={color} size={size} />;
       }
 
       IconCmp = t ? t('add') : 'add';
@@ -29,7 +33,7 @@ const Icon: FC<{ color?: string; value: ReactNode }> = ({ color, value }) => {
       if (sc && sc.iconBack) {
         const IconBack = sc.iconBack;
 
-        return <IconBack color={color} />;
+        return <IconBack color={color} size={size} />;
       }
       IconCmp = t ? t('back') : 'back';
       break;
@@ -39,7 +43,7 @@ const Icon: FC<{ color?: string; value: ReactNode }> = ({ color, value }) => {
       if (sc && sc.iconNext) {
         const IconNext = sc.iconNext;
 
-        return <IconNext />;
+        return <IconNext color={color} size={size} />;
       }
       IconCmp = t ? t('next') : 'next';
       break;
@@ -50,7 +54,7 @@ const Icon: FC<{ color?: string; value: ReactNode }> = ({ color, value }) => {
       if (sc && sc.iconRemove) {
         const IconRemove = sc.iconRemove;
 
-        return <IconRemove />;
+        return <IconRemove color={color} size={size} />;
       }
       IconCmp = t ? t('remove') : 'remove';
 

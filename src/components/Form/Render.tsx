@@ -51,8 +51,10 @@ const Form: React.FC<
     pristine,
     submitClassName,
     submitIcon,
+    submitIconColor,
     submitIconLeft,
     submitIconRight,
+    submitIconSize,
     submitLabel = 'form/submit',
     submitting,
     // valid,
@@ -118,8 +120,10 @@ const Form: React.FC<
               // !isSubmissive || invalid || pristine || submitting || !valid
               !isSubmissive || pristine || submitting
             }
+            iconColor={submitIconColor}
             iconLeft={submitIconLeft || submitIcon}
             iconRight={submitIconRight}
+            iconSize={submitIconSize}
             type="submit"
           >
             {!submitIcon && (t ? t(submitLabel) : submitLabel)}
