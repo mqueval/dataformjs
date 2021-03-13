@@ -56,11 +56,12 @@ const Tabs = ({ barClassName, barItemClassName, className, formName, formValues,
         if (newDatas) {
             const newInfos = [];
             newDatas.forEach((newData, i) => {
+                var _a;
                 let addNewTab = true;
                 if ('string' !== typeof tabs[i]) {
                     const tmpTab = tabs[i];
                     // On vérifie si il y a une condition
-                    if (tmpTab?.condition) {
+                    if (tmpTab === null || tmpTab === void 0 ? void 0 : tmpTab.condition) {
                         const newTest = params
                             ? replaceTestParams_1.default(tmpTab.condition, params)
                             : tmpTab.condition;
@@ -73,7 +74,7 @@ const Tabs = ({ barClassName, barItemClassName, className, formName, formValues,
                         isActive: tab === i,
                         title: 'string' === typeof tabs[i]
                             ? tabs[i]
-                            : tabs[i]?.name,
+                            : (_a = tabs[i]) === null || _a === void 0 ? void 0 : _a.name,
                     });
                 }
             });
