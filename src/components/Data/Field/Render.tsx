@@ -9,7 +9,7 @@ import FieldTemplate from './Template';
 import FieldTextarea from './Textarea';
 
 const DataFieldRender: FC<WrappedFieldProps & DataFieldProps> = props => {
-  const { componentType, handleOnChange, id, input } = props;
+  const { className, componentType, handleOnChange, id, input } = props;
 
   const newInput = { ...input };
   const { onChange } = input;
@@ -60,7 +60,7 @@ const DataFieldRender: FC<WrappedFieldProps & DataFieldProps> = props => {
 
   return (
     <FieldTemplate id={id} {...props}>
-      <Component {...props} input={newInput} />
+      <Component {...props} className={className} input={newInput} />
     </FieldTemplate>
   );
 };
