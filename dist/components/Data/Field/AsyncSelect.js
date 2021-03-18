@@ -61,7 +61,7 @@ exports.SelectSC = styled_components_1.default(async_1.default) `
 `;
 const Input = props => (react_1.default.createElement(react_select_1.components.Input, Object.assign({}, props, { autoComplete: "new-password" })));
 exports.Input = Input;
-const FieldAsyncSelect = ({ cacheOptions = false, className, customOption, defaultOptions = false, defaultValue, formatOptionLabel, formName, getOptionLabel, getOptionValue, handleOnChange, hideSelectedOptions = false, id, input, isClearable = false, isMulti, isOptionDisabled, isOptionSelected, isSearchable = true, loadOptions, loadingMessage, meta, meta: { error, touched }, noOptionsMessage, placeholder, ...others }) => {
+const FieldAsyncSelect = ({ cacheOptions = false, className, customOption, defaultOptions = false, defaultValue, fieldClassName, formatOptionLabel, formName, getOptionLabel, getOptionValue, handleOnChange, hideSelectedOptions = false, id, input, isClearable = false, isMulti, isOptionDisabled, isOptionSelected, isSearchable = true, loadOptions, loadingMessage, meta, meta: { error, touched }, noOptionsMessage, placeholder, ...others }) => {
     const ref = react_1.useRef();
     let newValue;
     const dispatch = react_redux_1.useDispatch();
