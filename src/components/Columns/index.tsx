@@ -5,13 +5,22 @@ import { GridProps } from '../Grid';
 
 const ColumnsSC = styled.div<GridProps>`
   display: flex;
-  flex-direction: row;
   justify-content: flex-start;
   align-items: stretch;
   align-content: flex-start;
 
+  flex-direction: column;
+  @media (min-width: 768px) {
+    flex-direction: row;
+  }
+
   > * + * {
-    margin-left: 1.5rem;
+    margin-top: 1.5rem;
+
+    @media (min-width: 768px) {
+      margin-left: 1.5rem;
+      margin-top: 0;
+    }
   }
 `;
 
