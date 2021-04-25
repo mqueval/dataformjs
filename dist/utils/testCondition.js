@@ -42,9 +42,6 @@ exports.default = ({ fieldValue, operator, value, }) => {
         }
         case 'not-in': {
             const newArray = value && !Array.isArray(value) ? value.split(',') : value;
-            console.info('value', value);
-            console.info('fieldValue', fieldValue);
-            console.info('newArray', newArray);
             return undefined !== fieldValue && !newArray.includes(fieldValue);
         }
     }
