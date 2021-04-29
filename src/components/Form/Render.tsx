@@ -1,5 +1,5 @@
 import objectHash from 'object-hash';
-import React, { ReactNode, useContext } from 'react';
+import React, { FC, ReactNode, useContext } from 'react';
 import { connect, DefaultRootState } from 'react-redux';
 import { Dispatch } from 'redux';
 import { DecoratedFormProps, InjectedFormProps, reduxForm } from 'redux-form';
@@ -7,7 +7,7 @@ import styled from 'styled-components';
 
 import { FormidableContext } from '../../index';
 import Button from '../Button';
-import { FormProps } from './index';
+import { FormActionProps, FormDivActionProps, FormProps } from './index';
 
 const FormSC = styled.form``;
 const FormBodySC = styled.div``;
@@ -23,6 +23,73 @@ interface FormRenderProps extends FormProps {
   errorValues?: any;
   formValues?: any;
 }
+
+const Actions: FC<{
+  id?: string;
+  values?: FormActionProps | FormActionProps[] | FormDivActionProps[];
+}> = ({ id, values }) => {
+  if (!values) {
+    return null;
+  }
+
+  const tmp: (FormActionProps | FormDivActionProps)[] = Array.isArray(values)
+    ? values
+    : [values];
+
+  return (
+    <>
+      {tmp.map((a: FormActionProps | FormDivActionProps) => {
+        if ((a as FormDivActionProps).actions) {
+          const div = a as FormDivActionProps;
+
+          return (
+            <div className={div.className}>
+              {div.actions.map(
+                (
+                  {
+                    className: actionClassName,
+                    label,
+                    onClick: actionOnClick,
+                    ...actionProps
+                  },
+                  i,
+                ) => (
+                  <Button
+                    key={objectHash({ actionClassName, id, label, index: i })}
+                    {...actionProps}
+                    onClick={actionOnClick}
+                  >
+                    {label}
+                  </Button>
+                ),
+              )}
+            </div>
+          );
+        }
+
+        return ((Array.isArray(a) ? a : [a]) as FormActionProps[]).map(
+          (
+            {
+              className: actionClassName,
+              label,
+              onClick: actionOnClick,
+              ...actionProps
+            },
+            i,
+          ) => (
+            <Button
+              key={objectHash({ actionClassName, id, label, index: i })}
+              {...actionProps}
+              onClick={actionOnClick}
+            >
+              {label}
+            </Button>
+          ),
+        );
+      })}
+    </>
+  );
+};
 
 const Form: React.FC<
   FormRenderProps & InjectedFormProps<any, FormRenderProps>
@@ -79,39 +146,18 @@ const Form: React.FC<
         )}
       </FormBodySC>
       <FormFooterSC className={footerClassName}>
-        <div>
-          {actions &&
-            (!Array.isArray(actions) ? [actions] : actions).map(
-              (
-                {
-                  className: actionClassName,
-                  label,
-                  onClick: actionOnClick,
-                  ...actionProps
-                },
-                i,
-              ) => (
-                <Button
-                  key={objectHash({ actionClassName, id, label, index: i })}
-                  {...actionProps}
-                  onClick={actionOnClick}
-                >
-                  {label}
-                </Button>
-              ),
-            )}
-          {cancelOnClick && (
-            <Button
-              className={cancelClassName}
-              iconColor={cancelIconColor}
-              iconLeft={cancelIcon}
-              onClick={cancelOnClick}
-              status={cancelStatus}
-            >
-              {t ? t(cancelLabel) : cancelLabel}
-            </Button>
-          )}
-        </div>
+        <Actions id={id} values={actions} />
+        {cancelOnClick && (
+          <Button
+            className={cancelClassName}
+            iconColor={cancelIconColor}
+            iconLeft={cancelIcon}
+            onClick={cancelOnClick}
+            status={cancelStatus}
+          >
+            {t ? t(cancelLabel) : cancelLabel}
+          </Button>
+        )}
 
         {!hideSubmitButton && (
           <Button

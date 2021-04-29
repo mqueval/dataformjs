@@ -6,8 +6,12 @@ import { DataProps } from '../Data';
 export interface FormActionProps extends ButtonProps {
     label?: string;
 }
+export interface FormDivActionProps {
+    className?: string;
+    actions: FormActionProps[];
+}
 export interface FormProps {
-    actions?: FormActionProps | FormActionProps[];
+    actions?: FormActionProps | FormActionProps[] | FormDivActionProps[];
     asyncChangeFields?: string[];
     asyncValidate?: (values: FormData, dispatch: Dispatch<any>, props: DecoratedFormProps<FormData, any>, blurredField: string) => Promise<any>;
     bodyClassName?: string;
