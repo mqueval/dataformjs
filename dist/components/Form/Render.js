@@ -36,6 +36,21 @@ const FormFooterSC = styled_components_1.default.div `
   justify-content: space-between;
 `;
 const MessageSC = styled_components_1.default.div ``;
+const Actions = ({ id, values }) => {
+    if (!values) {
+        return null;
+    }
+    const tmp = Array.isArray(values)
+        ? values
+        : [values];
+    return (react_1.default.createElement(react_1.default.Fragment, null, tmp.map((a) => {
+        if (a.actions) {
+            const div = a;
+            return (react_1.default.createElement("div", { className: div.className }, div.actions.map(({ className: actionClassName, label, onClick: actionOnClick, ...actionProps }, i) => (react_1.default.createElement(Button_1.default, Object.assign({ key: object_hash_1.default({ actionClassName, id, label, index: i }) }, actionProps, { onClick: actionOnClick }), label)))));
+        }
+        return (Array.isArray(a) ? a : [a]).map(({ className: actionClassName, label, onClick: actionOnClick, ...actionProps }, i) => (react_1.default.createElement(Button_1.default, Object.assign({ key: object_hash_1.default({ actionClassName, id, label, index: i }) }, actionProps, { onClick: actionOnClick }), label)));
+    })));
+};
 const Form = props => {
     const { actions, bodyClassName, cancelClassName, cancelIcon, cancelIconColor, cancelLabel = 'cancel', cancelOnClick, cancelStatus, children, className, error, 
     // errorValues,
@@ -50,10 +65,8 @@ const Form = props => {
             children,
             error && (react_1.default.createElement(MessageSC, { as: sc && sc.fieldMessage, status: "error" }, t ? t(error) : error))),
         react_1.default.createElement(FormFooterSC, { className: footerClassName },
-            react_1.default.createElement("div", null,
-                actions &&
-                    (!Array.isArray(actions) ? [actions] : actions).map(({ className: actionClassName, label, onClick: actionOnClick, ...actionProps }, i) => (react_1.default.createElement(Button_1.default, Object.assign({ key: object_hash_1.default({ actionClassName, id, label, index: i }) }, actionProps, { onClick: actionOnClick }), label))),
-                cancelOnClick && (react_1.default.createElement(Button_1.default, { className: cancelClassName, iconColor: cancelIconColor, iconLeft: cancelIcon, onClick: cancelOnClick, status: cancelStatus }, t ? t(cancelLabel) : cancelLabel))),
+            react_1.default.createElement(Actions, { id: id, values: actions }),
+            cancelOnClick && (react_1.default.createElement(Button_1.default, { className: cancelClassName, iconColor: cancelIconColor, iconLeft: cancelIcon, onClick: cancelOnClick, status: cancelStatus }, t ? t(cancelLabel) : cancelLabel)),
             !hideSubmitButton && (react_1.default.createElement(Button_1.default, { className: submitClassName, disabled: 
                 // !isSubmissive || invalid || pristine || submitting || !valid
                 !isSubmissive || pristine || submitting, iconColor: submitIconColor, iconLeft: submitIconLeft || submitIcon, iconRight: submitIconRight, iconSize: submitIconSize, type: "submit" }, !submitIcon && (t ? t(submitLabel) : submitLabel))))));
