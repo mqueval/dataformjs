@@ -12,6 +12,7 @@ type GroupProps = {
   columnsClassName?: string;
   customInfos?: ReactNode;
   customInfosClassName?: string;
+  datasClassName?: string;
   description?: string;
   descriptionClassName?: string;
   grid?: boolean;
@@ -31,13 +32,12 @@ const Group: FC<GroupProps> = ({
   children,
   className,
   columns,
-  columnsClassName,
   customInfos,
   customInfosClassName,
+  datasClassName,
   description,
   descriptionClassName,
   grid,
-  gridClassName,
   params,
   title,
   titleAs,
@@ -63,9 +63,9 @@ const Group: FC<GroupProps> = ({
           {t ? t(description) : description}
         </GroupDescriptionSC>
       )}
-      {columns && <Columns className={columnsClassName}>{children}</Columns>}
-      {grid && <Grid className={gridClassName}>{children}</Grid>}
-      {!columns && !grid && children}
+      {columns && <Columns className={datasClassName}>{children}</Columns>}
+      {grid && <Grid className={datasClassName}>{children}</Grid>}
+      {!columns && !grid && <div className={datasClassName}>{children}</div>}
     </GroupSC>
   );
 };

@@ -31,6 +31,7 @@ export interface DataFieldProps extends DataProps {
         value: string | number;
         id?: string;
     }[];
+    optionsClassName?: string;
     params?: {
         [key: string]: any;
     };
