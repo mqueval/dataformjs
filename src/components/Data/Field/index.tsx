@@ -41,6 +41,7 @@ export interface DataFieldProps extends DataProps {
   message?: string;
   name: string;
   options?: { label: string; value: string | number; id?: string }[];
+  optionsClassName?: string;
   params?: { [key: string]: any };
   placeholder?: string;
   required?: boolean;
@@ -57,6 +58,7 @@ const DataField: FC<
   column,
   columnOptions,
   fieldClassName,
+  optionsClassName,
   templateClassName,
   validate,
   wrapperClassName,
@@ -109,7 +111,7 @@ const DataField: FC<
       >
         <InputGroupSC
           as={sc && sc.inputGroup}
-          className="flex flex-row gap-2"
+          className={optionsClassName}
           role="radiogroup"
         >
           {options.map(option => (
