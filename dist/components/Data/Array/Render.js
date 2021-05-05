@@ -25,13 +25,14 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const object_hash_1 = __importDefault(require("object-hash"));
 const react_1 = __importStar(require("react"));
 const redux_form_1 = require("redux-form");
+const styled_components_1 = __importDefault(require("styled-components"));
 const index_1 = require("../../../index");
 const initializeValues_1 = __importDefault(require("../../../utils/initializeValues"));
-const Button_1 = __importDefault(require("../../Button"));
 const Field_1 = __importDefault(require("../Field"));
 const index_2 = __importDefault(require("../index"));
+const ButtonSC = styled_components_1.default.button ``;
 const DataArrayRender = ({ addButtonClassName, addButtonIcon, addButtonId, addButtonLabel, addButtonPosition, addButtonSize, addButtonStatus, datas, fields, formName, formValues, params, removeButtonClassName, removeButtonIcon, removeButtonLabel, removeButtonSize, removeButtonStatus, }) => {
-    const { t } = react_1.useContext(index_1.FormidableContext);
+    const { sc, t } = react_1.useContext(index_1.FormidableContext);
     react_1.useEffect(() => {
         if (0 === fields.length) {
             fields.push(datas ? initializeValues_1.default(datas) : '');
@@ -50,10 +51,10 @@ const DataArrayRender = ({ addButtonClassName, addButtonIcon, addButtonId, addBu
         }
     };
     return (react_1.default.createElement("div", null,
-        'top' === addButtonPosition && (react_1.default.createElement(Button_1.default, { className: addButtonClassName, iconLeft: addButtonIcon, onClick: handleAddButtonOnClick, size: addButtonSize, status: addButtonStatus }, addButtonLabel)),
+        'top' === addButtonPosition && (react_1.default.createElement(ButtonSC, { as: sc && sc.button, className: addButtonClassName, iconLeft: addButtonIcon, onClick: handleAddButtonOnClick, size: addButtonSize, status: addButtonStatus }, addButtonLabel)),
         fields &&
             fields.map((field, index) => {
-                const removeCmp = (removeButtonIcon || removeButtonLabel) && (react_1.default.createElement(Button_1.default, { className: removeButtonClassName, "data-index": index, iconLeft: removeButtonIcon, onClick: handleRemoveButtonOnClick, size: removeButtonSize, status: removeButtonStatus }, t && removeButtonLabel
+                const removeCmp = (removeButtonIcon || removeButtonLabel) && (react_1.default.createElement(ButtonSC, { as: sc && sc.button, className: removeButtonClassName, "data-index": index, iconLeft: removeButtonIcon, onClick: handleRemoveButtonOnClick, size: removeButtonSize, status: removeButtonStatus }, t && removeButtonLabel
                     ? t(removeButtonLabel)
                     : removeButtonLabel));
                 if (datas && datas.length > 0) {
@@ -75,6 +76,6 @@ const DataArrayRender = ({ addButtonClassName, addButtonIcon, addButtonId, addBu
                         name: field,
                     } }));
             }),
-        'bottom' === addButtonPosition && (react_1.default.createElement(Button_1.default, { iconLeft: addButtonIcon, id: addButtonId, onClick: handleAddButtonOnClick, size: addButtonSize, status: addButtonStatus }, t && addButtonLabel ? t(addButtonLabel) : addButtonLabel))));
+        'bottom' === addButtonPosition && (react_1.default.createElement(ButtonSC, { as: sc && sc.button, iconLeft: addButtonIcon, id: addButtonId, onClick: handleAddButtonOnClick, size: addButtonSize, status: addButtonStatus }, t && addButtonLabel ? t(addButtonLabel) : addButtonLabel))));
 };
 exports.default = DataArrayRender;
