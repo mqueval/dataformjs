@@ -120,10 +120,7 @@ const DataField: FC<
               fieldClassName={fieldClassName}
               templateClassName={templateClassName}
               {...props}
-              className={classnames(
-                '"grid grid-cols-2 items-center"',
-                className,
-              )}
+              className={className}
               component={DataFieldInput}
               description={option.label}
               id={option.id || `${newId}_${option.value}`}
