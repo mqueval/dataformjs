@@ -1,17 +1,21 @@
-import classnames from 'classnames';
 import React, {
   SyntheticEvent,
+  useContext,
   useEffect,
   useMemo,
   useState,
   VFC,
 } from 'react';
 import { connect } from 'react-redux';
+import styled from 'styled-components';
 
+import { FormidableContext } from '../../index';
 import replaceTestParams from '../../utils/replaceTestParams';
 import verifyCondition from '../../utils/verifyCondition';
 import Data, { DataProps } from '../Data';
 import TabsBar from './Bar';
+
+const TabsSC = styled.div``;
 
 type TabType = {
   name: string;
@@ -47,6 +51,8 @@ const Tabs: VFC<TabsProps & { formValues: { [key: string]: any } }> = ({
   params,
   tabs,
 }) => {
+  const { sc } = useContext(FormidableContext);
+
   const [tab, setTab] = useState<number>(0);
   const [infos, setInfos] = useState<TabsPageInfoProps[]>([]);
   const newDatas: Partial<DataProps>[] | undefined = useMemo(
@@ -119,7 +125,7 @@ const Tabs: VFC<TabsProps & { formValues: { [key: string]: any } }> = ({
   };
 
   return (
-    <div className={classnames(className, 'w-full')}>
+    <TabsSC as={sc && sc.tabs} className={className}>
       <TabsBar
         className={barClassName}
         handleButtonOnClick={handleButtonOnClick}
@@ -129,7 +135,7 @@ const Tabs: VFC<TabsProps & { formValues: { [key: string]: any } }> = ({
       {newDatas && newDatas.length > tab && (
         <Data {...newDatas[tab]} formName={formName} params={params} />
       )}
-    </div>
+    </TabsSC>
   );
 };
 

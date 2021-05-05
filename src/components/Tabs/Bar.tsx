@@ -1,7 +1,8 @@
 import hash from 'object-hash';
-import React, { FC, SyntheticEvent } from 'react';
+import React, { FC, SyntheticEvent, useContext } from 'react';
 import styled from 'styled-components';
 
+import { FormidableContext } from '../../index';
 import { TabsPageInfoProps } from './index';
 
 const TabsBarSC = styled.ul`
@@ -23,35 +24,39 @@ const TabsBarItemSC = styled.li<TabsPageInfoProps>`
 const ItemTitleSC = styled.span``;
 
 interface TabsBarProps {
+  className?: string;
   handleButtonOnClick: (event: SyntheticEvent<HTMLButtonElement>) => void;
   infos: TabsPageInfoProps[];
-  className?: string;
   itemClassName?: string;
 }
 
 const TabsBar: FC<TabsBarProps> = ({
   handleButtonOnClick,
   infos,
-  className,
   itemClassName,
-}) => (
-  <TabsBarSC className={className}>
-    {infos.map((info, i) => (
-      <TabsBarItemSC
-        key={`${hash({ ...infos[i], i })}`}
-        className={itemClassName}
-        {...info}
-      >
-        <button
-          data-tab={info.index}
-          onClick={handleButtonOnClick}
-          type="button"
+  ...props
+}) => {
+  const { sc } = useContext(FormidableContext);
+
+  return (
+    <TabsBarSC as={sc && sc.tabsBar} {...props}>
+      {infos.map((info, i) => (
+        <TabsBarItemSC
+          key={`${hash({ ...infos[i], i })}`}
+          className={itemClassName}
+          {...info}
         >
-          <ItemTitleSC>{infos[i].title}</ItemTitleSC>
-        </button>
-      </TabsBarItemSC>
-    ))}
-  </TabsBarSC>
-);
+          <button
+            data-tab={info.index}
+            onClick={handleButtonOnClick}
+            type="button"
+          >
+            <ItemTitleSC>{infos[i].title}</ItemTitleSC>
+          </button>
+        </TabsBarItemSC>
+      ))}
+    </TabsBarSC>
+  );
+};
 
 export default TabsBar;

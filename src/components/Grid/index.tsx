@@ -1,24 +1,20 @@
-import React, { FC } from 'react';
+import React, { FC, useContext } from 'react';
 import styled from 'styled-components';
 
-export interface GridProps {
-  className?: string;
-}
+import { FormidableContext } from '../../index';
 
-const GridSC = styled.div<GridProps>`
+const GridSC = styled.div`
   display: grid;
   column-gap: 1.5rem;
 `;
 
-const Grid: FC<GridProps> = ({ children, className }) => (
-  // const childrenWithProps = React.Children.map(children, child => {
-  //   if (React.isValidElement(child)) {
-  //     return React.cloneElement(child, { spacingX, spacingY });
-  //   }
-  //
-  //   return child;
-  // });
+const Grid: FC = ({ children, ...props }) => {
+  const { sc } = useContext(FormidableContext);
 
-  <GridSC className={className}>{children}</GridSC>
-);
+  return (
+    <GridSC as={sc && sc.grid} {...props}>
+      {children}
+    </GridSC>
+  );
+};
 export default Grid;

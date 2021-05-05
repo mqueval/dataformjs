@@ -1,9 +1,9 @@
-import React, { FC } from 'react';
+import React, { FC, useContext } from 'react';
 import styled from 'styled-components';
 
-import { GridProps } from '../Grid';
+import { FormidableContext } from '../../index';
 
-const RowsSC = styled.div<GridProps>`
+const RowsSC = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -15,8 +15,14 @@ const RowsSC = styled.div<GridProps>`
   }
 `;
 
-const Rows: FC<GridProps> = ({ children, className }) => (
-  <RowsSC className={className}>{children}</RowsSC>
-);
+const Rows: FC = ({ children, ...props }) => {
+  const { sc } = useContext(FormidableContext);
+
+  return (
+    <RowsSC as={sc && sc.rows} {...props}>
+      {children}
+    </RowsSC>
+  );
+};
 
 export default Rows;

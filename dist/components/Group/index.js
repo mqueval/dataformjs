@@ -28,17 +28,18 @@ const index_1 = require("../../index");
 const convertParams_1 = __importDefault(require("../../utils/convertParams"));
 const Columns_1 = __importDefault(require("../Columns"));
 const Grid_1 = __importDefault(require("../Grid"));
+const CustomInfosSC = styled_components_1.default.div ``;
 const GroupSC = styled_components_1.default.fieldset ``;
 const GroupDescriptionSC = styled_components_1.default.p ``;
 const LegendSC = styled_components_1.default.legend ``;
-const Group = ({ children, className, columns, columnsClassName, customInfos, customInfosClassName, description, descriptionClassName, grid, gridClassName, params, title, titleClassName, titleParams, }) => {
+const Group = ({ children, className, columns, columnsProps, customInfos, customInfosProps, description, descriptionProps, grid, gridProps, params, title, titleProps, titleParams, }) => {
     const { t, sc } = react_1.useContext(index_1.FormidableContext);
     return (react_1.default.createElement(GroupSC, { as: sc && sc.group, className: className },
-        customInfos && react_1.default.createElement("div", { className: customInfosClassName }, customInfos),
-        title && (react_1.default.createElement(LegendSC, { as: sc && sc.groupTitle, className: titleClassName }, t ? t(title, convertParams_1.default(titleParams, params)) : title)),
-        description && (react_1.default.createElement(GroupDescriptionSC, { as: sc && sc.groupDescription, className: descriptionClassName }, t ? t(description) : description)),
-        columns && react_1.default.createElement(Columns_1.default, { className: columnsClassName }, children),
-        grid && react_1.default.createElement(Grid_1.default, { className: gridClassName }, children),
+        customInfos && (react_1.default.createElement(CustomInfosSC, Object.assign({ as: sc && sc.groupCustomInfos }, customInfosProps), customInfos)),
+        title && (react_1.default.createElement(LegendSC, Object.assign({ as: sc && sc.groupTitle }, titleProps), t ? t(title, convertParams_1.default(titleParams, params)) : title)),
+        description && (react_1.default.createElement(GroupDescriptionSC, Object.assign({ as: sc && sc.groupDescription }, descriptionProps), t ? t(description) : description)),
+        columns && react_1.default.createElement(Columns_1.default, Object.assign({}, columnsProps), children),
+        grid && react_1.default.createElement(Grid_1.default, Object.assign({}, gridProps), children),
         !columns && !grid && children));
 };
 exports.default = Group;
