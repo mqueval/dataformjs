@@ -1,13 +1,15 @@
 import hash from 'object-hash';
 import React, { FC, SyntheticEvent, useContext, useEffect } from 'react';
 import { FormSection, WrappedFieldArrayProps } from 'redux-form';
+import styled from 'styled-components';
 
 import { FormidableContext } from '../../../index';
 import initializeValues from '../../../utils/initializeValues';
-import Button from '../../Button';
 import Field from '../Field';
 import Data from '../index';
 import { DataArrayProps } from './index';
+
+const ButtonSC = styled.button``;
 
 const DataArrayRender: FC<WrappedFieldArrayProps & DataArrayProps> = ({
   addButtonClassName,
@@ -28,7 +30,7 @@ const DataArrayRender: FC<WrappedFieldArrayProps & DataArrayProps> = ({
   removeButtonSize,
   removeButtonStatus,
 }) => {
-  const { t } = useContext(FormidableContext);
+  const { sc, t } = useContext(FormidableContext);
 
   useEffect(() => {
     if (0 === fields.length) {
@@ -57,7 +59,8 @@ const DataArrayRender: FC<WrappedFieldArrayProps & DataArrayProps> = ({
   return (
     <div>
       {'top' === addButtonPosition && (
-        <Button
+        <ButtonSC
+          as={sc && sc.button}
           className={addButtonClassName}
           iconLeft={addButtonIcon}
           onClick={handleAddButtonOnClick}
@@ -65,13 +68,14 @@ const DataArrayRender: FC<WrappedFieldArrayProps & DataArrayProps> = ({
           status={addButtonStatus}
         >
           {addButtonLabel}
-        </Button>
+        </ButtonSC>
       )}
 
       {fields &&
         fields.map((field, index) => {
           const removeCmp = (removeButtonIcon || removeButtonLabel) && (
-            <Button
+            <ButtonSC
+              as={sc && sc.button}
               className={removeButtonClassName}
               data-index={index}
               iconLeft={removeButtonIcon}
@@ -82,7 +86,7 @@ const DataArrayRender: FC<WrappedFieldArrayProps & DataArrayProps> = ({
               {t && removeButtonLabel
                 ? t(removeButtonLabel)
                 : removeButtonLabel}
-            </Button>
+            </ButtonSC>
           );
 
           if (datas && datas.length > 0) {
@@ -141,7 +145,8 @@ const DataArrayRender: FC<WrappedFieldArrayProps & DataArrayProps> = ({
         })}
 
       {'bottom' === addButtonPosition && (
-        <Button
+        <ButtonSC
+          as={sc && sc.button}
           iconLeft={addButtonIcon}
           id={addButtonId}
           onClick={handleAddButtonOnClick}
@@ -149,7 +154,7 @@ const DataArrayRender: FC<WrappedFieldArrayProps & DataArrayProps> = ({
           status={addButtonStatus}
         >
           {t && addButtonLabel ? t(addButtonLabel) : addButtonLabel}
-        </Button>
+        </ButtonSC>
       )}
     </div>
   );
