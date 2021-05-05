@@ -163,7 +163,7 @@ const Wizard: FC<WizardProps> = ({
   const initialValues = initializeValues(newDatas);
 
   return (
-    <WizardSC className={className}>
+    <WizardSC as={sc && sc.wizard} className={className}>
       {showProgress && newPages && (
         <ProgressBar
           className={progressClassName}

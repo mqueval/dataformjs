@@ -1,4 +1,3 @@
-import classnames from 'classnames';
 import React, { FC, ReactElement, SyntheticEvent, useContext } from 'react';
 import { Field as FieldForm, Validator } from 'redux-form';
 import styled from 'styled-components';

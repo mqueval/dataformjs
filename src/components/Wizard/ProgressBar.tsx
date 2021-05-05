@@ -1,7 +1,8 @@
 import hash from 'object-hash';
-import React, { ComponentType, FC, SyntheticEvent } from 'react';
+import React, { ComponentType, FC, SyntheticEvent, useContext } from 'react';
 import styled, { css } from 'styled-components';
 
+import { FormidableContext } from '../../index';
 import { FormProps } from '../Form';
 import { WizardPageInfoProps } from './index';
 
@@ -120,19 +121,23 @@ const ProgressBar: FC<ProgressBarProps> = ({
   infos,
   page,
   pages,
-  className,
   itemClassName,
   itemIconClassName,
   showStep,
+  ...props
 }) => {
+  const { sc } = useContext(FormidableContext);
+
   const IconStep = iconStep;
   const IconSuccess = iconSuccess;
+  // TODO revoir ce composant
 
   return (
-    <ProgressBarSC className={className}>
+    <ProgressBarSC as={sc && sc.progressBar} {...props}>
       {infos.map((info, i) => (
         <ProgressBarItemSC
           key={`${hash({ ...infos[i], i })}`}
+          as={sc && sc.progressBarItem}
           className={itemClassName}
           {...info}
           isCompleted={i < page}

@@ -9,19 +9,20 @@ import Grid from '../Grid';
 type GroupProps = {
   className?: string;
   columns?: boolean;
-  columnsClassName?: string;
+  columnsProps?: { [key: string]: any };
   customInfos?: ReactNode;
-  customInfosClassName?: string;
+  customInfosProps?: { [key: string]: any };
   description?: string;
-  descriptionClassName?: string;
+  descriptionProps?: { [key: string]: any };
   grid?: boolean;
-  gridClassName?: string;
+  gridProps?: { [key: string]: any };
   params?: { [key: string]: any };
   title?: string;
-  titleClassName?: string;
+  titleProps?: { [key: string]: any };
   titleParams?: { [key: string]: any };
 };
 
+const CustomInfosSC = styled.div``;
 const GroupSC = styled.fieldset``;
 const GroupDescriptionSC = styled.p``;
 const LegendSC = styled.legend``;
@@ -30,25 +31,29 @@ const Group: FC<GroupProps> = ({
   children,
   className,
   columns,
-  columnsClassName,
+  columnsProps,
   customInfos,
-  customInfosClassName,
+  customInfosProps,
   description,
-  descriptionClassName,
+  descriptionProps,
   grid,
-  gridClassName,
+  gridProps,
   params,
   title,
-  titleClassName,
+  titleProps,
   titleParams,
 }) => {
   const { t, sc } = useContext(FormidableContext);
 
   return (
     <GroupSC as={sc && sc.group} className={className}>
-      {customInfos && <div className={customInfosClassName}>{customInfos}</div>}
+      {customInfos && (
+        <CustomInfosSC as={sc && sc.groupCustomInfos} {...customInfosProps}>
+          {customInfos}
+        </CustomInfosSC>
+      )}
       {title && (
-        <LegendSC as={sc && sc.groupTitle} className={titleClassName}>
+        <LegendSC as={sc && sc.groupTitle} {...titleProps}>
           {t ? t(title, convertParams(titleParams, params)) : title}
         </LegendSC>
       )}
@@ -56,13 +61,13 @@ const Group: FC<GroupProps> = ({
       {description && (
         <GroupDescriptionSC
           as={sc && sc.groupDescription}
-          className={descriptionClassName}
+          {...descriptionProps}
         >
           {t ? t(description) : description}
         </GroupDescriptionSC>
       )}
-      {columns && <Columns className={columnsClassName}>{children}</Columns>}
-      {grid && <Grid className={gridClassName}>{children}</Grid>}
+      {columns && <Columns {...columnsProps}>{children}</Columns>}
+      {grid && <Grid {...gridProps}>{children}</Grid>}
       {!columns && !grid && children}
     </GroupSC>
   );

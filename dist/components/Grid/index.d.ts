@@ -1,6 +1,3 @@
 import { FC } from 'react';
-export interface GridProps {
-    className?: string;
-}
-declare const Grid: FC<GridProps>;
+declare const Grid: FC;
 export default Grid;
