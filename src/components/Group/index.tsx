@@ -12,14 +12,12 @@ type GroupProps = {
   columnsClassName?: string;
   customInfos?: ReactNode;
   customInfosClassName?: string;
-  datasClassName?: string;
   description?: string;
   descriptionClassName?: string;
   grid?: boolean;
   gridClassName?: string;
   params?: { [key: string]: any };
   title?: string;
-  titleAs?: 'div';
   titleClassName?: string;
   titleParams?: { [key: string]: any };
 };
@@ -32,15 +30,15 @@ const Group: FC<GroupProps> = ({
   children,
   className,
   columns,
+  columnsClassName,
   customInfos,
   customInfosClassName,
-  datasClassName,
   description,
   descriptionClassName,
   grid,
+  gridClassName,
   params,
   title,
-  titleAs,
   titleClassName,
   titleParams,
 }) => {
@@ -50,7 +48,7 @@ const Group: FC<GroupProps> = ({
     <GroupSC as={sc && sc.group} className={className}>
       {customInfos && <div className={customInfosClassName}>{customInfos}</div>}
       {title && (
-        <LegendSC as={titleAs} className={titleClassName}>
+        <LegendSC as={sc && sc.groupTitle} className={titleClassName}>
           {t ? t(title, convertParams(titleParams, params)) : title}
         </LegendSC>
       )}
@@ -63,9 +61,9 @@ const Group: FC<GroupProps> = ({
           {t ? t(description) : description}
         </GroupDescriptionSC>
       )}
-      {columns && <Columns className={datasClassName}>{children}</Columns>}
-      {grid && <Grid className={datasClassName}>{children}</Grid>}
-      {!columns && !grid && <div className={datasClassName}>{children}</div>}
+      {columns && <Columns className={columnsClassName}>{children}</Columns>}
+      {grid && <Grid className={gridClassName}>{children}</Grid>}
+      {!columns && !grid && children}
     </GroupSC>
   );
 };

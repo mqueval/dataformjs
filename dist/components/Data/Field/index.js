@@ -22,7 +22,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const classnames_1 = __importDefault(require("classnames"));
 const react_1 = __importStar(require("react"));
 const redux_form_1 = require("redux-form");
 const styled_components_1 = __importDefault(require("styled-components"));
@@ -60,7 +59,7 @@ const DataField = ({ className, column, columnOptions, fieldClassName, optionsCl
             return react_1.default.createElement("div", null, "input : erreur de param\u00E8tre : options obligatoire");
         }
         return (react_1.default.createElement(Wrapper_1.default, Object.assign({}, props, { column: column, columnOptions: columnOptions, id: newId, wrapperClassName: wrapperClassName }),
-            react_1.default.createElement(InputGroupSC, { as: sc && sc.inputGroup, className: optionsClassName, role: "radiogroup" }, options.map(option => (react_1.default.createElement(redux_form_1.Field, Object.assign({ key: option.value, fieldClassName: fieldClassName, templateClassName: templateClassName }, props, { className: classnames_1.default('"grid grid-cols-2 items-center"', className), component: Input_1.default, description: option.label, id: option.id || `${newId}_${option.value}`, validate: newValidate, value: option.value })))))));
+            react_1.default.createElement(InputGroupSC, { as: sc && sc.inputGroup, className: optionsClassName, role: "radiogroup" }, options.map(option => (react_1.default.createElement(redux_form_1.Field, Object.assign({ key: option.value, fieldClassName: fieldClassName, templateClassName: templateClassName }, props, { className: className, component: Input_1.default, description: option.label, id: option.id || `${newId}_${option.value}`, validate: newValidate, value: option.value })))))));
     }
     return (react_1.default.createElement(Wrapper_1.default, Object.assign({}, props, { column: column, columnOptions: columnOptions, id: newId, wrapperClassName: wrapperClassName }),
         react_1.default.createElement(redux_form_1.Field, Object.assign({}, props, { className: className, component: Render_1.default, fieldClassName: fieldClassName, id: newId, templateClassName: templateClassName, validate: newValidate }))));

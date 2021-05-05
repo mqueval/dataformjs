@@ -5,7 +5,6 @@ declare type GroupProps = {
     columnsClassName?: string;
     customInfos?: ReactNode;
     customInfosClassName?: string;
-    datasClassName?: string;
     description?: string;
     descriptionClassName?: string;
     grid?: boolean;
@@ -14,7 +13,6 @@ declare type GroupProps = {
         [key: string]: any;
     };
     title?: string;
-    titleAs?: 'div';
     titleClassName?: string;
     titleParams?: {
         [key: string]: any;
