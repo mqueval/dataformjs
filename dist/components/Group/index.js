@@ -31,14 +31,14 @@ const Grid_1 = __importDefault(require("../Grid"));
 const GroupSC = styled_components_1.default.fieldset ``;
 const GroupDescriptionSC = styled_components_1.default.p ``;
 const LegendSC = styled_components_1.default.legend ``;
-const Group = ({ children, className, columns, customInfos, customInfosClassName, datasClassName, description, descriptionClassName, grid, params, title, titleAs, titleClassName, titleParams, }) => {
+const Group = ({ children, className, columns, columnsClassName, customInfos, customInfosClassName, description, descriptionClassName, grid, gridClassName, params, title, titleClassName, titleParams, }) => {
     const { t, sc } = react_1.useContext(index_1.FormidableContext);
     return (react_1.default.createElement(GroupSC, { as: sc && sc.group, className: className },
         customInfos && react_1.default.createElement("div", { className: customInfosClassName }, customInfos),
-        title && (react_1.default.createElement(LegendSC, { as: titleAs, className: titleClassName }, t ? t(title, convertParams_1.default(titleParams, params)) : title)),
+        title && (react_1.default.createElement(LegendSC, { as: sc && sc.groupTitle, className: titleClassName }, t ? t(title, convertParams_1.default(titleParams, params)) : title)),
         description && (react_1.default.createElement(GroupDescriptionSC, { as: sc && sc.groupDescription, className: descriptionClassName }, t ? t(description) : description)),
-        columns && react_1.default.createElement(Columns_1.default, { className: datasClassName }, children),
-        grid && react_1.default.createElement(Grid_1.default, { className: datasClassName }, children),
-        !columns && !grid && react_1.default.createElement("div", { className: datasClassName }, children)));
+        columns && react_1.default.createElement(Columns_1.default, { className: columnsClassName }, children),
+        grid && react_1.default.createElement(Grid_1.default, { className: gridClassName }, children),
+        !columns && !grid && children));
 };
 exports.default = Group;
