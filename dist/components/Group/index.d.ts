@@ -2,18 +2,28 @@ import { FC, ReactNode } from 'react';
 declare type GroupProps = {
     className?: string;
     columns?: boolean;
-    columnsClassName?: string;
+    columnsProps?: {
+        [key: string]: any;
+    };
     customInfos?: ReactNode;
-    customInfosClassName?: string;
+    customInfosProps?: {
+        [key: string]: any;
+    };
     description?: string;
-    descriptionClassName?: string;
+    descriptionProps?: {
+        [key: string]: any;
+    };
     grid?: boolean;
-    gridClassName?: string;
+    gridProps?: {
+        [key: string]: any;
+    };
     params?: {
         [key: string]: any;
     };
     title?: string;
-    titleClassName?: string;
+    titleProps?: {
+        [key: string]: any;
+    };
     titleParams?: {
         [key: string]: any;
     };

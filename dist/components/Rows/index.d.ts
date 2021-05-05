@@ -1,4 +1,3 @@
 import { FC } from 'react';
-import { GridProps } from '../Grid';
-declare const Rows: FC<GridProps>;
+declare const Rows: FC;
 export default Rows;

@@ -22,14 +22,17 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const classnames_1 = __importDefault(require("classnames"));
 const react_1 = __importStar(require("react"));
 const react_redux_1 = require("react-redux");
+const styled_components_1 = __importDefault(require("styled-components"));
+const index_1 = require("../../index");
 const replaceTestParams_1 = __importDefault(require("../../utils/replaceTestParams"));
 const verifyCondition_1 = __importDefault(require("../../utils/verifyCondition"));
 const Data_1 = __importDefault(require("../Data"));
 const Bar_1 = __importDefault(require("./Bar"));
+const TabsSC = styled_components_1.default.div ``;
 const Tabs = ({ barClassName, barItemClassName, className, formName, formValues, datas, params, tabs, }) => {
+    const { sc } = react_1.useContext(index_1.FormidableContext);
     const [tab, setTab] = react_1.useState(0);
     const [infos, setInfos] = react_1.useState([]);
     const newDatas = react_1.useMemo(() => (datas && !Array.isArray(datas) ? [datas] : datas), [datas]);
@@ -87,7 +90,7 @@ const Tabs = ({ barClassName, barItemClassName, className, formName, formValues,
             setTab(parseInt(newTab, 10));
         }
     };
-    return (react_1.default.createElement("div", { className: classnames_1.default(className, 'w-full') },
+    return (react_1.default.createElement(TabsSC, { as: sc && sc.tabs, className: className },
         react_1.default.createElement(Bar_1.default, { className: barClassName, handleButtonOnClick: handleButtonOnClick, infos: infos, itemClassName: barItemClassName }),
         newDatas && newDatas.length > tab && (react_1.default.createElement(Data_1.default, Object.assign({}, newDatas[tab], { formName: formName, params: params })))));
 };

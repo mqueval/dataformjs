@@ -23,8 +23,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const object_hash_1 = __importDefault(require("object-hash"));
-const react_1 = __importDefault(require("react"));
+const react_1 = __importStar(require("react"));
 const styled_components_1 = __importStar(require("styled-components"));
+const index_1 = require("../../index");
 const ProgressBarSC = styled_components_1.default.ul `
   display: table;
   width: 100%;
@@ -110,10 +111,12 @@ const ProgressBarItemTitleSC = styled_components_1.default.span `
   left: calc(-50% + 15px);
   color: inherit;
 `;
-const ProgressBar = ({ handleStepButtonOnClick, iconStep, iconSuccess, infos, page, pages, className, itemClassName, itemIconClassName, showStep, }) => {
+const ProgressBar = ({ handleStepButtonOnClick, iconStep, iconSuccess, infos, page, pages, itemClassName, itemIconClassName, showStep, ...props }) => {
+    const { sc } = react_1.useContext(index_1.FormidableContext);
     const IconStep = iconStep;
     const IconSuccess = iconSuccess;
-    return (react_1.default.createElement(ProgressBarSC, { className: className }, infos.map((info, i) => (react_1.default.createElement(ProgressBarItemSC, Object.assign({ key: `${object_hash_1.default({ ...infos[i], i })}`, className: itemClassName }, info, { isCompleted: i < page }),
+    // TODO revoir ce composant
+    return (react_1.default.createElement(ProgressBarSC, Object.assign({ as: sc && sc.progressBar }, props), infos.map((info, i) => (react_1.default.createElement(ProgressBarItemSC, Object.assign({ key: `${object_hash_1.default({ ...infos[i], i })}`, as: sc && sc.progressBarItem, className: itemClassName }, info, { isCompleted: i < page }),
         react_1.default.createElement("button", { "data-page": i, onClick: handleStepButtonOnClick, type: "button" },
             react_1.default.createElement(ProgressBarItemIconSC, Object.assign({ "aria-label": `step ${i + 1}`, className: itemIconClassName }, info, { isCompleted: i < page }),
                 i < page && IconSuccess && react_1.default.createElement(IconSuccess, { size: 16 }),

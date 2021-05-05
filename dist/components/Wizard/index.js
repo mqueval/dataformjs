@@ -108,7 +108,7 @@ const Wizard = ({ backClassName, backIcon, backIconColor, backLabel, backStatus,
         });
     }
     const initialValues = initializeValues_1.default(newDatas);
-    return (react_1.default.createElement(WizardSC, { className: className },
+    return (react_1.default.createElement(WizardSC, { as: sc && sc.wizard, className: className },
         showProgress && newPages && (react_1.default.createElement(ProgressBar_1.default, { className: progressClassName, handleStepButtonOnClick: handleStepButtonOnClick, iconStep: sc && sc.iconStep, iconSuccess: sc && sc.iconSuccess, infos: infos, itemClassName: progressItemClassName, itemIconClassName: progressItemIconClassName, page: page, pages: newPages, showStep: progressShowStep })),
         newPages && newPages.length > page && (react_1.default.createElement(Form_1.default, Object.assign({ cancelClassName: backClassName, cancelIcon: backIcon, cancelIconColor: backIconColor, cancelLabel: backLabel, cancelOnClick: page > 0 ? handleBackOnClick : undefined, cancelStatus: backStatus, id: `${id}--page_${page}`, initialValues: initialValues, onSubmit: handleNextOnClick }, newPages[page], { destroyOnUnmount: false, forceUnregisterOnUnmount // <------ unregister fields on unmount
             : true, name: name, params: params })))));
