@@ -27,7 +27,7 @@ const react_redux_1 = require("react-redux");
 const redux_form_1 = require("redux-form");
 const styled_components_1 = __importDefault(require("styled-components"));
 const index_1 = require("../../index");
-const Button_1 = __importDefault(require("../Button"));
+const ButtonSC = styled_components_1.default.button ``;
 const FormSC = styled_components_1.default.form ``;
 const FormBodySC = styled_components_1.default.div ``;
 const FormFooterSC = styled_components_1.default.div `
@@ -50,8 +50,8 @@ const Form = props => {
             children,
             error && (react_1.default.createElement(MessageSC, { as: sc && sc.fieldMessage, status: "error" }, t ? t(error) : error))),
         react_1.default.createElement(FormFooterSC, { className: footerClassName },
-            react_1.default.createElement("div", null, cancelOnClick && (react_1.default.createElement(Button_1.default, { iconLeft: cancelIcon, onClick: cancelOnClick, status: cancelStatus }, t ? t(cancelLabel) : cancelLabel))),
-            !hideSubmitButton && (react_1.default.createElement(Button_1.default, { disabled: 
+            react_1.default.createElement("div", null, cancelOnClick && (react_1.default.createElement(ButtonSC, { as: sc && sc.button, iconLeft: cancelIcon, onClick: cancelOnClick, status: cancelStatus }, t ? t(cancelLabel) : cancelLabel))),
+            !hideSubmitButton && (react_1.default.createElement(ButtonSC, { as: sc && sc.button, disabled: 
                 // !isSubmissive || invalid || pristine || submitting || !valid
                 !isSubmissive || pristine || submitting, iconRight: submitIcon, type: "submit" }, t ? t(submitLabel) : submitLabel)))));
 };

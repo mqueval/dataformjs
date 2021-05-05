@@ -6,9 +6,9 @@ import { DecoratedFormProps, InjectedFormProps, reduxForm } from 'redux-form';
 import styled from 'styled-components';
 
 import { FormidableContext } from '../../index';
-import Button from '../Button';
 import { FormActionProps, FormDivActionProps, FormProps } from './index';
 
+const ButtonSC = styled.button``;
 const FormSC = styled.form``;
 const FormBodySC = styled.div``;
 const FormFooterSC = styled.div`
@@ -32,6 +32,8 @@ const Actions: FC<{
     return null;
   }
 
+  const { sc } = useContext(FormidableContext);
+
   const tmp: (FormActionProps | FormDivActionProps)[] = Array.isArray(values)
     ? values
     : [values];
@@ -44,46 +46,28 @@ const Actions: FC<{
 
           return (
             <div className={div.className}>
-              {div.actions.map(
-                (
-                  {
-                    className: actionClassName,
-                    label,
-                    onClick: actionOnClick,
-                    ...actionProps
-                  },
-                  i,
-                ) => (
-                  <Button
-                    key={objectHash({ actionClassName, id, label, index: i })}
-                    {...actionProps}
-                    onClick={actionOnClick}
-                  >
-                    {label}
-                  </Button>
-                ),
-              )}
+              {div.actions.map(({ label, ...actionProps }, i) => (
+                <ButtonSC
+                  key={objectHash({ id, label, index: i })}
+                  as={sc && sc.button}
+                  {...actionProps}
+                >
+                  {label}
+                </ButtonSC>
+              ))}
             </div>
           );
         }
 
         return ((Array.isArray(a) ? a : [a]) as FormActionProps[]).map(
-          (
-            {
-              className: actionClassName,
-              label,
-              onClick: actionOnClick,
-              ...actionProps
-            },
-            i,
-          ) => (
-            <Button
-              key={objectHash({ actionClassName, id, label, index: i })}
+          ({ label, ...actionProps }, i) => (
+            <ButtonSC
+              key={objectHash({ id, label, index: i })}
+              as={sc && sc.button}
               {...actionProps}
-              onClick={actionOnClick}
             >
               {label}
-            </Button>
+            </ButtonSC>
           ),
         );
       })}
@@ -148,7 +132,8 @@ const Form: React.FC<
       <FormFooterSC className={footerClassName}>
         <Actions id={id} values={actions} />
         {cancelOnClick && (
-          <Button
+          <ButtonSC
+            as={sc && sc.button}
             className={cancelClassName}
             iconColor={cancelIconColor}
             iconLeft={cancelIcon}
@@ -156,11 +141,12 @@ const Form: React.FC<
             status={cancelStatus}
           >
             {t ? t(cancelLabel) : cancelLabel}
-          </Button>
+          </ButtonSC>
         )}
 
         {!hideSubmitButton && (
-          <Button
+          <ButtonSC
+            as={sc && sc.button}
             className={submitClassName}
             disabled={
               // !isSubmissive || invalid || pristine || submitting || !valid
@@ -173,7 +159,7 @@ const Form: React.FC<
             type="submit"
           >
             {!submitIcon && (t ? t(submitLabel) : submitLabel)}
-          </Button>
+          </ButtonSC>
         )}
       </FormFooterSC>
     </FormSC>

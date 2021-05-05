@@ -4,11 +4,10 @@ import { Dispatch } from 'redux';
 import { DecoratedFormProps } from 'redux-form';
 
 import initializeValues from '../../utils/initializeValues';
-import { ButtonProps } from '../Button';
 import Data, { DataProps } from '../Data';
 import FormRender from './Render';
 
-export interface FormActionProps extends ButtonProps {
+export interface FormActionProps {
   label?: string;
 }
 

@@ -5,9 +5,9 @@ import { DecoratedFormProps, InjectedFormProps, reduxForm } from 'redux-form';
 import styled from 'styled-components';
 
 import { FormidableContext } from '../../index';
-import Button from '../Button';
 import { DataProps } from '../Data';
 
+const ButtonSC = styled.button``;
 const FormSC = styled.form``;
 const FormBodySC = styled.div``;
 const FormFooterSC = styled.div`
@@ -98,18 +98,20 @@ const Form: React.FC<
       <FormFooterSC className={footerClassName}>
         <div>
           {cancelOnClick && (
-            <Button
+            <ButtonSC
+              as={sc && sc.button}
               iconLeft={cancelIcon}
               onClick={cancelOnClick}
               status={cancelStatus}
             >
               {t ? t(cancelLabel) : cancelLabel}
-            </Button>
+            </ButtonSC>
           )}
         </div>
 
         {!hideSubmitButton && (
-          <Button
+          <ButtonSC
+            as={sc && sc.button}
             disabled={
               // !isSubmissive || invalid || pristine || submitting || !valid
               !isSubmissive || pristine || submitting
@@ -118,7 +120,7 @@ const Form: React.FC<
             type="submit"
           >
             {t ? t(submitLabel) : submitLabel}
-          </Button>
+          </ButtonSC>
         )}
       </FormFooterSC>
     </FormSC>

@@ -28,7 +28,7 @@ const react_redux_1 = require("react-redux");
 const redux_form_1 = require("redux-form");
 const styled_components_1 = __importDefault(require("styled-components"));
 const index_1 = require("../../index");
-const Button_1 = __importDefault(require("../Button"));
+const ButtonSC = styled_components_1.default.button ``;
 const FormSC = styled_components_1.default.form ``;
 const FormBodySC = styled_components_1.default.div ``;
 const FormFooterSC = styled_components_1.default.div `
@@ -40,15 +40,16 @@ const Actions = ({ id, values }) => {
     if (!values) {
         return null;
     }
+    const { sc } = react_1.useContext(index_1.FormidableContext);
     const tmp = Array.isArray(values)
         ? values
         : [values];
     return (react_1.default.createElement(react_1.default.Fragment, null, tmp.map((a) => {
         if (a.actions) {
             const div = a;
-            return (react_1.default.createElement("div", { className: div.className }, div.actions.map(({ className: actionClassName, label, onClick: actionOnClick, ...actionProps }, i) => (react_1.default.createElement(Button_1.default, Object.assign({ key: object_hash_1.default({ actionClassName, id, label, index: i }) }, actionProps, { onClick: actionOnClick }), label)))));
+            return (react_1.default.createElement("div", { className: div.className }, div.actions.map(({ label, ...actionProps }, i) => (react_1.default.createElement(ButtonSC, Object.assign({ key: object_hash_1.default({ id, label, index: i }), as: sc && sc.button }, actionProps), label)))));
         }
-        return (Array.isArray(a) ? a : [a]).map(({ className: actionClassName, label, onClick: actionOnClick, ...actionProps }, i) => (react_1.default.createElement(Button_1.default, Object.assign({ key: object_hash_1.default({ actionClassName, id, label, index: i }) }, actionProps, { onClick: actionOnClick }), label)));
+        return (Array.isArray(a) ? a : [a]).map(({ label, ...actionProps }, i) => (react_1.default.createElement(ButtonSC, Object.assign({ key: object_hash_1.default({ id, label, index: i }), as: sc && sc.button }, actionProps), label)));
     })));
 };
 const Form = props => {
@@ -66,8 +67,8 @@ const Form = props => {
             error && (react_1.default.createElement(MessageSC, { as: sc && sc.fieldMessage, status: "error" }, t ? t(error) : error))),
         react_1.default.createElement(FormFooterSC, { className: footerClassName },
             react_1.default.createElement(Actions, { id: id, values: actions }),
-            cancelOnClick && (react_1.default.createElement(Button_1.default, { className: cancelClassName, iconColor: cancelIconColor, iconLeft: cancelIcon, onClick: cancelOnClick, status: cancelStatus }, t ? t(cancelLabel) : cancelLabel)),
-            !hideSubmitButton && (react_1.default.createElement(Button_1.default, { className: submitClassName, disabled: 
+            cancelOnClick && (react_1.default.createElement(ButtonSC, { as: sc && sc.button, className: cancelClassName, iconColor: cancelIconColor, iconLeft: cancelIcon, onClick: cancelOnClick, status: cancelStatus }, t ? t(cancelLabel) : cancelLabel)),
+            !hideSubmitButton && (react_1.default.createElement(ButtonSC, { as: sc && sc.button, className: submitClassName, disabled: 
                 // !isSubmissive || invalid || pristine || submitting || !valid
                 !isSubmissive || pristine || submitting, iconColor: submitIconColor, iconLeft: submitIconLeft || submitIcon, iconRight: submitIconRight, iconSize: submitIconSize, type: "submit" }, !submitIcon && (t ? t(submitLabel) : submitLabel))))));
 };

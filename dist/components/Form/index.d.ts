@@ -1,9 +1,8 @@
 import { FC, ReactNode, SyntheticEvent } from 'react';
 import { Dispatch } from 'redux';
 import { DecoratedFormProps } from 'redux-form';
-import { ButtonProps } from '../Button';
 import { DataProps } from '../Data';
-export interface FormActionProps extends ButtonProps {
+export interface FormActionProps {
     label?: string;
 }
 export interface FormDivActionProps {
