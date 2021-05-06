@@ -9,8 +9,12 @@ interface ProgressBarProps {
     page: number;
     pages: Partial<FormProps>[];
     className?: string;
-    itemClassName?: string;
-    itemIconClassName?: string;
+    itemProps?: {
+        [key: string]: any;
+    };
+    itemIconProps?: {
+        [key: string]: any;
+    };
     showStep?: boolean;
 }
 declare const ProgressBar: FC<ProgressBarProps>;

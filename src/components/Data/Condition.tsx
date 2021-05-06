@@ -24,7 +24,7 @@ interface DataConditionProps extends DataProps {
   datas: DataProps[];
   formName: string;
   group?: boolean;
-  groupOptions?: { [key: string]: any };
+  groupProps?: { [key: string]: any };
   test: DataConditionTestProps | DataConditionTestProps[];
   valid?: boolean;
 }
@@ -34,7 +34,7 @@ const DataCondition: FC<DataConditionProps> = ({
   formName,
   formValues,
   group,
-  groupOptions,
+  groupProps,
   className,
   params,
   valid,
@@ -44,7 +44,7 @@ const DataCondition: FC<DataConditionProps> = ({
   }
 
   const ConditionCmp = group ? Group : ConditionSC;
-  const props = group ? groupOptions : {};
+  const props = group ? groupProps : {};
 
   return (
     <ConditionCmp className={className} {...props}>

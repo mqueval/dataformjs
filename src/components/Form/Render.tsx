@@ -28,11 +28,11 @@ const Actions: FC<{
   id?: string;
   values?: FormActionProps | FormActionProps[] | FormDivActionProps[];
 }> = ({ id, values }) => {
+  const { sc } = useContext(FormidableContext);
+
   if (!values) {
     return null;
   }
-
-  const { sc } = useContext(FormidableContext);
 
   const tmp: (FormActionProps | FormDivActionProps)[] = Array.isArray(values)
     ? values
@@ -80,18 +80,13 @@ const Form: React.FC<
 > = props => {
   const {
     actions,
-    bodyClassName,
-    cancelClassName,
-    cancelIcon,
-    cancelIconColor,
-    cancelLabel = 'cancel',
-    cancelOnClick,
-    cancelStatus,
+    bodyProps,
+    cancelProps,
     children,
     className,
     error,
     // errorValues,
-    footerClassName,
+    footerProps,
     // formValues,
     handleSubmit,
     hideSubmitButton = false,
@@ -100,13 +95,7 @@ const Form: React.FC<
     // invalid,
     name,
     pristine,
-    submitClassName,
-    submitIcon,
-    submitIconColor,
-    submitIconLeft,
-    submitIconRight,
-    submitIconSize,
-    submitLabel = 'form/submit',
+    submitProps,
     submitting,
     // valid,
   } = props;
@@ -121,7 +110,7 @@ const Form: React.FC<
       name={`${name}-form`}
       onSubmit={handleSubmit}
     >
-      <FormBodySC className={bodyClassName}>
+      <FormBodySC {...bodyProps}>
         {children}
         {error && (
           <MessageSC as={sc && sc.fieldMessage} status="error">
@@ -129,36 +118,30 @@ const Form: React.FC<
           </MessageSC>
         )}
       </FormBodySC>
-      <FormFooterSC className={footerClassName}>
+      <FormFooterSC {...footerProps}>
         <Actions id={id} values={actions} />
-        {cancelOnClick && (
-          <ButtonSC
-            as={sc && sc.button}
-            className={cancelClassName}
-            iconColor={cancelIconColor}
-            iconLeft={cancelIcon}
-            onClick={cancelOnClick}
-            status={cancelStatus}
-          >
-            {t ? t(cancelLabel) : cancelLabel}
+        {cancelProps?.onClick && (
+          <ButtonSC as={sc && sc.button} {...cancelProps}>
+            {t
+              ? t(cancelProps?.label || 'cancel')
+              : cancelProps?.label || 'cancel'}
           </ButtonSC>
         )}
 
         {!hideSubmitButton && (
           <ButtonSC
             as={sc && sc.button}
-            className={submitClassName}
+            {...submitProps}
             disabled={
               // !isSubmissive || invalid || pristine || submitting || !valid
               !isSubmissive || pristine || submitting
             }
-            iconColor={submitIconColor}
-            iconLeft={submitIconLeft || submitIcon}
-            iconRight={submitIconRight}
-            iconSize={submitIconSize}
             type="submit"
           >
-            {!submitIcon && (t ? t(submitLabel) : submitLabel)}
+            {!submitProps?.icon &&
+              (t
+                ? t(submitProps?.label || 'submit')
+                : submitProps?.label || 'submit')}
           </ButtonSC>
         )}
       </FormFooterSC>

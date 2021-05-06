@@ -12,11 +12,11 @@ const DataFieldRender: FC<WrappedFieldProps & DataFieldProps> = props => {
   const {
     className,
     componentType,
-    fieldClassName,
+    fieldProps,
     handleOnChange,
     id,
     input,
-    templateClassName,
+    templateProps,
   } = props;
 
   const newInput = { ...input };
@@ -67,11 +67,11 @@ const DataFieldRender: FC<WrappedFieldProps & DataFieldProps> = props => {
   }
 
   return (
-    <FieldTemplate id={id} {...props} templateClassName={templateClassName}>
+    <FieldTemplate id={id} {...props} {...templateProps}>
       <Component
         {...props}
+        {...fieldProps}
         className={className}
-        fieldClassName={fieldClassName}
         input={newInput}
       />
     </FieldTemplate>

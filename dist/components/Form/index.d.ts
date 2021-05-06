@@ -1,4 +1,4 @@
-import { FC, ReactNode, SyntheticEvent } from 'react';
+import { FC } from 'react';
 import { Dispatch } from 'redux';
 import { DecoratedFormProps } from 'redux-form';
 import { DataProps } from '../Data';
@@ -13,18 +13,19 @@ export interface FormProps {
     actions?: FormActionProps | FormActionProps[] | FormDivActionProps[];
     asyncChangeFields?: string[];
     asyncValidate?: (values: FormData, dispatch: Dispatch<any>, props: DecoratedFormProps<FormData, any>, blurredField: string) => Promise<any>;
-    bodyClassName?: string;
-    cancelClassName?: string;
-    cancelIcon?: ReactNode;
-    cancelIconColor?: string;
-    cancelLabel?: string;
-    cancelOnClick?: (event: SyntheticEvent<HTMLButtonElement>) => void;
-    cancelStatus?: string;
+    bodyProps?: {
+        [key: string]: any;
+    };
+    cancelProps?: {
+        [key: string]: any;
+    };
     className?: string;
     datas?: DataProps | DataProps[];
     destroyOnUnmount?: boolean;
     enableReinitialize?: boolean;
-    footerClassName?: string;
+    footerProps?: {
+        [key: string]: any;
+    };
     forceUnregisterOnUnmount?: boolean;
     hideSubmitButton?: boolean;
     id?: string;
@@ -38,13 +39,9 @@ export interface FormProps {
     params?: {
         [key: string]: any;
     };
-    submitClassName?: string;
-    submitIcon?: ReactNode;
-    submitIconColor?: string;
-    submitIconLeft?: ReactNode;
-    submitIconRight?: ReactNode;
-    submitIconSize?: number;
-    submitLabel?: string;
+    submitProps?: {
+        [key: string]: any;
+    };
     title?: string;
     touchOnChange?: boolean;
     validate?: (values: any, props: any) => any;

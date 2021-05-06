@@ -10,9 +10,9 @@ const styled_components_1 = __importDefault(require("styled-components"));
 const Group_1 = __importDefault(require("../Group"));
 const index_1 = __importDefault(require("./index"));
 const SectionSC = styled_components_1.default.div ``;
-const DataSection = ({ className, datas, name, formName, formValues, group, groupOptions, params, }) => {
+const DataSection = ({ className, datas, name, formName, formValues, group, groupProps, params, }) => {
     const SectionCmp = group ? Group_1.default : SectionSC;
-    const props = group ? groupOptions : {};
+    const props = group ? groupProps : {};
     return (react_1.default.createElement(SectionCmp, Object.assign({ className: className }, props),
         react_1.default.createElement(redux_form_1.FormSection, { name: name }, datas &&
             datas.length > 0 &&

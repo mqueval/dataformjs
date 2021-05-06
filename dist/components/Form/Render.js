@@ -37,10 +37,10 @@ const FormFooterSC = styled_components_1.default.div `
 `;
 const MessageSC = styled_components_1.default.div ``;
 const Actions = ({ id, values }) => {
+    const { sc } = react_1.useContext(index_1.FormidableContext);
     if (!values) {
         return null;
     }
-    const { sc } = react_1.useContext(index_1.FormidableContext);
     const tmp = Array.isArray(values)
         ? values
         : [values];
@@ -53,24 +53,29 @@ const Actions = ({ id, values }) => {
     })));
 };
 const Form = props => {
-    const { actions, bodyClassName, cancelClassName, cancelIcon, cancelIconColor, cancelLabel = 'cancel', cancelOnClick, cancelStatus, children, className, error, 
+    const { actions, bodyProps, cancelProps, children, className, error, 
     // errorValues,
-    footerClassName, 
+    footerProps, 
     // formValues,
     handleSubmit, hideSubmitButton = false, id, isSubmissive = true, 
     // invalid,
-    name, pristine, submitClassName, submitIcon, submitIconColor, submitIconLeft, submitIconRight, submitIconSize, submitLabel = 'form/submit', submitting, } = props;
+    name, pristine, submitProps, submitting, } = props;
     const { sc, t } = react_1.useContext(index_1.FormidableContext);
     return (react_1.default.createElement(FormSC, { as: sc && sc.form, className: className, id: id, name: `${name}-form`, onSubmit: handleSubmit },
-        react_1.default.createElement(FormBodySC, { className: bodyClassName },
+        react_1.default.createElement(FormBodySC, Object.assign({}, bodyProps),
             children,
             error && (react_1.default.createElement(MessageSC, { as: sc && sc.fieldMessage, status: "error" }, t ? t(error) : error))),
-        react_1.default.createElement(FormFooterSC, { className: footerClassName },
+        react_1.default.createElement(FormFooterSC, Object.assign({}, footerProps),
             react_1.default.createElement(Actions, { id: id, values: actions }),
-            cancelOnClick && (react_1.default.createElement(ButtonSC, { as: sc && sc.button, className: cancelClassName, iconColor: cancelIconColor, iconLeft: cancelIcon, onClick: cancelOnClick, status: cancelStatus }, t ? t(cancelLabel) : cancelLabel)),
-            !hideSubmitButton && (react_1.default.createElement(ButtonSC, { as: sc && sc.button, className: submitClassName, disabled: 
+            (cancelProps === null || cancelProps === void 0 ? void 0 : cancelProps.onClick) && (react_1.default.createElement(ButtonSC, Object.assign({ as: sc && sc.button }, cancelProps), t
+                ? t((cancelProps === null || cancelProps === void 0 ? void 0 : cancelProps.label) || 'cancel')
+                : (cancelProps === null || cancelProps === void 0 ? void 0 : cancelProps.label) || 'cancel')),
+            !hideSubmitButton && (react_1.default.createElement(ButtonSC, Object.assign({ as: sc && sc.button }, submitProps, { disabled: 
                 // !isSubmissive || invalid || pristine || submitting || !valid
-                !isSubmissive || pristine || submitting, iconColor: submitIconColor, iconLeft: submitIconLeft || submitIcon, iconRight: submitIconRight, iconSize: submitIconSize, type: "submit" }, !submitIcon && (t ? t(submitLabel) : submitLabel))))));
+                !isSubmissive || pristine || submitting, type: "submit" }), !(submitProps === null || submitProps === void 0 ? void 0 : submitProps.icon) &&
+                (t
+                    ? t((submitProps === null || submitProps === void 0 ? void 0 : submitProps.label) || 'submit')
+                    : (submitProps === null || submitProps === void 0 ? void 0 : submitProps.label) || 'submit'))))));
 };
 const ReduxForm = redux_form_1.reduxForm({})(Form);
 const mapStateToProps = (state, props) => ({

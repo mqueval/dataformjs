@@ -18,19 +18,19 @@ const WrapperSC = styled.div``;
 const FieldWrapper: FC<DataFieldProps> = ({
   children,
   column,
-  columnOptions,
+  columnProps,
   componentType,
   customBottom,
-  customBottomClassName,
+  customBottomProps,
   customInfos,
-  customInfosClassName,
+  customInfosProps,
   customTop,
-  customTopClassName,
+  customTopProps,
   id,
   label,
   labelShow = true,
   name,
-  wrapperClassName,
+  wrapperProps,
 }) => {
   const { t, sc } = useContext(FormidableContext);
 
@@ -39,17 +39,17 @@ const FieldWrapper: FC<DataFieldProps> = ({
   }
 
   const WrapperCmp = column ? Column : WrapperSC;
-  const props = column ? columnOptions : {};
+  const props = column ? columnProps : {};
 
   return (
-    <WrapperCmp className={wrapperClassName} {...props}>
+    <WrapperCmp {...props} {...wrapperProps}>
       {customInfos && (
-        <CustomTopSC as={sc && sc.customTop} className={customInfosClassName}>
+        <CustomTopSC as={sc && sc.customTop} {...customInfosProps}>
           {customInfos}
         </CustomTopSC>
       )}
       {customTop && (
-        <CustomTopSC as={sc && sc.customTop} className={customTopClassName}>
+        <CustomTopSC as={sc && sc.customTop} {...customTopProps}>
           {customTop}
         </CustomTopSC>
       )}
@@ -60,10 +60,7 @@ const FieldWrapper: FC<DataFieldProps> = ({
       )}
       <div>{children}</div>
       {customBottom && (
-        <CustomBottomSC
-          as={sc && sc.customBottom}
-          className={customBottomClassName}
-        >
+        <CustomBottomSC as={sc && sc.customBottom} {...customBottomProps}>
           {customBottom}
         </CustomBottomSC>
       )}

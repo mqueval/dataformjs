@@ -109,8 +109,8 @@ interface ProgressBarProps {
   page: number;
   pages: Partial<FormProps>[];
   className?: string;
-  itemClassName?: string;
-  itemIconClassName?: string;
+  itemProps?: { [key: string]: any };
+  itemIconProps?: { [key: string]: any };
   showStep?: boolean;
 }
 
@@ -121,8 +121,8 @@ const ProgressBar: FC<ProgressBarProps> = ({
   infos,
   page,
   pages,
-  itemClassName,
-  itemIconClassName,
+  itemProps,
+  itemIconProps,
   showStep,
   ...props
 }) => {
@@ -138,14 +138,15 @@ const ProgressBar: FC<ProgressBarProps> = ({
         <ProgressBarItemSC
           key={`${hash({ ...infos[i], i })}`}
           as={sc && sc.progressBarItem}
-          className={itemClassName}
+          {...itemProps}
           {...info}
           isCompleted={i < page}
         >
           <button data-page={i} onClick={handleStepButtonOnClick} type="button">
             <ProgressBarItemIconSC
               aria-label={`step ${i + 1}`}
-              className={itemIconClassName}
+              as={sc && sc.progressBarItemIcon}
+              {...itemIconProps}
               {...info}
               isCompleted={i < page}
             >
@@ -155,9 +156,13 @@ const ProgressBar: FC<ProgressBarProps> = ({
             </ProgressBarItemIconSC>
 
             {showStep && (
-              <ProgressBarItemStepSC>{`step ${i + 1}`}</ProgressBarItemStepSC>
+              <ProgressBarItemStepSC as={sc && sc.progressBarItemStep}>{`step ${
+                i + 1
+              }`}</ProgressBarItemStepSC>
             )}
-            <ProgressBarItemTitleSC>{pages[i].title}</ProgressBarItemTitleSC>
+            <ProgressBarItemTitleSC as={sc && sc.progressBarItemTitle}>
+              {pages[i].title}
+            </ProgressBarItemTitleSC>
           </button>
         </ProgressBarItemSC>
       ))}

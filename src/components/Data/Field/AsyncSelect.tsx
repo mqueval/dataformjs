@@ -77,7 +77,7 @@ const FieldAsyncSelect: FC<
   customOption,
   defaultOptions = false,
   defaultValue,
-  fieldClassName,
+  fieldProps,
   formatOptionLabel,
   formName,
   getOptionLabel,
