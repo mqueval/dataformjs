@@ -31,9 +31,10 @@ const DataFieldInputSC = styled_components_1.default.div `
   justify-items: center;
 `;
 const InputSC = styled_components_1.default.input ``;
-const FieldInput = ({ className, description, disabled, fieldClassName, id, input, placeholder, mask, max, meta: { error, touched }, min, step, type = 'text', }) => {
+const FieldInput = ({ autoComplete, className, description, disabled, fieldProps, id, input, placeholder, mask, max, meta: { error, touched }, min, step, type = 'text', }) => {
     const { t, sc } = react_1.useContext(index_1.FormidableContext);
-    const fieldProps = {
+    const newFieldProps = {
+        ...fieldProps,
         disabled,
         id,
         max,
@@ -45,7 +46,7 @@ const FieldInput = ({ className, description, disabled, fieldClassName, id, inpu
         type: mask ? 'text' : type,
     };
     return (react_1.default.createElement(DataFieldInputSC, { className: className },
-        mask ? (react_1.default.createElement(react_input_mask_1.default, Object.assign({ mask: mask }, input), (inputProps) => (react_1.default.createElement(InputSC, Object.assign({}, inputProps, fieldProps, { className: fieldClassName }))))) : (react_1.default.createElement(InputSC, Object.assign({}, input, fieldProps, { className: fieldClassName }))),
+        mask ? (react_1.default.createElement(react_input_mask_1.default, Object.assign({ mask: mask }, input), (inputProps) => (react_1.default.createElement(InputSC, Object.assign({}, inputProps, newFieldProps, { autoComplete: autoComplete }))))) : (react_1.default.createElement(InputSC, Object.assign({}, input, newFieldProps, { autoComplete: autoComplete }))),
         description && (react_1.default.createElement("label", { htmlFor: id }, t ? t(description) : description))));
 };
 exports.default = FieldInput;

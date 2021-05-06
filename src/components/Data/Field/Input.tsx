@@ -14,6 +14,7 @@ const DataFieldInputSC = styled.div`
 const InputSC = styled.input``;
 
 export interface DataFieldInputProps extends DataFieldProps {
+  autoComplete?: string;
   description?: string;
   mask?: string;
   min?: number | string;
@@ -23,10 +24,11 @@ export interface DataFieldInputProps extends DataFieldProps {
 }
 
 const FieldInput: FC<WrappedFieldProps & DataFieldInputProps> = ({
+  autoComplete,
   className,
   description,
   disabled,
-  fieldClassName,
+  fieldProps,
   id,
   input,
   placeholder,
@@ -39,7 +41,8 @@ const FieldInput: FC<WrappedFieldProps & DataFieldInputProps> = ({
 }) => {
   const { t, sc } = useContext(FormidableContext);
 
-  const fieldProps = {
+  const newFieldProps = {
+    ...fieldProps,
     disabled,
     id,
     max,
@@ -58,13 +61,13 @@ const FieldInput: FC<WrappedFieldProps & DataFieldInputProps> = ({
           {(inputProps: any) => (
             <InputSC
               {...inputProps}
-              {...fieldProps}
-              className={fieldClassName}
+              {...newFieldProps}
+              autoComplete={autoComplete}
             />
           )}
         </InputMask>
       ) : (
-        <InputSC {...input} {...fieldProps} className={fieldClassName} />
+        <InputSC {...input} {...newFieldProps} autoComplete={autoComplete} />
       )}
       {description && (
         <label htmlFor={id}>{t ? t(description) : description}</label>

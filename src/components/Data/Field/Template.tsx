@@ -11,7 +11,7 @@ const FieldSC = styled.div``;
 
 const FieldTemplate: FC<WrappedFieldProps & DataFieldProps> = ({
   children,
-  templateClassName,
+  templateProps,
   input: { name },
   message,
   meta: { error, touched, warning },
@@ -19,7 +19,7 @@ const FieldTemplate: FC<WrappedFieldProps & DataFieldProps> = ({
   const { t, sc } = useContext(FormidableContext);
 
   return (
-    <FieldSC as={sc && sc.field} className={templateClassName}>
+    <FieldSC as={sc && sc.field} {...templateProps}>
       {children}
 
       {touched &&

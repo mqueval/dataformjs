@@ -1,5 +1,5 @@
 import hash from 'object-hash';
-import React, { FC, ReactNode, SyntheticEvent } from 'react';
+import React, { FC } from 'react';
 import { Dispatch } from 'redux';
 import { DecoratedFormProps } from 'redux-form';
 
@@ -25,18 +25,19 @@ export interface FormProps {
     props: DecoratedFormProps<FormData, any>,
     blurredField: string,
   ) => Promise<any>;
-  bodyClassName?: string;
-  cancelClassName?: string;
-  cancelIcon?: ReactNode;
-  cancelIconColor?: string;
-  cancelLabel?: string;
-  cancelOnClick?: (event: SyntheticEvent<HTMLButtonElement>) => void;
-  cancelStatus?: string;
+  bodyProps?: { [key: string]: any };
+  cancelProps?: { [key: string]: any };
+  // cancelClassName?: string;
+  // cancelIcon?: ReactNode;
+  // cancelIconColor?: string;
+  // cancelLabel?: string;
+  // cancelOnClick?: (event: SyntheticEvent<HTMLButtonElement>) => void;
+  // cancelStatus?: string;
   className?: string;
   datas?: DataProps | DataProps[];
   destroyOnUnmount?: boolean;
   enableReinitialize?: boolean;
-  footerClassName?: string;
+  footerProps?: { [key: string]: any };
   forceUnregisterOnUnmount?: boolean;
   hideSubmitButton?: boolean;
   id?: string;
@@ -51,13 +52,14 @@ export interface FormProps {
   ): void;
   onSubmit: (values?: any) => void;
   params?: { [key: string]: any };
-  submitClassName?: string;
-  submitIcon?: ReactNode;
-  submitIconColor?: string;
-  submitIconLeft?: ReactNode;
-  submitIconRight?: ReactNode;
-  submitIconSize?: number;
-  submitLabel?: string;
+  submitProps?: { [key: string]: any };
+  // submitClassName?: string;
+  // submitIcon?: ReactNode;
+  // submitIconColor?: string;
+  // submitIconLeft?: ReactNode;
+  // submitIconRight?: ReactNode;
+  // submitIconSize?: number;
+  // submitLabel?: string;
   title?: string;
   touchOnChange?: boolean;
   validate?: (values: any, props: any) => any;
@@ -67,20 +69,15 @@ const Form: FC<FormProps> = ({
   actions,
   asyncChangeFields,
   asyncValidate,
-  bodyClassName,
-  cancelClassName,
-  cancelIcon,
-  cancelIconColor,
-  cancelLabel,
-  cancelOnClick,
-  cancelStatus,
+  bodyProps,
+  cancelProps,
   children,
   className,
   datas,
   destroyOnUnmount,
   enableReinitialize,
   forceUnregisterOnUnmount,
-  footerClassName,
+  footerProps,
   hideSubmitButton,
   id,
   initialValues,
@@ -89,13 +86,7 @@ const Form: FC<FormProps> = ({
   onChange,
   onSubmit,
   params,
-  submitClassName,
-  submitIcon,
-  submitIconColor,
-  submitIconLeft,
-  submitIconRight,
-  submitIconSize,
-  submitLabel,
+  submitProps,
   touchOnChange,
   validate,
 }) => {
@@ -107,17 +98,12 @@ const Form: FC<FormProps> = ({
       actions={actions}
       asyncChangeFields={asyncChangeFields}
       asyncValidate={asyncValidate}
-      bodyClassName={bodyClassName}
-      cancelClassName={cancelClassName}
-      cancelIcon={cancelIcon}
-      cancelIconColor={cancelIconColor}
-      cancelLabel={cancelLabel}
-      cancelOnClick={cancelOnClick}
-      cancelStatus={cancelStatus}
+      bodyProps={bodyProps}
+      cancelProps={cancelProps}
       className={className}
       destroyOnUnmount={destroyOnUnmount}
       enableReinitialize={enableReinitialize}
-      footerClassName={footerClassName}
+      footerProps={footerProps}
       forceUnregisterOnUnmount={forceUnregisterOnUnmount}
       hideSubmitButton={hideSubmitButton}
       id={id}
@@ -126,13 +112,7 @@ const Form: FC<FormProps> = ({
       name={name}
       onChange={onChange}
       onSubmit={onSubmit}
-      submitClassName={submitClassName}
-      submitIcon={submitIcon}
-      submitIconColor={submitIconColor}
-      submitIconLeft={submitIconLeft}
-      submitIconRight={submitIconRight}
-      submitIconSize={submitIconSize}
-      submitLabel={submitLabel}
+      submitProps={submitProps}
       touchOnChange={touchOnChange}
       validate={validate}
     >
