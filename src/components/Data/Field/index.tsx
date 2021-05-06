@@ -21,13 +21,13 @@ const InputGroupSC = styled.div``;
 export interface DataFieldProps extends DataProps {
   componentType: string;
   column?: boolean;
-  columnOptions?: { [key: string]: any };
+  columnProps?: { [key: string]: any };
   customBottom?: ReactElement | ReactElement[];
-  customBottomClassName?: string;
+  customBottomProps?: { [key: string]: any };
   customTop?: ReactElement | ReactElement[];
-  customTopClassName?: string;
+  customTopProps?: { [key: string]: any };
   disabled?: boolean;
-  fieldClassName?: string;
+  fieldProps?: { [key: string]: any };
   handleOnChange?: (props: {
     change?: (formName: string, name: string, value: any) => void;
     event?: SyntheticEvent<HTMLInputElement> | any;
@@ -40,14 +40,14 @@ export interface DataFieldProps extends DataProps {
   message?: string;
   name: string;
   options?: { label: string; value: string | number; id?: string }[];
-  optionsClassName?: string;
+  optionsProps?: { [key: string]: any };
   params?: { [key: string]: any };
   placeholder?: string;
   required?: boolean;
-  templateClassName?: string;
+  templateProps?: { [key: string]: any };
   type?: string;
   validate?: Validator | Validator[]; // TODO @deprecated
-  wrapperClassName?: string;
+  wrapperProps?: { [key: string]: any };
 }
 
 const DataField: FC<
@@ -55,12 +55,12 @@ const DataField: FC<
 > = ({
   className,
   column,
-  columnOptions,
-  fieldClassName,
-  optionsClassName,
-  templateClassName,
+  columnProps,
+  fieldProps,
+  optionsProps,
+  templateProps,
   validate,
-  wrapperClassName,
+  wrapperProps,
   ...props
 }) => {
   const { sc } = useContext(FormidableContext);
@@ -104,20 +104,20 @@ const DataField: FC<
       <DataFieldWrapper
         {...props}
         column={column}
-        columnOptions={columnOptions}
+        columnProps={columnProps}
         id={newId}
-        wrapperClassName={wrapperClassName}
+        wrapperProps={wrapperProps}
       >
         <InputGroupSC
           as={sc && sc.inputGroup}
-          className={optionsClassName}
+          {...optionsProps}
           role="radiogroup"
         >
           {options.map(option => (
             <FieldForm
               key={option.value}
-              fieldClassName={fieldClassName}
-              templateClassName={templateClassName}
+              fieldProps={fieldProps}
+              templateProps={templateProps}
               {...props}
               className={className}
               component={DataFieldInput}
@@ -136,17 +136,17 @@ const DataField: FC<
     <DataFieldWrapper
       {...props}
       column={column}
-      columnOptions={columnOptions}
+      columnProps={columnProps}
       id={newId}
-      wrapperClassName={wrapperClassName}
+      wrapperProps={wrapperProps}
     >
       <FieldForm
         {...props}
         className={className}
         component={DataFieldRender}
-        fieldClassName={fieldClassName}
+        fieldProps={fieldProps}
         id={newId}
-        templateClassName={templateClassName}
+        templateProps={templateProps}
         validate={newValidate}
       />
     </DataFieldWrapper>

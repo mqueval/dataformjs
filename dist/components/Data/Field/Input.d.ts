@@ -2,6 +2,7 @@ import { FC } from 'react';
 import { WrappedFieldProps } from 'redux-form';
 import { DataFieldProps } from './index';
 export interface DataFieldInputProps extends DataFieldProps {
+    autoComplete?: string;
     description?: string;
     mask?: string;
     min?: number | string;

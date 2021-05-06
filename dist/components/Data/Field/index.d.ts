@@ -6,15 +6,21 @@ import { DataFieldInputProps } from './Input';
 export interface DataFieldProps extends DataProps {
     componentType: string;
     column?: boolean;
-    columnOptions?: {
+    columnProps?: {
         [key: string]: any;
     };
     customBottom?: ReactElement | ReactElement[];
-    customBottomClassName?: string;
+    customBottomProps?: {
+        [key: string]: any;
+    };
     customTop?: ReactElement | ReactElement[];
-    customTopClassName?: string;
+    customTopProps?: {
+        [key: string]: any;
+    };
     disabled?: boolean;
-    fieldClassName?: string;
+    fieldProps?: {
+        [key: string]: any;
+    };
     handleOnChange?: (props: {
         change?: (formName: string, name: string, value: any) => void;
         event?: SyntheticEvent<HTMLInputElement> | any;
@@ -31,16 +37,22 @@ export interface DataFieldProps extends DataProps {
         value: string | number;
         id?: string;
     }[];
-    optionsClassName?: string;
+    optionsProps?: {
+        [key: string]: any;
+    };
     params?: {
         [key: string]: any;
     };
     placeholder?: string;
     required?: boolean;
-    templateClassName?: string;
+    templateProps?: {
+        [key: string]: any;
+    };
     type?: string;
     validate?: Validator | Validator[];
-    wrapperClassName?: string;
+    wrapperProps?: {
+        [key: string]: any;
+    };
 }
 declare const DataField: FC<DataFieldAsyncSelectProps<any> | DataFieldInputProps | DataFieldProps>;
 export default DataField;

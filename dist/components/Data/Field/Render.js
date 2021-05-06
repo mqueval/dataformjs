@@ -10,7 +10,7 @@ const Select_1 = __importDefault(require("./Select"));
 const Template_1 = __importDefault(require("./Template"));
 const Textarea_1 = __importDefault(require("./Textarea"));
 const DataFieldRender = props => {
-    const { className, componentType, fieldClassName, handleOnChange, id, input, templateClassName, } = props;
+    const { className, componentType, fieldProps, handleOnChange, id, input, templateProps, } = props;
     const newInput = { ...input };
     const { onChange } = input;
     if (handleOnChange) {
@@ -43,7 +43,7 @@ const DataFieldRender = props => {
         default:
             return (react_1.default.createElement("div", null, `data field render : erreur de paramètre : ${componentType} n'est pas pris en charge`));
     }
-    return (react_1.default.createElement(Template_1.default, Object.assign({ id: id }, props, { templateClassName: templateClassName }),
-        react_1.default.createElement(Component, Object.assign({}, props, { className: className, fieldClassName: fieldClassName, input: newInput }))));
+    return (react_1.default.createElement(Template_1.default, Object.assign({ id: id }, props, templateProps),
+        react_1.default.createElement(Component, Object.assign({}, props, fieldProps, { className: className, input: newInput }))));
 };
 exports.default = DataFieldRender;

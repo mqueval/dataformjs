@@ -3,10 +3,14 @@ import DataArray from './Array';
 import { DataConditionTestProps } from './Condition';
 export interface DataProps {
     actions?: any;
-    actionsClassName?: string;
+    actionsProps?: {
+        [key: string]: any;
+    };
     className?: string;
     customInfos?: ReactNode;
-    customInfosClassName?: string;
+    customInfosProps?: {
+        [key: string]: any;
+    };
     componentType?: string;
     datas?: DataProps[];
     formName?: string;

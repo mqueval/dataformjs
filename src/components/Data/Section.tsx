@@ -14,7 +14,7 @@ const DataSection: FC<
     name: string;
     formName: string;
     group?: boolean;
-    groupOptions?: { [key: string]: any };
+    groupProps?: { [key: string]: any };
     params?: { [key: string]: any };
   }
 > = ({
@@ -24,11 +24,11 @@ const DataSection: FC<
   formName,
   formValues,
   group,
-  groupOptions,
+  groupProps,
   params,
 }) => {
   const SectionCmp = group ? Group : SectionSC;
-  const props = group ? groupOptions : {};
+  const props = group ? groupProps : {};
 
   return (
     <SectionCmp className={className} {...props}>

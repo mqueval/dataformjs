@@ -5,7 +5,7 @@ declare const DataSection: FC<DataProps & {
     name: string;
     formName: string;
     group?: boolean;
-    groupOptions?: {
+    groupProps?: {
         [key: string]: any;
     };
     params?: {

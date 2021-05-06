@@ -31,7 +31,7 @@ const Input_1 = __importDefault(require("./Input"));
 const Render_1 = __importDefault(require("./Render"));
 const Wrapper_1 = __importDefault(require("./Wrapper"));
 const InputGroupSC = styled_components_1.default.div ``;
-const DataField = ({ className, column, columnOptions, fieldClassName, optionsClassName, templateClassName, validate, wrapperClassName, ...props }) => {
+const DataField = ({ className, column, columnProps, fieldProps, optionsProps, templateProps, validate, wrapperProps, ...props }) => {
     const { sc } = react_1.useContext(index_1.FormidableContext);
     const { componentType, id, name, options, required, params, type } = props;
     const newId = id || `${params && params.name ? `${params.name}.` : ''}${name}`;
@@ -58,10 +58,10 @@ const DataField = ({ className, column, columnOptions, fieldClassName, optionsCl
         if (!options || 0 === options.length) {
             return react_1.default.createElement("div", null, "input : erreur de param\u00E8tre : options obligatoire");
         }
-        return (react_1.default.createElement(Wrapper_1.default, Object.assign({}, props, { column: column, columnOptions: columnOptions, id: newId, wrapperClassName: wrapperClassName }),
-            react_1.default.createElement(InputGroupSC, { as: sc && sc.inputGroup, className: optionsClassName, role: "radiogroup" }, options.map(option => (react_1.default.createElement(redux_form_1.Field, Object.assign({ key: option.value, fieldClassName: fieldClassName, templateClassName: templateClassName }, props, { className: className, component: Input_1.default, description: option.label, id: option.id || `${newId}_${option.value}`, validate: newValidate, value: option.value })))))));
+        return (react_1.default.createElement(Wrapper_1.default, Object.assign({}, props, { column: column, columnProps: columnProps, id: newId, wrapperProps: wrapperProps }),
+            react_1.default.createElement(InputGroupSC, Object.assign({ as: sc && sc.inputGroup }, optionsProps, { role: "radiogroup" }), options.map(option => (react_1.default.createElement(redux_form_1.Field, Object.assign({ key: option.value, fieldProps: fieldProps, templateProps: templateProps }, props, { className: className, component: Input_1.default, description: option.label, id: option.id || `${newId}_${option.value}`, validate: newValidate, value: option.value })))))));
     }
-    return (react_1.default.createElement(Wrapper_1.default, Object.assign({}, props, { column: column, columnOptions: columnOptions, id: newId, wrapperClassName: wrapperClassName }),
-        react_1.default.createElement(redux_form_1.Field, Object.assign({}, props, { className: className, component: Render_1.default, fieldClassName: fieldClassName, id: newId, templateClassName: templateClassName, validate: newValidate }))));
+    return (react_1.default.createElement(Wrapper_1.default, Object.assign({}, props, { column: column, columnProps: columnProps, id: newId, wrapperProps: wrapperProps }),
+        react_1.default.createElement(redux_form_1.Field, Object.assign({}, props, { className: className, component: Render_1.default, fieldProps: fieldProps, id: newId, templateProps: templateProps, validate: newValidate }))));
 };
 exports.default = DataField;

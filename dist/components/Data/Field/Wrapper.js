@@ -34,18 +34,18 @@ const CustomTopSC = styled_components_1.default.div `
 `;
 const FieldLabelSC = styled_components_1.default.label ``;
 const WrapperSC = styled_components_1.default.div ``;
-const FieldWrapper = ({ children, column, columnOptions, componentType, customBottom, customBottomClassName, customInfos, customInfosClassName, customTop, customTopClassName, id, label, labelShow = true, name, wrapperClassName, }) => {
+const FieldWrapper = ({ children, column, columnProps, componentType, customBottom, customBottomProps, customInfos, customInfosProps, customTop, customTopProps, id, label, labelShow = true, name, wrapperProps, }) => {
     const { t, sc } = react_1.useContext(index_1.FormidableContext);
     if ('hidden' === componentType) {
         return react_1.default.createElement(react_1.default.Fragment, null, children);
     }
     const WrapperCmp = column ? Column_1.default : WrapperSC;
-    const props = column ? columnOptions : {};
-    return (react_1.default.createElement(WrapperCmp, Object.assign({ className: wrapperClassName }, props),
-        customInfos && (react_1.default.createElement(CustomTopSC, { as: sc && sc.customTop, className: customInfosClassName }, customInfos)),
-        customTop && (react_1.default.createElement(CustomTopSC, { as: sc && sc.customTop, className: customTopClassName }, customTop)),
+    const props = column ? columnProps : {};
+    return (react_1.default.createElement(WrapperCmp, Object.assign({}, props, wrapperProps),
+        customInfos && (react_1.default.createElement(CustomTopSC, Object.assign({ as: sc && sc.customTop }, customInfosProps), customInfos)),
+        customTop && (react_1.default.createElement(CustomTopSC, Object.assign({ as: sc && sc.customTop }, customTopProps), customTop)),
         labelShow && (react_1.default.createElement(FieldLabelSC, { as: sc && sc.label, htmlFor: id }, t ? t(label || name) : label || name)),
         react_1.default.createElement("div", null, children),
-        customBottom && (react_1.default.createElement(CustomBottomSC, { as: sc && sc.customBottom, className: customBottomClassName }, customBottom))));
+        customBottom && (react_1.default.createElement(CustomBottomSC, Object.assign({ as: sc && sc.customBottom }, customBottomProps), customBottom))));
 };
 exports.default = FieldWrapper;

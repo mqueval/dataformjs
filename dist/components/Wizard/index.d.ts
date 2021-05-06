@@ -1,11 +1,9 @@
-import { FC, ReactNode } from 'react';
+import { FC } from 'react';
 import { FormProps } from '../Form';
 export interface WizardProps {
-    backIcon?: ReactNode;
-    backIconColor?: string;
-    backLabel?: string;
-    backClassName?: string;
-    backStatus?: string;
+    backProps?: {
+        [key: string]: any;
+    };
     className?: string;
     pages?: Partial<FormProps> | Partial<FormProps>[];
     id?: string;
@@ -13,9 +11,15 @@ export interface WizardProps {
     params?: {
         [key: string]: any;
     };
-    progressClassName?: string;
-    progressItemClassName?: string;
-    progressItemIconClassName?: string;
+    progressProps?: {
+        [key: string]: any;
+    };
+    progressItemProps?: {
+        [key: string]: any;
+    };
+    progressItemIconProps?: {
+        [key: string]: any;
+    };
     progressShowStep?: boolean;
     showProgress?: boolean;
 }
