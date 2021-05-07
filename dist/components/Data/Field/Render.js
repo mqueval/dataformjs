@@ -10,13 +10,20 @@ const Select_1 = __importDefault(require("./Select"));
 const Template_1 = __importDefault(require("./Template"));
 const Textarea_1 = __importDefault(require("./Textarea"));
 const DataFieldRender = props => {
-    const { className, componentType, fieldProps, handleOnChange, id, input, templateProps, } = props;
+    const { className, componentType, fieldProps, handleOnChange, handleOnBlur, id, input, templateProps, } = props;
     const newInput = { ...input };
-    const { onChange } = input;
+    const { onChange, onBlur } = input;
     if (handleOnChange) {
         newInput.onChange = (event) => {
             handleOnChange({ event, name: input.name });
             onChange(event);
+        };
+    }
+    if (handleOnBlur) {
+        newInput.onBlur = (event) => {
+            const { value } = event.currentTarget;
+            handleOnBlur({ event, value, name: input.name });
+            onBlur(event);
         };
     }
     if ('hidden' === componentType) {

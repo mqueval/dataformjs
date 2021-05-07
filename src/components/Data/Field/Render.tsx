@@ -14,13 +14,14 @@ const DataFieldRender: FC<WrappedFieldProps & DataFieldProps> = props => {
     componentType,
     fieldProps,
     handleOnChange,
+    handleOnBlur,
     id,
     input,
     templateProps,
   } = props;
 
   const newInput = { ...input };
-  const { onChange } = input;
+  const { onChange, onBlur } = input;
   if (handleOnChange) {
     newInput.onChange = (
       event: SyntheticEvent<
@@ -29,6 +30,18 @@ const DataFieldRender: FC<WrappedFieldProps & DataFieldProps> = props => {
     ): void => {
       handleOnChange({ event, name: input.name });
       onChange(event);
+    };
+  }
+
+  if (handleOnBlur) {
+    newInput.onBlur = (
+      event: SyntheticEvent<
+        HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+      >,
+    ): void => {
+      const { value } = event.currentTarget;
+      handleOnBlur({ event, value, name: input.name });
+      onBlur(event);
     };
   }
 
