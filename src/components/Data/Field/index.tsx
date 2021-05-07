@@ -30,10 +30,21 @@ export interface DataFieldProps extends DataProps {
   fieldProps?: { [key: string]: any };
   handleOnChange?: (props: {
     change?: (formName: string, name: string, value: any) => void;
-    event?: SyntheticEvent<HTMLInputElement> | any;
+    event?:
+      | SyntheticEvent<
+          HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+        >
+      | any;
     name?: string;
     value?: any;
   }) => any;
+  handleOnBlur?: (props: {
+    event?: SyntheticEvent<
+      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+    >;
+    name?: string;
+    value?: any;
+  }) => void;
   id?: string;
   label?: string;
   labelShow?: boolean;
