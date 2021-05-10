@@ -9,6 +9,10 @@ export interface DataFieldProps extends DataProps {
     columnProps?: {
         [key: string]: any;
     };
+    customAction?: ReactElement | ReactElement[];
+    customActionProps?: {
+        [key: string]: any;
+    };
     customBottom?: ReactElement | ReactElement[];
     customBottomProps?: {
         [key: string]: any;

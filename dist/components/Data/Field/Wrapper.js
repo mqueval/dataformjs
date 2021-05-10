@@ -41,11 +41,11 @@ const FieldWrapper = ({ children, column, columnProps, componentType, customBott
     }
     const WrapperCmp = column ? Column_1.default : WrapperSC;
     const props = column ? columnProps : {};
-    return (react_1.default.createElement(WrapperCmp, Object.assign({}, props, wrapperProps),
+    return (react_1.default.createElement(WrapperCmp, Object.assign({ as: !column && sc && sc.fieldWrapper }, props, wrapperProps),
         customInfos && (react_1.default.createElement(CustomTopSC, Object.assign({ as: sc && sc.customTop }, customInfosProps), customInfos)),
         customTop && (react_1.default.createElement(CustomTopSC, Object.assign({ as: sc && sc.customTop }, customTopProps), customTop)),
-        labelShow && (react_1.default.createElement(FieldLabelSC, { as: sc && sc.label, htmlFor: id }, t ? t(label || name) : label || name)),
-        react_1.default.createElement("div", null, children),
+        labelShow && (react_1.default.createElement(FieldLabelSC, { as: sc && sc.fieldLabel, htmlFor: id }, t ? t(label || name) : label || name)),
+        children,
         customBottom && (react_1.default.createElement(CustomBottomSC, Object.assign({ as: sc && sc.customBottom }, customBottomProps), customBottom))));
 };
 exports.default = FieldWrapper;

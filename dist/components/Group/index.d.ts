@@ -1,5 +1,9 @@
 import { FC, ReactNode } from 'react';
 declare type GroupProps = {
+    bodyRemoveTag?: boolean;
+    bodyProps?: {
+        [key: string]: any;
+    };
     className?: string;
     columns?: boolean;
     columnsProps?: {
