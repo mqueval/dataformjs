@@ -5,22 +5,29 @@ import styled from 'styled-components';
 import { FormidableContext } from '../../../index';
 import { DataFieldProps } from './index';
 
+const CustomActionSC = styled.div``;
 const FieldMessageSC = styled.div``;
-
-const FieldSC = styled.div``;
+const FieldTemplateSC = styled.div``;
 
 const FieldTemplate: FC<WrappedFieldProps & DataFieldProps> = ({
   children,
+  customAction,
+  customActionProps,
   templateProps,
-  input: { name },
   message,
   meta: { error, touched, warning },
 }) => {
   const { t, sc } = useContext(FormidableContext);
 
   return (
-    <FieldSC as={sc && sc.field} {...templateProps}>
+    <FieldTemplateSC as={sc && sc.fieldTemplate} {...templateProps}>
       {children}
+
+      {customAction && (
+        <CustomActionSC as={sc && sc.customTop} {...customActionProps}>
+          {customAction}
+        </CustomActionSC>
+      )}
 
       {touched &&
         ((error && (
@@ -38,7 +45,7 @@ const FieldTemplate: FC<WrappedFieldProps & DataFieldProps> = ({
           {t ? t(message) : message}
         </FieldMessageSC>
       )}
-    </FieldSC>
+    </FieldTemplateSC>
   );
 };
 

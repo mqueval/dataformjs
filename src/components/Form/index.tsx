@@ -1,5 +1,5 @@
 import hash from 'object-hash';
-import React, { FC } from 'react';
+import React, { FC, ReactNode, SyntheticEvent } from 'react';
 import { Dispatch } from 'redux';
 import { DecoratedFormProps } from 'redux-form';
 
@@ -8,7 +8,13 @@ import Data, { DataProps } from '../Data';
 import FormRender from './Render';
 
 export interface FormActionProps {
+  iconColor?: string;
+  iconLeft?: ReactNode;
+  iconRight?: ReactNode;
+  iconSize?: number;
   label?: string;
+  onClick: (event: SyntheticEvent<HTMLButtonElement>) => any;
+  status?: string;
 }
 
 export interface FormDivActionProps {

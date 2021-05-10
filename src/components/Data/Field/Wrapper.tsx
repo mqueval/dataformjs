@@ -42,7 +42,11 @@ const FieldWrapper: FC<DataFieldProps> = ({
   const props = column ? columnProps : {};
 
   return (
-    <WrapperCmp {...props} {...wrapperProps}>
+    <WrapperCmp
+      as={!column && sc && sc.fieldWrapper}
+      {...props}
+      {...wrapperProps}
+    >
       {customInfos && (
         <CustomTopSC as={sc && sc.customTop} {...customInfosProps}>
           {customInfos}
@@ -54,11 +58,11 @@ const FieldWrapper: FC<DataFieldProps> = ({
         </CustomTopSC>
       )}
       {labelShow && (
-        <FieldLabelSC as={sc && sc.label} htmlFor={id}>
+        <FieldLabelSC as={sc && sc.fieldLabel} htmlFor={id}>
           {t ? t(label || name) : label || name}
         </FieldLabelSC>
       )}
-      <div>{children}</div>
+      {children}
       {customBottom && (
         <CustomBottomSC as={sc && sc.customBottom} {...customBottomProps}>
           {customBottom}

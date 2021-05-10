@@ -7,6 +7,8 @@ import Columns from '../Columns';
 import Grid from '../Grid';
 
 type GroupProps = {
+  bodyRemoveTag?: boolean;
+  bodyProps?: { [key: string]: any };
   className?: string;
   columns?: boolean;
   columnsProps?: { [key: string]: any };
@@ -24,10 +26,13 @@ type GroupProps = {
 
 const CustomInfosSC = styled.div``;
 const GroupSC = styled.fieldset``;
+const GroupBodySC = styled.div``;
 const GroupDescriptionSC = styled.p``;
 const LegendSC = styled.legend``;
 
 const Group: FC<GroupProps> = ({
+  bodyRemoveTag = false,
+  bodyProps,
   children,
   className,
   columns,
@@ -44,6 +49,14 @@ const Group: FC<GroupProps> = ({
   titleParams,
 }) => {
   const { t, sc } = useContext(FormidableContext);
+
+  const GroupBodyCmp = bodyRemoveTag ? React.Fragment : GroupBodySC;
+  const groupBodyProps = bodyRemoveTag
+    ? {}
+    : {
+        ...bodyProps,
+        as: sc && sc.groupBody,
+      };
 
   return (
     <GroupSC as={sc && sc.group} className={className}>
@@ -66,9 +79,12 @@ const Group: FC<GroupProps> = ({
           {t ? t(description) : description}
         </GroupDescriptionSC>
       )}
-      {columns && <Columns {...columnsProps}>{children}</Columns>}
-      {grid && <Grid {...gridProps}>{children}</Grid>}
-      {!columns && !grid && children}
+
+      <GroupBodyCmp {...groupBodyProps}>
+        {columns && <Columns {...columnsProps}>{children}</Columns>}
+        {grid && <Grid {...gridProps}>{children}</Grid>}
+        {!columns && !grid && children}
+      </GroupBodyCmp>
     </GroupSC>
   );
 };
