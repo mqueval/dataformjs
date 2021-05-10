@@ -138,7 +138,9 @@ const Form: React.FC<
             }
             type="submit"
           >
-            {!submitProps?.icon &&
+            {!submitProps?.iconLeft &&
+              !submitProps?.iconRight &&
+              !submitProps?.label &&
               (t
                 ? t(submitProps?.label || 'submit')
                 : submitProps?.label || 'submit')}

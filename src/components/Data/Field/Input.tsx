@@ -6,11 +6,6 @@ import styled from 'styled-components';
 import { FormidableContext } from '../../../index';
 import { DataFieldProps } from './index';
 
-const DataFieldInputSC = styled.div`
-  display: flex;
-  justify-items: center;
-`;
-
 const InputSC = styled.input``;
 
 export interface DataFieldInputProps extends DataFieldProps {
@@ -25,7 +20,6 @@ export interface DataFieldInputProps extends DataFieldProps {
 
 const FieldInput: FC<WrappedFieldProps & DataFieldInputProps> = ({
   autoComplete,
-  className,
   description,
   disabled,
   fieldProps,
@@ -55,7 +49,7 @@ const FieldInput: FC<WrappedFieldProps & DataFieldInputProps> = ({
   };
 
   return (
-    <DataFieldInputSC className={className}>
+    <>
       {mask ? (
         <InputMask mask={mask} {...input}>
           {(inputProps: any) => (
@@ -72,7 +66,7 @@ const FieldInput: FC<WrappedFieldProps & DataFieldInputProps> = ({
       {description && (
         <label htmlFor={id}>{t ? t(description) : description}</label>
       )}
-    </DataFieldInputSC>
+    </>
   );
 };
 

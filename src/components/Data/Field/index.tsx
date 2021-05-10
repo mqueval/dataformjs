@@ -22,6 +22,8 @@ export interface DataFieldProps extends DataProps {
   componentType: string;
   column?: boolean;
   columnProps?: { [key: string]: any };
+  customAction?: ReactElement | ReactElement[];
+  customActionProps?: { [key: string]: any };
   customBottom?: ReactElement | ReactElement[];
   customBottomProps?: { [key: string]: any };
   customTop?: ReactElement | ReactElement[];
