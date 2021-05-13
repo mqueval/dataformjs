@@ -9,6 +9,8 @@ import { FormidableContext } from '../../../index';
 import { DataFieldSelectProps } from './Select';
 
 export const SelectSC = styled(AsyncSelect)`
+  flex: 1;
+
   .DataFieldSelect__value-container {
     padding-bottom: 0;
     padding-top: 0;
