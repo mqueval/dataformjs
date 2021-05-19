@@ -12,16 +12,16 @@ const composeEnhancers =
 const loggerMiddleware = createLogger();
 const middleware = [];
 
-if (process.env.NODE_ENV !== 'production') {
-  middleware.push(loggerMiddleware);
-}
-
 export default (
   initialState = {},
   extraReducers = null,
   extraArguments = null,
 ) => {
   middleware.push(thunkMiddleware.withExtraArgument(extraArguments));
+
+  if (process.env.NODE_ENV !== 'production') {
+    middleware.push(loggerMiddleware);
+  }
 
   return createStore(
     rootReducer(extraReducers),

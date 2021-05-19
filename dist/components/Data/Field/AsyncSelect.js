@@ -31,6 +31,8 @@ const redux_form_1 = require("redux-form");
 const styled_components_1 = __importDefault(require("styled-components"));
 const index_1 = require("../../../index");
 exports.SelectSC = styled_components_1.default(async_1.default) `
+  flex: 1;
+
   .DataFieldSelect__value-container {
     padding-bottom: 0;
     padding-top: 0;

@@ -12,10 +12,10 @@ const composeEnhancers = (process.env.BROWSER && window.__REDUX_DEVTOOLS_EXTENSI
     redux_1.compose;
 const loggerMiddleware = redux_logger_1.createLogger();
 const middleware = [];
-if (process.env.NODE_ENV !== 'production') {
-    middleware.push(loggerMiddleware);
-}
 exports.default = (initialState = {}, extraReducers = null, extraArguments = null) => {
     middleware.push(redux_thunk_1.default.withExtraArgument(extraArguments));
+    if (process.env.NODE_ENV !== 'production') {
+        middleware.push(loggerMiddleware);
+    }
     return redux_1.createStore(reducers_1.default(extraReducers), initialState, composeEnhancers(redux_1.applyMiddleware(...middleware)));
 };
