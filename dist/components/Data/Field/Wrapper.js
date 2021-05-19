@@ -40,8 +40,12 @@ const FieldWrapper = ({ children, column, columnProps, componentType, customBott
         return react_1.default.createElement(react_1.default.Fragment, null, children);
     }
     const WrapperCmp = column ? Column_1.default : WrapperSC;
-    const props = column ? columnProps : {};
-    return (react_1.default.createElement(WrapperCmp, Object.assign({ as: !column && sc && sc.fieldWrapper }, props, wrapperProps),
+    const props = column
+        ? columnProps
+        : {
+            as: sc && sc.fieldWrapper,
+        };
+    return (react_1.default.createElement(WrapperCmp, Object.assign({}, props, wrapperProps),
         customInfos && (react_1.default.createElement(CustomTopSC, Object.assign({ as: sc && sc.customTop }, customInfosProps), customInfos)),
         customTop && (react_1.default.createElement(CustomTopSC, Object.assign({ as: sc && sc.customTop }, customTopProps), customTop)),
         labelShow && (react_1.default.createElement(FieldLabelSC, { as: sc && sc.fieldLabel, htmlFor: id }, t ? t(label || name) : label || name)),

@@ -39,14 +39,14 @@ const FieldWrapper: FC<DataFieldProps> = ({
   }
 
   const WrapperCmp = column ? Column : WrapperSC;
-  const props = column ? columnProps : {};
+  const props = column
+    ? columnProps
+    : {
+        as: sc && sc.fieldWrapper,
+      };
 
   return (
-    <WrapperCmp
-      as={!column && sc && sc.fieldWrapper}
-      {...props}
-      {...wrapperProps}
-    >
+    <WrapperCmp {...props} {...wrapperProps}>
       {customInfos && (
         <CustomTopSC as={sc && sc.customTop} {...customInfosProps}>
           {customInfos}
