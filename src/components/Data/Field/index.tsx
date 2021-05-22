@@ -17,6 +17,7 @@ import DataFieldRender from './Render';
 import DataFieldWrapper from './Wrapper';
 
 const InputGroupSC = styled.div``;
+const InputGroupItemSC = styled.div``;
 
 export interface DataFieldProps extends DataProps {
   componentType: string;
@@ -127,18 +128,19 @@ const DataField: FC<
           role="radiogroup"
         >
           {options.map(option => (
-            <FieldForm
-              key={option.value}
-              fieldProps={fieldProps}
-              templateProps={templateProps}
-              {...props}
-              className={className}
-              component={DataFieldInput}
-              description={option.label}
-              id={option.id || `${newId}_${option.value}`}
-              validate={newValidate}
-              value={option.value}
-            />
+            <InputGroupItemSC key={option.value} as={sc && sc.inputGroupItem}>
+              <FieldForm
+                fieldProps={fieldProps}
+                templateProps={templateProps}
+                {...props}
+                className={className}
+                component={DataFieldInput}
+                description={option.label}
+                id={option.id || `${newId}_${option.value}`}
+                validate={newValidate}
+                value={option.value}
+              />
+            </InputGroupItemSC>
           ))}
         </InputGroupSC>
       </DataFieldWrapper>
