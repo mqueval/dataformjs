@@ -54,7 +54,6 @@ const Icon = ({ color, size, value, }) => {
             break;
         }
         case 'remove': {
-            console.info('button remove');
             if (sc && sc.iconRemove) {
                 const IconRemove = sc.iconRemove;
                 return react_1.default.createElement(IconRemove, { color: color, size: size });
