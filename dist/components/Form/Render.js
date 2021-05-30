@@ -64,7 +64,7 @@ const Form = props => {
     return (react_1.default.createElement(FormSC, { as: sc && sc.form, className: className, id: id, name: `${name}-form`, onSubmit: handleSubmit },
         react_1.default.createElement(FormBodySC, Object.assign({}, bodyProps),
             children,
-            error && (react_1.default.createElement(MessageSC, { as: sc && sc.fieldMessage, status: "error" }, t ? t(error) : error))),
+            error && (react_1.default.createElement(MessageSC, { as: sc && sc.formMessage, status: "error" }, t ? t(error) : error))),
         react_1.default.createElement(FormFooterSC, Object.assign({}, footerProps),
             react_1.default.createElement(Actions, { id: id, values: actions }),
             (cancelProps === null || cancelProps === void 0 ? void 0 : cancelProps.onClick) && (react_1.default.createElement(ButtonSC, Object.assign({ as: sc && sc.button }, cancelProps), t
