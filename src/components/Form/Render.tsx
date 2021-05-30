@@ -113,7 +113,7 @@ const Form: React.FC<
       <FormBodySC {...bodyProps}>
         {children}
         {error && (
-          <MessageSC as={sc && sc.fieldMessage} status="error">
+          <MessageSC as={sc && sc.formMessage} status="error">
             {t ? t(error) : error}
           </MessageSC>
         )}
