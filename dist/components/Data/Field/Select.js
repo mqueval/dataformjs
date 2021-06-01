@@ -31,7 +31,7 @@ const styled_components_1 = __importDefault(require("styled-components"));
 const index_1 = require("../../../index");
 const AsyncSelect_1 = require("./AsyncSelect");
 const SelectSC = styled_components_1.default.select ``;
-const FieldSelect = ({ disabled, formName, formatOptionLabel, getOptionLabel, getOptionValue, hasEmpty = true, handleOnChange, id, input, isSearchable = false, options, placeholder, meta: { error, touched }, multi = false, standard = true, ...others }) => {
+const FieldSelect = ({ disabled, formName, formatOptionLabel, getOptionLabel, getOptionValue, hasEmpty = true, handleOnChange, id, input, isSearchable = false, options, placeholder, meta: { error, touched }, isMulti = false, standard = true, ...others }) => {
     const { getControlStyle, t, sc } = react_1.useContext(index_1.FormidableContext);
     const dispatch = react_redux_1.useDispatch();
     if (!formName) {
@@ -40,7 +40,7 @@ const FieldSelect = ({ disabled, formName, formatOptionLabel, getOptionLabel, ge
     if (!options) {
         return react_1.default.createElement("div", null, "select : erreur de param\u00E8tre : options obligatoire");
     }
-    if (multi || !standard) {
+    if (isMulti || !standard) {
         const { name } = input;
         const styles = {
             control: (base) => getControlStyle
@@ -60,7 +60,7 @@ const FieldSelect = ({ disabled, formName, formatOptionLabel, getOptionLabel, ge
                     value: changeValue,
                 });
             }
-            dispatch(redux_form_1.change(formName, name, changeValue && multi
+            dispatch(redux_form_1.change(formName, name, changeValue && isMulti
                 ? changeValue.map(handleGetOptionValue)
                 : handleGetOptionValue(changeValue)));
         };
@@ -100,7 +100,7 @@ const FieldSelect = ({ disabled, formName, formatOptionLabel, getOptionLabel, ge
             }
             return option && option.value;
         };
-        return (react_1.default.createElement(AsyncSelect_1.SelectSC, { as: react_select_1.default, autoComplete: "new-password", classNamePrefix: "DataFieldSelect", component: { Input: AsyncSelect_1.Input }, formatOptionLabel: handleFormatOptionLabel, getOptionLabel: handleGetOptionLabel, getOptionValue: handleGetOptionValue, inputId: id, isMulti: multi, isSearchable: isSearchable, onBlur: handleOnBlur, onChange: handleInnerOnChange, onFocus: handleOnFocus, options: options, placeholder: t && placeholder ? t(placeholder) : placeholder, styles: styles, value: multi
+        return (react_1.default.createElement(AsyncSelect_1.SelectSC, { as: react_select_1.default, autoComplete: "new-password", classNamePrefix: "DataFieldSelect", component: { Input: AsyncSelect_1.Input }, formatOptionLabel: handleFormatOptionLabel, getOptionLabel: handleGetOptionLabel, getOptionValue: handleGetOptionValue, inputId: id, isMulti: isMulti, isSearchable: isSearchable, onBlur: handleOnBlur, onChange: handleInnerOnChange, onFocus: handleOnFocus, options: options, placeholder: t && placeholder ? t(placeholder) : placeholder, styles: styles, value: isMulti
                 ? input.value &&
                     input.value.map((v) => options.find(o => o.value === v))
                 : options.find(o => o.value === input.value) }));
