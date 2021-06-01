@@ -23,6 +23,7 @@ export {
   InjectedFormProps,
   reduxForm,
   reset,
+  submit,
   Validator,
   WrappedFieldArrayProps,
 } from 'redux-form';
