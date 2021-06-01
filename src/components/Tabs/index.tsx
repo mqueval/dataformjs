@@ -51,6 +51,7 @@ const Tabs: VFC<TabsProps & { formValues: { [key: string]: any } }> = ({
   params,
   tabs,
 }) => {
+  const [searchParams, setSearchParams] = useState<{ [key: string]: any }>({});
   const { sc } = useContext(FormidableContext);
 
   const [tab, setTab] = useState<number>(0);
@@ -62,6 +63,7 @@ const Tabs: VFC<TabsProps & { formValues: { [key: string]: any } }> = ({
 
   useEffect(() => {
     let newTab = 0;
+
     if (
       typeof window !== 'undefined' &&
       window.location &&
@@ -78,7 +80,10 @@ const Tabs: VFC<TabsProps & { formValues: { [key: string]: any } }> = ({
       if (search.page) {
         newTab = parseInt(search.page, 10);
       }
+
+      setSearchParams(search);
     }
+
     setTab(newTab);
   }, []);
 
@@ -121,6 +126,17 @@ const Tabs: VFC<TabsProps & { formValues: { [key: string]: any } }> = ({
 
     if (newTab) {
       setTab(parseInt(newTab, 10));
+
+      let location = window && window.location ? window.location.pathname : '/';
+      const search: { [key: string]: any } = {
+        ...searchParams,
+        tab,
+      };
+      location += `?${Object.keys(search)
+        .map(key => `${key}=${search[key]}`)
+        .join('&')}`;
+
+      window.history.replaceState({ location, tab }, `tab ${tab}`, location);
     }
   };
 

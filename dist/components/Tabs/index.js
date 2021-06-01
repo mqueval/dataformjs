@@ -32,6 +32,7 @@ const Data_1 = __importDefault(require("../Data"));
 const Bar_1 = __importDefault(require("./Bar"));
 const TabsSC = styled_components_1.default.div ``;
 const Tabs = ({ barClassName, barItemClassName, className, formName, formValues, datas, params, tabs, }) => {
+    const [searchParams, setSearchParams] = react_1.useState({});
     const { sc } = react_1.useContext(index_1.FormidableContext);
     const [tab, setTab] = react_1.useState(0);
     const [infos, setInfos] = react_1.useState([]);
@@ -52,6 +53,7 @@ const Tabs = ({ barClassName, barItemClassName, className, formName, formValues,
             if (search.page) {
                 newTab = parseInt(search.page, 10);
             }
+            setSearchParams(search);
         }
         setTab(newTab);
     }, []);
@@ -88,6 +90,15 @@ const Tabs = ({ barClassName, barItemClassName, className, formName, formValues,
         const newTab = event.currentTarget.getAttribute('data-tab');
         if (newTab) {
             setTab(parseInt(newTab, 10));
+            let location = window && window.location ? window.location.pathname : '/';
+            const search = {
+                ...searchParams,
+                tab,
+            };
+            location += `?${Object.keys(search)
+                .map(key => `${key}=${search[key]}`)
+                .join('&')}`;
+            window.history.replaceState({ location, tab }, `tab ${tab}`, location);
         }
     };
     return (react_1.default.createElement(TabsSC, { as: sc && sc.tabs, className: className },
