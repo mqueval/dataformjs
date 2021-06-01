@@ -1,3 +1,4 @@
+import classnames from 'classnames';
 import hash from 'object-hash';
 import React, { FC, SyntheticEvent, useContext } from 'react';
 import styled from 'styled-components';
@@ -40,10 +41,13 @@ const TabsBar: FC<TabsBarProps> = ({
 
   return (
     <TabsBarSC as={sc && sc.tabsBar} {...props}>
-      {infos.map((info, i) => (
+      {infos.map(info => (
         <TabsBarItemSC
-          key={`${hash({ ...infos[i], i })}`}
-          className={itemClassName}
+          key={`${hash({ ...info })}`}
+          as={sc && sc.tabsBarItem}
+          className={classnames(itemClassName, {
+            'is-active': info.isActive,
+          })}
           {...info}
         >
           <button
@@ -51,7 +55,9 @@ const TabsBar: FC<TabsBarProps> = ({
             onClick={handleButtonOnClick}
             type="button"
           >
-            <ItemTitleSC>{infos[i].title}</ItemTitleSC>
+            <ItemTitleSC as={sc && sc.tabsBarItemTitle}>
+              {info.title}
+            </ItemTitleSC>
           </button>
         </TabsBarItemSC>
       ))}
