@@ -9,7 +9,7 @@ export interface DataFieldSelectProps extends DataFieldProps {
     }) => ReactNode;
     hasEmpty?: boolean;
     isSearchable?: boolean;
-    multi?: boolean;
+    isMulti?: boolean;
     getOptionLabel?: (option: any) => any;
     getOptionValue?: (option: any) => any;
     standard?: boolean;

@@ -22,7 +22,7 @@ export interface DataFieldSelectProps extends DataFieldProps {
   ) => ReactNode;
   hasEmpty?: boolean;
   isSearchable?: boolean;
-  multi?: boolean;
+  isMulti?: boolean;
   getOptionLabel?: (option: any) => any;
   getOptionValue?: (option: any) => any;
   standard?: boolean;
@@ -42,7 +42,7 @@ const FieldSelect: FC<WrappedFieldProps & DataFieldSelectProps> = ({
   options,
   placeholder,
   meta: { error, touched },
-  multi = false,
+  isMulti = false,
   standard = true,
   ...others
 }) => {
@@ -57,7 +57,7 @@ const FieldSelect: FC<WrappedFieldProps & DataFieldSelectProps> = ({
     return <div>select : erreur de paramètre : options obligatoire</div>;
   }
 
-  if (multi || !standard) {
+  if (isMulti || !standard) {
     const { name } = input;
 
     const styles = {
@@ -86,7 +86,7 @@ const FieldSelect: FC<WrappedFieldProps & DataFieldSelectProps> = ({
         change(
           formName,
           name,
-          changeValue && multi
+          changeValue && isMulti
             ? changeValue.map(handleGetOptionValue)
             : handleGetOptionValue(changeValue),
         ),
@@ -192,7 +192,7 @@ const FieldSelect: FC<WrappedFieldProps & DataFieldSelectProps> = ({
         getOptionLabel={handleGetOptionLabel}
         getOptionValue={handleGetOptionValue}
         inputId={id}
-        isMulti={multi}
+        isMulti={isMulti}
         isSearchable={isSearchable}
         onBlur={handleOnBlur}
         onChange={handleInnerOnChange}
@@ -201,7 +201,7 @@ const FieldSelect: FC<WrappedFieldProps & DataFieldSelectProps> = ({
         placeholder={t && placeholder ? t(placeholder) : placeholder}
         styles={styles}
         value={
-          multi
+          isMulti
             ? input.value &&
               input.value.map((v: any) => options.find(o => o.value === v))
             : options.find(o => o.value === input.value)
