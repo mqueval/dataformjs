@@ -29,7 +29,6 @@ export interface DataFieldAsyncSelectProps<P> extends DataFieldSelectProps {
     noOptionsMessage?: ({ inputValue }: {
         inputValue?: string;
     }) => ReactNode;
-    value?: P | P[];
 }
 declare const FieldAsyncSelect: FC<WrappedFieldProps & DataFieldAsyncSelectProps<any>>;
 export default FieldAsyncSelect;

@@ -69,7 +69,7 @@ const FieldAsyncSelect = ({ cacheOptions = false, className, customOption, defau
     const dispatch = react_redux_1.useDispatch();
     const { getControlStyle, t } = react_1.useContext(index_1.FormidableContext);
     if (!formName) {
-        return react_1.default.createElement("div", null, "async-select : erreur de param\u00E8tre : formName obligatoire");
+        return (react_1.default.createElement("div", null, "async-select : erreur de param\u00E8tre : formName obligatoire"));
     }
     if (!loadOptions) {
         return (react_1.default.createElement("div", null, "async-select : erreur de param\u00E8tre : loadOptions obligatoire"));
@@ -79,7 +79,8 @@ const FieldAsyncSelect = ({ cacheOptions = false, className, customOption, defau
         console.info('handleOnBlur');
         input.onBlur(newValue || value);
     };
-    const handleInnerOnChange = (changeValue) => {
+    const handleInnerOnChange = (changeValue, options) => {
+        console.info('handleInnerOnChange', { changeValue, options });
         newValue = changeValue;
         if (handleOnChange) {
             handleOnChange({
@@ -134,6 +135,6 @@ const FieldAsyncSelect = ({ cacheOptions = false, className, customOption, defau
             })
             : base,
     };
-    return (react_1.default.createElement(exports.SelectSC, { ref: ref, autoComplete: "new-password", cacheOptions: cacheOptions, className: className, classNamePrefix: "DataFieldSelect", components: newComponents, defaultOptions: defaultOptions, defaultValue: defaultValue, formatOptionLabel: formatOptionLabel, getOptionLabel: getOptionLabel, getOptionValue: getOptionValue, hideSelectedOptions: hideSelectedOptions, inputId: id, isClearable: isClearable, isMulti: isMulti, isOptionDisabled: isOptionDisabled, isOptionSelected: isOptionSelected, isSearchable: isSearchable, loadOptions: loadOptions, loadingMessage: loadingMessage, noOptionsMessage: noOptionsMessage, onBlur: handleOnBlur, onChange: handleInnerOnChange, onFocus: handleOnFocus, onMenuClose: handleOnMenuClose, placeholder: t && placeholder ? t(placeholder) : placeholder, styles: styles, value: value }));
+    return (react_1.default.createElement(exports.SelectSC, Object.assign({ ref: ref, autoComplete: "new-password", cacheOptions: cacheOptions, className: className, classNamePrefix: "DataFieldSelect", components: newComponents, defaultOptions: defaultOptions, defaultValue: defaultValue, formatOptionLabel: formatOptionLabel, getOptionLabel: getOptionLabel, getOptionValue: getOptionValue, hideSelectedOptions: hideSelectedOptions, inputId: id, isClearable: isClearable, isMulti: isMulti, isOptionDisabled: isOptionDisabled, isOptionSelected: isOptionSelected, isSearchable: isSearchable, loadOptions: loadOptions, loadingMessage: loadingMessage, noOptionsMessage: noOptionsMessage, onBlur: handleOnBlur, onChange: handleInnerOnChange, onFocus: handleOnFocus, onMenuClose: handleOnMenuClose, placeholder: t && placeholder ? t(placeholder) : placeholder, styles: styles, value: value }, others)));
 };
 exports.default = FieldAsyncSelect;
