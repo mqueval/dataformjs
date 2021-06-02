@@ -120,13 +120,10 @@ const FieldAsyncSelect: FC<WrappedFieldProps & DataFieldAsyncSelectProps<any>> =
     const { name, value } = input;
 
     const handleOnBlur = (): void => {
-      console.info('handleOnBlur');
       input.onBlur(newValue || value);
     };
 
     const handleInnerOnChange = (changeValue: any, options: any): void => {
-      console.info('handleInnerOnChange', { changeValue, options });
-
       newValue = changeValue;
       if (handleOnChange) {
         handleOnChange({
@@ -154,7 +151,6 @@ const FieldAsyncSelect: FC<WrappedFieldProps & DataFieldAsyncSelectProps<any>> =
     };
 
     const handleOnMenuClose = () => {
-      console.info('handleOnMenuClose');
       // if (undefined !== ref) {
       //   ref.current.select.blur();
       // TODO pour que cela fonctionne sur mobile
