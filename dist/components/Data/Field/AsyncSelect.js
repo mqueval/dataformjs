@@ -76,11 +76,9 @@ const FieldAsyncSelect = ({ cacheOptions = false, className, customOption, defau
     }
     const { name, value } = input;
     const handleOnBlur = () => {
-        console.info('handleOnBlur');
         input.onBlur(newValue || value);
     };
     const handleInnerOnChange = (changeValue, options) => {
-        console.info('handleInnerOnChange', { changeValue, options });
         newValue = changeValue;
         if (handleOnChange) {
             handleOnChange({
@@ -107,7 +105,6 @@ const FieldAsyncSelect = ({ cacheOptions = false, className, customOption, defau
         input.onFocus(event);
     };
     const handleOnMenuClose = () => {
-        console.info('handleOnMenuClose');
         // if (undefined !== ref) {
         //   ref.current.select.blur();
         // TODO pour que cela fonctionne sur mobile
