@@ -68,156 +68,160 @@ export interface DataFieldAsyncSelectProps<P> extends DataFieldSelectProps {
   loadOptions?: (inputValue: string) => Promise<P[]>;
   loadingMessage?: ({ inputValue }: { inputValue?: string }) => ReactNode;
   noOptionsMessage?: ({ inputValue }: { inputValue?: string }) => ReactNode;
-  value?: P | P[];
+  // value?: P | P[];
 }
 
-const FieldAsyncSelect: FC<
-  WrappedFieldProps & DataFieldAsyncSelectProps<any>
-> = ({
-  cacheOptions = false,
-  className,
-  customOption,
-  defaultOptions = false,
-  defaultValue,
-  fieldProps,
-  formatOptionLabel,
-  formName,
-  getOptionLabel,
-  getOptionValue,
-  handleOnChange,
-  hideSelectedOptions = false,
-  id,
-  input,
-  isClearable = false,
-  isMulti,
-  isOptionDisabled,
-  isOptionSelected,
-  isSearchable = true,
-  loadOptions,
-  loadingMessage,
-  meta,
-  meta: { error, touched },
-  noOptionsMessage,
-  placeholder,
-  ...others
-}) => {
-  const ref = useRef<any>();
-  let newValue: any;
-  const dispatch = useDispatch();
-  const { getControlStyle, t } = useContext(FormidableContext);
+const FieldAsyncSelect: FC<WrappedFieldProps & DataFieldAsyncSelectProps<any>> =
+  ({
+    cacheOptions = false,
+    className,
+    customOption,
+    defaultOptions = false,
+    defaultValue,
+    fieldProps,
+    formatOptionLabel,
+    formName,
+    getOptionLabel,
+    getOptionValue,
+    handleOnChange,
+    hideSelectedOptions = false,
+    id,
+    input,
+    isClearable = false,
+    isMulti,
+    isOptionDisabled,
+    isOptionSelected,
+    isSearchable = true,
+    loadOptions,
+    loadingMessage,
+    meta,
+    meta: { error, touched },
+    noOptionsMessage,
+    placeholder,
+    ...others
+  }) => {
+    const ref = useRef<any>();
+    let newValue: any;
+    const dispatch = useDispatch();
+    const { getControlStyle, t } = useContext(FormidableContext);
 
-  if (!formName) {
-    return <div>async-select : erreur de paramètre : formName obligatoire</div>;
-  }
-
-  if (!loadOptions) {
-    return (
-      <div>async-select : erreur de paramètre : loadOptions obligatoire</div>
-    );
-  }
-
-  const { name, value } = input;
-
-  const handleOnBlur = (): void => {
-    console.info('handleOnBlur');
-    input.onBlur(newValue || value);
-  };
-
-  const handleInnerOnChange = (changeValue: any): void => {
-    newValue = changeValue;
-    if (handleOnChange) {
-      handleOnChange({
-        change: (...props) => dispatch(change(...props)),
-        value: changeValue,
-      });
+    if (!formName) {
+      return (
+        <div>async-select : erreur de paramètre : formName obligatoire</div>
+      );
     }
-    dispatch(change(formName, name, changeValue, true));
-  };
 
-  const handleOnFocus = (event: any): void => {
-    if (undefined !== ref && value) {
-      if (formatOptionLabel) {
-        ref.current.select.state.inputValue = formatOptionLabel(value, {
-          context: 'value',
+    if (!loadOptions) {
+      return (
+        <div>async-select : erreur de paramètre : loadOptions obligatoire</div>
+      );
+    }
+
+    const { name, value } = input;
+
+    const handleOnBlur = (): void => {
+      console.info('handleOnBlur');
+      input.onBlur(newValue || value);
+    };
+
+    const handleInnerOnChange = (changeValue: any, options: any): void => {
+      console.info('handleInnerOnChange', { changeValue, options });
+
+      newValue = changeValue;
+      if (handleOnChange) {
+        handleOnChange({
+          change: (...props) => dispatch(change(...props)),
+          value: changeValue,
         });
-      } else if (getOptionLabel) {
-        ref.current.select.state.inputValue = getOptionLabel(value);
-      } else if (value.label) {
-        ref.current.select.state.inputValue = value.label;
       }
+      dispatch(change(formName, name, changeValue, true));
+    };
+
+    const handleOnFocus = (event: any): void => {
+      if (undefined !== ref && value) {
+        if (formatOptionLabel) {
+          ref.current.select.state.inputValue = formatOptionLabel(value, {
+            context: 'value',
+          });
+        } else if (getOptionLabel) {
+          ref.current.select.state.inputValue = getOptionLabel(value);
+        } else if (value.label) {
+          ref.current.select.state.inputValue = value.label;
+        }
+      }
+
+      input.onFocus(event);
+    };
+
+    const handleOnMenuClose = () => {
+      console.info('handleOnMenuClose');
+      // if (undefined !== ref) {
+      //   ref.current.select.blur();
+      // TODO pour que cela fonctionne sur mobile
+      // }
+    };
+
+    const newComponents: { [key: string]: any } = {};
+
+    if (customOption) {
+      newComponents.Option = customOption;
     }
 
-    input.onFocus(event);
+    newComponents.Input = Input;
+
+    // const SelectContainer: FC<ContainerProps<any>> = ({ children, ...props }) => (
+    //   <div>
+    //     <components.SelectContainer {...props}>
+    //       {children}
+    //     </components.SelectContainer>
+    //   </div>
+    // );
+    //
+    // newComponents.SelectContainer = SelectContainer;
+
+    const styles = {
+      control: (base: any): any =>
+        getControlStyle
+          ? getControlStyle({
+              ...others,
+              status: touched && error ? 'error' : undefined,
+            })
+          : base,
+    };
+
+    return (
+      <SelectSC
+        ref={ref}
+        autoComplete="new-password"
+        cacheOptions={cacheOptions}
+        className={className}
+        classNamePrefix="DataFieldSelect"
+        components={newComponents}
+        defaultOptions={defaultOptions}
+        defaultValue={defaultValue}
+        formatOptionLabel={formatOptionLabel}
+        getOptionLabel={getOptionLabel}
+        getOptionValue={getOptionValue}
+        hideSelectedOptions={hideSelectedOptions}
+        inputId={id}
+        isClearable={isClearable}
+        isMulti={isMulti}
+        isOptionDisabled={isOptionDisabled}
+        isOptionSelected={isOptionSelected}
+        isSearchable={isSearchable}
+        loadOptions={loadOptions}
+        loadingMessage={loadingMessage}
+        noOptionsMessage={noOptionsMessage}
+        onBlur={handleOnBlur}
+        onChange={handleInnerOnChange}
+        onFocus={handleOnFocus}
+        onMenuClose={handleOnMenuClose}
+        placeholder={t && placeholder ? t(placeholder) : placeholder}
+        styles={styles}
+        value={value}
+        {...others}
+      />
+    );
   };
-
-  const handleOnMenuClose = () => {
-    console.info('handleOnMenuClose');
-    // if (undefined !== ref) {
-    //   ref.current.select.blur();
-    // TODO pour que cela fonctionne sur mobile
-    // }
-  };
-
-  const newComponents: { [key: string]: any } = {};
-
-  if (customOption) {
-    newComponents.Option = customOption;
-  }
-
-  newComponents.Input = Input;
-
-  // const SelectContainer: FC<ContainerProps<any>> = ({ children, ...props }) => (
-  //   <div>
-  //     <components.SelectContainer {...props}>
-  //       {children}
-  //     </components.SelectContainer>
-  //   </div>
-  // );
-  //
-  // newComponents.SelectContainer = SelectContainer;
-
-  const styles = {
-    control: (base: any): any =>
-      getControlStyle
-        ? getControlStyle({
-            ...others,
-            status: touched && error ? 'error' : undefined,
-          })
-        : base,
-  };
-
-  return (
-    <SelectSC
-      ref={ref}
-      autoComplete="new-password"
-      cacheOptions={cacheOptions}
-      className={className}
-      classNamePrefix="DataFieldSelect"
-      components={newComponents}
-      defaultOptions={defaultOptions}
-      defaultValue={defaultValue}
-      formatOptionLabel={formatOptionLabel}
-      getOptionLabel={getOptionLabel}
-      getOptionValue={getOptionValue}
-      hideSelectedOptions={hideSelectedOptions}
-      inputId={id}
-      isClearable={isClearable}
-      isMulti={isMulti}
-      isOptionDisabled={isOptionDisabled}
-      isOptionSelected={isOptionSelected}
-      isSearchable={isSearchable}
-      loadOptions={loadOptions}
-      loadingMessage={loadingMessage}
-      noOptionsMessage={noOptionsMessage}
-      onBlur={handleOnBlur}
-      onChange={handleInnerOnChange}
-      onFocus={handleOnFocus}
-      onMenuClose={handleOnMenuClose}
-      placeholder={t && placeholder ? t(placeholder) : placeholder}
-      styles={styles}
-      value={value}
-    />
-  );
-};
 
 export default FieldAsyncSelect;
