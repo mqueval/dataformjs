@@ -19,6 +19,7 @@ export interface FormProps {
     actions?: FormActionProps | FormActionProps[] | FormDivActionProps[];
     asyncChangeFields?: string[];
     asyncValidate?: (values: FormData, dispatch: Dispatch<any>, props: DecoratedFormProps<FormData, any>, blurredField: string) => Promise<any>;
+    autosave?: boolean;
     bodyProps?: {
         [key: string]: any;
     };
