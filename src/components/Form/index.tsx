@@ -1,7 +1,8 @@
+import { diff } from 'deep-object-diff';
 import hash from 'object-hash';
-import React, { FC, ReactNode, SyntheticEvent } from 'react';
+import React, { FC, ReactNode, SyntheticEvent, useState } from 'react';
 import { Dispatch } from 'redux';
-import { DecoratedFormProps } from 'redux-form';
+import { DecoratedFormProps, submit } from 'redux-form';
 
 import initializeValues from '../../utils/initializeValues';
 import Data, { DataProps } from '../Data';
@@ -31,6 +32,7 @@ export interface FormProps {
     props: DecoratedFormProps<FormData, any>,
     blurredField: string,
   ) => Promise<any>;
+  autosave?: boolean;
   bodyProps?: { [key: string]: any };
   cancelProps?: { [key: string]: any };
   // cancelClassName?: string;
@@ -75,6 +77,7 @@ const Form: FC<FormProps> = ({
   actions,
   asyncChangeFields,
   asyncValidate,
+  autosave,
   bodyProps,
   cancelProps,
   children,
@@ -96,8 +99,40 @@ const Form: FC<FormProps> = ({
   touchOnChange,
   validate,
 }) => {
+  const [timeoutId, setTimeoutId] = useState<NodeJS.Timeout>();
+  const [canBeSubmited, setCanBeSubmited] = useState<boolean>();
+
   const newDatas: DataProps[] | undefined =
     datas && !Array.isArray(datas) ? [datas] : datas;
+
+  const handleOnChange = (
+    values: Partial<FormData>,
+    dispatch: Dispatch<any>,
+    props: DecoratedFormProps<FormData, any>,
+    previousValues: Partial<FormData>,
+  ): void => {
+    if (onChange) {
+      onChange(values, dispatch, props, previousValues);
+    }
+
+    if (autosave) {
+      setCanBeSubmited(true);
+
+      if (Object.keys(diff(values, previousValues)).length > 0) {
+        if (timeoutId) {
+          clearTimeout(timeoutId);
+        }
+
+        setTimeoutId(
+          setTimeout(() => {
+            if (canBeSubmited) {
+              dispatch(submit(name));
+            }
+          }, 1000),
+        );
+      }
+    }
+  };
 
   return (
     <FormRender
@@ -116,7 +151,7 @@ const Form: FC<FormProps> = ({
       initialValues={initialValues || (newDatas && initializeValues(newDatas))}
       isSubmissive={isSubmissive}
       name={name}
-      onChange={onChange}
+      onChange={handleOnChange}
       onSubmit={onSubmit}
       submitProps={submitProps}
       touchOnChange={touchOnChange}

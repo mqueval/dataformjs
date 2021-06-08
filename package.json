@@ -10,7 +10,7 @@
   "bugs": {
     "url": "https://github.com/mqueval/dataformjs/issues"
   },
-  "version": "2.5.5",
+  "version": "2.6.0",
   "private": false,
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -27,6 +27,7 @@
     "@types/redux-form": "^8.3.0",
     "@types/styled-components": "^5.1.4",
     "classnames": "^2.2.6",
+    "deep-object-diff": "^1.1.0",
     "lodash": "^4.17.20",
     "moment": "^2.29.1",
     "object-hash": "^2.0.3",
