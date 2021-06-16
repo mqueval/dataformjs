@@ -13,25 +13,21 @@ const DataValues: FC<DataFieldValuesProps> = ({
   formName,
   formValues,
   params,
-}) => {
-  console.info('formValues data values', formValues);
-
-  return (
-    <div>
-      {datas &&
-        datas.length > 0 &&
-        datas.map(data => (
-          <Data
-            key={hash(data)}
-            {...data}
-            formName={formName}
-            formValues={formValues}
-            params={params}
-          />
-        ))}
-    </div>
-  );
-};
+}) => (
+  <div>
+    {datas &&
+      datas.length > 0 &&
+      datas.map(data => (
+        <Data
+          key={hash(data)}
+          {...data}
+          formName={formName}
+          formValues={formValues}
+          params={params}
+        />
+      ))}
+  </div>
+);
 
 export default connect(
   (
