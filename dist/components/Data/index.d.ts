@@ -18,7 +18,9 @@ export interface DataProps {
         [key: string]: any;
     };
     grid?: boolean;
-    gridClassName?: string;
+    gridProps?: {
+        [key: string]: any;
+    };
     label?: string;
     name?: string;
     params?: {
