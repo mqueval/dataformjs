@@ -11,9 +11,11 @@ const addValidator = (validator, validators) => {
     return newValidators;
 };
 exports.addValidator = addValidator;
-const isDate = (value) => value && !moment_1.default(value, 'DD/MM/YYYY').isValid()
-    ? 'validator.date.error'
-    : undefined;
+const isDate = (value) => {
+    console.info('isDate', value);
+    console.info('isDate', moment_1.default(value).isValid());
+    return value && !moment_1.default(value).isValid() ? 'validator.date.error' : undefined;
+};
 exports.isDate = isDate;
 const isEmail = (value) => value && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value)
     ? 'validator.email.error'
