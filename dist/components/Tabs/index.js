@@ -31,12 +31,13 @@ const verifyCondition_1 = __importDefault(require("../../utils/verifyCondition")
 const Data_1 = __importDefault(require("../Data"));
 const Bar_1 = __importDefault(require("./Bar"));
 const TabsSC = styled_components_1.default.div ``;
-const Tabs = ({ barClassName, barItemClassName, className, formName, formValues, datas, params, tabs, }) => {
+const Tabs = ({ barClassName, barItemClassName, className, formName, datas, params, tabs, }) => {
     const [searchParams, setSearchParams] = react_1.useState({});
     const { sc } = react_1.useContext(index_1.FormidableContext);
     const [tab, setTab] = react_1.useState(0);
     const [infos, setInfos] = react_1.useState([]);
     const newDatas = react_1.useMemo(() => (datas && !Array.isArray(datas) ? [datas] : datas), [datas]);
+    const formValues = react_redux_1.useSelector((state) => state.form && state.form[formName] ? state.form[formName].values : {});
     react_1.useEffect(() => {
         let newTab = 0;
         if (typeof window !== 'undefined' &&
@@ -105,10 +106,4 @@ const Tabs = ({ barClassName, barItemClassName, className, formName, formValues,
         react_1.default.createElement(Bar_1.default, { className: barClassName, handleButtonOnClick: handleButtonOnClick, infos: infos, itemClassName: barItemClassName }),
         newDatas && newDatas.length > tab && (react_1.default.createElement(Data_1.default, Object.assign({}, newDatas[tab], { formName: formName, params: params })))));
 };
-const mapStateToProps = (globalState, ownProps) => {
-    const { values } = globalState.form[ownProps.formName];
-    return {
-        formValues: values,
-    };
-};
-exports.default = react_redux_1.connect(mapStateToProps)(Tabs);
+exports.default = Tabs;
