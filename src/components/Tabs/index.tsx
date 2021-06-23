@@ -6,7 +6,7 @@ import React, {
   useState,
   VFC,
 } from 'react';
-import { connect } from 'react-redux';
+import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 
 import { FormidableContext } from '../../index';
@@ -41,12 +41,11 @@ export interface TabsPageInfoProps {
   title: string;
 }
 
-const Tabs: VFC<TabsProps & { formValues: { [key: string]: any } }> = ({
+const Tabs: VFC<TabsProps> = ({
   barClassName,
   barItemClassName,
   className,
   formName,
-  formValues,
   datas,
   params,
   tabs,
@@ -59,6 +58,10 @@ const Tabs: VFC<TabsProps & { formValues: { [key: string]: any } }> = ({
   const newDatas: Partial<DataProps>[] | undefined = useMemo(
     () => (datas && !Array.isArray(datas) ? [datas] : datas),
     [datas],
+  );
+
+  const formValues = useSelector((state: any) =>
+    state.form && state.form[formName] ? state.form[formName].values : {},
   );
 
   useEffect(() => {
@@ -155,12 +158,4 @@ const Tabs: VFC<TabsProps & { formValues: { [key: string]: any } }> = ({
   );
 };
 
-const mapStateToProps = (globalState: any, ownProps: TabsProps) => {
-  const { values } = globalState.form[ownProps.formName];
-
-  return {
-    formValues: values,
-  };
-};
-
-export default connect(mapStateToProps)(Tabs);
+export default Tabs;
