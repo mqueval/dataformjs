@@ -33,7 +33,7 @@ const FormBodySC = styled_components_1.default.div ``;
 const FormFooterSC = styled_components_1.default.div `
   display: flex;
   justify-content: space-between;
-  padding-top: ${props => props.theme.spacing.l};
+  padding-top: 1.5rem;
 `;
 const MessageSC = styled_components_1.default.div ``;
 const Form = props => {
