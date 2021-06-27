@@ -13,7 +13,7 @@ const FormBodySC = styled.div``;
 const FormFooterSC = styled.div`
   display: flex;
   justify-content: space-between;
-  padding-top: ${props => props.theme.spacing.l};
+  padding-top: 1.5rem;
 `;
 
 const MessageSC = styled.div``;

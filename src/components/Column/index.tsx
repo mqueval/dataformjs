@@ -1,3 +1,4 @@
+import classnames from 'classnames';
 import React, { FC, useContext } from 'react';
 import styled from 'styled-components';
 
@@ -11,12 +12,16 @@ const ColumnSC = styled.div`
   width: 100%;
 `;
 
-const Column: FC = ({ children, ...props }) => {
+const Column: FC<{ sticky?: number }> = ({ children, sticky, ...props }) => {
   const { sc } = useContext(FormidableContext);
 
   return (
     <ColumnSC as={sc && sc.column} {...props}>
-      {children}
+      {sticky ? (
+        <div className={classnames('sticky', `top-${sticky}`)}>{children}</div>
+      ) : (
+        children
+      )}
     </ColumnSC>
   );
 };
