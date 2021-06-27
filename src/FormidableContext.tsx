@@ -2,7 +2,6 @@ import { TFunction } from 'i18next';
 import React, { FC, ReactElement, useState } from 'react';
 import { Provider } from 'react-redux';
 import { Store } from 'redux';
-import { ThemeProvider } from 'styled-components';
 
 import { DataProps } from './components/Data';
 import createStore from './createStore';
@@ -19,7 +18,6 @@ interface FormidableStateProps {
   sc?: { [key: string]: any };
   store?: Store;
   t?: TFunction;
-  theme?: { [key: string]: any };
 }
 
 const defaultState: FormidableStateProps = {
@@ -32,7 +30,6 @@ const defaultState: FormidableStateProps = {
   sc: undefined,
   store: undefined,
   t: undefined,
-  theme: undefined,
 };
 
 const FormidableContext = React.createContext(defaultState);
@@ -47,7 +44,6 @@ const FormidableProvider: FC<FormidableStateProps> = ({
   initialState = {},
   sc,
   t,
-  theme,
 }) => {
   const [store] = useState<Store>(
     createStore(initialState, extraReducers, extraArguments),
@@ -65,12 +61,9 @@ const FormidableProvider: FC<FormidableStateProps> = ({
         sc,
         store,
         t,
-        theme,
       }}
     >
-      <Provider store={store}>
-        <ThemeProvider theme={theme}>{children}</ThemeProvider>
-      </Provider>
+      <Provider store={store}>{children}</Provider>
     </FormidableContext.Provider>
   );
 };

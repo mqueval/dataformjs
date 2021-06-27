@@ -16,9 +16,6 @@ interface FormidableStateProps {
     };
     store?: Store;
     t?: TFunction;
-    theme?: {
-        [key: string]: any;
-    };
 }
 declare const FormidableContext: React.Context<FormidableStateProps>;
 declare const FormidableProvider: FC<FormidableStateProps>;
