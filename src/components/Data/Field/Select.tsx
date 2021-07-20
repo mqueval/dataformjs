@@ -222,8 +222,8 @@ const FieldSelect: FC<WrappedFieldProps & DataFieldSelectProps> = ({
       <option aria-label={placeholder} disabled hidden={!hasEmpty} value="">
         {t && placeholder ? t(placeholder) : placeholder}
       </option>
-      {options.map(({ label, value }) => (
-        <option key={value} value={value}>
+      {options.map(({ disabled: d, label, value }) => (
+        <option key={value} disabled={d} value={value}>
           {t ? t(label) : label}
         </option>
       ))}
