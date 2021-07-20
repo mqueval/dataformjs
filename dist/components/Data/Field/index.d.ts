@@ -37,11 +37,13 @@ export interface DataFieldProps extends DataProps {
         value?: any;
     }) => void;
     id?: string;
+    isTranslatable?: boolean;
     label?: string;
     labelShow?: boolean;
     message?: string;
     name: string;
     options?: {
+        disabled?: boolean;
         label: string;
         value: string | number;
         id?: string;

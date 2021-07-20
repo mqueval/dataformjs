@@ -1,6 +1,7 @@
 import { diff } from 'deep-object-diff';
 import hash from 'object-hash';
 import React, { FC, ReactNode, SyntheticEvent, useState } from 'react';
+import { useSelector } from 'react-redux';
 import { Dispatch } from 'redux';
 import { DecoratedFormProps, submit } from 'redux-form';
 
@@ -102,6 +103,11 @@ const Form: FC<FormProps> = ({
   const [timeoutId, setTimeoutId] = useState<NodeJS.Timeout>();
   const [canBeSubmited, setCanBeSubmited] = useState<boolean>();
 
+  const traductions: { [key: string]: any }[] = useSelector(
+    (state: any) => state.form[name]?.values?.traductions,
+  );
+
+  console.info('traductions', traductions);
   const newDatas: DataProps[] | undefined =
     datas && !Array.isArray(datas) ? [datas] : datas;
 
@@ -159,7 +165,16 @@ const Form: FC<FormProps> = ({
     >
       {newDatas &&
         newDatas.map((props: DataProps) => (
-          <Data key={hash(props)} {...props} formName={name} params={params} />
+          <Data
+            key={hash(props)}
+            {...props}
+            formName={name}
+            params={{
+              ...params,
+              traductions:
+                traductions && traductions.map(traduction => traduction.key),
+            }}
+          />
         ))}
       {children}
     </FormRender>
