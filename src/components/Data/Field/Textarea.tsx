@@ -7,13 +7,12 @@ import { DataFieldProps } from './index';
 
 const TextareaSC = styled.textarea``;
 
-const FieldTextarea: FC<WrappedFieldProps & DataFieldProps> = ({
-  disabled,
-  id,
-  input,
-  meta: { error, touched },
-  placeholder,
-}) => {
+const FieldTextarea: FC<
+  WrappedFieldProps &
+    DataFieldProps & {
+      rows?: number;
+    }
+> = ({ disabled, id, input, meta: { error, touched }, placeholder, rows }) => {
   const { t, sc } = useContext(FormidableContext);
 
   return (
@@ -23,6 +22,7 @@ const FieldTextarea: FC<WrappedFieldProps & DataFieldProps> = ({
       disabled={disabled}
       id={id}
       placeholder={t && placeholder ? t(placeholder) : placeholder}
+      rows={rows}
       status={touched && error ? 'error' : null}
     />
   );

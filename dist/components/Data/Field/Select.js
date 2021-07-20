@@ -107,6 +107,6 @@ const FieldSelect = ({ disabled, formName, formatOptionLabel, getOptionLabel, ge
     }
     return (react_1.default.createElement(SelectSC, Object.assign({}, input, { as: sc && sc.select, disabled: disabled, id: id, required: true, status: touched && error ? 'error' : null }),
         react_1.default.createElement("option", { "aria-label": placeholder, disabled: true, hidden: !hasEmpty, value: "" }, t && placeholder ? t(placeholder) : placeholder),
-        options.map(({ label, value }) => (react_1.default.createElement("option", { key: value, value: value }, t ? t(label) : label)))));
+        options.map(({ disabled: d, label, value }) => (react_1.default.createElement("option", { key: value, disabled: d, value: value }, t ? t(label) : label)))));
 };
 exports.default = FieldSelect;
