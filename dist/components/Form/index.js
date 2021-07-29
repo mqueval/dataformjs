@@ -34,7 +34,6 @@ const Form = ({ actions, asyncChangeFields, asyncValidate, autosave, bodyProps, 
     const [timeoutId, setTimeoutId] = react_1.useState();
     const [canBeSubmited, setCanBeSubmited] = react_1.useState();
     const traductions = react_redux_1.useSelector((state) => { var _a, _b; return (_b = (_a = state.form[name]) === null || _a === void 0 ? void 0 : _a.values) === null || _b === void 0 ? void 0 : _b.traductions; });
-    console.info('traductions', traductions);
     const newDatas = datas && !Array.isArray(datas) ? [datas] : datas;
     const handleOnChange = (values, dispatch, props, previousValues) => {
         if (onChange) {

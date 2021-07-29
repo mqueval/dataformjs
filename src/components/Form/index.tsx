@@ -107,7 +107,6 @@ const Form: FC<FormProps> = ({
     (state: any) => state.form[name]?.values?.traductions,
   );
 
-  console.info('traductions', traductions);
   const newDatas: DataProps[] | undefined =
     datas && !Array.isArray(datas) ? [datas] : datas;
 

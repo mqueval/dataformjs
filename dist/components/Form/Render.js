@@ -47,9 +47,9 @@ const Actions = ({ id, values }) => {
     return (react_1.default.createElement(react_1.default.Fragment, null, tmp.map((a) => {
         if (a.actions) {
             const div = a;
-            return (react_1.default.createElement("div", { className: div.className }, div.actions.map(({ label, ...actionProps }, i) => (react_1.default.createElement(ButtonSC, Object.assign({ key: object_hash_1.default({ id, label, index: i }), as: sc && sc.button }, actionProps), label)))));
+            return (react_1.default.createElement("div", { key: `form_actions_div_${object_hash_1.default(div.actions)}`, className: div.className }, div.actions.map(({ label, ...actionProps }, i) => (react_1.default.createElement(ButtonSC, Object.assign({ key: `form_actions_${object_hash_1.default({ id, label, index: i })}`, as: sc && sc.button }, actionProps), label)))));
         }
-        return (Array.isArray(a) ? a : [a]).map(({ label, ...actionProps }, i) => (react_1.default.createElement(ButtonSC, Object.assign({ key: object_hash_1.default({ id, label, index: i }), as: sc && sc.button }, actionProps), label)));
+        return (Array.isArray(a) ? a : [a]).map(({ label, ...actionProps }, i) => (react_1.default.createElement(ButtonSC, Object.assign({ key: `form_actions_${object_hash_1.default({ id, label, index: i })}`, as: sc && sc.button }, actionProps), label)));
     })));
 };
 const Form = props => {

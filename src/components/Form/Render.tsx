@@ -45,10 +45,13 @@ const Actions: FC<{
           const div = a as FormDivActionProps;
 
           return (
-            <div className={div.className}>
+            <div
+              key={`form_actions_div_${objectHash(div.actions)}`}
+              className={div.className}
+            >
               {div.actions.map(({ label, ...actionProps }, i) => (
                 <ButtonSC
-                  key={objectHash({ id, label, index: i })}
+                  key={`form_actions_${objectHash({ id, label, index: i })}`}
                   as={sc && sc.button}
                   {...actionProps}
                 >
@@ -62,7 +65,7 @@ const Actions: FC<{
         return ((Array.isArray(a) ? a : [a]) as FormActionProps[]).map(
           ({ label, ...actionProps }, i) => (
             <ButtonSC
-              key={objectHash({ id, label, index: i })}
+              key={`form_actions_${objectHash({ id, label, index: i })}`}
               as={sc && sc.button}
               {...actionProps}
             >
