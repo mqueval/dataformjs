@@ -25,15 +25,13 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const deep_object_diff_1 = require("deep-object-diff");
 const object_hash_1 = __importDefault(require("object-hash"));
 const react_1 = __importStar(require("react"));
-const react_redux_1 = require("react-redux");
 const redux_form_1 = require("redux-form");
 const initializeValues_1 = __importDefault(require("../../utils/initializeValues"));
 const Data_1 = __importDefault(require("../Data"));
 const Render_1 = __importDefault(require("./Render"));
-const Form = ({ actions, asyncChangeFields, asyncValidate, autosave, bodyProps, cancelProps, children, className, datas, destroyOnUnmount, enableReinitialize, forceUnregisterOnUnmount, footerProps, hideSubmitButton, id, initialValues, isSubmissive, name, onChange, onSubmit, params, submitProps, touchOnChange, validate, }) => {
+const Form = ({ actions, asyncChangeFields, asyncValidate, autosave, bodyProps, cancelProps, children, className, datas, destroyOnUnmount, enableReinitialize, forceUnregisterOnUnmount, footerProps, hideSubmitButton, id, initialValues, isSubmissive, keepDirtyOnReinitialize, name, onChange, onSubmit, params, submitProps, touchOnChange, validate, }) => {
     const [timeoutId, setTimeoutId] = react_1.useState();
     const [canBeSubmited, setCanBeSubmited] = react_1.useState();
-    const traductions = react_redux_1.useSelector((state) => { var _a, _b; return (_b = (_a = state.form[name]) === null || _a === void 0 ? void 0 : _a.values) === null || _b === void 0 ? void 0 : _b.traductions; });
     const newDatas = datas && !Array.isArray(datas) ? [datas] : datas;
     const handleOnChange = (values, dispatch, props, previousValues) => {
         if (onChange) {
@@ -53,11 +51,10 @@ const Form = ({ actions, asyncChangeFields, asyncValidate, autosave, bodyProps, 
             }
         }
     };
-    return (react_1.default.createElement(Render_1.default, { actions: actions, asyncChangeFields: asyncChangeFields, asyncValidate: asyncValidate, bodyProps: bodyProps, cancelProps: cancelProps, className: className, destroyOnUnmount: destroyOnUnmount, enableReinitialize: enableReinitialize, footerProps: footerProps, forceUnregisterOnUnmount: forceUnregisterOnUnmount, hideSubmitButton: hideSubmitButton, id: id, initialValues: initialValues || (newDatas && initializeValues_1.default(newDatas)), isSubmissive: isSubmissive, name: name, onChange: handleOnChange, onSubmit: onSubmit, submitProps: submitProps, touchOnChange: touchOnChange, validate: validate },
+    return (react_1.default.createElement(Render_1.default, { actions: actions, asyncChangeFields: asyncChangeFields, asyncValidate: asyncValidate, bodyProps: bodyProps, cancelProps: cancelProps, className: className, destroyOnUnmount: destroyOnUnmount, enableReinitialize: enableReinitialize, footerProps: footerProps, forceUnregisterOnUnmount: forceUnregisterOnUnmount, hideSubmitButton: hideSubmitButton, id: id, initialValues: initialValues || (newDatas && initializeValues_1.default(newDatas)), isSubmissive: isSubmissive, keepDirtyOnReinitialize: keepDirtyOnReinitialize, name: name, onChange: handleOnChange, onSubmit: onSubmit, submitProps: submitProps, touchOnChange: touchOnChange, validate: validate },
         newDatas &&
             newDatas.map((props) => (react_1.default.createElement(Data_1.default, Object.assign({ key: object_hash_1.default(props) }, props, { formName: name, params: {
                     ...params,
-                    traductions: traductions && traductions.map(traduction => traduction.key),
                 } })))),
         children));
 };

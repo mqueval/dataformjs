@@ -29,6 +29,7 @@ export interface DataProps {
     required?: boolean;
     title?: string;
     test?: DataConditionTestProps | DataConditionTestProps[];
+    type?: string;
 }
 declare const Data: FC<DataProps & {
     formName: string;

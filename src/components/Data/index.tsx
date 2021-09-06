@@ -33,6 +33,7 @@ export interface DataProps {
   required?: boolean;
   title?: string;
   test?: DataConditionTestProps | DataConditionTestProps[];
+  type?: string;
 }
 
 const Data: FC<

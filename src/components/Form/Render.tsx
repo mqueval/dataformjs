@@ -165,6 +165,7 @@ type StateProps = {
   enableReinitialize: boolean;
   forceUnregisterOnUnmount: boolean;
   form: string;
+  keepDirtyOnReinitialize?: boolean;
   touchOnChange?: boolean;
 };
 
@@ -181,6 +182,7 @@ const mapStateToProps = (
   enableReinitialize: !!props.enableReinitialize,
   forceUnregisterOnUnmount: !!props.forceUnregisterOnUnmount,
   form: props.name,
+  keepDirtyOnReinitialize: !!props.keepDirtyOnReinitialize,
   touchOnChange:
     undefined !== props.touchOnChange ? props.touchOnChange : false,
 });
