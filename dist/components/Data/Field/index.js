@@ -22,7 +22,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const object_hash_1 = __importDefault(require("object-hash"));
 const react_1 = __importStar(require("react"));
 const redux_form_1 = require("redux-form");
 const styled_components_1 = __importDefault(require("styled-components"));
@@ -33,10 +32,7 @@ const Render_1 = __importDefault(require("./Render"));
 const Wrapper_1 = __importDefault(require("./Wrapper"));
 const InputGroupSC = styled_components_1.default.div ``;
 const InputGroupItemSC = styled_components_1.default.div ``;
-const TranslationsSC = styled_components_1.default.div ``;
-const TranslationsItemSC = styled_components_1.default.div ``;
-const TranslalationsItemLangSC = styled_components_1.default.div ``;
-const DataField = ({ className, column, columnProps, fieldProps, isTranslatable, optionsProps, templateProps, validate, wrapperProps, ...props }) => {
+const DataField = ({ className, column, columnProps, fieldProps, optionsProps, templateProps, validate, wrapperProps, ...props }) => {
     const { sc } = react_1.useContext(index_1.FormidableContext);
     const { componentType, id, name, options, required, params, type } = props;
     const newId = id || `${params && params.name ? `${params.name}.` : ''}${name}`;
@@ -68,9 +64,6 @@ const DataField = ({ className, column, columnProps, fieldProps, isTranslatable,
                 react_1.default.createElement(redux_form_1.Field, Object.assign({ fieldProps: fieldProps, templateProps: templateProps }, props, { className: className, component: Input_1.default, description: option.label, id: option.id || `${newId}_${option.value}`, validate: newValidate, value: option.value }))))))));
     }
     return (react_1.default.createElement(Wrapper_1.default, Object.assign({}, props, { column: column, columnProps: columnProps, id: newId, wrapperProps: wrapperProps }),
-        react_1.default.createElement(redux_form_1.Field, Object.assign({}, props, { className: className, component: Render_1.default, fieldProps: fieldProps, id: newId, templateProps: templateProps, validate: newValidate })),
-        isTranslatable && params && params.traductions && (react_1.default.createElement(TranslationsSC, { as: sc && sc.translation }, params.traductions.map((traduction, index) => (react_1.default.createElement(TranslationsItemSC, { key: object_hash_1.default({ name, traduction }), as: sc && sc.translationItem },
-            react_1.default.createElement(TranslalationsItemLangSC, { as: sc && sc.translationItemLang, lang: traduction }),
-            react_1.default.createElement(redux_form_1.Field, Object.assign({}, props, { className: className, component: Render_1.default, fieldProps: fieldProps, id: newId, name: `traductions[${index}].${name}`, templateProps: templateProps, validate: newValidate })))))))));
+        react_1.default.createElement(redux_form_1.Field, Object.assign({}, props, { className: className, component: Render_1.default, fieldProps: fieldProps, id: newId, templateProps: templateProps, validate: newValidate }))));
 };
 exports.default = DataField;

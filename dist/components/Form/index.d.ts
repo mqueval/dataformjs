@@ -40,6 +40,7 @@ export interface FormProps {
         [key: string]: any;
     };
     isSubmissive?: boolean;
+    keepDirtyOnReinitialize?: boolean;
     name: string;
     onChange?(values: Partial<FormData>, dispatch: Dispatch<any>, props: DecoratedFormProps<FormData, any>, previousValues: Partial<FormData>): void;
     onSubmit: (values?: any) => void;

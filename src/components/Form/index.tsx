@@ -1,7 +1,6 @@
 import { diff } from 'deep-object-diff';
 import hash from 'object-hash';
 import React, { FC, ReactNode, SyntheticEvent, useState } from 'react';
-import { useSelector } from 'react-redux';
 import { Dispatch } from 'redux';
 import { DecoratedFormProps, submit } from 'redux-form';
 
@@ -52,6 +51,7 @@ export interface FormProps {
   id?: string;
   initialValues?: { [key: string]: any };
   isSubmissive?: boolean;
+  keepDirtyOnReinitialize?: boolean;
   name: string;
   onChange?(
     values: Partial<FormData>,
@@ -92,6 +92,7 @@ const Form: FC<FormProps> = ({
   id,
   initialValues,
   isSubmissive,
+  keepDirtyOnReinitialize,
   name,
   onChange,
   onSubmit,
@@ -102,10 +103,6 @@ const Form: FC<FormProps> = ({
 }) => {
   const [timeoutId, setTimeoutId] = useState<NodeJS.Timeout>();
   const [canBeSubmited, setCanBeSubmited] = useState<boolean>();
-
-  const traductions: { [key: string]: any }[] = useSelector(
-    (state: any) => state.form[name]?.values?.traductions,
-  );
 
   const newDatas: DataProps[] | undefined =
     datas && !Array.isArray(datas) ? [datas] : datas;
@@ -155,6 +152,7 @@ const Form: FC<FormProps> = ({
       id={id}
       initialValues={initialValues || (newDatas && initializeValues(newDatas))}
       isSubmissive={isSubmissive}
+      keepDirtyOnReinitialize={keepDirtyOnReinitialize}
       name={name}
       onChange={handleOnChange}
       onSubmit={onSubmit}
@@ -170,8 +168,6 @@ const Form: FC<FormProps> = ({
             formName={name}
             params={{
               ...params,
-              traductions:
-                traductions && traductions.map(traduction => traduction.key),
             }}
           />
         ))}
