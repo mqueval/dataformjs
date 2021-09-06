@@ -1,4 +1,3 @@
-import objectHash from 'object-hash';
 import React, { FC, ReactElement, SyntheticEvent, useContext } from 'react';
 import { Field as FieldForm, Validator } from 'redux-form';
 import styled from 'styled-components';
@@ -19,9 +18,6 @@ import DataFieldWrapper from './Wrapper';
 
 const InputGroupSC = styled.div``;
 const InputGroupItemSC = styled.div``;
-const TranslationsSC = styled.div``;
-const TranslationsItemSC = styled.div``;
-const TranslalationsItemLangSC = styled.div``;
 
 export interface DataFieldProps extends DataProps {
   componentType: string;
@@ -53,7 +49,6 @@ export interface DataFieldProps extends DataProps {
     value?: any;
   }) => void;
   id?: string;
-  isTranslatable?: boolean;
   label?: string;
   labelShow?: boolean;
   message?: string;
@@ -81,7 +76,6 @@ const DataField: FC<
   column,
   columnProps,
   fieldProps,
-  isTranslatable,
   optionsProps,
   templateProps,
   validate,
@@ -175,31 +169,6 @@ const DataField: FC<
         templateProps={templateProps}
         validate={newValidate}
       />
-      {isTranslatable && params && params.traductions && (
-        <TranslationsSC as={sc && sc.translation}>
-          {params.traductions.map((traduction: string, index: number) => (
-            <TranslationsItemSC
-              key={objectHash({ name, traduction })}
-              as={sc && sc.translationItem}
-            >
-              <TranslalationsItemLangSC
-                as={sc && sc.translationItemLang}
-                lang={traduction}
-              />
-              <FieldForm
-                {...props}
-                className={className}
-                component={DataFieldRender}
-                fieldProps={fieldProps}
-                id={newId}
-                name={`traductions[${index}].${name}`}
-                templateProps={templateProps}
-                validate={newValidate}
-              />
-            </TranslationsItemSC>
-          ))}
-        </TranslationsSC>
-      )}
     </DataFieldWrapper>
   );
 };

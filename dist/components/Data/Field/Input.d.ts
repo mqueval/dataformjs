@@ -8,7 +8,6 @@ export interface DataFieldInputProps extends DataFieldProps {
     min?: number | string;
     max?: number | string;
     step?: number;
-    type?: string;
 }
 declare const FieldInput: FC<WrappedFieldProps & DataFieldInputProps>;
 export default FieldInput;
