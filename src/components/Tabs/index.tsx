@@ -1,3 +1,4 @@
+// import qs, { ParsedQs } from 'qs';
 import React, {
   SyntheticEvent,
   useContext,
@@ -67,6 +68,7 @@ const Tabs: VFC<TabsProps> = ({
   useEffect(() => {
     let newTab = 0;
 
+    console.info('tabs useEffect');
     if (
       typeof window !== 'undefined' &&
       window.location &&
@@ -80,10 +82,11 @@ const Tabs: VFC<TabsProps> = ({
           const [key, value] = option.split('=');
           search[key] = value;
         });
-      if (search.page) {
-        newTab = parseInt(search.page, 10);
+      if (search.tab) {
+        newTab = parseInt(search.tab, 10);
       }
 
+      console.info('tabs useEffect', search);
       setSearchParams(search);
     }
 
@@ -133,13 +136,17 @@ const Tabs: VFC<TabsProps> = ({
       let location = window && window.location ? window.location.pathname : '/';
       const search: { [key: string]: any } = {
         ...searchParams,
-        tab,
+        tab: newTab,
       };
       location += `?${Object.keys(search)
         .map(key => `${key}=${search[key]}`)
         .join('&')}`;
 
-      window.history.replaceState({ location, tab }, `tab ${tab}`, location);
+      window.history.replaceState(
+        { location, tab: newTab },
+        `tab ${newTab}`,
+        location,
+      );
     }
   };
 
