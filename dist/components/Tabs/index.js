@@ -22,6 +22,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+// import qs, { ParsedQs } from 'qs';
 const react_1 = __importStar(require("react"));
 const react_redux_1 = require("react-redux");
 const styled_components_1 = __importDefault(require("styled-components"));
@@ -40,6 +41,7 @@ const Tabs = ({ barClassName, barItemClassName, className, formName, datas, para
     const formValues = react_redux_1.useSelector((state) => state.form && state.form[formName] ? state.form[formName].values : {});
     react_1.useEffect(() => {
         let newTab = 0;
+        console.info('tabs useEffect');
         if (typeof window !== 'undefined' &&
             window.location &&
             window.location.search) {
@@ -51,9 +53,10 @@ const Tabs = ({ barClassName, barItemClassName, className, formName, datas, para
                 const [key, value] = option.split('=');
                 search[key] = value;
             });
-            if (search.page) {
-                newTab = parseInt(search.page, 10);
+            if (search.tab) {
+                newTab = parseInt(search.tab, 10);
             }
+            console.info('tabs useEffect', search);
             setSearchParams(search);
         }
         setTab(newTab);
@@ -94,12 +97,12 @@ const Tabs = ({ barClassName, barItemClassName, className, formName, datas, para
             let location = window && window.location ? window.location.pathname : '/';
             const search = {
                 ...searchParams,
-                tab,
+                tab: newTab,
             };
             location += `?${Object.keys(search)
                 .map(key => `${key}=${search[key]}`)
                 .join('&')}`;
-            window.history.replaceState({ location, tab }, `tab ${tab}`, location);
+            window.history.replaceState({ location, tab: newTab }, `tab ${newTab}`, location);
         }
     };
     return (react_1.default.createElement(TabsSC, { as: sc && sc.tabs, className: className },
