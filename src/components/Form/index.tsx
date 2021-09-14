@@ -15,6 +15,7 @@ export interface FormActionProps {
   iconSize?: number;
   label?: string;
   onClick: (event: SyntheticEvent<HTMLButtonElement>) => any;
+  size?: string;
   status?: string;
 }
 
