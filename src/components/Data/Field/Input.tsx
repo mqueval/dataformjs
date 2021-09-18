@@ -11,6 +11,7 @@ const InputSC = styled.input``;
 export interface DataFieldInputProps extends DataFieldProps {
   autoComplete?: string;
   description?: string;
+  descriptionParams?: { [key: string]: any };
   mask?: string;
   min?: number | string;
   max?: number | string;
@@ -20,6 +21,7 @@ export interface DataFieldInputProps extends DataFieldProps {
 const FieldInput: FC<WrappedFieldProps & DataFieldInputProps> = ({
   autoComplete,
   description,
+  descriptionParams,
   disabled,
   fieldProps,
   id,
@@ -63,7 +65,9 @@ const FieldInput: FC<WrappedFieldProps & DataFieldInputProps> = ({
         <InputSC {...input} {...newFieldProps} autoComplete={autoComplete} />
       )}
       {description && (
-        <label htmlFor={id}>{t ? t(description) : description}</label>
+        <label htmlFor={id}>
+          {t ? t(description, descriptionParams) : description}
+        </label>
       )}
     </>
   );

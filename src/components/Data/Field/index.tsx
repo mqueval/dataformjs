@@ -56,6 +56,7 @@ export interface DataFieldProps extends DataProps {
   options?: {
     disabled?: boolean;
     label: string;
+    params?: { [key: string]: any };
     value: string | number;
     id?: string;
   }[];
@@ -141,6 +142,7 @@ const DataField: FC<
                 className={className}
                 component={DataFieldInput}
                 description={option.label}
+                descriptionParams={option.params}
                 id={option.id || `${newId}_${option.value}`}
                 validate={newValidate}
                 value={option.value}
