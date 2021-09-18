@@ -27,7 +27,7 @@ const react_input_mask_1 = __importDefault(require("react-input-mask"));
 const styled_components_1 = __importDefault(require("styled-components"));
 const index_1 = require("../../../index");
 const InputSC = styled_components_1.default.input ``;
-const FieldInput = ({ autoComplete, description, disabled, fieldProps, id, input, placeholder, mask, max, meta: { error, touched }, min, step, type = 'text', }) => {
+const FieldInput = ({ autoComplete, description, descriptionParams, disabled, fieldProps, id, input, placeholder, mask, max, meta: { error, touched }, min, step, type = 'text', }) => {
     const { t, sc } = react_1.useContext(index_1.FormidableContext);
     const newFieldProps = {
         ...fieldProps,
@@ -43,6 +43,6 @@ const FieldInput = ({ autoComplete, description, disabled, fieldProps, id, input
     };
     return (react_1.default.createElement(react_1.default.Fragment, null,
         mask ? (react_1.default.createElement(react_input_mask_1.default, Object.assign({ mask: mask }, input), (inputProps) => (react_1.default.createElement(InputSC, Object.assign({}, inputProps, newFieldProps, { autoComplete: autoComplete }))))) : (react_1.default.createElement(InputSC, Object.assign({}, input, newFieldProps, { autoComplete: autoComplete }))),
-        description && (react_1.default.createElement("label", { htmlFor: id }, t ? t(description) : description))));
+        description && (react_1.default.createElement("label", { htmlFor: id }, t ? t(description, descriptionParams) : description))));
 };
 exports.default = FieldInput;

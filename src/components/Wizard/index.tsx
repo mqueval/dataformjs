@@ -1,7 +1,6 @@
 import queryString from 'query-string';
 import React, {
   FC,
-  ReactNode,
   SyntheticEvent,
   useContext,
   useEffect,
