@@ -61,7 +61,7 @@ const DataField = ({ className, column, columnProps, fieldProps, optionsProps, t
         }
         return (react_1.default.createElement(Wrapper_1.default, Object.assign({}, props, { column: column, columnProps: columnProps, id: newId, wrapperProps: wrapperProps }),
             react_1.default.createElement(InputGroupSC, Object.assign({ as: sc && sc.inputGroup }, optionsProps, { role: "radiogroup" }), options.map(option => (react_1.default.createElement(InputGroupItemSC, { key: option.value, as: sc && sc.inputGroupItem },
-                react_1.default.createElement(redux_form_1.Field, Object.assign({ fieldProps: fieldProps, templateProps: templateProps }, props, { className: className, component: Input_1.default, description: option.label, id: option.id || `${newId}_${option.value}`, validate: newValidate, value: option.value }))))))));
+                react_1.default.createElement(redux_form_1.Field, Object.assign({ fieldProps: fieldProps, templateProps: templateProps }, props, { className: className, component: Input_1.default, description: option.label, descriptionParams: option.params, id: option.id || `${newId}_${option.value}`, validate: newValidate, value: option.value }))))))));
     }
     return (react_1.default.createElement(Wrapper_1.default, Object.assign({}, props, { column: column, columnProps: columnProps, id: newId, wrapperProps: wrapperProps }),
         react_1.default.createElement(redux_form_1.Field, Object.assign({}, props, { className: className, component: Render_1.default, fieldProps: fieldProps, id: newId, templateProps: templateProps, validate: newValidate }))));

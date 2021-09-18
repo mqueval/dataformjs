@@ -44,6 +44,9 @@ export interface DataFieldProps extends DataProps {
     options?: {
         disabled?: boolean;
         label: string;
+        params?: {
+            [key: string]: any;
+        };
         value: string | number;
         id?: string;
     }[];
