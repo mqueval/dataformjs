@@ -48,6 +48,7 @@ export interface FormProps {
     params?: {
         [key: string]: any;
     };
+    removePristine?: boolean;
     submitProps?: {
         [key: string]: any;
     };
