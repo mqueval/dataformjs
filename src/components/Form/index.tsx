@@ -62,6 +62,7 @@ export interface FormProps {
   ): void;
   onSubmit: (values?: any) => void;
   params?: { [key: string]: any };
+  removePristine?: boolean;
   submitProps?: { [key: string]: any };
   // submitClassName?: string;
   // submitIcon?: ReactNode;
@@ -98,6 +99,7 @@ const Form: FC<FormProps> = ({
   onChange,
   onSubmit,
   params,
+  removePristine,
   submitProps,
   touchOnChange,
   validate,
@@ -157,6 +159,7 @@ const Form: FC<FormProps> = ({
       name={name}
       onChange={handleOnChange}
       onSubmit={onSubmit}
+      removePristine={removePristine}
       submitProps={submitProps}
       touchOnChange={touchOnChange}
       validate={validate}

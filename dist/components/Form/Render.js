@@ -59,7 +59,7 @@ const Form = props => {
     // formValues,
     handleSubmit, hideSubmitButton = false, id, isSubmissive = true, 
     // invalid,
-    name, pristine, submitProps, submitting, } = props;
+    name, pristine, removePristine = false, submitProps, submitting, } = props;
     const { sc, t } = react_1.useContext(index_1.FormidableContext);
     return (react_1.default.createElement(FormSC, { as: sc && sc.form, className: className, id: id, name: `${name}-form`, onSubmit: handleSubmit },
         react_1.default.createElement(FormBodySC, Object.assign({}, bodyProps),
@@ -72,7 +72,7 @@ const Form = props => {
                 : (cancelProps === null || cancelProps === void 0 ? void 0 : cancelProps.label) || 'cancel')),
             !hideSubmitButton && (react_1.default.createElement(ButtonSC, Object.assign({ as: sc && sc.button }, submitProps, { disabled: 
                 // !isSubmissive || invalid || pristine || submitting || !valid
-                !isSubmissive || pristine || submitting, type: "submit" }), ((submitProps === null || submitProps === void 0 ? void 0 : submitProps.label) ||
+                !isSubmissive || (!removePristine && pristine) || submitting, type: "submit" }), ((submitProps === null || submitProps === void 0 ? void 0 : submitProps.label) ||
                 (!(submitProps === null || submitProps === void 0 ? void 0 : submitProps.iconLeft) && !(submitProps === null || submitProps === void 0 ? void 0 : submitProps.iconRight))) &&
                 (t
                     ? t((submitProps === null || submitProps === void 0 ? void 0 : submitProps.label) || 'submit')
