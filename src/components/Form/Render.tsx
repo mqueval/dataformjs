@@ -98,6 +98,7 @@ const Form: React.FC<
     // invalid,
     name,
     pristine,
+    removePristine = false,
     submitProps,
     submitting,
     // valid,
@@ -137,7 +138,7 @@ const Form: React.FC<
             {...submitProps}
             disabled={
               // !isSubmissive || invalid || pristine || submitting || !valid
-              !isSubmissive || pristine || submitting
+              !isSubmissive || (!removePristine && pristine) || submitting
             }
             type="submit"
           >

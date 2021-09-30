@@ -1,9 +1,10 @@
 import hash from 'object-hash';
-import React, { FC } from 'react';
+import React, { FC, useContext } from 'react';
 import { connect, DefaultRootState } from 'react-redux';
 import { getFormValues } from 'redux-form';
 import styled from 'styled-components';
 
+import { FormidableContext } from '../../index';
 import replaceTestParams from '../../utils/replaceTestParams';
 import verifyCondition from '../../utils/verifyCondition';
 import Group from '../Group';
@@ -39,6 +40,8 @@ const DataCondition: FC<DataConditionProps> = ({
   params,
   valid,
 }) => {
+  const { sc } = useContext(FormidableContext);
+
   if (!valid) {
     return null;
   }
@@ -47,7 +50,11 @@ const DataCondition: FC<DataConditionProps> = ({
   const props = group ? groupProps : {};
 
   return (
-    <ConditionCmp className={className} {...props}>
+    <ConditionCmp
+      className={className}
+      {...props}
+      as={!group && sc && sc.condition}
+    >
       {datas &&
         datas.length > 0 &&
         datas.map(data => (
@@ -63,24 +70,29 @@ const DataCondition: FC<DataConditionProps> = ({
   );
 };
 
-export default connect((state: DefaultRootState, props: DataConditionProps): {
-  valid: boolean;
-} => {
-  if (!props.formName) {
-    throw new Error('the formName props est obligatoire');
-  }
+export default connect(
+  (
+    state: DefaultRootState,
+    props: DataConditionProps,
+  ): {
+    valid: boolean;
+  } => {
+    if (!props.formName) {
+      throw new Error('the formName props est obligatoire');
+    }
 
-  const formValues: { [key: string]: any } = getFormValues(props.formName)(
-    state,
-  );
+    const formValues: { [key: string]: any } = getFormValues(props.formName)(
+      state,
+    );
 
-  const { params, test } = props;
+    const { params, test } = props;
 
-  const newTest = params ? replaceTestParams(test, params) : test;
+    const newTest = params ? replaceTestParams(test, params) : test;
 
-  const valid = verifyCondition({ formValues, test: newTest });
+    const valid = verifyCondition({ formValues, test: newTest });
 
-  return {
-    valid,
-  };
-})(DataCondition);
+    return {
+      valid,
+    };
+  },
+)(DataCondition);
