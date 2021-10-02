@@ -168,6 +168,7 @@ type StateProps = {
   form: string;
   keepDirtyOnReinitialize?: boolean;
   touchOnChange?: boolean;
+  updateUnregisteredFields?: boolean;
 };
 
 const ReduxForm = reduxForm<any, FormRenderProps>({})(Form);
@@ -186,6 +187,10 @@ const mapStateToProps = (
   keepDirtyOnReinitialize: !!props.keepDirtyOnReinitialize,
   touchOnChange:
     undefined !== props.touchOnChange ? props.touchOnChange : false,
+  updateUnregisteredFields:
+    undefined !== props.updateUnregisteredFields
+      ? props.updateUnregisteredFields
+      : false,
 });
 
 export default connect(mapStateToProps)(ReduxForm);

@@ -88,5 +88,8 @@ const mapStateToProps = (state, props) => ({
     form: props.name,
     keepDirtyOnReinitialize: !!props.keepDirtyOnReinitialize,
     touchOnChange: undefined !== props.touchOnChange ? props.touchOnChange : false,
+    updateUnregisteredFields: undefined !== props.updateUnregisteredFields
+        ? props.updateUnregisteredFields
+        : false,
 });
 exports.default = react_redux_1.connect(mapStateToProps)(ReduxForm);
