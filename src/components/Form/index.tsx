@@ -73,6 +73,7 @@ export interface FormProps {
   // submitLabel?: string;
   title?: string;
   touchOnChange?: boolean;
+  updateUnregisteredFields?: boolean;
   validate?: (values: any, props: any) => any;
 }
 
@@ -102,6 +103,7 @@ const Form: FC<FormProps> = ({
   removePristine,
   submitProps,
   touchOnChange,
+  updateUnregisteredFields,
   validate,
 }) => {
   const [timeoutId, setTimeoutId] = useState<NodeJS.Timeout>();
@@ -162,6 +164,7 @@ const Form: FC<FormProps> = ({
       removePristine={removePristine}
       submitProps={submitProps}
       touchOnChange={touchOnChange}
+      updateUnregisteredFields={updateUnregisteredFields}
       validate={validate}
     >
       {newDatas &&

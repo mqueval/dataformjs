@@ -54,6 +54,7 @@ export interface FormProps {
     };
     title?: string;
     touchOnChange?: boolean;
+    updateUnregisteredFields?: boolean;
     validate?: (values: any, props: any) => any;
 }
 declare const Form: FC<FormProps>;
