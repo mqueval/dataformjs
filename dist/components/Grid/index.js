@@ -30,7 +30,7 @@ const GridSC = styled_components_1.default.div `
   column-gap: 1.5rem;
 `;
 const Grid = ({ children, ...props }) => {
-    const { sc } = react_1.useContext(index_1.FormidableContext);
-    return (react_1.default.createElement(GridSC, Object.assign({ as: sc && sc.grid }, props), children));
+    const { sc } = (0, react_1.useContext)(index_1.FormidableContext);
+    return (react_1.default.createElement(GridSC, { as: sc && sc.grid, ...props }, children));
 };
 exports.default = Grid;

@@ -1,9 +1,6 @@
-import classnames from 'classnames';
-import React, { ReactNode, useContext, VoidFunctionComponent } from 'react';
+import React, { ReactNode, VoidFunctionComponent } from 'react';
 import { FieldArray } from 'redux-form';
-import styled from 'styled-components';
 
-import { FormidableContext } from '../../../index';
 import Group from '../../Group';
 import { DataProps } from '../index';
 import DataArrayRender from './Render';

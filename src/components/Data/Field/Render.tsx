@@ -1,7 +1,6 @@
 import React, { FC, SyntheticEvent } from 'react';
 import { WrappedFieldProps } from 'redux-form';
 
-import FieldAsyncSelect from './AsyncSelect';
 import { DataFieldProps } from './index';
 import FieldInput from './Input';
 import FieldSelect from './Select';
@@ -51,11 +50,6 @@ const DataFieldRender: FC<WrappedFieldProps & DataFieldProps> = props => {
 
   let Component;
   switch (componentType) {
-    case 'async-select': {
-      Component = FieldAsyncSelect;
-      break;
-    }
-
     case 'input': {
       Component = FieldInput;
       break;

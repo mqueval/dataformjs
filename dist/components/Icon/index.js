@@ -22,7 +22,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const react_1 = __importStar(require("react"));
 const index_1 = require("../../index");
 const Icon = ({ color, size, value, }) => {
-    const { t, sc } = react_1.useContext(index_1.FormidableContext);
+    const { t, sc } = (0, react_1.useContext)(index_1.FormidableContext);
     if (typeof react_1.default.Component === typeof value) {
         const IconCmp = value;
         return react_1.default.createElement(IconCmp, { color: color, size: size });

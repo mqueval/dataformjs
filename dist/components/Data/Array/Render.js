@@ -32,17 +32,17 @@ const Field_1 = __importDefault(require("../Field"));
 const index_2 = __importDefault(require("../index"));
 const ButtonSC = styled_components_1.default.button ``;
 const DataArrayRender = ({ addButtonClassName, addButtonIcon, addButtonId, addButtonLabel, addButtonPosition, addButtonSize, addButtonStatus, datas, fields, formName, formValues, params, removeButtonClassName, removeButtonIcon, removeButtonLabel, removeButtonSize, removeButtonStatus, }) => {
-    const { sc, t } = react_1.useContext(index_1.FormidableContext);
-    react_1.useEffect(() => {
+    const { sc, t } = (0, react_1.useContext)(index_1.FormidableContext);
+    (0, react_1.useEffect)(() => {
         if (0 === fields.length) {
-            fields.push(datas ? initializeValues_1.default(datas) : '');
+            fields.push(datas ? (0, initializeValues_1.default)(datas) : '');
         }
     }, [datas, fields]);
     // if (!datas) {
     //   return <div>datas obligatoire</div>;
     // }
     const handleAddButtonOnClick = () => {
-        fields.push(datas ? initializeValues_1.default(datas) : '');
+        fields.push(datas ? (0, initializeValues_1.default)(datas) : '');
     };
     const handleRemoveButtonOnClick = (event) => {
         const index = event.currentTarget.getAttribute('data-index');
@@ -59,17 +59,17 @@ const DataArrayRender = ({ addButtonClassName, addButtonIcon, addButtonId, addBu
                     : removeButtonLabel));
                 if (datas && datas.length > 0) {
                     if (datas.length > 1 || datas[0].datas) {
-                        return (react_1.default.createElement(redux_form_1.FormSection, { key: `${field}_${object_hash_1.default(datas)}`, name: field }, datas.map(value => (react_1.default.createElement(index_2.default, Object.assign({ key: `${field}_${object_hash_1.default(value)}` }, value, { customInfos: removeCmp, formName: formName, formValues: formValues, params: {
+                        return (react_1.default.createElement(redux_form_1.FormSection, { key: `${field}_${(0, object_hash_1.default)(datas)}`, name: field }, datas.map(value => (react_1.default.createElement(index_2.default, { key: `${field}_${(0, object_hash_1.default)(value)}`, ...value, customInfos: removeCmp, formName: formName, formValues: formValues, params: {
                                 ...params,
                                 index,
                                 count: index + 1,
                                 name: field,
-                            } }))))));
+                            } })))));
                     }
-                    return (react_1.default.createElement(index_2.default, Object.assign({ key: field }, datas[0], { customInfos: removeCmp, formName: formName, formValues: formValues, name: field, params: {
+                    return (react_1.default.createElement(index_2.default, { key: field, ...datas[0], customInfos: removeCmp, formName: formName, formValues: formValues, name: field, params: {
                             ...params,
                             name: field,
-                        } })));
+                        } }));
                 }
                 return (react_1.default.createElement(Field_1.default, { key: field, componentType: "input", customInfos: removeCmp, formName: formName, formValues: formValues, name: field, params: {
                         ...params,

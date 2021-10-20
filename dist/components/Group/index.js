@@ -34,7 +34,7 @@ const GroupBodySC = styled_components_1.default.div ``;
 const GroupDescriptionSC = styled_components_1.default.p ``;
 const LegendSC = styled_components_1.default.legend ``;
 const Group = ({ bodyRemoveTag = false, bodyProps, children, className, columns, columnsProps, customInfos, customInfosProps, description, descriptionProps, grid, gridProps, params, title, titleProps, titleParams, }) => {
-    const { t, sc } = react_1.useContext(index_1.FormidableContext);
+    const { t, sc } = (0, react_1.useContext)(index_1.FormidableContext);
     const GroupBodyCmp = bodyRemoveTag ? react_1.default.Fragment : GroupBodySC;
     const groupBodyProps = bodyRemoveTag
         ? {}
@@ -43,12 +43,12 @@ const Group = ({ bodyRemoveTag = false, bodyProps, children, className, columns,
             as: sc && sc.groupBody,
         };
     return (react_1.default.createElement(GroupSC, { as: sc && sc.group, className: className },
-        customInfos && (react_1.default.createElement(CustomInfosSC, Object.assign({ as: sc && sc.groupCustomInfos }, customInfosProps), customInfos)),
-        title && (react_1.default.createElement(LegendSC, Object.assign({ as: sc && sc.groupTitle }, titleProps), t ? t(title, convertParams_1.default(titleParams, params)) : title)),
-        description && (react_1.default.createElement(GroupDescriptionSC, Object.assign({ as: sc && sc.groupDescription }, descriptionProps), t ? t(description) : description)),
-        react_1.default.createElement(GroupBodyCmp, Object.assign({}, groupBodyProps),
-            columns && react_1.default.createElement(Columns_1.default, Object.assign({}, columnsProps), children),
-            grid && react_1.default.createElement(Grid_1.default, Object.assign({}, gridProps), children),
+        customInfos && (react_1.default.createElement(CustomInfosSC, { as: sc && sc.groupCustomInfos, ...customInfosProps }, customInfos)),
+        title && (react_1.default.createElement(LegendSC, { as: sc && sc.groupTitle, ...titleProps }, t ? t(title, (0, convertParams_1.default)(titleParams, params)) : title)),
+        description && (react_1.default.createElement(GroupDescriptionSC, { as: sc && sc.groupDescription, ...descriptionProps }, t ? t(description) : description)),
+        react_1.default.createElement(GroupBodyCmp, { ...groupBodyProps },
+            columns && react_1.default.createElement(Columns_1.default, { ...columnsProps }, children),
+            grid && react_1.default.createElement(Grid_1.default, { ...gridProps }, children),
             !columns && !grid && children)));
 };
 exports.default = Group;

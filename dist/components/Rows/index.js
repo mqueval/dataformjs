@@ -37,7 +37,7 @@ const RowsSC = styled_components_1.default.div `
   }
 `;
 const Rows = ({ children, ...props }) => {
-    const { sc } = react_1.useContext(index_1.FormidableContext);
-    return (react_1.default.createElement(RowsSC, Object.assign({ as: sc && sc.rows }, props), children));
+    const { sc } = (0, react_1.useContext)(index_1.FormidableContext);
+    return (react_1.default.createElement(RowsSC, { as: sc && sc.rows, ...props }, children));
 };
 exports.default = Rows;

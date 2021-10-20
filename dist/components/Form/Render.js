@@ -37,7 +37,7 @@ const FormFooterSC = styled_components_1.default.div `
 `;
 const MessageSC = styled_components_1.default.div ``;
 const Actions = ({ id, values }) => {
-    const { sc } = react_1.useContext(index_1.FormidableContext);
+    const { sc } = (0, react_1.useContext)(index_1.FormidableContext);
     if (!values) {
         return null;
     }
@@ -47,9 +47,9 @@ const Actions = ({ id, values }) => {
     return (react_1.default.createElement(react_1.default.Fragment, null, tmp.map((a) => {
         if (a.actions) {
             const div = a;
-            return (react_1.default.createElement("div", { key: `form_actions_div_${object_hash_1.default(div.actions)}`, className: div.className }, div.actions.map(({ label, ...actionProps }, i) => (react_1.default.createElement(ButtonSC, Object.assign({ key: `form_actions_${object_hash_1.default({ id, label, index: i })}`, as: sc && sc.button }, actionProps), label)))));
+            return (react_1.default.createElement("div", { key: `form_actions_div_${(0, object_hash_1.default)(div.actions)}`, className: div.className }, div.actions.map(({ label, ...actionProps }, i) => (react_1.default.createElement(ButtonSC, { key: `form_actions_${(0, object_hash_1.default)({ id, label, index: i })}`, as: sc && sc.button, ...actionProps }, label)))));
         }
-        return (Array.isArray(a) ? a : [a]).map(({ label, ...actionProps }, i) => (react_1.default.createElement(ButtonSC, Object.assign({ key: `form_actions_${object_hash_1.default({ id, label, index: i })}`, as: sc && sc.button }, actionProps), label)));
+        return (Array.isArray(a) ? a : [a]).map(({ label, ...actionProps }, i) => (react_1.default.createElement(ButtonSC, { key: `form_actions_${(0, object_hash_1.default)({ id, label, index: i })}`, as: sc && sc.button, ...actionProps }, label)));
     })));
 };
 const Form = props => {
@@ -59,26 +59,28 @@ const Form = props => {
     // formValues,
     handleSubmit, hideSubmitButton = false, id, isSubmissive = true, 
     // invalid,
-    name, pristine, removePristine = false, submitProps, submitting, } = props;
-    const { sc, t } = react_1.useContext(index_1.FormidableContext);
+    name, pristine, removePristine = false, submitProps, submitting,
+    // valid,
+     } = props;
+    const { sc, t } = (0, react_1.useContext)(index_1.FormidableContext);
     return (react_1.default.createElement(FormSC, { as: sc && sc.form, className: className, id: id, name: `${name}-form`, onSubmit: handleSubmit },
-        react_1.default.createElement(FormBodySC, Object.assign({}, bodyProps),
+        react_1.default.createElement(FormBodySC, { ...bodyProps },
             children,
             error && (react_1.default.createElement(MessageSC, { as: sc && sc.formMessage, status: "error" }, t ? t(error) : error))),
-        react_1.default.createElement(FormFooterSC, Object.assign({}, footerProps),
+        react_1.default.createElement(FormFooterSC, { ...footerProps },
             react_1.default.createElement(Actions, { id: id, values: actions }),
-            (cancelProps === null || cancelProps === void 0 ? void 0 : cancelProps.onClick) && (react_1.default.createElement(ButtonSC, Object.assign({ as: sc && sc.button }, cancelProps), t
+            (cancelProps === null || cancelProps === void 0 ? void 0 : cancelProps.onClick) && (react_1.default.createElement(ButtonSC, { as: sc && sc.button, ...cancelProps }, t
                 ? t((cancelProps === null || cancelProps === void 0 ? void 0 : cancelProps.label) || 'cancel')
                 : (cancelProps === null || cancelProps === void 0 ? void 0 : cancelProps.label) || 'cancel')),
-            !hideSubmitButton && (react_1.default.createElement(ButtonSC, Object.assign({ as: sc && sc.button }, submitProps, { disabled: 
+            !hideSubmitButton && (react_1.default.createElement(ButtonSC, { as: sc && sc.button, ...submitProps, disabled: 
                 // !isSubmissive || invalid || pristine || submitting || !valid
-                !isSubmissive || (!removePristine && pristine) || submitting, type: "submit" }), ((submitProps === null || submitProps === void 0 ? void 0 : submitProps.label) ||
+                !isSubmissive || (!removePristine && pristine) || submitting, type: "submit" }, ((submitProps === null || submitProps === void 0 ? void 0 : submitProps.label) ||
                 (!(submitProps === null || submitProps === void 0 ? void 0 : submitProps.iconLeft) && !(submitProps === null || submitProps === void 0 ? void 0 : submitProps.iconRight))) &&
                 (t
                     ? t((submitProps === null || submitProps === void 0 ? void 0 : submitProps.label) || 'submit')
                     : (submitProps === null || submitProps === void 0 ? void 0 : submitProps.label) || 'submit'))))));
 };
-const ReduxForm = redux_form_1.reduxForm({})(Form);
+const ReduxForm = (0, redux_form_1.reduxForm)({})(Form);
 const mapStateToProps = (state, props) => ({
     asyncChangeFields: props.asyncChangeFields,
     asyncValidate: props.asyncValidate,
@@ -92,4 +94,4 @@ const mapStateToProps = (state, props) => ({
         ? props.updateUnregisteredFields
         : false,
 });
-exports.default = react_redux_1.connect(mapStateToProps)(ReduxForm);
+exports.default = (0, react_redux_1.connect)(mapStateToProps)(ReduxForm);

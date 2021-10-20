@@ -43,8 +43,10 @@ const Form = props => {
     // formValues,
     handleSubmit, hideSubmitButton = false, id, isSubmissive = true, 
     // invalid,
-    name, pristine, submitIcon, submitLabel = 'form/submit', submitting, } = props;
-    const { sc, t } = react_1.useContext(index_1.FormidableContext);
+    name, pristine, submitIcon, submitLabel = 'form/submit', submitting,
+    // valid,
+     } = props;
+    const { sc, t } = (0, react_1.useContext)(index_1.FormidableContext);
     return (react_1.default.createElement(FormSC, { as: sc && sc.form, className: className, id: id, name: `${name}-form`, onSubmit: handleSubmit },
         react_1.default.createElement(FormBodySC, { className: bodyClassName },
             children,
@@ -55,7 +57,7 @@ const Form = props => {
                 // !isSubmissive || invalid || pristine || submitting || !valid
                 !isSubmissive || pristine || submitting, iconRight: submitIcon, type: "submit" }, t ? t(submitLabel) : submitLabel)))));
 };
-const ReduxForm = redux_form_1.reduxForm({})(Form);
+const ReduxForm = (0, redux_form_1.reduxForm)({})(Form);
 const mapStateToProps = (state, props) => ({
     asyncChangeFields: props.asyncChangeFields,
     asyncValidate: props.asyncValidate,
@@ -65,4 +67,4 @@ const mapStateToProps = (state, props) => ({
     form: props.name,
     touchOnChange: undefined !== props.touchOnChange ? props.touchOnChange : false,
 });
-exports.default = react_redux_1.connect(mapStateToProps)(ReduxForm);
+exports.default = (0, react_redux_1.connect)(mapStateToProps)(ReduxForm);

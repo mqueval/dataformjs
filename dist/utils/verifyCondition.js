@@ -28,7 +28,7 @@ exports.default = ({ formValues, test, }) => {
                 return undefined;
             }, formValues);
             // if (undefined !== fieldValue) {
-            valid.push(testCondition_1.default({ fieldValue, operator, value }));
+            valid.push((0, testCondition_1.default)({ fieldValue, operator, value }));
             // } else {
             // valid.push(false);
             // }

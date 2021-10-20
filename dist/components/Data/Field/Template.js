@@ -29,10 +29,10 @@ const CustomActionSC = styled_components_1.default.div ``;
 const FieldMessageSC = styled_components_1.default.div ``;
 const FieldTemplateSC = styled_components_1.default.div ``;
 const FieldTemplate = ({ children, customAction, customActionProps, templateProps, message, meta: { error, touched, warning }, }) => {
-    const { t, sc } = react_1.useContext(index_1.FormidableContext);
-    return (react_1.default.createElement(FieldTemplateSC, Object.assign({ as: sc && sc.fieldTemplate }, templateProps),
+    const { t, sc } = (0, react_1.useContext)(index_1.FormidableContext);
+    return (react_1.default.createElement(FieldTemplateSC, { as: sc && sc.fieldTemplate, ...templateProps },
         children,
-        customAction && (react_1.default.createElement(CustomActionSC, Object.assign({ as: sc && sc.customTop }, customActionProps), customAction)),
+        customAction && (react_1.default.createElement(CustomActionSC, { as: sc && sc.customTop, ...customActionProps }, customAction)),
         touched &&
             ((error && (react_1.default.createElement(FieldMessageSC, { as: sc && sc.fieldMessage, status: "error" }, t ? t(error) : error))) ||
                 (warning && (react_1.default.createElement(FieldMessageSC, { as: sc && sc.fieldMessage, status: "warning" }, t ? t(warning) : warning)))),

@@ -33,24 +33,24 @@ const Wrapper_1 = __importDefault(require("./Wrapper"));
 const InputGroupSC = styled_components_1.default.div ``;
 const InputGroupItemSC = styled_components_1.default.div ``;
 const DataField = ({ className, column, columnProps, fieldProps, optionsProps, templateProps, validate, wrapperProps, ...props }) => {
-    const { sc } = react_1.useContext(index_1.FormidableContext);
+    const { sc } = (0, react_1.useContext)(index_1.FormidableContext);
     const { componentType, id, name, options, required, params, type } = props;
     const newId = id || `${params && params.name ? `${params.name}.` : ''}${name}`;
     let newValidate = validate && !Array.isArray(validate) ? [validate] : validate;
     if (required) {
-        newValidate = validators_1.addValidator(validators_1.isRequired, newValidate);
+        newValidate = (0, validators_1.addValidator)(validators_1.isRequired, newValidate);
     }
     switch (type) {
         case 'date': {
-            newValidate = validators_1.addValidator(validators_1.isDate, newValidate);
+            newValidate = (0, validators_1.addValidator)(validators_1.isDate, newValidate);
             break;
         }
         case 'email': {
-            newValidate = validators_1.addValidator(validators_1.isEmail, newValidate);
+            newValidate = (0, validators_1.addValidator)(validators_1.isEmail, newValidate);
             break;
         }
         case 'time': {
-            newValidate = validators_1.addValidator(validators_1.isTime, newValidate);
+            newValidate = (0, validators_1.addValidator)(validators_1.isTime, newValidate);
             break;
         }
         default:
@@ -59,11 +59,11 @@ const DataField = ({ className, column, columnProps, fieldProps, optionsProps, t
         if (!options || 0 === options.length) {
             return react_1.default.createElement("div", null, "input : erreur de param\u00E8tre : options obligatoire");
         }
-        return (react_1.default.createElement(Wrapper_1.default, Object.assign({}, props, { column: column, columnProps: columnProps, id: newId, wrapperProps: wrapperProps }),
-            react_1.default.createElement(InputGroupSC, Object.assign({ as: sc && sc.inputGroup }, optionsProps, { role: "radiogroup" }), options.map(option => (react_1.default.createElement(InputGroupItemSC, { key: option.value, as: sc && sc.inputGroupItem },
-                react_1.default.createElement(redux_form_1.Field, Object.assign({ fieldProps: fieldProps, templateProps: templateProps }, props, { className: className, component: Input_1.default, description: option.label, descriptionParams: option.params, id: option.id || `${newId}_${option.value}`, validate: newValidate, value: option.value }))))))));
+        return (react_1.default.createElement(Wrapper_1.default, { ...props, column: column, columnProps: columnProps, id: newId, wrapperProps: wrapperProps },
+            react_1.default.createElement(InputGroupSC, { as: sc && sc.inputGroup, ...optionsProps, role: "radiogroup" }, options.map(option => (react_1.default.createElement(InputGroupItemSC, { key: option.value, as: sc && sc.inputGroupItem },
+                react_1.default.createElement(redux_form_1.Field, { fieldProps: fieldProps, templateProps: templateProps, ...props, className: className, component: Input_1.default, description: option.label, descriptionParams: option.params, id: option.id || `${newId}_${option.value}`, validate: newValidate, value: option.value })))))));
     }
-    return (react_1.default.createElement(Wrapper_1.default, Object.assign({}, props, { column: column, columnProps: columnProps, id: newId, wrapperProps: wrapperProps }),
-        react_1.default.createElement(redux_form_1.Field, Object.assign({}, props, { className: className, component: Render_1.default, fieldProps: fieldProps, id: newId, templateProps: templateProps, validate: newValidate }))));
+    return (react_1.default.createElement(Wrapper_1.default, { ...props, column: column, columnProps: columnProps, id: newId, wrapperProps: wrapperProps },
+        react_1.default.createElement(redux_form_1.Field, { ...props, className: className, component: Render_1.default, fieldProps: fieldProps, id: newId, templateProps: templateProps, validate: newValidate })));
 };
 exports.default = DataField;

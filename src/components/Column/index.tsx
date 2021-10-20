@@ -1,4 +1,3 @@
-import classnames from 'classnames';
 import React, { FC, useContext } from 'react';
 import styled from 'styled-components';
 
@@ -18,7 +17,7 @@ const Column: FC<{ sticky?: number }> = ({ children, sticky, ...props }) => {
   return (
     <ColumnSC as={sc && sc.column} {...props}>
       {sticky ? (
-        <div className={classnames('sticky', `top-${sticky}`)}>{children}</div>
+        <div className={`sticky top-${sticky}`}>{children}</div>
       ) : (
         children
       )}
