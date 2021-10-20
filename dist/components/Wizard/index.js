@@ -33,12 +33,12 @@ const Form_1 = __importDefault(require("../Form"));
 const ProgressBar_1 = __importDefault(require("./ProgressBar"));
 const WizardSC = styled_components_1.default.div ``;
 const Wizard = ({ backProps, className, id, pages, name, params, progressProps, progressItemProps, progressItemIconProps, progressShowStep = false, showProgress, }) => {
-    const { sc } = react_1.useContext(index_1.FormidableContext);
-    const dispatch = react_redux_1.useDispatch();
-    const [page, setPage] = react_1.useState(0);
-    const [infos, setInfos] = react_1.useState([]);
+    const { sc } = (0, react_1.useContext)(index_1.FormidableContext);
+    const dispatch = (0, react_redux_1.useDispatch)();
+    const [page, setPage] = (0, react_1.useState)(0);
+    const [infos, setInfos] = (0, react_1.useState)([]);
     const newPages = pages && !Array.isArray(pages) ? [pages] : pages;
-    react_1.useEffect(() => {
+    (0, react_1.useEffect)(() => {
         let newPage = 0;
         if (typeof window !== 'undefined' &&
             window.location &&
@@ -57,7 +57,7 @@ const Wizard = ({ backProps, className, id, pages, name, params, progressProps, 
         }
         setPage(newPage);
     }, []);
-    react_1.useEffect(() => {
+    (0, react_1.useEffect)(() => {
         if (newPages) {
             const newInfos = newPages.map((newPage, i) => ({
                 inProgress: page === i,
@@ -73,7 +73,7 @@ const Wizard = ({ backProps, className, id, pages, name, params, progressProps, 
                 setPage(parseInt(i, 10));
             }
             else {
-                dispatch(redux_form_1.submit(name));
+                dispatch((0, redux_form_1.submit)(name));
             }
         }
     };
@@ -107,12 +107,12 @@ const Wizard = ({ backProps, className, id, pages, name, params, progressProps, 
             }
         });
     }
-    const initialValues = initializeValues_1.default(newDatas);
+    const initialValues = (0, initializeValues_1.default)(newDatas);
     const newBackProps = backProps !== null && backProps !== void 0 ? backProps : {};
     newBackProps.onClick = page > 0 ? handleBackOnClick : undefined;
     return (react_1.default.createElement(WizardSC, { as: sc && sc.wizard, className: className },
-        showProgress && newPages && (react_1.default.createElement(ProgressBar_1.default, Object.assign({}, progressProps, { handleStepButtonOnClick: handleStepButtonOnClick, iconStep: sc && sc.iconStep, iconSuccess: sc && sc.iconSuccess, infos: infos, itemIconProps: progressItemIconProps, itemProps: progressItemProps, page: page, pages: newPages, showStep: progressShowStep }))),
-        newPages && newPages.length > page && (react_1.default.createElement(Form_1.default, Object.assign({ cancelProps: newBackProps, id: `${id}--page_${page}`, initialValues: initialValues, onSubmit: handleNextOnClick }, newPages[page], { destroyOnUnmount: false, forceUnregisterOnUnmount // <------ unregister fields on unmount
-            : true, name: name, params: params })))));
+        showProgress && newPages && (react_1.default.createElement(ProgressBar_1.default, { ...progressProps, handleStepButtonOnClick: handleStepButtonOnClick, iconStep: sc && sc.iconStep, iconSuccess: sc && sc.iconSuccess, infos: infos, itemIconProps: progressItemIconProps, itemProps: progressItemProps, page: page, pages: newPages, showStep: progressShowStep })),
+        newPages && newPages.length > page && (react_1.default.createElement(Form_1.default, { cancelProps: newBackProps, id: `${id}--page_${page}`, initialValues: initialValues, onSubmit: handleNextOnClick, ...newPages[page], destroyOnUnmount: false, forceUnregisterOnUnmount // <------ unregister fields on unmount
+            : true, name: name, params: params }))));
 };
 exports.default = Wizard;

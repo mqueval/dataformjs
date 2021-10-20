@@ -9,6 +9,6 @@ const rootReducer = extras => {
     if (extras) {
         reducers = { ...reducers, ...extras };
     }
-    return redux_1.combineReducers(reducers);
+    return (0, redux_1.combineReducers)(reducers);
 };
 exports.default = rootReducer;

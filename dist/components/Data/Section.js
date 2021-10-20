@@ -13,9 +13,9 @@ const SectionSC = styled_components_1.default.div ``;
 const DataSection = ({ className, datas, name, formName, formValues, group, groupProps, params, }) => {
     const SectionCmp = group ? Group_1.default : SectionSC;
     const props = group ? groupProps : {};
-    return (react_1.default.createElement(SectionCmp, Object.assign({ className: className }, props),
+    return (react_1.default.createElement(SectionCmp, { className: className, ...props },
         react_1.default.createElement(redux_form_1.FormSection, { name: name }, datas &&
             datas.length > 0 &&
-            datas.map(data => (react_1.default.createElement(index_1.default, Object.assign({ key: object_hash_1.default(data) }, data, { formName: formName, formValues: formValues, params: params })))))));
+            datas.map(data => (react_1.default.createElement(index_1.default, { key: (0, object_hash_1.default)(data), ...data, formName: formName, formValues: formValues, params: params }))))));
 };
 exports.default = DataSection;

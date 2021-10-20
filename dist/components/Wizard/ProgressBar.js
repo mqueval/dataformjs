@@ -53,14 +53,14 @@ const ProgressBarItemSC = styled_components_1.default.li `
   }
 
   ${props => props.isCompleted &&
-    styled_components_1.css `
+    (0, styled_components_1.css) `
       &:before {
         background-color: #112255;
       }
     `};
 
   ${props => props.inProgress &&
-    styled_components_1.css `
+    (0, styled_components_1.css) `
       &:before {
         background: #112255;
         background: linear-gradient(
@@ -96,7 +96,7 @@ const ProgressBarItemIconSC = styled_components_1.default.span `
   font-weight: 600;
 
   ${props => props.isCompleted &&
-    styled_components_1.css `
+    (0, styled_components_1.css) `
       border: none;
       background: #112255;
       color: #fff;
@@ -112,13 +112,13 @@ const ProgressBarItemTitleSC = styled_components_1.default.span `
   color: inherit;
 `;
 const ProgressBar = ({ handleStepButtonOnClick, iconStep, iconSuccess, infos, page, pages, itemProps, itemIconProps, showStep, ...props }) => {
-    const { sc } = react_1.useContext(index_1.FormidableContext);
+    const { sc } = (0, react_1.useContext)(index_1.FormidableContext);
     const IconStep = iconStep;
     const IconSuccess = iconSuccess;
     // TODO revoir ce composant
-    return (react_1.default.createElement(ProgressBarSC, Object.assign({ as: sc && sc.progressBar }, props), infos.map((info, i) => (react_1.default.createElement(ProgressBarItemSC, Object.assign({ key: `${object_hash_1.default({ ...infos[i], i })}`, as: sc && sc.progressBarItem }, itemProps, info, { isCompleted: i < page }),
+    return (react_1.default.createElement(ProgressBarSC, { as: sc && sc.progressBar, ...props }, infos.map((info, i) => (react_1.default.createElement(ProgressBarItemSC, { key: `${(0, object_hash_1.default)({ ...infos[i], i })}`, as: sc && sc.progressBarItem, ...itemProps, ...info, isCompleted: i < page },
         react_1.default.createElement("button", { "data-page": i, onClick: handleStepButtonOnClick, type: "button" },
-            react_1.default.createElement(ProgressBarItemIconSC, Object.assign({ "aria-label": `step ${i + 1}`, as: sc && sc.progressBarItemIcon }, itemIconProps, info, { isCompleted: i < page }),
+            react_1.default.createElement(ProgressBarItemIconSC, { "aria-label": `step ${i + 1}`, as: sc && sc.progressBarItemIcon, ...itemIconProps, ...info, isCompleted: i < page },
                 i < page && IconSuccess && react_1.default.createElement(IconSuccess, { size: 16 }),
                 i >= page && showStep && IconStep && react_1.default.createElement(IconStep, { size: 12 }),
                 i >= page && (!showStep || !IconStep) && react_1.default.createElement("span", null, i + 1)),

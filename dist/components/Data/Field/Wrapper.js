@@ -35,7 +35,7 @@ const CustomTopSC = styled_components_1.default.div `
 const FieldLabelSC = styled_components_1.default.label ``;
 const WrapperSC = styled_components_1.default.div ``;
 const FieldWrapper = ({ children, column, columnProps, componentType, customBottom, customBottomProps, customInfos, customInfosProps, customTop, customTopProps, id, label, labelShow = true, name, wrapperProps, }) => {
-    const { t, sc } = react_1.useContext(index_1.FormidableContext);
+    const { t, sc } = (0, react_1.useContext)(index_1.FormidableContext);
     if ('hidden' === componentType) {
         return react_1.default.createElement(react_1.default.Fragment, null, children);
     }
@@ -45,11 +45,11 @@ const FieldWrapper = ({ children, column, columnProps, componentType, customBott
         : {
             as: sc && sc.fieldWrapper,
         };
-    return (react_1.default.createElement(WrapperCmp, Object.assign({}, props, wrapperProps),
-        customInfos && (react_1.default.createElement(CustomTopSC, Object.assign({ as: sc && sc.customTop }, customInfosProps), customInfos)),
-        customTop && (react_1.default.createElement(CustomTopSC, Object.assign({ as: sc && sc.customTop }, customTopProps), customTop)),
+    return (react_1.default.createElement(WrapperCmp, { ...props, ...wrapperProps },
+        customInfos && (react_1.default.createElement(CustomTopSC, { as: sc && sc.customTop, ...customInfosProps }, customInfos)),
+        customTop && (react_1.default.createElement(CustomTopSC, { as: sc && sc.customTop, ...customTopProps }, customTop)),
         labelShow && (react_1.default.createElement(FieldLabelSC, { as: sc && sc.fieldLabel, htmlFor: id }, t ? t(label || name) : label || name)),
         children,
-        customBottom && (react_1.default.createElement(CustomBottomSC, Object.assign({ as: sc && sc.customBottom }, customBottomProps), customBottom))));
+        customBottom && (react_1.default.createElement(CustomBottomSC, { as: sc && sc.customBottom, ...customBottomProps }, customBottom))));
 };
 exports.default = FieldWrapper;

@@ -7,7 +7,6 @@ export { default as Columns } from './components/Columns';
 export { default as Data, DataProps, DataArray } from './components/Data';
 export { default as DataField, DataFieldProps } from './components/Data/Field';
 export { DataFieldInputProps } from './components/Data/Field/Input';
-export { DataFieldAsyncSelectProps } from './components/Data/Field/AsyncSelect';
 export { DataArrayProps } from './components/Data/Array';
 export { default as Form, FormProps, FormActionProps } from './components/Form';
 export { default as Group } from './components/Group';
