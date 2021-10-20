@@ -33,13 +33,13 @@ const Data_1 = __importDefault(require("../Data"));
 const Bar_1 = __importDefault(require("./Bar"));
 const TabsSC = styled_components_1.default.div ``;
 const Tabs = ({ barClassName, barItemClassName, className, formName, datas, params, tabs, }) => {
-    const [searchParams, setSearchParams] = react_1.useState({});
-    const { sc } = react_1.useContext(index_1.FormidableContext);
-    const [tab, setTab] = react_1.useState(0);
-    const [infos, setInfos] = react_1.useState([]);
-    const newDatas = react_1.useMemo(() => (datas && !Array.isArray(datas) ? [datas] : datas), [datas]);
-    const formValues = react_redux_1.useSelector((state) => state.form && state.form[formName] ? state.form[formName].values : {});
-    react_1.useEffect(() => {
+    const [searchParams, setSearchParams] = (0, react_1.useState)({});
+    const { sc } = (0, react_1.useContext)(index_1.FormidableContext);
+    const [tab, setTab] = (0, react_1.useState)(0);
+    const [infos, setInfos] = (0, react_1.useState)([]);
+    const newDatas = (0, react_1.useMemo)(() => (datas && !Array.isArray(datas) ? [datas] : datas), [datas]);
+    const formValues = (0, react_redux_1.useSelector)((state) => state.form && state.form[formName] ? state.form[formName].values : {});
+    (0, react_1.useEffect)(() => {
         let newTab = 0;
         console.info('tabs useEffect');
         if (typeof window !== 'undefined' &&
@@ -61,7 +61,7 @@ const Tabs = ({ barClassName, barItemClassName, className, formName, datas, para
         }
         setTab(newTab);
     }, []);
-    react_1.useEffect(() => {
+    (0, react_1.useEffect)(() => {
         if (newDatas) {
             const newInfos = [];
             newDatas.forEach((newData, i) => {
@@ -72,9 +72,9 @@ const Tabs = ({ barClassName, barItemClassName, className, formName, datas, para
                     // On vérifie si il y a une condition
                     if (tmpTab === null || tmpTab === void 0 ? void 0 : tmpTab.condition) {
                         const newTest = params
-                            ? replaceTestParams_1.default(tmpTab.condition, params)
+                            ? (0, replaceTestParams_1.default)(tmpTab.condition, params)
                             : tmpTab.condition;
-                        addNewTab = verifyCondition_1.default({ formValues, test: newTest });
+                        addNewTab = (0, verifyCondition_1.default)({ formValues, test: newTest });
                     }
                 }
                 if (addNewTab) {
@@ -107,6 +107,6 @@ const Tabs = ({ barClassName, barItemClassName, className, formName, datas, para
     };
     return (react_1.default.createElement(TabsSC, { as: sc && sc.tabs, className: className },
         react_1.default.createElement(Bar_1.default, { className: barClassName, handleButtonOnClick: handleButtonOnClick, infos: infos, itemClassName: barItemClassName }),
-        newDatas && newDatas.length > tab && (react_1.default.createElement(Data_1.default, Object.assign({}, newDatas[tab], { formName: formName, params: params })))));
+        newDatas && newDatas.length > tab && (react_1.default.createElement(Data_1.default, { ...newDatas[tab], formName: formName, params: params }))));
 };
 exports.default = Tabs;

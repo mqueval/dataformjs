@@ -22,7 +22,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const classnames_1 = __importDefault(require("classnames"));
 const react_1 = __importStar(require("react"));
 const styled_components_1 = __importDefault(require("styled-components"));
 const index_1 = require("../../index");
@@ -34,7 +33,7 @@ const ColumnSC = styled_components_1.default.div `
   width: 100%;
 `;
 const Column = ({ children, sticky, ...props }) => {
-    const { sc } = react_1.useContext(index_1.FormidableContext);
-    return (react_1.default.createElement(ColumnSC, Object.assign({ as: sc && sc.column }, props), sticky ? (react_1.default.createElement("div", { className: classnames_1.default('sticky', `top-${sticky}`) }, children)) : (children)));
+    const { sc } = (0, react_1.useContext)(index_1.FormidableContext);
+    return (react_1.default.createElement(ColumnSC, { as: sc && sc.column, ...props }, sticky ? (react_1.default.createElement("div", { className: `sticky top-${sticky}` }, children)) : (children)));
 };
 exports.default = Column;

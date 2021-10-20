@@ -11,9 +11,9 @@ import {
   isTime,
 } from '../../../utils/validators';
 import { DataProps } from '../index';
-import { DataFieldAsyncSelectProps } from './AsyncSelect';
 import DataFieldInput, { DataFieldInputProps } from './Input';
 import DataFieldRender from './Render';
+import { DataFieldSelectProps } from './Select';
 import DataFieldWrapper from './Wrapper';
 
 const InputGroupSC = styled.div``;
@@ -71,7 +71,7 @@ export interface DataFieldProps extends DataProps {
 }
 
 const DataField: FC<
-  DataFieldAsyncSelectProps<any> | DataFieldInputProps | DataFieldProps
+  DataFieldSelectProps | DataFieldInputProps | DataFieldProps
 > = ({
   className,
   column,

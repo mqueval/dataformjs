@@ -11,7 +11,6 @@ import Tabs, { TabsProps } from '../Tabs';
 import DataArray from './Array';
 import DataCondition, { DataConditionTestProps } from './Condition';
 import DataField from './Field';
-import DataSearchAndForm from './Search+Form';
 import DataSection from './Section';
 import DataValues from './Values';
 
@@ -233,23 +232,6 @@ const Data: FC<
               />
             ))}
         </Rows>
-      );
-    }
-
-    case 'search+form': {
-      if (!name) {
-        return (
-          <div>{`${componentType} : erreur de paramètre : name obligatoire`}</div>
-        );
-      }
-
-      return (
-        <DataSearchAndForm
-          {...props}
-          formName={formName}
-          formValues={formValues}
-          name={name}
-        />
       );
     }
 

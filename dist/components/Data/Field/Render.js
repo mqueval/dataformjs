@@ -4,7 +4,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const react_1 = __importDefault(require("react"));
-const AsyncSelect_1 = __importDefault(require("./AsyncSelect"));
 const Input_1 = __importDefault(require("./Input"));
 const Select_1 = __importDefault(require("./Select"));
 const Template_1 = __importDefault(require("./Template"));
@@ -27,14 +26,10 @@ const DataFieldRender = props => {
         };
     }
     if ('hidden' === componentType) {
-        return react_1.default.createElement("input", Object.assign({}, input, { type: "hidden" }));
+        return react_1.default.createElement("input", { ...input, type: "hidden" });
     }
     let Component;
     switch (componentType) {
-        case 'async-select': {
-            Component = AsyncSelect_1.default;
-            break;
-        }
         case 'input': {
             Component = Input_1.default;
             break;
@@ -50,7 +45,7 @@ const DataFieldRender = props => {
         default:
             return (react_1.default.createElement("div", null, `data field render : erreur de paramètre : ${componentType} n'est pas pris en charge`));
     }
-    return (react_1.default.createElement(Template_1.default, Object.assign({ id: id }, props, templateProps),
-        react_1.default.createElement(Component, Object.assign({}, props, fieldProps, { className: className, input: newInput }))));
+    return (react_1.default.createElement(Template_1.default, { id: id, ...props, ...templateProps },
+        react_1.default.createElement(Component, { ...props, ...fieldProps, className: className, input: newInput })));
 };
 exports.default = DataFieldRender;

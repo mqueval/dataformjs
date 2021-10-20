@@ -1,2 +1,2 @@
-declare function _default(initialState?: {}, extraReducers?: any, extraArguments?: any): any;
+declare function _default(initialState?: {}, extraReducers?: null, extraArguments?: null): any;
 export default _default;

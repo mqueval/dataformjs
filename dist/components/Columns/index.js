@@ -46,7 +46,7 @@ const ColumnsSC = styled_components_1.default.div `
   }
 `;
 const Columns = ({ children, ...props }) => {
-    const { sc } = react_1.useContext(index_1.FormidableContext);
-    return (react_1.default.createElement(ColumnsSC, Object.assign({ as: sc && sc.columns }, props), children));
+    const { sc } = (0, react_1.useContext)(index_1.FormidableContext);
+    return (react_1.default.createElement(ColumnsSC, { as: sc && sc.columns, ...props }, children));
 };
 exports.default = Columns;

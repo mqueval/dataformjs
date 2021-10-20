@@ -10,12 +10,12 @@ const reducers_1 = __importDefault(require("./reducers"));
 // eslint-disable-next-line no-underscore-dangle
 const composeEnhancers = (process.env.BROWSER && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) ||
     redux_1.compose;
-const loggerMiddleware = redux_logger_1.createLogger();
+const loggerMiddleware = (0, redux_logger_1.createLogger)();
 const middleware = [];
 exports.default = (initialState = {}, extraReducers = null, extraArguments = null) => {
     middleware.push(redux_thunk_1.default.withExtraArgument(extraArguments));
     if (process.env.NODE_ENV !== 'production') {
         middleware.push(loggerMiddleware);
     }
-    return redux_1.createStore(reducers_1.default(extraReducers), initialState, composeEnhancers(redux_1.applyMiddleware(...middleware)));
+    return (0, redux_1.createStore)((0, reducers_1.default)(extraReducers), initialState, composeEnhancers((0, redux_1.applyMiddleware)(...middleware)));
 };

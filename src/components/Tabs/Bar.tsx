@@ -1,4 +1,3 @@
-import classnames from 'classnames';
 import hash from 'object-hash';
 import React, { FC, SyntheticEvent, useContext } from 'react';
 import styled from 'styled-components';
@@ -45,9 +44,7 @@ const TabsBar: FC<TabsBarProps> = ({
         <TabsBarItemSC
           key={`${hash({ ...info })}`}
           as={sc && sc.tabsBarItem}
-          className={classnames(itemClassName, {
-            'is-active': info.isActive,
-          })}
+          className={`${itemClassName}${info.isActive ? ' is-active' : ''}`}
           {...info}
         >
           <button

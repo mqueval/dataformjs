@@ -39,7 +39,7 @@ const defaultState = {
 };
 const FormidableContext = react_1.default.createContext(defaultState);
 const FormidableProvider = ({ children, extendData, extraArguments, extraReducers, getControlStyle, initializeStore, initialState = {}, sc, t, }) => {
-    const [store] = react_1.useState(createStore_1.default(initialState, extraReducers, extraArguments));
+    const [store] = (0, react_1.useState)((0, createStore_1.default)(initialState, extraReducers, extraArguments));
     if (initializeStore) {
         initializeStore(store);
     }
