@@ -20,6 +20,7 @@
     "clean": "rimraf dist",
     "watch": "yarn clean && tsc --watch"
   },
+  "files": ["dist"],
   "dependencies": {
     "@types/react-input-mask": "^3.0.0",
     "@types/react-redux": "^7.1.9",
