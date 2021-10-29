@@ -1,4 +1,5 @@
 // import qs, { ParsedQs } from 'qs';
+import styled from '@emotion/styled';
 import React, {
   SyntheticEvent,
   useContext,
@@ -8,7 +9,6 @@ import React, {
   VFC,
 } from 'react';
 import { useSelector } from 'react-redux';
-import styled from 'styled-components';
 
 import { FormidableContext } from '../../index';
 import replaceTestParams from '../../utils/replaceTestParams';

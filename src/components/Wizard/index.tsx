@@ -1,3 +1,4 @@
+import styled from '@emotion/styled';
 import queryString from 'query-string';
 import React, {
   FC,
@@ -8,7 +9,6 @@ import React, {
 } from 'react';
 import { useDispatch } from 'react-redux';
 import { submit } from 'redux-form';
-import styled from 'styled-components';
 
 import { DataProps, FormidableContext } from '../../index';
 import initializeValues from '../../utils/initializeValues';

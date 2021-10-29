@@ -1,7 +1,7 @@
+import styled from '@emotion/styled';
 import hash from 'object-hash';
 import React, { FC, SyntheticEvent, useContext, useEffect } from 'react';
 import { FormSection, WrappedFieldArrayProps } from 'redux-form';
-import styled from 'styled-components';
 
 import { FormidableContext } from '../../../index';
 import initializeValues from '../../../utils/initializeValues';
@@ -9,7 +9,11 @@ import Field from '../Field';
 import Data from '../index';
 import { DataArrayProps } from './index';
 
-const ButtonSC = styled.button``;
+const ButtonSC = styled.button<{
+  iconLeft?: any;
+  size?: string;
+  status?: string;
+}>``;
 
 const DataArrayRender: FC<WrappedFieldArrayProps & DataArrayProps> = ({
   addButtonClassName,

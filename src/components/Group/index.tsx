@@ -1,5 +1,5 @@
+import styled from '@emotion/styled';
 import React, { FC, ReactNode, useContext } from 'react';
-import styled from 'styled-components';
 
 import { FormidableContext } from '../../index';
 import convertParams from '../../utils/convertParams';

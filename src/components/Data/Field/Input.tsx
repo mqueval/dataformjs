@@ -1,7 +1,7 @@
+import styled from '@emotion/styled';
 import React, { FC, useContext } from 'react';
 import InputMask from 'react-input-mask';
 import { WrappedFieldProps } from 'redux-form';
-import styled from 'styled-components';
 
 import { FormidableContext } from '../../../index';
 import { DataFieldProps } from './index';
