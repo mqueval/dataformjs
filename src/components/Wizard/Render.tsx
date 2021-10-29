@@ -1,13 +1,17 @@
+import styled from '@emotion/styled';
 import React, { ReactNode, SyntheticEvent, useContext } from 'react';
 import { connect, DefaultRootState } from 'react-redux';
 import { Dispatch } from 'redux';
 import { DecoratedFormProps, InjectedFormProps, reduxForm } from 'redux-form';
-import styled from 'styled-components';
 
 import { FormidableContext } from '../../index';
 import { DataProps } from '../Data';
 
-const ButtonSC = styled.button``;
+const ButtonSC = styled.button<{
+  iconLeft?: any;
+  iconRight?: any;
+  status?: string;
+}>``;
 const FormSC = styled.form``;
 const FormBodySC = styled.div``;
 const FormFooterSC = styled.div`
@@ -16,7 +20,7 @@ const FormFooterSC = styled.div`
   padding-top: 1.5rem;
 `;
 
-const MessageSC = styled.div``;
+const MessageSC = styled.div<{ status?: string }>``;
 
 interface FormRenderProps {
   asyncValidate?: (

@@ -1,7 +1,7 @@
+import styled from '@emotion/styled';
 import hash from 'object-hash';
 import React, { FC } from 'react';
 import { FormSection } from 'redux-form';
-import styled from 'styled-components';
 
 import Group from '../Group';
 import Data, { DataProps } from './index';

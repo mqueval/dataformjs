@@ -1,11 +1,11 @@
+import styled from '@emotion/styled';
 import React, { FC, useContext } from 'react';
 import { WrappedFieldProps } from 'redux-form';
-import styled from 'styled-components';
 
 import { FormidableContext } from '../../../index';
 import { DataFieldProps } from './index';
 
-const TextareaSC = styled.textarea``;
+const TextareaSC = styled.textarea<{ status?: string }>``;
 
 const FieldTextarea: FC<
   WrappedFieldProps &
@@ -23,7 +23,7 @@ const FieldTextarea: FC<
       id={id}
       placeholder={t && placeholder ? t(placeholder) : placeholder}
       rows={rows}
-      status={touched && error ? 'error' : null}
+      status={touched && error ? 'error' : undefined}
     />
   );
 };

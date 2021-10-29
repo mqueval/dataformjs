@@ -1,6 +1,7 @@
+import { css } from '@emotion/react';
+import styled from '@emotion/styled';
 import hash from 'object-hash';
 import React, { ComponentType, FC, SyntheticEvent, useContext } from 'react';
-import styled, { css } from 'styled-components';
 
 import { FormidableContext } from '../../index';
 import { FormProps } from '../Form';

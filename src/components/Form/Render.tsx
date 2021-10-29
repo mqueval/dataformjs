@@ -1,9 +1,9 @@
+import styled from '@emotion/styled';
 import objectHash from 'object-hash';
 import React, { FC, ReactNode, useContext } from 'react';
 import { connect, DefaultRootState } from 'react-redux';
 import { Dispatch } from 'redux';
 import { DecoratedFormProps, InjectedFormProps, reduxForm } from 'redux-form';
-import styled from 'styled-components';
 
 import { FormidableContext } from '../../index';
 import { FormActionProps, FormDivActionProps, FormProps } from './index';
@@ -16,7 +16,7 @@ const FormFooterSC = styled.div`
   justify-content: space-between;
 `;
 
-const MessageSC = styled.div``;
+const MessageSC = styled.div<{ status?: string }>``;
 
 interface FormRenderProps extends FormProps {
   children?: ReactNode;
