@@ -1,8 +1,8 @@
+import styled from '@emotion/styled';
 import hash from 'object-hash';
 import React, { FC, useContext } from 'react';
 import { connect, DefaultRootState } from 'react-redux';
 import { getFormValues } from 'redux-form';
-import styled from 'styled-components';
 
 import { FormidableContext } from '../../index';
 import replaceTestParams from '../../utils/replaceTestParams';

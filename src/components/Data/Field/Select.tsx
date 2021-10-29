@@ -1,11 +1,11 @@
+import styled from '@emotion/styled';
 import React, { FC, ReactNode, useContext } from 'react';
 import { WrappedFieldProps } from 'redux-form';
-import styled from 'styled-components';
 
 import { FormidableContext } from '../../../index';
 import { DataFieldProps } from './index';
 
-const SelectSC = styled.select``;
+const SelectSC = styled.select<{ status?: string }>``;
 
 export interface DataFieldSelectProps extends DataFieldProps {
   formatOptionLabel?: (
@@ -50,7 +50,7 @@ const FieldSelect: FC<WrappedFieldProps & DataFieldSelectProps> = ({
       disabled={disabled}
       id={id}
       required
-      status={touched && error ? 'error' : null}
+      status={touched && error ? 'error' : undefined}
     >
       <option aria-label={placeholder} disabled hidden={!hasEmpty} value="">
         {t && placeholder ? t(placeholder) : placeholder}

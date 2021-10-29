@@ -1,5 +1,5 @@
+import styled from '@emotion/styled';
 import React, { FC, useContext } from 'react';
-import styled from 'styled-components';
 
 import { DataFieldProps, FormidableContext } from '../../../index';
 import Column from '../../Column';
