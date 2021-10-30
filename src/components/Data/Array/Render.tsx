@@ -23,6 +23,8 @@ const DataArrayRender: FC<WrappedFieldArrayProps & DataArrayProps> = ({
   addButtonPosition,
   addButtonSize,
   addButtonStatus,
+  customInfos,
+  customInfosProps,
   datas,
   fields,
   formName,
@@ -94,14 +96,20 @@ const DataArrayRender: FC<WrappedFieldArrayProps & DataArrayProps> = ({
           );
 
           if (datas && datas.length > 0) {
-            if (datas.length > 1 || datas[0].datas) {
+            if (datas.length > 1 || datas[0].datas || datas[0].name) {
               return (
                 <FormSection key={`${field}_${hash(datas)}`} name={field}>
                   {datas.map(value => (
                     <Data
                       key={`${field}_${hash(value)}`}
                       {...value}
-                      customInfos={removeCmp}
+                      customInfos={
+                        <div data-index={index}>
+                          {customInfos}
+                          {removeCmp}
+                        </div>
+                      }
+                      customInfosProps={customInfosProps}
                       formName={formName}
                       formValues={formValues}
                       params={{
