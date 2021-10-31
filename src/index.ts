@@ -1,14 +1,13 @@
 import FormidableContext, { FormidableProvider } from './FormidableContext';
 
-export { AnyAction, Dispatch, Store, compose } from 'redux';
 export {
   connect,
+  DispatchProp,
   useDispatch,
   useSelector,
-  DispatchProp,
   useStore,
 } from 'react-redux';
-
+export { AnyAction, compose, Dispatch, Store } from 'redux';
 export {
   change,
   DecoratedFormProps,
@@ -18,33 +17,33 @@ export {
   FieldArrayFieldsProps,
   FormSection,
   formValueSelector,
-  SubmissionError,
-  WrappedFieldProps,
   InjectedFormProps,
   reduxForm,
   reset,
+  SubmissionError,
   submit,
   Validator,
   WrappedFieldArrayProps,
+  WrappedFieldProps,
 } from 'redux-form';
 
 export const print = (): void => {
   console.info('Bonjour tout le monde !! La vie est formidable !!');
 };
 
+export { default as Column } from './components/Column';
 export { default as Columns } from './components/Columns';
-export { default as Data, DataProps, DataArray } from './components/Data';
+export { default as Data, DataArray, DataProps } from './components/Data';
+export { DataArrayProps } from './components/Data/Array';
 export { default as DataField, DataFieldProps } from './components/Data/Field';
 export { DataFieldInputProps } from './components/Data/Field/Input';
-export { DataArrayProps } from './components/Data/Array';
-export { default as Form, FormProps, FormActionProps } from './components/Form';
+export { default as Form, FormActionProps, FormProps } from './components/Form';
+export { default as Grid } from './components/Grid';
 export { default as Group } from './components/Group';
 export { default as Icon } from './components/Icon';
 export { default as Wizard, WizardProps } from './components/Wizard';
+export { default as convertParams } from './utils/convertParams';
 export { default as initializeValues } from './utils/initializeValues';
 export { addValidator, isEmail, isRequired } from './utils/validators';
-export { default as Column } from './components/Column';
-export { default as Grid } from './components/Grid';
-export { default as convertParams } from './utils/convertParams';
 
 export { FormidableContext, FormidableProvider };
