@@ -1,18 +1,28 @@
-import hash from 'object-hash';
-import React, { FC, ReactNode, useContext } from 'react';
+import React, {
+  FC,
+  ReactElement,
+  ReactNode,
+  SyntheticEvent,
+  useContext,
+} from 'react';
 
-import { FormidableContext } from '../../index';
-import Column from '../Column';
-import Columns from '../Columns';
-import Grid from '../Grid';
-import Group from '../Group';
-import Rows from '../Rows';
-import Tabs, { TabsProps } from '../Tabs';
-import DataArray from './Array';
-import DataCondition, { DataConditionTestProps } from './Condition';
+import { DataFieldProps, FormidableContext } from '../../index';
+import DataBox, { DataBoxProps } from './Box';
+import DataCondition, { DataConditionProps } from './Condition';
 import DataField from './Field';
-import DataSection from './Section';
-import DataValues from './Values';
+import DataArray from './Field/Array';
+import DataSection, { DataSectionProps } from './Section';
+import Tabs, { DataTabsProps } from './Tabs';
+import DataWithChildren, { DataWithChildrenProps } from './WithChildren';
+
+export interface WrapperProps {
+  addBeforeOnClick?: (event: SyntheticEvent<HTMLButtonElement>) => void;
+  componentType: string;
+  formName: string;
+  position: string;
+  name?: string;
+  editOnClick?: (event: SyntheticEvent<HTMLButtonElement>) => void;
+}
 
 export interface DataProps {
   actions?: any;
@@ -20,328 +30,196 @@ export interface DataProps {
   className?: string;
   customInfos?: ReactNode;
   customInfosProps?: { [key: string]: any };
-  componentType?: string;
-  datas?: DataProps[];
+  componentType: string;
   formName?: string;
   formValues?: { [key: string]: any };
-  grid?: boolean;
-  gridProps?: { [key: string]: any };
-  label?: string;
+  mode?: 'creation';
   name?: string;
   params?: { [key: string]: any };
-  required?: boolean;
+  position?: string;
   title?: string;
-  test?: DataConditionTestProps | DataConditionTestProps[];
-  type?: string;
+  wrapper?: FC<WrapperProps>;
+  wrapperFunc?: {
+    addBeforeOnClick: (event: SyntheticEvent<HTMLButtonElement>) => void;
+    editOnClick: (event: SyntheticEvent<HTMLButtonElement>) => void;
+  };
 }
 
-const Data: FC<
-  DataProps & {
-    formName: string;
-  }
-> = ({ datas, formName, formValues, ...props }) => {
-  const { componentType, test, name, params } = props;
+const Data: FC<DataProps> = props => {
+  const { componentType, wrapper, wrapperFunc } = props;
+  let datas;
+  let name;
   const { extendData } = useContext(FormidableContext);
 
-  if (!componentType) {
-    return <div>erreur de paramètre : componentType obligatoire</div>;
-  }
+  let Component: ReactElement | null = null;
 
   if (extendData) {
-    const result = extendData({
-      ...props,
-      datas,
-      formName,
-      formValues,
-      params,
-    });
+    Component = extendData(props);
+  }
 
-    if (result) {
-      return result;
+  if (!Component) {
+    switch (componentType) {
+      case 'array': {
+        name = (props as DataFieldProps).name;
+        if (!name) {
+          Component = (
+            <div>{`${componentType} : erreur de paramètre : name obligatoire`}</div>
+          );
+        }
+        Component = <DataArray {...props} name={name} />;
+
+        break;
+      }
+
+      case 'box': {
+        datas = (props as DataBoxProps).datas;
+        if (!datas) {
+          Component = (
+            <div>{`${componentType} : erreur de paramètre : datas obligatoire`}</div>
+          );
+        } else {
+          Component = <DataBox {...props} datas={datas} />;
+        }
+
+        break;
+      }
+
+      case 'condition': {
+        const { test } = props as DataConditionProps;
+        datas = (props as DataConditionProps).datas;
+        if (!datas) {
+          Component = (
+            <div>{`${componentType} : erreur de paramètre : datas obligatoire`}</div>
+          );
+        } else if (!props.formName) {
+          Component = (
+            <div>{`${componentType} : erreur de paramètre : formName obligatoire`}</div>
+          );
+        } else if (!test) {
+          Component = (
+            <div>{`${componentType} : erreur de paramètre : test obligatoire`}</div>
+          );
+        } else {
+          Component = <DataCondition {...props} datas={datas} test={test} />;
+        }
+
+        break;
+      }
+
+      case 'flex':
+      case 'group':
+      case 'grid': {
+        datas = (props as DataWithChildrenProps).datas;
+        if (!datas) {
+          Component = (
+            <div>{`${componentType} : erreur de paramètre : datas obligatoire`}</div>
+          );
+        } else {
+          Component = <DataWithChildren {...props} datas={datas} />;
+        }
+
+        break;
+      }
+
+      case 'select': {
+        name = (props as DataFieldProps).name;
+        if (!name) {
+          Component = (
+            <div>{`${componentType} : erreur de paramètre : name obligatoire`}</div>
+          );
+        } else {
+          Component = (
+            <DataField {...props} componentType="select" name={name} />
+          );
+        }
+
+        break;
+      }
+
+      case 'section': {
+        name = (props as DataFieldProps).name;
+        datas = (props as DataSectionProps).datas;
+        if (!name) {
+          Component = (
+            <div>{`${componentType} : erreur de paramètre : name obligatoire`}</div>
+          );
+        } else if (!datas) {
+          Component = (
+            <div>{`${componentType} : erreur de paramètre : datas obligatoire`}</div>
+          );
+        } else {
+          Component = <DataSection {...props} datas={datas} name={name} />;
+        }
+
+        break;
+      }
+
+      case 'tabs': {
+        datas = (props as DataTabsProps).datas;
+        if (!datas) {
+          Component = (
+            <div>{`${componentType} : erreur de paramètre : datas obligatoire`}</div>
+          );
+        } else {
+          Component = <Tabs {...(props as DataTabsProps)} datas={datas} />;
+        }
+
+        break;
+      }
+
+      case 'textarea':
+        name = (props as DataFieldProps).name;
+        if (!name) {
+          Component = (
+            <div>{`${componentType} : erreur de paramètre : name obligatoire`}</div>
+          );
+        } else {
+          Component = (
+            <DataField {...props} componentType="textarea" name={name} />
+          );
+        }
+
+        break;
+
+      case 'hidden':
+      case 'input': {
+        name = (props as DataFieldProps).name;
+        if (!name) {
+          Component = (
+            <div>{`${componentType} : erreur de paramètre : name obligatoire`}</div>
+          );
+        } else {
+          Component = (
+            <DataField {...props} componentType={componentType} name={name} />
+          );
+        }
+
+        break;
+      }
+
+      default: {
+        Component = (
+          <div>{`${componentType} : ce type de composant n'est pas pris en charge`}</div>
+        );
+      }
     }
   }
 
-  switch (componentType) {
-    case 'array': {
-      if (!name) {
-        return (
-          <div>{`${componentType} : erreur de paramètre : name obligatoire`}</div>
-        );
-      }
+  const Wrapper = wrapper;
 
-      // if (!datas) {
-      //   return (
-      //     <div>{`${componentType} : erreur de paramètre : datas obligatoire`}</div>
-      //   );
-      // }
-
-      return (
-        <DataArray
-          {...props}
-          datas={datas}
-          formName={formName}
-          formValues={formValues}
-          name={name}
-          params={params}
-        />
-      );
-    }
-
-    case 'column': {
-      if (!datas) {
-        return (
-          <div>{`${componentType} : erreur de paramètre : datas obligatoire`}</div>
-        );
-      }
-
-      return (
-        <Column {...props}>
-          {datas &&
-            datas.length > 0 &&
-            datas.map(data => (
-              <Data
-                key={`${hash(data)}`}
-                {...data}
-                formName={formName}
-                formValues={formValues}
-                params={params}
-              />
-            ))}
-        </Column>
-      );
-    }
-
-    case 'columns': {
-      if (!datas) {
-        return (
-          <div>{`${componentType} : erreur de paramètre : datas obligatoire`}</div>
-        );
-      }
-
-      return (
-        <Columns {...props}>
-          {datas &&
-            datas.length > 0 &&
-            datas.map(data => (
-              <Data
-                key={hash(data)}
-                {...data}
-                formName={formName}
-                formValues={formValues}
-                params={params}
-              />
-            ))}
-        </Columns>
-      );
-    }
-
-    case 'condition': {
-      if (!datas) {
-        return (
-          <div>{`${componentType} : erreur de paramètre : datas obligatoire`}</div>
-        );
-      }
-      if (!test) {
-        return (
-          <div>{`${componentType} : erreur de paramètre : test obligatoire`}</div>
-        );
-      }
-      if (!formName) {
-        return (
-          <div>{`${componentType} : erreur de paramètre : formName obligatoire`}</div>
-        );
-      }
-
-      return (
-        <DataCondition
-          {...props}
-          datas={datas}
-          formName={formName}
-          formValues={formValues}
-          test={test}
-        />
-      );
-    }
-
-    case 'grid': {
-      if (!datas) {
-        return (
-          <div>{`${componentType} : erreur de paramètre : datas obligatoire`}</div>
-        );
-      }
-
-      return (
-        <Grid {...props}>
-          {datas &&
-            datas.length > 0 &&
-            datas.map(data => (
-              <Data
-                key={hash(data)}
-                {...data}
-                formName={formName}
-                formValues={formValues}
-                params={params}
-              />
-            ))}
-        </Grid>
-      );
-    }
-
-    case 'group': {
-      if (!datas) {
-        return (
-          <div>{`${componentType} : erreur de paramètre : datas obligatoire`}</div>
-        );
-      }
-
-      return (
-        <Group {...props}>
-          {datas &&
-            datas.length > 0 &&
-            datas.map(data => (
-              <Data
-                key={hash(data)}
-                {...data}
-                formName={formName}
-                formValues={formValues}
-                params={params}
-              />
-            ))}
-        </Group>
-      );
-    }
-
-    case 'rows': {
-      if (!datas) {
-        return (
-          <div>{`${componentType} : erreur de paramètre : datas obligatoire`}</div>
-        );
-      }
-
-      return (
-        <Rows {...props}>
-          {datas &&
-            datas.length > 0 &&
-            datas.map(data => (
-              <Data
-                key={hash(data)}
-                {...data}
-                formName={formName}
-                formValues={formValues}
-                params={params}
-              />
-            ))}
-        </Rows>
-      );
-    }
-
-    case 'select': {
-      if (!name) {
-        return (
-          <div>{`${componentType} : erreur de paramètre : name obligatoire`}</div>
-        );
-      }
-
-      return (
-        <DataField
-          {...props}
-          componentType="select"
-          formName={formName}
-          formValues={formValues}
-          name={name}
-        />
-      );
-    }
-
-    case 'section': {
-      if (!name) {
-        return (
-          <div>{`${componentType} : erreur de paramètre : name obligatoire`}</div>
-        );
-      }
-
-      return (
-        <DataSection
-          {...props}
-          datas={datas}
-          formName={formName}
-          formValues={formValues}
-          name={name}
-          params={params}
-        />
-      );
-    }
-
-    case 'tabs': {
-      if (!datas) {
-        return (
-          <div>{`${componentType} : erreur de paramètre : datas obligatoire`}</div>
-        );
-      }
-
-      return (
-        <Tabs
-          {...(props as TabsProps)}
-          datas={datas}
-          formName={formName}
-          formValues={formValues}
-        />
-      );
-    }
-
-    case 'textarea':
-      if (!name) {
-        return (
-          <div>{`${componentType} : erreur de paramètre : name obligatoire`}</div>
-        );
-      }
-
-      return (
-        <DataField
-          {...props}
-          componentType="textarea"
-          formName={formName}
-          formValues={formValues}
-          name={name}
-        />
-      );
-
-    case 'values': {
-      return (
-        <DataValues
-          {...props}
-          datas={datas}
-          formName={formName}
-          name={name}
-          params={params}
-        />
-      );
-    }
-
-    case 'hidden':
-    case 'input':
-      if (!name) {
-        return (
-          <div>{`${componentType} : erreur de paramètre : name obligatoire`}</div>
-        );
-      }
-
-      return (
-        <DataField
-          {...props}
-          componentType={componentType}
-          formName={formName}
-          formValues={formValues}
-          name={name}
-        />
-      );
-
-    default: {
-      return (
-        <div>{`${componentType} : ce type de composant n'est pas pris en charge`}</div>
-      );
-    }
-  }
+  return Wrapper && props.formName && props.position ? (
+    <Wrapper
+      componentType={componentType}
+      formName={props.formName}
+      name={name}
+      position={props.position}
+      {...wrapperFunc}
+    >
+      {Component}
+    </Wrapper>
+  ) : (
+    Component
+  );
 };
 
 export default Data;

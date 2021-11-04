@@ -2,7 +2,6 @@ import styled from '@emotion/styled';
 import React, { FC, useContext } from 'react';
 
 import { DataFieldProps, FormidableContext } from '../../../index';
-import Column from '../../Column';
 
 const CustomBottomSC = styled.div`
   float: right;
@@ -17,8 +16,6 @@ const WrapperSC = styled.div``;
 
 const FieldWrapper: FC<DataFieldProps> = ({
   children,
-  column,
-  columnProps,
   componentType,
   customBottom,
   customBottomProps,
@@ -38,15 +35,8 @@ const FieldWrapper: FC<DataFieldProps> = ({
     return <>{children}</>;
   }
 
-  const WrapperCmp = column ? Column : WrapperSC;
-  const props = column
-    ? columnProps
-    : {
-        as: sc && sc.fieldWrapper,
-      };
-
   return (
-    <WrapperCmp {...props} {...wrapperProps}>
+    <WrapperSC as={sc && sc.fieldWrapper} {...wrapperProps}>
       {customInfos && (
         <CustomTopSC as={sc && sc.customTop} {...customInfosProps}>
           {customInfos}
@@ -68,7 +58,7 @@ const FieldWrapper: FC<DataFieldProps> = ({
           {customBottom}
         </CustomBottomSC>
       )}
-    </WrapperCmp>
+    </WrapperSC>
   );
 };
 export default FieldWrapper;

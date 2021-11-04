@@ -1,10 +1,10 @@
 import React, { FC, SyntheticEvent } from 'react';
 import { WrappedFieldProps } from 'redux-form';
 
-import { DataFieldProps } from './index';
+import { DataFieldProps } from '../index';
+import FieldTemplate from '../Template';
 import FieldInput from './Input';
-import FieldSelect from './Select';
-import FieldTemplate from './Template';
+import FieldSelect, { DataFieldSelectProps } from './Select';
 import FieldTextarea from './Textarea';
 
 const DataFieldRender: FC<WrappedFieldProps & DataFieldProps> = props => {
@@ -51,17 +51,38 @@ const DataFieldRender: FC<WrappedFieldProps & DataFieldProps> = props => {
   let Component;
   switch (componentType) {
     case 'input': {
-      Component = FieldInput;
+      Component = (
+        <FieldInput
+          {...props}
+          {...fieldProps}
+          className={className}
+          input={newInput}
+        />
+      );
       break;
     }
 
     case 'select': {
-      Component = FieldSelect;
+      Component = (
+        <FieldSelect
+          {...(props as WrappedFieldProps & DataFieldSelectProps)}
+          {...fieldProps}
+          className={className}
+          input={newInput}
+        />
+      );
       break;
     }
 
     case 'textarea': {
-      Component = FieldTextarea;
+      Component = (
+        <FieldTextarea
+          {...props}
+          {...fieldProps}
+          className={className}
+          input={newInput}
+        />
+      );
       break;
     }
 
@@ -75,12 +96,7 @@ const DataFieldRender: FC<WrappedFieldProps & DataFieldProps> = props => {
 
   return (
     <FieldTemplate id={id} {...props} {...templateProps}>
-      <Component
-        {...props}
-        {...fieldProps}
-        className={className}
-        input={newInput}
-      />
+      {Component}
     </FieldTemplate>
   );
 };

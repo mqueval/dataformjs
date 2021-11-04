@@ -2,8 +2,8 @@ import styled from '@emotion/styled';
 import React, { FC, useContext } from 'react';
 import { WrappedFieldProps } from 'redux-form';
 
-import { FormidableContext } from '../../../index';
-import { DataFieldProps } from './index';
+import { FormidableContext } from '../../../../index';
+import { DataFieldProps } from '../index';
 
 const TextareaSC = styled.textarea<{ status?: string }>``;
 

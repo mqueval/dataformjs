@@ -1,4 +1,4 @@
-export default ({
+const testCondition = ({
   fieldValue,
   operator,
   value,
@@ -67,3 +67,5 @@ export default ({
 
   return false;
 };
+
+export default testCondition;

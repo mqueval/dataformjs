@@ -11,18 +11,15 @@ import {
   isTime,
 } from '../../../utils/validators';
 import { DataProps } from '../index';
-import DataFieldInput, { DataFieldInputProps } from './Input';
 import DataFieldRender from './Render';
-import { DataFieldSelectProps } from './Select';
+import DataFieldInput, { DataFieldInputProps } from './Render/Input';
+import { DataFieldSelectProps } from './Render/Select';
 import DataFieldWrapper from './Wrapper';
 
 const InputGroupSC = styled.div``;
 const InputGroupItemSC = styled.div``;
 
 export interface DataFieldProps extends DataProps {
-  componentType: string;
-  column?: boolean;
-  columnProps?: { [key: string]: any };
   customAction?: ReactElement | ReactElement[];
   customActionProps?: { [key: string]: any };
   customBottom?: ReactElement | ReactElement[];
@@ -53,15 +50,6 @@ export interface DataFieldProps extends DataProps {
   labelShow?: boolean;
   message?: string;
   name: string;
-  options?: {
-    disabled?: boolean;
-    label: string;
-    params?: { [key: string]: any };
-    value: string | number;
-    id?: string;
-  }[];
-  optionsProps?: { [key: string]: any };
-  params?: { [key: string]: any };
   placeholder?: string;
   required?: boolean;
   templateProps?: { [key: string]: any };
@@ -74,10 +62,8 @@ const DataField: FC<
   DataFieldSelectProps | DataFieldInputProps | DataFieldProps
 > = ({
   className,
-  column,
-  columnProps,
   fieldProps,
-  optionsProps,
+  mode,
   templateProps,
   validate,
   wrapperProps,
@@ -85,7 +71,15 @@ const DataField: FC<
 }) => {
   const { sc } = useContext(FormidableContext);
 
-  const { componentType, id, name, options, required, params, type } = props;
+  if (mode && 'creation' === mode) {
+    return (
+      <div>
+        {props.componentType} : {props.name}
+      </div>
+    );
+  }
+
+  const { componentType, id, name, required, params, type } = props;
 
   const newId =
     id || `${params && params.name ? `${params.name}.` : ''}${name}`;
@@ -116,18 +110,13 @@ const DataField: FC<
   }
 
   if ('radio' === type && 'input' === componentType) {
+    const { options, optionsProps } = props as DataFieldInputProps;
     if (!options || 0 === options.length) {
       return <div>input : erreur de paramètre : options obligatoire</div>;
     }
 
     return (
-      <DataFieldWrapper
-        {...props}
-        column={column}
-        columnProps={columnProps}
-        id={newId}
-        wrapperProps={wrapperProps}
-      >
+      <DataFieldWrapper {...props} id={newId} wrapperProps={wrapperProps}>
         <InputGroupSC
           as={sc && sc.inputGroup}
           {...optionsProps}
@@ -155,13 +144,7 @@ const DataField: FC<
   }
 
   return (
-    <DataFieldWrapper
-      {...props}
-      column={column}
-      columnProps={columnProps}
-      id={newId}
-      wrapperProps={wrapperProps}
-    >
+    <DataFieldWrapper {...props} id={newId} wrapperProps={wrapperProps}>
       <FieldForm
         {...props}
         className={className}

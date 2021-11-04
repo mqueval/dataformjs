@@ -31,12 +31,19 @@ export const print = (): void => {
   console.info('Bonjour tout le monde !! La vie est formidable !!');
 };
 
-export { default as Column } from './components/Column';
-export { default as Columns } from './components/Columns';
-export { default as Data, DataArray, DataProps } from './components/Data';
-export { DataArrayProps } from './components/Data/Array';
+export {
+  default as Data,
+  DataArray,
+  DataProps,
+  WrapperProps,
+} from './components/Data';
+export { default as Box } from './components/Data/Box';
 export { default as DataField, DataFieldProps } from './components/Data/Field';
-export { DataFieldInputProps } from './components/Data/Field/Input';
+export { DataArrayProps } from './components/Data/Field/Array';
+export { DataFieldInputProps } from './components/Data/Field/Render/Input';
+export { default as DataSection } from './components/Data/Section';
+export { default as DataWithChildren } from './components/Data/WithChildren';
+export { default as Flex } from './components/Flex';
 export { default as Form, FormActionProps, FormProps } from './components/Form';
 export { default as Grid } from './components/Grid';
 export { default as Group } from './components/Group';
