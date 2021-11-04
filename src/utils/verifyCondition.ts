@@ -1,7 +1,7 @@
 import { DataConditionTestProps } from '../components/Data/Condition';
 import testCondition from './testCondition';
 
-export default ({
+const verifyCondition = ({
   formValues,
   test,
 }: {
@@ -48,3 +48,5 @@ export default ({
 
   return !valid.some(val => !val);
 };
+
+export default verifyCondition;

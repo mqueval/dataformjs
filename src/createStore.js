@@ -12,7 +12,7 @@ const composeEnhancers =
 const loggerMiddleware = createLogger();
 const middleware = [];
 
-export default (
+const store = (
   initialState = {},
   extraReducers = null,
   extraArguments = null,
@@ -29,3 +29,5 @@ export default (
     composeEnhancers(applyMiddleware(...middleware)),
   );
 };
+
+export default store;

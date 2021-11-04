@@ -3,26 +3,20 @@ import React, { FC, ReactNode, useContext } from 'react';
 
 import { FormidableContext } from '../../index';
 import convertParams from '../../utils/convertParams';
-import Columns from '../Columns';
-import Grid from '../Grid';
 
-type GroupProps = {
+export interface GroupProps {
   bodyRemoveTag?: boolean;
   bodyProps?: { [key: string]: any };
   className?: string;
-  columns?: boolean;
-  columnsProps?: { [key: string]: any };
   customInfos?: ReactNode;
   customInfosProps?: { [key: string]: any };
   description?: string;
   descriptionProps?: { [key: string]: any };
-  grid?: boolean;
-  gridProps?: { [key: string]: any };
   params?: { [key: string]: any };
   title?: string;
   titleProps?: { [key: string]: any };
   titleParams?: { [key: string]: any };
-};
+}
 
 const CustomInfosSC = styled.div``;
 const GroupSC = styled.fieldset``;
@@ -33,16 +27,12 @@ const LegendSC = styled.legend``;
 const Group: FC<GroupProps> = ({
   bodyRemoveTag = false,
   bodyProps,
-  children,
   className,
-  columns,
-  columnsProps,
   customInfos,
   customInfosProps,
+  children,
   description,
   descriptionProps,
-  grid,
-  gridProps,
   params,
   title,
   titleProps,
@@ -80,11 +70,7 @@ const Group: FC<GroupProps> = ({
         </GroupDescriptionSC>
       )}
 
-      <GroupBodyCmp {...groupBodyProps}>
-        {columns && <Columns {...columnsProps}>{children}</Columns>}
-        {grid && <Grid {...gridProps}>{children}</Grid>}
-        {!columns && !grid && children}
-      </GroupBodyCmp>
+      <GroupBodyCmp {...groupBodyProps}>{children}</GroupBodyCmp>
     </GroupSC>
   );
 };

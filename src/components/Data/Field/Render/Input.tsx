@@ -3,10 +3,18 @@ import React, { FC, useContext } from 'react';
 import InputMask from 'react-input-mask';
 import { WrappedFieldProps } from 'redux-form';
 
-import { FormidableContext } from '../../../index';
-import { DataFieldProps } from './index';
+import { FormidableContext } from '../../../../index';
+import { DataFieldProps } from '../index';
 
 const InputSC = styled.input``;
+
+interface DataFieldInputOption {
+  disabled?: boolean;
+  label: string;
+  params?: { [key: string]: any };
+  value: string | number;
+  id?: string;
+}
 
 export interface DataFieldInputProps extends DataFieldProps {
   autoComplete?: string;
@@ -15,6 +23,8 @@ export interface DataFieldInputProps extends DataFieldProps {
   mask?: string;
   min?: number | string;
   max?: number | string;
+  options?: DataFieldInputOption[];
+  optionsProps?: { [key: string]: any };
   step?: number;
 }
 

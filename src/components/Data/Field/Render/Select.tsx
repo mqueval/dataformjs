@@ -1,26 +1,23 @@
 import styled from '@emotion/styled';
-import React, { FC, ReactNode, useContext } from 'react';
+import React, { FC, useContext } from 'react';
 import { WrappedFieldProps } from 'redux-form';
 
-import { FormidableContext } from '../../../index';
-import { DataFieldProps } from './index';
+import { FormidableContext } from '../../../../index';
+import { DataFieldProps } from '../index';
 
 const SelectSC = styled.select<{ status?: string }>``;
 
+interface DataFieldSelectOption {
+  disabled?: boolean;
+  label: string;
+  options?: DataFieldSelectOption[];
+  selected?: boolean;
+  value: string | number;
+}
+
 export interface DataFieldSelectProps extends DataFieldProps {
-  formatOptionLabel?: (
-    option: any,
-    props: {
-      context: 'menu' | 'value';
-      inputValue?: string;
-      selectValue?: any | any[];
-    },
-  ) => ReactNode;
   hasEmpty?: boolean;
-  isSearchable?: boolean;
-  getOptionLabel?: (option: any) => any;
-  getOptionValue?: (option: any) => any;
-  standard?: boolean;
+  options: DataFieldSelectOption[];
 }
 
 const FieldSelect: FC<WrappedFieldProps & DataFieldSelectProps> = ({
@@ -55,11 +52,25 @@ const FieldSelect: FC<WrappedFieldProps & DataFieldSelectProps> = ({
       <option aria-label={placeholder} disabled hidden={!hasEmpty} value="">
         {t && placeholder ? t(placeholder) : placeholder}
       </option>
-      {options.map(({ disabled: d, label, value }) => (
-        <option key={value} disabled={d} value={value}>
-          {t ? t(label) : label}
-        </option>
-      ))}
+      {options.map(({ disabled: d, label, options: o, value }) => {
+        if (o && o.length > 0) {
+          return (
+            <optgroup key={`${label}_${o.length}`} label={label}>
+              {o.map(({ disabled: od, label: ol, value: ov }) => (
+                <option key={ov} disabled={od} value={ov}>
+                  {t ? t(ol) : ol}
+                </option>
+              ))}
+            </optgroup>
+          );
+        }
+
+        return (
+          <option key={value} disabled={d} value={value}>
+            {t ? t(label) : label}
+          </option>
+        );
+      })}
     </SelectSC>
   );
 };

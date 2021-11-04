@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 import hash from 'object-hash';
 import React, { FC, SyntheticEvent, useContext } from 'react';
 
-import { FormidableContext } from '../../index';
+import { FormidableContext } from '../../../index';
 import { TabsPageInfoProps } from './index';
 
 const TabsBarSC = styled.ul`

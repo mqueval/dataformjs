@@ -24,6 +24,17 @@ export interface FormDivActionProps {
   actions: FormActionProps[];
 }
 
+export interface ButtonProps {
+  className?: string;
+  iconLeft?: ReactNode;
+  iconRight?: ReactNode;
+  iconColor?: string;
+  iconSize?: number;
+  label?: string;
+  onClick?: (event: SyntheticEvent<HTMLButtonElement>) => void;
+  status?: string;
+}
+
 export interface FormProps {
   actions?: FormActionProps | FormActionProps[] | FormDivActionProps[];
   asyncChangeFields?: string[];
@@ -36,12 +47,6 @@ export interface FormProps {
   autosave?: boolean;
   bodyProps?: { [key: string]: any };
   cancelProps?: { [key: string]: any };
-  // cancelClassName?: string;
-  // cancelIcon?: ReactNode;
-  // cancelIconColor?: string;
-  // cancelLabel?: string;
-  // cancelOnClick?: (event: SyntheticEvent<HTMLButtonElement>) => void;
-  // cancelStatus?: string;
   className?: string;
   datas?: DataProps | DataProps[];
   destroyOnUnmount?: boolean;
@@ -53,6 +58,7 @@ export interface FormProps {
   initialValues?: { [key: string]: any };
   isSubmissive?: boolean;
   keepDirtyOnReinitialize?: boolean;
+  mode?: 'creation';
   name: string;
   onChange?(
     values: Partial<FormData>,
@@ -64,13 +70,6 @@ export interface FormProps {
   params?: { [key: string]: any };
   removePristine?: boolean;
   submitProps?: { [key: string]: any };
-  // submitClassName?: string;
-  // submitIcon?: ReactNode;
-  // submitIconColor?: string;
-  // submitIconLeft?: ReactNode;
-  // submitIconRight?: ReactNode;
-  // submitIconSize?: number;
-  // submitLabel?: string;
   title?: string;
   touchOnChange?: boolean;
   updateUnregisteredFields?: boolean;
@@ -96,6 +95,7 @@ const Form: FC<FormProps> = ({
   initialValues,
   isSubmissive,
   keepDirtyOnReinitialize,
+  mode,
   name,
   onChange,
   onSubmit,
@@ -168,14 +168,13 @@ const Form: FC<FormProps> = ({
       validate={validate}
     >
       {newDatas &&
-        newDatas.map((props: DataProps) => (
+        newDatas.map((props: DataProps, index) => (
           <Data
             key={hash(props)}
             {...props}
             formName={name}
-            params={{
-              ...params,
-            }}
+            mode={mode}
+            params={params}
           />
         ))}
       {children}

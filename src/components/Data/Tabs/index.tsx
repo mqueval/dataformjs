@@ -1,4 +1,3 @@
-// import qs, { ParsedQs } from 'qs';
 import styled from '@emotion/styled';
 import React, {
   SyntheticEvent,
@@ -10,10 +9,11 @@ import React, {
 } from 'react';
 import { useSelector } from 'react-redux';
 
-import { FormidableContext } from '../../index';
-import replaceTestParams from '../../utils/replaceTestParams';
-import verifyCondition from '../../utils/verifyCondition';
-import Data, { DataProps } from '../Data';
+import { FormidableContext } from '../../../index';
+import replaceTestParams from '../../../utils/replaceTestParams';
+import verifyCondition from '../../../utils/verifyCondition';
+import Data, { DataProps } from '../index';
+import { DataWithChildrenProps } from '../WithChildren';
 import TabsBar from './Bar';
 
 const TabsSC = styled.div``;
@@ -29,10 +29,9 @@ type TabType = {
 
 type TabProps = string | TabType;
 
-export interface TabsProps extends DataProps {
+export interface DataTabsProps extends DataProps, DataWithChildrenProps {
   barClassName?: string;
   barItemClassName?: string;
-  formName: string;
   tabs: TabProps[];
 }
 
@@ -42,33 +41,40 @@ export interface TabsPageInfoProps {
   title: string;
 }
 
-const Tabs: VFC<TabsProps> = ({
+const DataTabs: VFC<DataTabsProps> = ({
+  componentType,
   barClassName,
   barItemClassName,
   className,
   formName,
   datas,
+  mode,
   params,
+  position,
   tabs,
+  wrapper,
+  wrapperFunc,
+  ...props
 }) => {
   const [searchParams, setSearchParams] = useState<{ [key: string]: any }>({});
   const { sc } = useContext(FormidableContext);
 
   const [tab, setTab] = useState<number>(0);
   const [infos, setInfos] = useState<TabsPageInfoProps[]>([]);
-  const newDatas: Partial<DataProps>[] | undefined = useMemo(
+  const newDatas: DataProps[] | undefined = useMemo(
     () => (datas && !Array.isArray(datas) ? [datas] : datas),
     [datas],
   );
 
   const formValues = useSelector((state: any) =>
-    state.form && state.form[formName] ? state.form[formName].values : {},
+    state.form && formName && state.form[formName]
+      ? state.form[formName].values
+      : {},
   );
 
   useEffect(() => {
     let newTab = 0;
 
-    console.info('tabs useEffect');
     if (
       typeof window !== 'undefined' &&
       window.location &&
@@ -86,7 +92,6 @@ const Tabs: VFC<TabsProps> = ({
         newTab = parseInt(search.tab, 10);
       }
 
-      console.info('tabs useEffect', search);
       setSearchParams(search);
     }
 
@@ -151,7 +156,7 @@ const Tabs: VFC<TabsProps> = ({
   };
 
   return (
-    <TabsSC as={sc && sc.tabs} className={className}>
+    <TabsSC as={sc && sc.tabs} {...props} className={className}>
       <TabsBar
         className={barClassName}
         handleButtonOnClick={handleButtonOnClick}
@@ -159,10 +164,18 @@ const Tabs: VFC<TabsProps> = ({
         itemClassName={barItemClassName}
       />
       {newDatas && newDatas.length > tab && (
-        <Data {...newDatas[tab]} formName={formName} params={params} />
+        <Data
+          {...(newDatas[tab] as DataProps)}
+          formName={formName}
+          mode={mode}
+          params={params}
+          position={`${position ? `${position}.` : ''}datas[${tab}]`}
+          wrapper={wrapper}
+          wrapperFunc={wrapperFunc}
+        />
       )}
     </TabsSC>
   );
 };
 
-export default Tabs;
+export default DataTabs;

@@ -3,10 +3,11 @@ import hash from 'object-hash';
 import React, { FC, SyntheticEvent, useContext, useEffect } from 'react';
 import { FormSection, WrappedFieldArrayProps } from 'redux-form';
 
-import { FormidableContext } from '../../../index';
-import initializeValues from '../../../utils/initializeValues';
-import Field from '../Field';
-import Data from '../index';
+import { DataFieldProps, FormidableContext } from '../../../../index';
+import initializeValues from '../../../../utils/initializeValues';
+import Data from '../../index';
+import { DataWithChildrenProps } from '../../WithChildren';
+import Field from '../index';
 import { DataArrayProps } from './index';
 
 const ButtonSC = styled.button<{
@@ -15,14 +16,12 @@ const ButtonSC = styled.button<{
   status?: string;
 }>``;
 
-const DataArrayRender: FC<WrappedFieldArrayProps & DataArrayProps> = ({
-  addButtonClassName,
-  addButtonIcon,
-  addButtonId,
-  addButtonLabel,
-  addButtonPosition,
-  addButtonSize,
-  addButtonStatus,
+const DataArrayRender: FC<
+  WrappedFieldArrayProps & Omit<DataArrayProps, 'name'>
+> = ({
+  addButtonProps,
+  bodyProps,
+  className,
   customInfos,
   customInfosProps,
   datas,
@@ -30,11 +29,7 @@ const DataArrayRender: FC<WrappedFieldArrayProps & DataArrayProps> = ({
   formName,
   formValues,
   params,
-  removeButtonClassName,
-  removeButtonIcon,
-  removeButtonLabel,
-  removeButtonSize,
-  removeButtonStatus,
+  removeButtonProps,
 }) => {
   const { sc, t } = useContext(FormidableContext);
 
@@ -62,53 +57,59 @@ const DataArrayRender: FC<WrappedFieldArrayProps & DataArrayProps> = ({
     }
   };
 
+  let addButtonPosition = 'top';
+  let addButtonLabel;
+  if (addButtonProps) {
+    if (addButtonProps.position) {
+      addButtonPosition = addButtonProps.position;
+    }
+    addButtonLabel = addButtonProps.label;
+  }
+
   return (
-    <div>
-      {'top' === addButtonPosition && (
+    <div className={className}>
+      {'top' === addButtonPosition && addButtonProps && (
         <ButtonSC
           as={sc && sc.button}
-          className={addButtonClassName}
-          iconLeft={addButtonIcon}
           onClick={handleAddButtonOnClick}
-          size={addButtonSize}
-          status={addButtonStatus}
+          {...addButtonProps}
         >
-          {addButtonLabel}
+          {t && addButtonLabel ? t(addButtonLabel) : addButtonLabel}
         </ButtonSC>
       )}
 
       {fields &&
         fields.map((field, index) => {
-          const removeCmp = (removeButtonIcon || removeButtonLabel) && (
+          const removeCmp = removeButtonProps && (
             <ButtonSC
               as={sc && sc.button}
-              className={removeButtonClassName}
               data-index={index}
-              iconLeft={removeButtonIcon}
               onClick={handleRemoveButtonOnClick}
-              size={removeButtonSize}
-              status={removeButtonStatus}
+              {...removeButtonProps}
             >
-              {t && removeButtonLabel
-                ? t(removeButtonLabel)
-                : removeButtonLabel}
+              {t && removeButtonProps.label
+                ? t(removeButtonProps.label)
+                : removeButtonProps.label}
             </ButtonSC>
           );
 
           if (datas && datas.length > 0) {
-            if (datas.length > 1 || datas[0].datas || datas[0].name) {
+            if (
+              datas.length > 1 ||
+              (datas[0] as DataWithChildrenProps).datas ||
+              (datas[0] as DataFieldProps).name
+            ) {
               return (
-                <FormSection key={`${field}_${hash(datas)}`} name={field}>
+                <FormSection
+                  key={`${field}_${hash(datas)}`}
+                  data-index={index}
+                  name={field}
+                  {...bodyProps}
+                >
                   {datas.map(value => (
                     <Data
                       key={`${field}_${hash(value)}`}
                       {...value}
-                      customInfos={
-                        <div data-index={index}>
-                          {customInfos}
-                          {removeCmp}
-                        </div>
-                      }
                       customInfosProps={customInfosProps}
                       formName={formName}
                       formValues={formValues}
@@ -120,15 +121,34 @@ const DataArrayRender: FC<WrappedFieldArrayProps & DataArrayProps> = ({
                       }}
                     />
                   ))}
+                  {customInfos}
+                  {removeCmp}
                 </FormSection>
               );
             }
 
             return (
-              <Data
-                key={field}
-                {...datas[0]}
-                customInfos={removeCmp}
+              <div key={field} data-index={index} {...bodyProps}>
+                <Data
+                  {...datas[0]}
+                  formName={formName}
+                  formValues={formValues}
+                  name={field}
+                  params={{
+                    ...params,
+                    name: field,
+                  }}
+                />
+                {customInfos}
+                {removeCmp}
+              </div>
+            );
+          }
+
+          return (
+            <div key={field} data-index={index} {...bodyProps}>
+              <Field
+                componentType="input"
                 formName={formName}
                 formValues={formValues}
                 name={field}
@@ -137,33 +157,17 @@ const DataArrayRender: FC<WrappedFieldArrayProps & DataArrayProps> = ({
                   name: field,
                 }}
               />
-            );
-          }
-
-          return (
-            <Field
-              key={field}
-              componentType="input"
-              customInfos={removeCmp}
-              formName={formName}
-              formValues={formValues}
-              name={field}
-              params={{
-                ...params,
-                name: field,
-              }}
-            />
+              {customInfos}
+              {removeCmp}
+            </div>
           );
         })}
 
       {'bottom' === addButtonPosition && (
         <ButtonSC
           as={sc && sc.button}
-          iconLeft={addButtonIcon}
-          id={addButtonId}
           onClick={handleAddButtonOnClick}
-          size={addButtonSize}
-          status={addButtonStatus}
+          {...addButtonProps}
         >
           {t && addButtonLabel ? t(addButtonLabel) : addButtonLabel}
         </ButtonSC>
