@@ -1,3 +1,4 @@
+import { Theme, ThemeProvider } from '@emotion/react';
 import { TFunction } from 'i18next';
 import React, { FC, ReactElement, useState } from 'react';
 import { Provider } from 'react-redux';
@@ -16,6 +17,7 @@ interface FormidableStateProps {
   sc?: { [key: string]: any };
   store?: Store;
   t?: TFunction;
+  theme?: Theme;
 }
 
 const defaultState: FormidableStateProps = {
@@ -42,10 +44,13 @@ const FormidableProvider: FC<FormidableStateProps> = ({
   initialState = {},
   sc,
   t,
+  theme,
 }) => {
   const [store] = useState<Store>(
     createStore(initialState, extraReducers, extraArguments),
   );
+
+  console.info('formidable theme', theme);
 
   if (initializeStore) {
     initializeStore(store);
@@ -61,7 +66,13 @@ const FormidableProvider: FC<FormidableStateProps> = ({
         t,
       }}
     >
-      <Provider store={store}>{children}</Provider>
+      <Provider store={store}>
+        {theme ? (
+          <ThemeProvider theme={theme}>{children}</ThemeProvider>
+        ) : (
+          children
+        )}
+      </Provider>
     </FormidableContext.Provider>
   );
 };
