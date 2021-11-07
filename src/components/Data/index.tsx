@@ -7,7 +7,6 @@ import React, {
 } from 'react';
 
 import { DataFieldProps, FormidableContext } from '../../index';
-import DataBox, { DataBoxProps } from './Box';
 import DataCondition, { DataConditionProps } from './Condition';
 import DataField from './Field';
 import DataArray from './Field/Array';
@@ -71,14 +70,17 @@ const Data: FC<DataProps> = props => {
         break;
       }
 
-      case 'box': {
-        datas = (props as DataBoxProps).datas;
+      case 'box':
+      case 'flex':
+      case 'group':
+      case 'grid': {
+        datas = (props as DataWithChildrenProps).datas;
         if (!datas) {
           Component = (
             <div>{`${componentType} : erreur de paramètre : datas obligatoire`}</div>
           );
         } else {
-          Component = <DataBox {...props} datas={datas} />;
+          Component = <DataWithChildren {...props} datas={datas} />;
         }
 
         break;
@@ -101,21 +103,6 @@ const Data: FC<DataProps> = props => {
           );
         } else {
           Component = <DataCondition {...props} datas={datas} test={test} />;
-        }
-
-        break;
-      }
-
-      case 'flex':
-      case 'group':
-      case 'grid': {
-        datas = (props as DataWithChildrenProps).datas;
-        if (!datas) {
-          Component = (
-            <div>{`${componentType} : erreur de paramètre : datas obligatoire`}</div>
-          );
-        } else {
-          Component = <DataWithChildren {...props} datas={datas} />;
         }
 
         break;

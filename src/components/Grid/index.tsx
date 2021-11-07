@@ -1,4 +1,3 @@
-import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import React, { FC, useContext } from 'react';
 
@@ -6,41 +5,28 @@ import { createStyles } from '../../core/functions';
 import { FormidableContext } from '../../index';
 
 export interface GridProps {
-  cols?: Property.GridCols;
-  gap?: string | number;
-  gapX?: string | number;
-  gapY?: string | number;
-  rows?: Property.GridRows;
-  flow?: Property.GridFlow;
+  cols?: Property.GridTemplateColumns | Property.GridTemplateColumns[];
+  gap?: Property.Gap | Property.Gap[];
+  gapX?: Property.RowGap | Property.RowGap[];
+  gapY?: Property.ColumnGap | Property.ColumnGap[];
+  rows?: Property.GridTemplateRows | Property.GridTemplateRows[];
+  flow?: Property.GridAutoFlow | Property.GridAutoFlow[];
+  justifyItems?: Property.JustifyItems | Property.JustifyItems[];
+  spaceX?: Property.Space | Property.Space[];
+  spaceY?: Property.Space | Property.Space[];
 }
 
-const GridSC = styled.div<GridProps & { theme?: any }>`
+const GridSC = styled.div<GridProps>`
   display: grid;
-  ${props => createStyles(props, props.theme.breakpoints)};
-  ${props => {
-    if (props.gap) {
-      return {
-        gap: props.gap,
-      };
-    }
-
-    return css`
-      column-gap: ${props.gapX};
-      row-gap: ${props.gapY};
-    `;
-  }};
+  column-gap: ${props => !props.gap && !props.gapX && !props.gapY && '1.5rem'};
+  ${createStyles};
 `;
 
-const Grid: FC<GridProps> = ({
-  children,
-  gapX = '1.5rem',
-  gapY = 0,
-  ...props
-}) => {
+const Grid: FC<GridProps> = ({ children, ...props }) => {
   const { sc } = useContext(FormidableContext);
 
   return (
-    <GridSC as={sc && sc.grid} gapX={gapX} gapY={gapY} {...props}>
+    <GridSC as={sc && sc.grid} {...props}>
       {children}
     </GridSC>
   );
