@@ -2,6 +2,7 @@ import styled from '@emotion/styled';
 import hash from 'object-hash';
 import React, { VFC } from 'react';
 
+import Box from '../Box';
 import Flex from '../Flex';
 import Grid from '../Grid';
 import Group from '../Group';
@@ -28,6 +29,11 @@ const DataWithChildren: VFC<DataWithChildrenProps> = ({
   let Cmp;
 
   switch (componentType) {
+    case 'box': {
+      Cmp = Box;
+      break;
+    }
+
     case 'flex': {
       Cmp = Flex;
       break;

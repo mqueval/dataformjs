@@ -1,8 +1,8 @@
 import styled from '@emotion/styled';
 import React, { FC, useContext } from 'react';
 
-import { createStyles } from '../../../core/functions';
 import { DataFieldProps, FormidableContext } from '../../../index';
+import Box from '../../Box';
 
 const CustomBottomSC = styled.div`
   float: right;
@@ -12,25 +12,7 @@ const CustomTopSC = styled.div`
   float: right;
 `;
 
-interface WrapperProps {
-  colAuto?: Property.ColAuto;
-  colEnd?: Property.ColEnd | Property.ColEnd[];
-  colSpan?: Property.ColSpan | Property.ColSpan[];
-  colStart?: Property.ColStart | Property.ColStart[];
-  rowAuto?: Property.RowAuto;
-  rowEnd?: Property.RowEnd | Property.RowEnd[];
-  rowSpan?: Property.RowSpan | Property.RowSpan[];
-  rowStart?: Property.RowStart | Property.RowStart[];
-}
-
 const FieldLabelSC = styled.label``;
-const WrapperSC = styled.div<
-  WrapperProps & {
-    theme?: any;
-  }
->`
-  ${props => createStyles(props, props.theme.breakpoints)}
-`;
 
 const FieldWrapper: FC<DataFieldProps> = ({
   children,
@@ -54,7 +36,7 @@ const FieldWrapper: FC<DataFieldProps> = ({
   }
 
   return (
-    <WrapperSC as={sc && sc.fieldWrapper} {...wrapperProps}>
+    <Box {...wrapperProps}>
       {customInfos && (
         <CustomTopSC as={sc && sc.customTop} {...customInfosProps}>
           {customInfos}
@@ -76,7 +58,7 @@ const FieldWrapper: FC<DataFieldProps> = ({
           {customBottom}
         </CustomBottomSC>
       )}
-    </WrapperSC>
+    </Box>
   );
 };
 export default FieldWrapper;

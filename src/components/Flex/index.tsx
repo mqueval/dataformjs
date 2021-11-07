@@ -1,48 +1,30 @@
-import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import React, { FC, useContext } from 'react';
 
+import { createStyles } from '../../core/functions';
 import { FormidableContext } from '../../index';
 
 export interface FlexProps {
-  direction?: 'column' | 'column-reverse' | 'row' | 'row-reverse';
+  content?: Property.AlignContent | Property.AlignContent[];
+  direction?: Property.FlexDirection | Property.FlexDirection[];
+  flex?: Property.Flex | Property.Flex[];
+  flow?: Property.FlexFlow | Property.FlexFlow[];
+  items?: Property.AlignItems | Property.AlignItems[];
+  grow?: Property.FlexGrow | Property.FlexGrow[];
+  justify?: Property.JustifyContent | Property.JustifyContent[];
+  shrink?: Property.FlexShrink | Property.FlexShrink[];
+  wrap?: Property.FlexWrap | Property.FlexWrap[];
+  spaceX?: Property.Space | Property.Space[];
+  spaceY?: Property.Space | Property.Space[];
 }
 
 const FlexSC = styled.div<FlexProps>`
   display: flex;
-  justify-content: flex-start;
-  align-items: stretch;
-  align-content: flex-start;
+  justify-content: ${props => !props.justify && 'flex-start'};
+  align-items: ${props => !props.items && 'stretch'};
+  align-content: ${props => !props.content && 'flex-start'};
 
-  flex-direction: column;
-  @media (min-width: 768px) {
-    flex-direction: ${props => props.direction};
-  }
-
-  ${props => {
-    switch (props.direction) {
-      case 'column':
-      case 'column-reverse': {
-        return css`
-          > * + * {
-            margin-top: 1.5rem;
-
-            @media (max-width: 768px) {
-              margin-left: 1.5rem;
-              margin-top: 0;
-            }
-          }
-        `;
-      }
-
-      default:
-        return css`
-          > * + * {
-            margin-left: 1.5rem;
-          }
-        `;
-    }
-  }}
+  ${createStyles};
 `;
 
 const Flex: FC<FlexProps> = ({ children, direction = 'column', ...props }) => {

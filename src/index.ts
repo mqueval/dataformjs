@@ -31,13 +31,13 @@ export const print = (): void => {
   console.info('Bonjour tout le monde !! La vie est formidable !!');
 };
 
+export { default as Box } from './components/Box';
 export {
   default as Data,
   DataArray,
   DataProps,
   WrapperProps,
 } from './components/Data';
-export { default as Box } from './components/Data/Box';
 export { default as DataField, DataFieldProps } from './components/Data/Field';
 export { DataArrayProps } from './components/Data/Field/Array';
 export { DataFieldInputProps } from './components/Data/Field/Render/Input';
