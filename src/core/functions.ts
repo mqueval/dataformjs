@@ -1,135 +1,33 @@
-const alignContent = {
-  patterns: {
-    '*': '{{value}}',
-  },
-  property: 'alignContent',
-};
+import { Theme } from '@emotion/react';
 
-const alignItems = {
-  patterns: {
-    '*': '{{value}}',
-  },
-  property: 'alignItems',
-};
-
-const columnGap = {
-  patterns: {
-    number: '{{value}}',
-    string: '{{value}}',
-  },
-  property: 'columnGap',
-};
+import { color, size, space } from './correspondings';
+import { alignContent, alignItems, alignSelf } from './properties/align';
+import { flex, flexDirection, flexFlow, flexWrap } from './properties/flex';
+import {
+  columnGap,
+  gap,
+  gridAutoFlow,
+  gridColumnEnd,
+  gridColumnStart,
+  gridRowEnd,
+  gridRowStart,
+  gridTemplateColumns,
+  gridTemplateRows,
+  rowGap,
+} from './properties/grid';
+import {
+  justifyContent,
+  justifyItems,
+  justifySelf,
+} from './properties/justify';
+import { mX, sX, sY } from './properties/space';
 
 const columns = {
   patterns: {
     number: '{{value}}',
     string: '{{value}}',
   },
-  property: 'columns',
-};
-
-const flex = {
-  patterns: {
-    string: '{{value}}',
-  },
-  property: 'flexFlow',
-};
-
-const flexDirection = {
-  patterns: {
-    string: '{{value}}',
-  },
-  property: 'flexDirection',
-};
-
-const flexFlow = {
-  patterns: {
-    string: '{{value}}',
-  },
-  property: 'flexFlow',
-};
-
-const gap = {
-  patterns: {
-    number: '{{value}}',
-    string: '{{value}}',
-  },
-  property: 'gap',
-};
-
-const gridAutoFlow = {
-  patterns: {
-    'col-dense': 'col dense',
-    column: 'column',
-    dense: 'dense',
-    inherit: 'inherit',
-    initial: 'initial',
-    row: 'row',
-    'row-dense': 'row dense',
-    unset: 'unset',
-  },
-  property: 'gridAutoFlow',
-};
-
-const gridColumnStart = {
-  patterns: {
-    number: '{{value}}',
-    string: '{{value}}',
-  },
-  property: 'gridColumnStart',
-};
-
-const gridRowEnd = {
-  patterns: {
-    number: '{{value}}',
-    string: '{{value}}',
-  },
-  property: 'gridRowEnd',
-};
-
-const gridRowStart = {
-  patterns: {
-    number: '{{value}}',
-    string: '{{value}}',
-  },
-  property: 'gridRowStart',
-};
-
-const gridTemplateColumns = {
-  patterns: {
-    number: 'repeat({{value}}, minmax(0, 1fr))',
-    string: '{{value}}',
-  },
-  property: 'gridTemplateColumns',
-};
-
-const gridTemplateRows = {
-  patterns: {
-    number: 'repeat({{value}}, minmax(0, 1fr))',
-    string: '{{value}}',
-  },
-  property: 'gridTemplateRows',
-};
-
-const justifyContent = {
-  patterns: {
-    '*': '{{value}}',
-  },
-  property: 'justify-content',
-};
-
-const justifyItems = {
-  patterns: {
-    '*': '{{value}}',
-  },
-  property: 'justify-items',
-};
-
-const justifySelf = {
-  patterns: {
-    '*': '{{value}}',
-  },
-  property: 'justify-self',
+  properties: 'columns',
 };
 
 const order = {
@@ -139,49 +37,28 @@ const order = {
     none: '0',
     number: '{{value}}',
   },
-  property: 'order',
-};
-
-const rowGap = {
-  patterns: {
-    number: '{{value}}',
-    string: '{{value}}',
-  },
-  property: 'rowGap',
-};
-
-const spaceX = {
-  parent: '& > :not([hidden]) ~ :not([hidden])',
-  patterns: {
-    '*': '{{value}}',
-  },
-  property: 'margin-left',
-};
-
-const spaceY = {
-  parent: '& > :not([hidden]) ~ :not([hidden])',
-  patterns: {
-    '*': '{{value}}',
-  },
-  property: 'margin-top',
+  properties: 'order',
 };
 
 export const propertyValues: {
   [prop: string]: {
     parent?: string;
     patterns: { [key: string]: string };
-    property: string;
+    properties: string | string[];
   };
 } = {
   alignContent,
   alignItems,
+  alignSelf,
   columnGap,
   columns,
   flex,
   flexDirection,
   flexFlow,
+  flexWrap,
   gap,
   gridAutoFlow,
+  gridColumnEnd,
   gridColumnStart,
   gridRowEnd,
   gridRowStart,
@@ -189,48 +66,62 @@ export const propertyValues: {
   gridTemplateRows,
   justifyItems,
   justifySelf,
+  mX,
   order,
   rowGap,
-  spaceX,
-  spaceY,
+  sX,
+  sY,
   colAuto: {
     patterns: {
       boolean: 'auto',
     },
-    property: 'gridColumn',
+    properties: 'gridColumn',
   },
-  colEnd: {
-    patterns: {
-      number: '{{value}}',
-      string: '{{value}}',
-    },
-    property: 'gridColumnEnd',
-  },
+  colEnd: gridColumnEnd,
   cols: gridTemplateColumns,
   colSpan: {
     patterns: {
       full: '1 / -1',
       number: 'span {{value}} / span {{value}}',
     },
-    property: 'gridColumn',
+    properties: 'gridColumn',
   },
   colStart: gridColumnStart,
   content: alignContent,
   direction: flexDirection,
   flow: gridAutoFlow,
-  gapX: columnGap,
-  gapY: rowGap,
+  g: gap,
+  gX: columnGap,
+  gY: rowGap,
   items: alignItems,
   justify: justifyContent,
   rowAuto: {
     patterns: {
       boolean: 'auto',
     },
-    property: 'gridRow',
+    properties: 'gridRow',
   },
   rowEnd: gridRowEnd,
   rows: gridTemplateRows,
   rowStart: gridRowStart,
+  self: alignSelf,
+  wrap: flexWrap,
+};
+
+const transformValue = (key: string, value: any, theme: Theme): string => {
+  if (space[key] && undefined !== theme.spacing[value]) {
+    return theme.spacing[value];
+  }
+
+  if (size[key] && undefined !== theme.sizes[value]) {
+    return theme.sizes[value];
+  }
+
+  if (color[key] && undefined !== theme.colors[value]) {
+    return theme.colors[value];
+  }
+
+  return String(value);
 };
 
 export const createStyles = (props: { [key: string]: any }): any => {
@@ -251,7 +142,7 @@ export const createStyles = (props: { [key: string]: any }): any => {
 
         values?.forEach((v, index) => {
           if (undefined !== v) {
-            let pattern;
+            let pattern: string | undefined;
             if ('string' === typeof v && propertyValue.patterns[v]) {
               pattern = propertyValue.patterns[v];
             } else if ('string' === typeof v && propertyValue.patterns.string) {
@@ -275,15 +166,31 @@ export const createStyles = (props: { [key: string]: any }): any => {
                 }
                 tmp = styles[propertyValue.parent];
               }
+              const properties = Array.isArray(propertyValue.properties)
+                ? propertyValue.properties
+                : [propertyValue.properties];
               if (index > 0 && breakpoints && breakpoints[index]) {
                 if (!styles[`@media (min-width: ${breakpoints[index]})`]) {
                   tmp[`@media (min-width: ${breakpoints[index]})`] = {};
                 }
-                tmp[`@media (min-width: ${breakpoints[index]})`][
-                  propertyValue.property
-                ] = pattern.replace(regex, v);
+                properties.forEach(property => {
+                  if (pattern) {
+                    tmp[`@media (min-width: ${breakpoints[index]})`][property] =
+                      pattern.replace(
+                        regex,
+                        transformValue(key, v, props.theme),
+                      );
+                  }
+                });
               } else {
-                tmp[propertyValue.property] = pattern.replace(regex, v);
+                properties.forEach(property => {
+                  if (pattern) {
+                    tmp[property] = pattern.replace(
+                      regex,
+                      transformValue(key, v, props.theme),
+                    );
+                  }
+                });
               }
             }
           }
@@ -291,8 +198,6 @@ export const createStyles = (props: { [key: string]: any }): any => {
       }
     }
   });
-
-  console.info('styles', styles);
 
   return styles;
 };

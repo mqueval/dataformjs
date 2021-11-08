@@ -3,26 +3,17 @@ import React, { FC, useContext } from 'react';
 
 import { createStyles } from '../../core/functions';
 import { FormidableContext } from '../../index';
+import HTMLElementProps from '../../props';
 
-export interface FlexProps {
-  content?: Property.AlignContent | Property.AlignContent[];
-  direction?: Property.FlexDirection | Property.FlexDirection[];
-  flex?: Property.Flex | Property.Flex[];
-  flow?: Property.FlexFlow | Property.FlexFlow[];
-  items?: Property.AlignItems | Property.AlignItems[];
-  grow?: Property.FlexGrow | Property.FlexGrow[];
-  justify?: Property.JustifyContent | Property.JustifyContent[];
-  shrink?: Property.FlexShrink | Property.FlexShrink[];
-  wrap?: Property.FlexWrap | Property.FlexWrap[];
-  spaceX?: Property.Space | Property.Space[];
-  spaceY?: Property.Space | Property.Space[];
-}
+export type FlexProps = HTMLElementProps;
 
 const FlexSC = styled.div<FlexProps>`
   display: flex;
-  justify-content: ${props => !props.justify && 'flex-start'};
-  align-items: ${props => !props.items && 'stretch'};
-  align-content: ${props => !props.content && 'flex-start'};
+  justify-content: ${props =>
+    !props.justify && !props.justifyContent && 'flex-start'};
+  align-items: ${props => !props.items && !props.alignItems && 'stretch'};
+  align-content: ${props =>
+    !props.content && !props.alignContent && 'flex-start'};
 
   ${createStyles};
 `;

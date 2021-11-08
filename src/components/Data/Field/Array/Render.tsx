@@ -10,6 +10,10 @@ import { DataWithChildrenProps } from '../../WithChildren';
 import Field from '../index';
 import { DataArrayProps } from './index';
 
+const ArraySC = styled.div`
+  position: relative;
+`;
+
 const ButtonSC = styled.button<{
   iconLeft?: any;
   size?: string;
@@ -67,7 +71,7 @@ const DataArrayRender: FC<
   }
 
   return (
-    <div className={className}>
+    <ArraySC className={className}>
       {'top' === addButtonPosition && addButtonProps && (
         <ButtonSC
           as={sc && sc.button}
@@ -172,7 +176,7 @@ const DataArrayRender: FC<
           {t && addButtonLabel ? t(addButtonLabel) : addButtonLabel}
         </ButtonSC>
       )}
-    </div>
+    </ArraySC>
   );
 };
 

@@ -10,6 +10,7 @@ import {
   isRequired,
   isTime,
 } from '../../../utils/validators';
+import { BoxProps } from '../../Box';
 import { DataProps } from '../index';
 import DataFieldRender from './Render';
 import DataFieldInput, { DataFieldInputProps } from './Render/Input';
@@ -55,7 +56,7 @@ export interface DataFieldProps extends DataProps {
   templateProps?: { [key: string]: any };
   type?: string;
   validate?: Validator | Validator[]; // TODO @deprecated
-  wrapperProps?: { [key: string]: any };
+  wrapperProps?: BoxProps;
 }
 
 const DataField: FC<
