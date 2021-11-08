@@ -2,12 +2,12 @@ import styled from '@emotion/styled';
 import React, { FC, ReactNode, useContext } from 'react';
 
 import { FormidableContext } from '../../index';
+import HTMLElementProps from '../../props';
 import convertParams from '../../utils/convertParams';
 
-export interface GroupProps {
+export interface GroupProps extends HTMLElementProps {
   bodyRemoveTag?: boolean;
   bodyProps?: { [key: string]: any };
-  className?: string;
   customInfos?: ReactNode;
   customInfosProps?: { [key: string]: any };
   description?: string;
@@ -37,6 +37,7 @@ const Group: FC<GroupProps> = ({
   title,
   titleProps,
   titleParams,
+  ...props
 }) => {
   const { t, sc } = useContext(FormidableContext);
 
@@ -49,7 +50,7 @@ const Group: FC<GroupProps> = ({
       };
 
   return (
-    <GroupSC as={sc && sc.group} className={className}>
+    <GroupSC as={sc && sc.group} className={className} {...props}>
       {customInfos && (
         <CustomInfosSC as={sc && sc.groupCustomInfos} {...customInfosProps}>
           {customInfos}

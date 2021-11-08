@@ -3,33 +3,29 @@ import React, { FC, useContext } from 'react';
 
 import { createStyles } from '../../core/functions';
 import { FormidableContext } from '../../index';
+import HTMLElementProps from '../../props';
 
-export interface BoxProps {
-  colAuto?: Property.ColAuto | Property.ColAuto[];
-  colEnd?: Property.GridColumnEnd | Property.GridColumnEnd[];
-  colSpan?: Property.ColSpan | Property.ColSpan[];
-  colStart?: Property.GridColumnStart | Property.GridColumnStart[];
-  content?: Property.AlignContent | Property.AlignContent[];
-  direction?: Property.FlexDirection | Property.FlexDirection[];
-  justifySelf?: Property.JustifySelf | Property.JustifySelf[];
-  order?: Property.Order | Property.Order[];
-  rowAuto?: Property.RowAuto | Property.RowAuto[];
-  rowEnd?: Property.GridRowEnd | Property.GridRowEnd[];
-  rowSpan?: Property.RowSpan | Property.RowSpan[];
-  rowStart?: Property.GridRowStart | Property.GridRowStart[];
+export interface BoxProps extends HTMLElementProps {
   sticky?: number;
 }
 
 const BoxSC = styled.div<BoxProps>`
-  align-self: auto;
   display: flex;
-  flex-direction: ${props => !props.direction && 'column'};
+  align-self: ${props => !props.self && !props.alignSelf && 'auto'};
+  flex-direction: ${props =>
+    !props.direction && !props.flexDirection && 'column'};
   width: 100%;
 
-  margin-bottom: 1.5rem;
+  div:not(.grid) > & {
+    margin-bottom: ${props => props.theme.spacing[props.theme.defaultSpace]};
 
-  &:last-child {
-    margin-bottom: 0;
+    &:last-of-type {
+      margin-bottom: 0;
+    }
+  }
+
+  div.grid + & {
+    margin-top: ${props => props.theme.spacing[props.theme.defaultSpace]};
   }
 
   ${createStyles}
