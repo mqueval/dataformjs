@@ -47,12 +47,14 @@ const FieldWrapper: FC<DataFieldProps> = ({
           {customTop}
         </CustomTopSC>
       )}
+
       {labelShow && (
         <FieldLabelSC as={sc && sc.fieldLabel} htmlFor={id}>
           {t ? t(label || name) : label || name}
         </FieldLabelSC>
       )}
       {children}
+
       {customBottom && (
         <CustomBottomSC as={sc && sc.customBottom} {...customBottomProps}>
           {customBottom}

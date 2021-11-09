@@ -3,6 +3,7 @@ import PaddingProps from './padding';
 
 interface StylesProps extends MarginProps, PaddingProps {
   // shorthand
+  col?: Property.GridColumn | Property.GridColumn[];
   colEnd?: Property.GridColumnEnd | Property.GridColumnEnd[];
   cols?: Property.GridTemplateColumns | Property.GridTemplateColumns[];
   colStart?: Property.GridColumnStart | Property.GridColumnStart[];
@@ -15,6 +16,7 @@ interface StylesProps extends MarginProps, PaddingProps {
   flow?: Property.GridAutoFlow | Property.GridAutoFlow[];
   items?: Property.AlignItems | Property.AlignItems[];
   justify?: Property.JustifyContent | Property.JustifyContent[];
+  row?: Property.GridRow | Property.GridRow[];
   rowEnd?: Property.GridRowEnd | Property.GridRowEnd[];
   rows?: Property.GridTemplateRows | Property.GridTemplateRows[];
   rowStart?: Property.GridRowStart | Property.GridRowStart[];
@@ -23,10 +25,6 @@ interface StylesProps extends MarginProps, PaddingProps {
   wrap?: Property.FlexWrap | Property.FlexWrap[];
 
   // shortcut
-  colAuto?: Property.ColAuto | Property.ColAuto[];
-  colSpan?: Property.ColSpan | Property.ColSpan[];
-  rowAuto?: Property.RowAuto | Property.RowAuto[];
-  rowSpan?: Property.RowSpan | Property.RowSpan[];
   sX?: Property.Space | Property.Space[];
   sY?: Property.Space | Property.Space[];
 
@@ -43,8 +41,10 @@ interface StylesProps extends MarginProps, PaddingProps {
   flexWrap?: Property.FlexWrap | Property.FlexWrap[];
   gap?: Property.Gap | Property.Gap[];
   gridAutoFlow?: Property.GridAutoFlow | Property.GridAutoFlow[];
+  gridColumn?: Property.GridColumn | Property.GridColumn[];
   gridColumnEnd?: Property.GridColumnEnd | Property.GridColumnEnd[];
   gridColumnStart?: Property.GridColumnStart | Property.GridColumnStart[];
+  gridRow?: Property.GridRow | Property.GridRow[];
   gridRowEnd?: Property.GridRowEnd | Property.GridRowEnd[];
   gridRowStart?: Property.GridRowStart | Property.GridRowStart[];
   gridTemplateColumns?:

@@ -28,6 +28,16 @@ export const gridAutoFlow = {
   properties: 'gridAutoFlow',
 };
 
+export const gridColumn = {
+  patterns: {
+    auto: 'auto',
+    full: '1 / -1',
+    number: 'span {{value}} / span {{value}}',
+    string: '{{value}}',
+  },
+  properties: 'gridColumn',
+};
+
 export const gridColumnEnd = {
   patterns: {
     number: '{{value}}',
@@ -42,6 +52,16 @@ export const gridColumnStart = {
     string: '{{value}}',
   },
   properties: 'gridColumnStart',
+};
+
+export const gridRow = {
+  patterns: {
+    auto: 'auto',
+    full: '1 / -1',
+    number: 'span {{value}} / span {{value}}',
+    string: '{{value}}',
+  },
+  properties: 'gridRow',
 };
 
 export const gridRowEnd = {

@@ -2,28 +2,28 @@ export const mX = {
   patterns: {
     '*': '{{value}}',
   },
-  properties: ['margin-left', 'margin-right'],
+  properties: ['marginLeft', 'marginRight'],
 };
 
 export const mY = {
   patterns: {
     '*': '{{value}}',
   },
-  properties: ['margin-top', 'margin-bottom'],
+  properties: ['marginTop', 'marginBottom'],
 };
 
 export const pX = {
   patterns: {
     '*': '{{value}}',
   },
-  properties: ['padding-left', 'padding-right'],
+  properties: ['paddingLeft', 'paddingRight'],
 };
 
 export const pY = {
   patterns: {
     '*': '{{value}}',
   },
-  properties: ['padding-top', 'padding-bottom'],
+  properties: ['paddingTop', 'paddingBottom'],
 };
 
 export const sX = {
@@ -31,7 +31,7 @@ export const sX = {
   patterns: {
     '*': '{{value}}',
   },
-  properties: 'margin-left',
+  properties: 'marginLeft',
 };
 
 export const sY = {
@@ -39,5 +39,5 @@ export const sY = {
   patterns: {
     '*': '{{value}}',
   },
-  properties: 'margin-top',
+  properties: 'marginTop',
 };

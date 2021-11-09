@@ -170,7 +170,7 @@ const Form: FC<FormProps> = ({
       {newDatas &&
         newDatas.map((props: DataProps, index) => (
           <Data
-            key={hash(props)}
+            key={hash({ ...props, datas: null, params: null })}
             {...props}
             formName={name}
             mode={mode}

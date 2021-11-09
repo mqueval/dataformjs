@@ -61,7 +61,7 @@ const DataWithChildren: VFC<DataWithChildrenProps> = ({
         newDatas.length > 0 &&
         newDatas.map((data, index) => (
           <Data
-            key={hash(data)}
+            key={hash({ ...data, datas: null, params: null })}
             {...data}
             formName={formName}
             formValues={formValues}

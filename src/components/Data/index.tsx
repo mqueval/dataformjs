@@ -9,7 +9,7 @@ import React, {
 import { DataFieldProps, FormidableContext } from '../../index';
 import DataCondition, { DataConditionProps } from './Condition';
 import DataField from './Field';
-import DataArray from './Field/Array';
+import DataArray from './FieldArray';
 import DataSection, { DataSectionProps } from './Section';
 import Tabs, { DataTabsProps } from './Tabs';
 import DataWithChildren, { DataWithChildrenProps } from './WithChildren';

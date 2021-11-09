@@ -29,4 +29,6 @@ export const space: { [key: string]: boolean } = {
   pT: true,
   pX: true,
   pY: true,
+  sX: true,
+  sY: true,
 };

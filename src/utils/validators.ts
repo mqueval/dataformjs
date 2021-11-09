@@ -1,15 +1,4 @@
 import dayjs from 'dayjs';
-import { Validator } from 'redux-form';
-
-export const addValidator = (
-  validator: Validator,
-  validators?: Validator[],
-): Validator[] => {
-  const newValidators = validators || [];
-  newValidators.push(validator);
-
-  return newValidators;
-};
 
 export const isDate = (value: string): string | undefined =>
   value && !dayjs(value).isValid() ? 'validator.date.error' : undefined;
@@ -21,7 +10,7 @@ export const isEmail = (value: string): string | undefined =>
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export const isRequired = (value: any): undefined | string =>
-  value || 'number' === typeof value ? undefined : 'required';
+  undefined !== value ? undefined : 'validator.required.error';
 
 export const isTime = (value: string): string | undefined =>
   value && !/^([01]?[0-9]|2[0-3]):[0-5][0-9]/.test(value)

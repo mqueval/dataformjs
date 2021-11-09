@@ -45,10 +45,7 @@ declare namespace Property {
   type Size = Length | Percentage;
 
   // shortcut
-  type ColAuto = boolean;
-  type ColSpan = 'full' | number;
-  type RowAuto = boolean;
-  type RowSpan = 'full' | number;
+  type Space = number | 'px';
 
   // longhand
   type AlignContent =
@@ -100,10 +97,10 @@ declare namespace Property {
   type FlexShrink = Globals | number;
   type FlexWrap = 'nowrap' | 'wrap' | 'wrap-reverse';
   type Gap = Globals | Size;
-  type GridColumn = Globals | GridLine;
+  type GridColumn = Globals | GridLine | 'full';
   type GridColumnEnd = Globals | GridLine;
   type GridColumnStart = Globals | GridLine;
-  type GridRow = Globals | GridLine;
+  type GridRow = Globals | GridLine | 'full';
   type GridRowEnd = Globals | GridLine;
   type GridRowStart = Globals | GridLine;
   type GridAutoFlow =
@@ -162,7 +159,6 @@ declare namespace Property {
     | `${Size} ${Size} ${Size} ${Size}`;
   type Order = Globals | number;
   type RowGap = Globals | 'normal' | Size;
-  type Space = number | 'px';
   type Width =
     | Globals
     | Size

@@ -1,15 +1,9 @@
 import styled from '@emotion/styled';
 import React, { FC, ReactElement, SyntheticEvent, useContext } from 'react';
-import { Field as FieldForm, Validator } from 'redux-form';
+import { Field as FieldForm } from 'redux-form';
 
 import { FormidableContext } from '../../../index';
-import {
-  addValidator,
-  isDate,
-  isEmail,
-  isRequired,
-  isTime,
-} from '../../../utils/validators';
+import { isDate, isEmail, isRequired, isTime } from '../../../utils/validators';
 import { BoxProps } from '../../Box';
 import { DataProps } from '../index';
 import DataFieldRender from './Render';
@@ -55,7 +49,6 @@ export interface DataFieldProps extends DataProps {
   required?: boolean;
   templateProps?: { [key: string]: any };
   type?: string;
-  validate?: Validator | Validator[]; // TODO @deprecated
   wrapperProps?: BoxProps;
 }
 
@@ -66,7 +59,6 @@ const DataField: FC<
   fieldProps,
   mode,
   templateProps,
-  validate,
   wrapperProps,
   ...props
 }) => {
@@ -82,33 +74,49 @@ const DataField: FC<
 
   const { componentType, id, name, required, params, type } = props;
 
+  const parse = (value: string) => {
+    let newValue: any;
+
+    switch (type) {
+      case 'number':
+      case 'range': {
+        newValue = Number(value);
+        break;
+      }
+      default:
+        newValue = value;
+    }
+
+    return newValue;
+  };
+
   const newId =
     id || `${params && params.name ? `${params.name}.` : ''}${name}`;
-  let newValidate =
-    validate && !Array.isArray(validate) ? [validate] : validate;
 
-  if (required) {
-    newValidate = addValidator(isRequired, newValidate);
-  }
-
-  switch (type) {
-    case 'date': {
-      newValidate = addValidator(isDate, newValidate);
-      break;
+  const validate = (): any[] | undefined => {
+    const newValidate = [];
+    if (required) {
+      newValidate.push(isRequired);
     }
 
-    case 'email': {
-      newValidate = addValidator(isEmail, newValidate);
-      break;
+    switch (type) {
+      case 'date': {
+        newValidate.push(isDate);
+        break;
+      }
+      case 'email': {
+        newValidate.push(isEmail);
+        break;
+      }
+      case 'time': {
+        newValidate.push(isTime);
+        break;
+      }
+      default:
     }
 
-    case 'time': {
-      newValidate = addValidator(isTime, newValidate);
-      break;
-    }
-
-    default:
-  }
+    return newValidate.length > 0 ? newValidate : undefined;
+  };
 
   if ('radio' === type && 'input' === componentType) {
     const { options, optionsProps } = props as DataFieldInputProps;
@@ -134,7 +142,7 @@ const DataField: FC<
                 description={option.label}
                 descriptionParams={option.params}
                 id={option.id || `${newId}_${option.value}`}
-                validate={newValidate}
+                validate={validate()}
                 value={option.value}
               />
             </InputGroupItemSC>
@@ -152,8 +160,9 @@ const DataField: FC<
         component={DataFieldRender}
         fieldProps={fieldProps}
         id={newId}
+        parse={parse}
         templateProps={templateProps}
-        validate={newValidate}
+        validate={validate()}
       />
     </DataFieldWrapper>
   );

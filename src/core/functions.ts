@@ -2,13 +2,22 @@ import { Theme } from '@emotion/react';
 
 import { color, size, space } from './correspondings';
 import { alignContent, alignItems, alignSelf } from './properties/align';
-import { flex, flexDirection, flexFlow, flexWrap } from './properties/flex';
+import {
+  flex,
+  flexDirection,
+  flexFlow,
+  flexGrow,
+  flexShrink,
+  flexWrap,
+} from './properties/flex';
 import {
   columnGap,
   gap,
   gridAutoFlow,
+  gridColumn,
   gridColumnEnd,
   gridColumnStart,
+  gridRow,
   gridRowEnd,
   gridRowStart,
   gridTemplateColumns,
@@ -55,11 +64,15 @@ export const propertyValues: {
   flex,
   flexDirection,
   flexFlow,
+  flexGrow,
+  flexShrink,
   flexWrap,
   gap,
   gridAutoFlow,
+  gridColumn,
   gridColumnEnd,
   gridColumnStart,
+  gridRow,
   gridRowEnd,
   gridRowStart,
   gridTemplateColumns,
@@ -71,40 +84,25 @@ export const propertyValues: {
   rowGap,
   sX,
   sY,
-  colAuto: {
-    patterns: {
-      boolean: 'auto',
-    },
-    properties: 'gridColumn',
-  },
+  col: gridColumn,
   colEnd: gridColumnEnd,
   cols: gridTemplateColumns,
-  colSpan: {
-    patterns: {
-      full: '1 / -1',
-      number: 'span {{value}} / span {{value}}',
-    },
-    properties: 'gridColumn',
-  },
   colStart: gridColumnStart,
   content: alignContent,
   direction: flexDirection,
   flow: gridAutoFlow,
   g: gap,
+  grow: flexGrow,
   gX: columnGap,
   gY: rowGap,
   items: alignItems,
   justify: justifyContent,
-  rowAuto: {
-    patterns: {
-      boolean: 'auto',
-    },
-    properties: 'gridRow',
-  },
+  row: gridRow,
   rowEnd: gridRowEnd,
   rows: gridTemplateRows,
   rowStart: gridRowStart,
   self: alignSelf,
+  shrink: flexShrink,
   wrap: flexWrap,
 };
 
@@ -139,6 +137,9 @@ export const createStyles = (props: { [key: string]: any }): any => {
         const regex = /{{value}}/gi;
 
         const propertyValue = propertyValues[key];
+        const properties = Array.isArray(propertyValue.properties)
+          ? propertyValue.properties
+          : [propertyValue.properties];
 
         values?.forEach((v, index) => {
           if (undefined !== v) {
@@ -156,6 +157,8 @@ export const createStyles = (props: { [key: string]: any }): any => {
               pattern = propertyValue.patterns.boolean;
             } else if (propertyValue.patterns['*']) {
               pattern = propertyValue.patterns['*'];
+            } else if (['inherit', 'initial', 'unset'].includes(v)) {
+              pattern = v;
             }
 
             if (pattern) {
@@ -166,9 +169,6 @@ export const createStyles = (props: { [key: string]: any }): any => {
                 }
                 tmp = styles[propertyValue.parent];
               }
-              const properties = Array.isArray(propertyValue.properties)
-                ? propertyValue.properties
-                : [propertyValue.properties];
               if (index > 0 && breakpoints && breakpoints[index]) {
                 if (!styles[`@media (min-width: ${breakpoints[index]})`]) {
                   tmp[`@media (min-width: ${breakpoints[index]})`] = {};

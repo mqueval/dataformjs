@@ -14,9 +14,24 @@ export const flexDirection = {
 
 export const flexFlow = {
   patterns: {
+    number: '{{value}}',
     string: '{{value}}',
   },
   properties: 'flexFlow',
+};
+
+export const flexGrow = {
+  patterns: {
+    number: '{{value}}',
+  },
+  properties: 'flexGrow',
+};
+
+export const flexShrink = {
+  patterns: {
+    number: '{{value}}',
+  },
+  properties: 'flexShrink',
 };
 
 export const flexWrap = {

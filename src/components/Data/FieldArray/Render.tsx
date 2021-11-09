@@ -1,18 +1,16 @@
 import styled from '@emotion/styled';
 import hash from 'object-hash';
-import React, { FC, SyntheticEvent, useContext, useEffect } from 'react';
+import React, { FC, SyntheticEvent, useContext } from 'react';
 import { FormSection, WrappedFieldArrayProps } from 'redux-form';
 
-import { DataFieldProps, FormidableContext } from '../../../../index';
-import initializeValues from '../../../../utils/initializeValues';
-import Data from '../../index';
-import { DataWithChildrenProps } from '../../WithChildren';
-import Field from '../index';
-import { DataArrayProps } from './index';
+import { DataFieldProps, FormidableContext } from '../../../index';
+import initializeValues from '../../../utils/initializeValues';
+import Field from '../Field';
+import Data from '../index';
+import { DataWithChildrenProps } from '../WithChildren';
+import { DataFieldArrayProps } from './index';
 
-const ArraySC = styled.div`
-  position: relative;
-`;
+const ArraySC = styled.div``;
 
 const ButtonSC = styled.button<{
   iconLeft?: any;
@@ -21,7 +19,7 @@ const ButtonSC = styled.button<{
 }>``;
 
 const DataArrayRender: FC<
-  WrappedFieldArrayProps & Omit<DataArrayProps, 'name'>
+  WrappedFieldArrayProps & Omit<DataFieldArrayProps, 'name'>
 > = ({
   addButtonProps,
   bodyProps,
@@ -36,19 +34,16 @@ const DataArrayRender: FC<
   removeButtonProps,
 }) => {
   const { sc, t } = useContext(FormidableContext);
+  const newDatas = datas && !Array.isArray(datas) ? [datas] : datas;
 
-  useEffect(() => {
-    if (0 === fields.length) {
-      fields.push(datas ? initializeValues(datas) : '');
-    }
-  }, [datas, fields]);
-
-  // if (!datas) {
-  //   return <div>datas obligatoire</div>;
-  // }
+  // useEffect(() => {
+  //   if (0 === fields.length) {
+  //     fields.push(newDatas ? initializeValues(newDatas) : '');
+  //   }
+  // }, [newDatas, fields]);
 
   const handleAddButtonOnClick = (): void => {
-    fields.push(datas ? initializeValues(datas) : '');
+    fields.push(newDatas ? initializeValues(newDatas) : '');
   };
 
   const handleRemoveButtonOnClick = (
@@ -97,20 +92,24 @@ const DataArrayRender: FC<
             </ButtonSC>
           );
 
-          if (datas && datas.length > 0) {
+          if (newDatas && newDatas.length > 0) {
             if (
-              datas.length > 1 ||
-              (datas[0] as DataWithChildrenProps).datas ||
-              (datas[0] as DataFieldProps).name
+              newDatas.length > 1 ||
+              (newDatas[0] as DataWithChildrenProps).datas ||
+              (newDatas[0] as DataFieldProps).name
             ) {
               return (
                 <FormSection
-                  key={`${field}_${hash(datas)}`}
+                  key={`${field}_${hash({
+                    ...newDatas,
+                    datas: null,
+                    params: null,
+                  })}`}
                   data-index={index}
                   name={field}
                   {...bodyProps}
                 >
-                  {datas.map(value => (
+                  {newDatas.map(value => (
                     <Data
                       key={`${field}_${hash(value)}`}
                       {...value}
@@ -134,7 +133,7 @@ const DataArrayRender: FC<
             return (
               <div key={field} data-index={index} {...bodyProps}>
                 <Data
-                  {...datas[0]}
+                  {...newDatas[0]}
                   formName={formName}
                   formValues={formValues}
                   name={field}
